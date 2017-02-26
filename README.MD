@@ -15,7 +15,7 @@ Exo-kernel for the consumer
 
 Currently we are converting the C code to C++ code and redesigning it to follow more of a C++ style
 
-##next steps
+##Next steps
 
 * USB floppy support  
 * SATA HDD support  
