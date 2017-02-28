@@ -6,9 +6,9 @@ Exo-kernel for the consumer
 
 * Working OS  
 * LibOSes for all 3 major OSes  
-    *Windows  
-    *Linux  
-    *Mac OS X  
+    * Windows  
+    * Linux  
+    * Mac OS X  
 * Live relinking to allow unmodified programs to be run
 
 ##Current status
