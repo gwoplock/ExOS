@@ -1,14 +1,14 @@
 all:
-	if [ -a /run/media/garrett/disk/boot/kernel.bin ] ; \
+	if [ -a /mnt/boot/kernel.bin ] ; \
 	then \
-		rm /run/media/garrett/disk/boot/kernel.bin ; \
+		rm /mnt/boot/kernel.bin ; \
 	fi;
 
 	#rm ./*.o
 
 	nasm /home/garrett/workspace/OS\ C++/src/boot/boot.s -felf -o boot.o
 	#/home/garrett/opt/cross/bin/i686-elf-as /home/garrett/workspace/OS/src/ISR/isr_wrapper.s -o isr_wrapper.o 
-	#/home/garrett/opt/cross/bin/i686-elf-gcc -c /home/garrett/workspace/OS\ C++/src/kernel.cpp -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
-	#/home/garrett/opt/cross/bin/i686-elf-gcc -c /home/garrett/workspace/OS\ C++/src/DT/GDT.cpp -o GDT.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
-	#/home/garrett/opt/cross/bin/i686-elf-gcc -T /home/garrett/workspace/OS\ C++/linker.ld -o /run/media/garrett/disk/boot/kernel.bin -ffreestanding -O2 -nostdlib *.o -lgcc
+	/home/garrett/opt/cross/bin/i686-elf-g++ -c /home/garrett/workspace/OS\ C++/src/kernel.cpp -o kernel.o -ffreestanding -O2 -Wall -Wextra
+	/home/garrett/opt/cross/bin/i686-elf-g++ -c /home/garrett/workspace/OS\ C++/src/memory/GlobalDescriptorTable.cpp -o GDT.o  -ffreestanding -O2 -Wall -Wextra
+	/home/garrett/opt/cross/bin/i686-elf-g++ -T /home/garrett/workspace/OS\ C++/linker.ld -o /mnt/usb/boot/kernel.bin -ffreestanding -O2 -nostdlib *.o -lgcc
 	sync
