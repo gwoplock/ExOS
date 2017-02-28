@@ -10,12 +10,13 @@ GlobalDescriptorTable gdt = GlobalDescriptorTable();
 
 
 #if defined(__cplusplus)
-extern "C" /* Use C linkage for kernel_main. */
+extern "C" {/* Use C linkage for kernel_main. */
 #endif
 void kernelMain(void/*multiboot shit*/){
 	asm("cli");
 	gdt.load();
 }
 
-
-
+#if defined(__cplusplus)
+}
+#endif
