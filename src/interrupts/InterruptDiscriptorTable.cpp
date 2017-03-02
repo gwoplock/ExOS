@@ -57,6 +57,7 @@ InterruptDiscriptorTable::InterruptDiscriptorTable( ) {
 	idt[45] = encode((uint32_t) (unsigned) irq_13, (uint16_t) 0x08);
 	idt[46] = encode((uint32_t) (unsigned) irq_14, (uint16_t) 0x08);
 	idt[47] = encode((uint32_t) (unsigned) irq_15, (uint16_t) 0x08);
+	size = 48;
 }
 
 IdtEntry InterruptDiscriptorTable::encode(uint32_t offset, uint16_t selector) {

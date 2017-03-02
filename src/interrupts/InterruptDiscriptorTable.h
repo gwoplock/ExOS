@@ -9,6 +9,7 @@
 #define INTERRUPTDISCRIPTORTABLE_H_
 
 #include "../global.h"
+#include "../drivers/ProgrammableInterruptController.h"
 
 struct IdtEntry {
 		uint16_t offset_1; // offset bits 0..15

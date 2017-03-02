@@ -8,4 +8,5 @@
 
 #include "memory/GlobalDescriptorTable.h"
 #include "global.h"
-
+#include "interrupts/InterruptDiscriptorTable.h"
+#include "drivers/ProgrammableInterruptController.h"
