@@ -2,7 +2,7 @@
 
 Exo-kernel for the consumer
 
-##Goals
+## Goals
 
 * Working OS  
 * LibOSes for all 3 major OSes  
@@ -11,16 +11,22 @@ Exo-kernel for the consumer
     * Mac OS X  
 * Live relinking to allow unmodified programs to be run
 
-##Current status
+## Current status
 
 Currently we are converting the C code to C++ code and redesigning it to follow more of a C++ style
 
-##Next steps
+## Next steps
 
-* USB floppy support  
+* libc
+* libc++
+* USB floppy support    
+* Program Loading and running  
 * SATA HDD support  
-* IDE HDD support   
-* Program Loading   
-* Maloc  
-* C-lib  
-
+* IDE HDD support 
+* LibOS format
+* Live Relinking
+* Linux LibOS
+* Multitasking
+* Windows LibOS
+   * Possibly based on react OS's code
+* Mac OS X LibOS
