@@ -1,7 +1,7 @@
 # my-OS
 
-Exo-kernel for the consumer
-
+This operating system is based around the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) but expands it to consumers with no computer knowledge. The idea is to read through the executable for the system calls and replace them with a user land system call from the LibOS for the OS the program should be running under. Im calling this replacemnt process "Live relinking". 
+ 
 ## Goals
 
 * Working OS  
@@ -29,7 +29,7 @@ Currently we are converting the C code to C++ code and redesigning it to follow 
 * SATA HDD support  
 * IDE HDD support 
 * LibOS format
-* Live Relinking
+* Live relinking
 * Linux LibOS
 * Multitasking
 * Windows LibOS
