@@ -11,11 +11,16 @@ Exo-kernel for the consumer
     * Mac OS X  
 * Live relinking to allow unmodified programs to be run
 
-## Current status
+## Current Status
 
 Currently we are converting the C code to C++ code and redesigning it to follow more of a C++ style
 
-## Next steps
+### What's Left
+* Display
+* Keyboard
+* Page Frame Allocation
+
+## Next Steps
 
 * libc
 * libc++
