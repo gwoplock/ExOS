@@ -39,6 +39,6 @@ Currently we are converting the C code to C++ code and redesigning it to follow 
 ## Make Dependencies
 * compiler toolchain for i686-elf
 
-##Compilation
+## Compilation
 
     make
