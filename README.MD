@@ -35,3 +35,9 @@ Currently we are converting the C code to C++ code and redesigning it to follow 
 * Windows LibOS
    * Possibly based on react OS's code
 * Mac OS X LibOS
+
+## Make Dependencies
+* compiler toolchain for i686-elf
+
+##Compilation
+    make
