@@ -25,7 +25,7 @@ void ProgrammableInterruptController::remap(uint8_t offset) {
 	io_wait();
 	outb(port+DATA_OFFSET, offset);
 	io_wait();
-	outb(port+DATA_OFFSET, 8086_MODE);
+	outb(port+DATA_OFFSET, MODE_8086);
 	io_wait();
 	outb(port+DATA_OFFSET, mask);
 }
@@ -35,7 +35,7 @@ void ProgrammableInterruptController::setMask(uint8_t line) {
 	outb(port+DATA_OFFSET, mask);
 }
 
-void ProgrammableInterruptController::clearMask(uint8_t line) {
+void ProgrammableInterruptController::unMask(uint8_t line) {
 	mask = inb(port+DATA_OFFSET) & ~(1<<line);
 	outb(port+DATA_OFFSET, mask);
 }
