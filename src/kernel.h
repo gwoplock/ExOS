@@ -10,7 +10,8 @@
 #include "global.h"
 #include "interrupts/InterruptDiscriptorTable.h"
 #include "drivers/ProgrammableInterruptController.h"
+#include "memory/PageTable.h"
 
-PageTable pageTable;
+
 void interruptSetUp();
 void fixPaging();

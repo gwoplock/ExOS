@@ -18,7 +18,7 @@
 
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");
 #define KernelPageDirStart 768
-#define kernelPageStart 786432
+#define KernelPageStart 786432
 #define fourKb 4096
 
 
