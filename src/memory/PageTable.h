@@ -53,6 +53,9 @@ class PageTable {
 		PageTable(bool buildFlag);
 		void* page(void* phyStart, void* virtStart, size_t size);
 		void movePageTable(PageDirEntry pagedir[1024]);
+		void* getKernelStart(){
+			return (void *) vKernelStart;
+		}
 };
 
 #endif /* PAGETABLE_H_ */

@@ -6,9 +6,7 @@
  */
 #include "kernel.h"
 
-GlobalDescriptorTable gdt = GlobalDescriptorTable();
-InterruptDiscriptorTable idt = InterruptDiscriptorTable();
-PageTable pageTable;
+
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */

@@ -2,7 +2,7 @@ AS = /home/garrett/opt/cross/bin/i686-elf-as
 GPP = /home/garrett/opt/cross/bin/i686-elf-g++
 GCC = /home/garrett/opt/cross/bin/i686-elf-gcc
 OS_CPP = /home/garrett/workspace/OS\ C++
-OBJS = boot.o isr_wrapper.o kernel.o GDT.o IDT.o IntHand.o ProgrammableInterruptController.o PageTable.o
+OBJS = boot.o isr_wrapper.o kernel.o GDT.o IDT.o IntHand.o ProgrammableInterruptController.o PageTable.o mem.o
 CFLAGS = -c -ffreestanding -O2 -Wall -Wextra
 BOOT = /mnt/boot
 
@@ -29,6 +29,9 @@ ProgrammableInterruptController.o: $(OS_CPP)/src/drivers/ProgrammableInterruptCo
 	 
 PageTable.o: $(OS_CPP)/src/memory/PageTable.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/PageTable.cpp
+
+mem.o: $(OS_CPP)/src/memory/mem.cpp
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/mem.cpp
 
 $(BOOT)/kernel.bin: $(OBJS)
 	$(GCC) -T $(OS_CPP)/linker.ld -o /mnt/usb/boot/kernel.bin -ffreestanding -O2 -nostdlib $(OBJS) -lgcc

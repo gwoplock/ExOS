@@ -12,6 +12,9 @@
 #include "drivers/ProgrammableInterruptController.h"
 #include "memory/PageTable.h"
 
+GlobalDescriptorTable gdt = GlobalDescriptorTable();
+InterruptDiscriptorTable idt = InterruptDiscriptorTable();
+PageTable pageTable;
 
 void interruptSetUp();
 void fixPaging();
