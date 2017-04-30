@@ -56,6 +56,9 @@ class PageTable {
 		void* getKernelStart(){
 			return (void *) vKernelStart;
 		}
+		PageTableEntry* getPageTables(){
+			return pageTables;
+		}
 };
 
 #endif /* PAGETABLE_H_ */

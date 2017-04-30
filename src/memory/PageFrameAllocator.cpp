@@ -20,7 +20,7 @@ PageFrameAllocator::PageFrameAllocator(bool buildFlag) {
 	while (i < 255 && memMap[i].type != 0xDEADC0DE) {
 		if (memMap[i].type != 1) {
 			uint32_t startPage = (uint64_t) memMap[i].base_addr / fourKb;
-			uint64_t sizeInPages = (memMap[i].length / fourKb) + 1
+			uint32_t sizeInPages = (memMap[i].length / fourKb) + 1
 					+ ( ((uint64_t) memMap[i].base_addr & 0xFFF) != 0);
 			int byte = startPage / 8;
 			int bit = startPage % 8;
@@ -49,4 +49,51 @@ PageFrameAllocator::PageFrameAllocator(bool buildFlag) {
 			byte++;
 		}
 	}
+}
+
+bool PageFrameAllocator::isAvalible(int page) {
+	size_t byte = page / 8;
+	size_t bit = page % 8;
+	return (bool) ! (physPageAvalibility[byte] & (0b1 << bit));
+}
+
+void* PageFrameAllocator::allocatePhysMem(size_t size) {
+	uint32_t sizeInPages = (size / fourKb) + ( (size & 0xFFF) != 0);
+	void* vertAddress = getNextVirtAddr(sizeInPages);
+	if (vertAddress == (void*) -1) {
+		return (void*) -1;
+	}
+	void* toRet = (void*) -1;
+	while (sizeInPages) {
+		if (isAvalible(lastUsedPage)) {
+			if (toRet == (void*) -1) {
+				toRet = pageTable.page((void*) (lastUsedPage * fourKb),
+						vertAddress, fourKb);
+			} else {
+				pageTable.page((void*) (lastUsedPage * fourKb), vertAddress,
+						fourKb);
+			}
+			sizeInPages--;
+			vertAddress = (void*) ((uint32_t) vertAddress + fourKb);
+			lastUsedPage++;
+		}
+	}
+	return toRet;
+}
+
+void* PageFrameAllocator::getNextVirtAddr(uint32_t sizeInPages) {
+	for (int i = 0; i < 1024 * 1024; i++) {
+		if(!pageTable.getPageTables()[i].present){
+			for (uint32_t n = 0; n < sizeInPages; n++){
+				if (pageTable.getPageTables()[i+n].present){
+					i+=n;
+					break;
+				}
+				if (n == sizeInPages -1){
+					return (void*)(i*fourKb);
+				}
+			}
+		}
+	}
+	return (void*)-1;
 }
