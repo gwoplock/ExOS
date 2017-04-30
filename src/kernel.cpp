@@ -15,6 +15,7 @@ void kernelMain(void/*multiboot shit*/){
 	asm("cli");
 	gdt.load();
 	interruptSetUp();
+
 }
 
 #if defined(__cplusplus)

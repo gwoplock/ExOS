@@ -4,7 +4,8 @@
  *  Created on: Feb 20, 2017
  *      Author: garrett
  */
-
+#ifndef KERNEL_H_
+#define KERNEL_H_
 
 #include "memory/GlobalDescriptorTable.h"
 #include "global.h"
@@ -18,3 +19,5 @@ PageTable pageTable;
 
 void interruptSetUp();
 void fixPaging();
+
+#endif
