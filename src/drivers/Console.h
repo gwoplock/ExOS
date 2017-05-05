@@ -10,6 +10,7 @@
 
 #include "../global.h"
 #include "../memory/mem.h"
+#include "Keyboard.h"
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;

@@ -2,7 +2,7 @@ AS = /home/garrett/opt/cross/bin/i686-elf-as
 GPP = /home/garrett/opt/cross/bin/i686-elf-g++
 GCC = /home/garrett/opt/cross/bin/i686-elf-gcc
 OS_CPP = /home/garrett/workspace/OS\ C++
-OBJS = boot.o isr_wrapper.o Console.o kernel.o GDT.o IDT.o IntHand.o ProgrammableInterruptController.o PageTable.o mem.o PageFrameAllocator.o
+OBJS = boot.o isr_wrapper.o Console.o kernel.o GDT.o IDT.o IntHand.o Keyboard.o ProgrammableInterruptController.o PageTable.o mem.o PageFrameAllocator.o
 CFLAGS = -c -ffreestanding -O2 -Wall -Wextra
 BOOT = /mnt/boot
 
@@ -38,6 +38,9 @@ PageFrameAllocator.o: $(OS_CPP)/src/memory/PageFrameAllocator.cpp
 
 Console.o: $(OS_CPP)/src/drivers/Console.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/Console.cpp
+	
+Keyboard.o: $(OS_CPP)/src/drivers/Keyboard.cpp
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/Keyboard.cpp
 
 $(BOOT)/kernel.bin: $(OBJS)
 	$(GCC) -T $(OS_CPP)/linker.ld -o /run/media/garrett/disk/boot/kernel.bin -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
