@@ -6,7 +6,9 @@
  */
 #include "kernel.h"
 
-
+InterruptDiscriptorTable idt = InterruptDiscriptorTable();
+GlobalDescriptorTable gdt = GlobalDescriptorTable();
+PageTable pageTable = PageTable();
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
@@ -29,5 +31,5 @@ void interruptSetUp(){
 }
 
 void fixPaging(){
-	pageTable = PageTable(true);
+	//pageTable = PageTable(true);
 }

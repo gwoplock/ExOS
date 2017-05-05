@@ -12,6 +12,8 @@
 #include "../kernel.h"
 #include "../multiboot spec/multiboot.h"
 
+void memcpy(void* to, void* from, size_t length);
+
 struct MultibootMemoryMap{
 	unsigned int size;
 	uint64_t base_addr;

@@ -30,35 +30,14 @@ class ProgrammableInterruptController {
 		void sendEndOfInterrupt(uint8_t line);
 };
 
-ProgrammableInterruptController pics[] = {ProgrammableInterruptController(false), ProgrammableInterruptController(true)};
-void picRemap(uint8_t masterOffset, uint8_t slaveOffset){
-	pics[0].remap(masterOffset);
-	pics[1].remap(slaveOffset);
-	outb(0x21, 4);
-	outb(0xA1, 2);
-}
-void maskIrq(uint8_t line){
-	if (line < 8){
-		pics[0].setMask(line);
-	} else {
-		pics[1].setMask(line-8);
-	}
-}
+extern ProgrammableInterruptController pics[];
 
-void unMaskIrq(uint8_t line){
-	if (line < 8){
-		pics[0].unMask(line);
-	} else {
-		pics[1].unMask(line-8);
-	}
-}
+void picRemap(uint8_t masterOffset, uint8_t slaveOffset);
 
-void sendEOI(uint8_t line){
-	if (line < 8){
-		pics[0].sendEndOfInterrupt(line);
-	} else {
-		pics[1].sendEndOfInterrupt(line-8);
-	}
-}
+void maskIrq(uint8_t line);
+
+void unMaskIrq(uint8_t line);
+
+void sendEOI(uint8_t line);
 
 #endif /* PROGRAMMABLEINTERRUPTCONTROLLER_H_ */

@@ -22,3 +22,15 @@ void getMemMap(multiboot_info_t* mbt) {
 	}
 	memMap[i].type = 0xDEADC0DE;
 }
+
+void memcpy(void* to, void* from, size_t length) {
+	int* toArr = (int*) to;
+	int* fromArr = (int*) from;
+	for (size_t i = 0; i < length / sizeof(int); i++) {
+		toArr[i] = fromArr[i];
+	}
+	for (size_t i = 0; i < length % sizeof(int); i++) {
+		* ((char*) to + i + length - length % sizeof(int)) = * ((char*) from + i
+				+ length - length % sizeof(int));
+	}
+}

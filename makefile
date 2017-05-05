@@ -37,7 +37,7 @@ PageFrameAllocator.o: $(OS_CPP)/src/memory/PageFrameAllocator.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/PageFrameAllocator.cpp
 
 $(BOOT)/kernel.bin: $(OBJS)
-	$(GCC) -T $(OS_CPP)/linker.ld -o /mnt/usb/boot/kernel.bin -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
+	$(GCC) -T $(OS_CPP)/linker.ld -o /run/media/garrett/disk/boot/kernel.bin -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
 	sync
 
 all: $(BOOT)/kernel.bin
