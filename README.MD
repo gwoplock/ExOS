@@ -16,7 +16,6 @@ This operating system is based around the [MIT exokernel](https://pdos.csail.mit
 Currently we are converting the C code to C++ code and redesigning it to follow more of a C++ style
 
 ### What's Left
-* Display
 * Keyboard
 
 ## Next Steps
