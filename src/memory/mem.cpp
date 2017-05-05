@@ -8,6 +8,7 @@
 #include "mem.h"
 
 MultibootMemoryMap memMap[256];
+
 void getMemMap(multiboot_info_t* mbt) {
 	uint32_t vKernelStart = (uint32_t) pageTable.getKernelStart();
 	mbt = (multiboot_info_t*) ((int32_t) mbt + vKernelStart);
@@ -32,5 +33,21 @@ void memcpy(void* to, void* from, size_t length) {
 	for (size_t i = 0; i < length % sizeof(int); i++) {
 		* ((char*) to + i + length - length % sizeof(int)) = * ((char*) from + i
 				+ length - length % sizeof(int));
+	}
+}
+
+
+void memSet(void* start, size_t length, char toSet) {
+	int toSetInt = (int) toSet;
+	for (size_t i = 1; i < sizeof(int) / sizeof(char); i++) {
+		toSetInt |= (int) toSet << (sizeof(char) * 8 * i);
+	}
+
+	int* toArr = (int*) start;
+	for (size_t i = 0; i < length / sizeof(int); i++) {
+		toArr[i] = toSetInt;
+	}
+	for (size_t i = 0; i < length % sizeof(int); i++) {
+		* ((char*) start + i + length - length % sizeof(int)) = toSet;
 	}
 }

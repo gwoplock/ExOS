@@ -12,7 +12,6 @@
 #include "../kernel.h"
 #include "../multiboot spec/multiboot.h"
 
-void memcpy(void* to, void* from, size_t length);
 
 struct MultibootMemoryMap{
 	unsigned int size;
@@ -22,6 +21,11 @@ struct MultibootMemoryMap{
 };
 
 extern MultibootMemoryMap memMap[256];
+
+void memcpy(void* to, void* from, size_t length);
+
+void memSet(void* start, size_t length, char toSet);
+
 
 void getMemMap(multiboot_info_t* mdb);
 
