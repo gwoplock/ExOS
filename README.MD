@@ -18,7 +18,6 @@ Currently we are converting the C code to C++ code and redesigning it to follow 
 ### What's Left
 * Display
 * Keyboard
-* Page Frame Allocation
 
 ## Next Steps
 
@@ -40,5 +39,7 @@ Currently we are converting the C code to C++ code and redesigning it to follow 
 * compiler toolchain for i686-elf
 
 ## Compilation
+
+set the final build path in the linker to whatever you're using. then: 
 
     make
