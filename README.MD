@@ -21,7 +21,7 @@ We are currently testing the code that was converted to c++.
 * PIC
 * ~~Console~~
 * Keyboard
-* Paging
+* ~~Paging~~
 * Page frame allocation
 
 
