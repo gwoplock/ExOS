@@ -69,7 +69,7 @@ class GlobalDescriptorTable {
 			//get size, -1 because Int-hell hates you
 			size = 3;
 			size_t sizeOfGdt = (3 * sizeof(GdtEntry)) - 1;
-			writeInt(10);
+			writeInt(123450);
 			//get the info to tell cpu about the GDT
 			BREAKPOINT
 			gdtd.size = (uint16_t)sizeOfGdt;

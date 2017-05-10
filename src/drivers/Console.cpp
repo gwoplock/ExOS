@@ -176,31 +176,24 @@ void terminalScroll( ) {
 					+ (VGA_WIDTH * 2) * (VGA_HEIGHT - 1)), VGA_WIDTH * 2, '\0');
 }
 
-
-
 //write a number (backwards because i hate you)
-void writeIntBackward(uint64_t num) {
+void writeInt(uint64_t num) {
+	uint8_t out[20];
+	for (int i = 0; i < 20; i++) {
+		out[i] = '\0';
+	}
 	if ( !num) {
 		terminalPutChar('0');
 		return;
 	}
 
-	int n = 0;
-	while (num != 0) {
-		terminalPutChar('0' + (num % 10));
+	int n = 19;
+	while (n>=0 && num != 0) {
+		out[n] = ('0' + (num % 10));
 		num /= 10;
-		n++;
+		n--;
 	}
+	terminalWrite((const char *)out, 20);
 }
 
-void writeInt(uint64_t num){
-	uint64_t num1 = num;
-	uint64_t num2 = 0;
-	while (num1){
-		num2 += num1 %10;
-		num2 *=10;
-		num1/=10;
-	}
-	writeIntBackward(num2);
-}
 
