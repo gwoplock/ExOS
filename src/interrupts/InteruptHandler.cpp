@@ -11,14 +11,23 @@
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 
-void irq_handler(int irq){
-
+void irq_handler(int line){
+	if(line ==1/*KB*/){
+		uint8_t key = KB.getKey();
+		if (key != '\0') {
+			//nope. put that key down
+			terminalPutChar(key);
+		} else {
+			//handle the specail key
+			//terminalHandleSpecialKey(_newKeyScancode, &mods);
+		}
+	}
+	sendEOI(line);
 }
 
-void isr_handler(int line){
-	//handle IRQ
-
-	sendEOI(line);
+void isr_handler(int interruptNumber){
+	writeInt(interruptNumber);
+	terminalPutChar(' ');
 }
 
 #if defined(__cplusplus)

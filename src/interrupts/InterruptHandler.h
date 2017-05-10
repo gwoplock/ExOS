@@ -9,6 +9,7 @@
 #define INTERRUPTHANDLER_H_
 
 #include "../drivers/ProgrammableInterruptController.h"
+#include "../kernel.h"
 
 
 

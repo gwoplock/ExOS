@@ -10,14 +10,14 @@
 Keyboard::Keyboard( ) {
 }
 
-uint8_t Keyboard::getScanCode( ) {
+uint8_t Keyboard::getScancode( ) {
 	uint8_t scanCode = 0;
 	scanCode = inb(PORT);
 	return scanCode;
 }
 
 uint8_t Keyboard::getKey(uint16_t modKeys) {
-	return getKey(getScanCode( ), modKeys);
+	return getKey(getScancode( ), modKeys);
 }
 
 uint8_t Keyboard::getKey(uint8_t scanCode, uint16_t modKeys) {

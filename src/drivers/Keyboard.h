@@ -74,7 +74,10 @@ class Keyboard {
 	public:
 		Keyboard( );
 		Keyboard(SCAN_CODE scanCode);
-		uint8_t getScanCode();
+		uint8_t getScancode();
+		uint8_t getKey(){
+			return getKey(modKeys);
+		}
 		uint8_t getKey(uint16_t modKeys);
 		uint8_t getKey(uint8_t _scanCode, uint16_t modKeys);
 };
