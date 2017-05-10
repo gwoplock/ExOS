@@ -13,10 +13,17 @@ This operating system is based around the [MIT exokernel](https://pdos.csail.mit
 
 ## Current Status
 
-Currently we are converting the C code to C++ code and redesigning it to follow more of a C++ style
+We are currently testing the code that was converted to c++. 
 
 ### What's Left
+* GDT
+* IDT
+* PIC
+* Console
 * Keyboard
+* Paging
+* Page frame allocation
+
 
 ## Next Steps
 
