@@ -7,10 +7,10 @@
 
 #ifndef GLOBALDESCRIPTORTABLE_H_
 #define GLOBALDESCRIPTORTABLE_H_
-
+#include "../drivers/Console.h"
 #include "../global.h"
 struct Flags {
-		uint8_t zero : 5;
+		uint8_t zero : 6;
 		uint8_t size : 1;
 		uint8_t Granularity :1;
 
@@ -20,6 +20,7 @@ struct Access {
 		uint8_t readWrite :1;
 		uint8_t direction :1;
 		uint8_t exicute :1;
+		uint8_t one :1;
 		uint8_t privilge :2;
 		uint8_t present :1;
 }__attribute__((packed));
@@ -57,7 +58,7 @@ struct GdtDescriptor {
 }__attribute__((packed));
 class GlobalDescriptorTable {
 	private:
-		GdtEntry gdt[256];
+		GdtEntry _gdt[256];
 		size_t size;
 		GdtDescriptor gdtd;
 	public:
@@ -66,13 +67,16 @@ class GlobalDescriptorTable {
 				uint32_t baseAddress, Access access, Flags flags);
 		void load( ) {
 			//get size, -1 because Int-hell hates you
-			size_t sizeOfGdt = size * sizeof(GdtEntry) - 1;
+			size = 3;
+			size_t sizeOfGdt = (3 * sizeof(GdtEntry)) - 1;
+			writeInt(10);
 			//get the info to tell cpu about the GDT
-
-			gdtd.size = sizeOfGdt;
-			gdtd.location = (uint32_t) gdt;
-			//load that shit
-			asm ("LGDT %[gdt]" : : [gdt] "m" (gdtd));
+			BREAKPOINT
+			gdtd.size = (uint16_t)sizeOfGdt;
+			gdtd.location = (uint32_t) _gdt;
+			//load
+			BREAKPOINT
+			asm ("LGDT %[gdtd]" : : [gdtd] "m" (gdtd));
 		}
 };
 

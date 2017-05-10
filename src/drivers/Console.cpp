@@ -185,7 +185,7 @@ void writeInt(uint64_t num) {
 
 	int n = 0;
 	while (num != 0) {
-		terminalPutChar('0' + num % 10);
+		terminalPutChar('0' + (num % 10));
 		num /= 10;
 		n++;
 	}

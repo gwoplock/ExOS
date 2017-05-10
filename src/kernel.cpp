@@ -15,13 +15,17 @@ Keyboard KB;
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 	void kernelMain(void/*multiboot shit*/) {
+		//BREAKPOINT
 		asm("cli");
 		/* begin test code*/
 		//gdt test -> broken
-		gdt.load( );
-		//term test
 		terminalInit((uint16_t*) 0xC00B8000);
+		gdt.load( );
+		//BREAKPOINT
+		//term test
+
 		terminalWriteString("Hello World!");
+		//BREAKPOINT
 		//paging test
 		pageTable.build( );
 		//IDT test

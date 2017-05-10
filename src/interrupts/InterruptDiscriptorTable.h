@@ -76,7 +76,7 @@ class InterruptDiscriptorTable {
 			//get the size of the IDT. -1 is x86 BULLSHIT
 			size_t sizeOfidt = (size * sizeof(IdtEntry)) - 1;
 			//build descriptor. no i cant spell
-			writeInt((uint64_t) idt);
+			writeInt((uint32_t) idt);
 			idtd.offset = (uint32_t) idt;
 			idtd.size = sizeOfidt;
 			//send the mem address to asm. tell cpu where IDT is

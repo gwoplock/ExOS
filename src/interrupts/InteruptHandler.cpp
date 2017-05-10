@@ -26,7 +26,7 @@ void irq_handler(int line){
 }
 
 void isr_handler(int interruptNumber){
-	writeInt(interruptNumber);
+	writeInt((uint32_t)interruptNumber);
 	terminalPutChar(' ');
 }
 

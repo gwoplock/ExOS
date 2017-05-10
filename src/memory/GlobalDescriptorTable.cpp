@@ -15,7 +15,7 @@ GlobalDescriptorTable::GlobalDescriptorTable( ) {
 	nullAccess.accessI = 0;
 	FlagsU nullFlags;
 	nullFlags.flagsI = 0;
-	gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0, (uint32_t) 0,
+	_gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0xF00F, (uint32_t) 0xB00B,
 			nullAccess.accessS, nullFlags.flagsS);
 
 	size++;
@@ -24,14 +24,14 @@ GlobalDescriptorTable::GlobalDescriptorTable( ) {
 	kernelCodeAccess.accessI = 0x9A;
 	FlagsU kernelCodeFlags;
 	kernelCodeFlags.flagsI = 0xCF;
-	gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
+	_gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
 			(uint32_t) 0, kernelCodeAccess.accessS, kernelCodeFlags.flagsS);
 	size++;
 	AccessU kernelDataAccess;
 	kernelDataAccess.accessI = 0x92;
 	FlagsU kernelDataFlags;
 	kernelDataFlags.flagsI = 0xCF;
-	gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
+	_gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
 			(uint32_t) 0, kernelDataAccess.accessS, kernelDataFlags.flagsS);
 
 	size++;
