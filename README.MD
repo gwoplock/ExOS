@@ -16,10 +16,10 @@ This operating system is based around the [MIT exokernel](https://pdos.csail.mit
 We are currently testing the code that was converted to c++. 
 
 ### What's Left
-~~* GDT~~
+* ~~GDT~~
 * IDT
 * PIC
-~~* Console~~
+* ~~Console~~
 * Keyboard
 * Paging
 * Page frame allocation
