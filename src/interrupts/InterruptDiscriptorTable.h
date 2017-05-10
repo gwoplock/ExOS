@@ -8,8 +8,10 @@
 #ifndef INTERRUPTDISCRIPTORTABLE_H_
 #define INTERRUPTDISCRIPTORTABLE_H_
 
+#include "../drivers/Console.h"
 #include "../global.h"
 #include "../drivers/ProgrammableInterruptController.h"
+
 
 struct IdtEntry {
 		uint16_t offset_1; // offset bits 0..15
@@ -74,6 +76,7 @@ class InterruptDiscriptorTable {
 			size_t sizeOfidt = (size * sizeof(IdtEntry)) - 1;
 			//build descriptor. no i cant spell
 			static IdtDiscriptor idtd;
+			writeInt((uint64_t) idt);
 			idtd.offset = (uint32_t) idt;
 			idtd.size = sizeOfidt;
 			//send the mem address to asm. tell cpu where IDT is

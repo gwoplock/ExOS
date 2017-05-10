@@ -9,7 +9,7 @@
 #define CONSOLE_H_
 
 #include "../global.h"
-#include "../memory/mem.h"
+
 #include "Keyboard.h"
 
 static const size_t VGA_WIDTH = 80;
@@ -63,6 +63,8 @@ void teminalUpdateBar(int row, int col);
 void terminalScroll( );
 
 void writeInt(uint64_t num);
+
+#include "../memory/mem.h"
 
 
 #endif /* CONSOLE_H_ */

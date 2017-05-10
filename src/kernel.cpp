@@ -20,8 +20,13 @@ void kernelMain(void/*multiboot shit*/){
 	gdt.load();
 	terminalInit((uint16_t*)0xC00B8000);
 	terminalWriteString("Hello World!");
+	pageTable.build();
+	//BREAKPOINT
 	interruptSetUp();
 	/*end test code*/
+	while (true){
+		asm("hlt");
+	}
 
 }
 
@@ -30,10 +35,10 @@ void kernelMain(void/*multiboot shit*/){
 #endif
 
 void interruptSetUp(){
-	picRemap(0x20, 0x28);
+	//picRemap(0x20, 0x28);
 	idt.load();
-	maskIrq(0);
-	//asm("sti");
+	//maskIrq(0);
+	asm("sti");
 }
 
 void fixPaging(){

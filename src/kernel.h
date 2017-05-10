@@ -9,11 +9,14 @@
 
 #include "memory/GlobalDescriptorTable.h"
 #include "global.h"
-#include "interrupts/InterruptDiscriptorTable.h"
 #include "drivers/ProgrammableInterruptController.h"
 #include "memory/PageTable.h"
 #include "drivers/Console.h"
 #include "drivers/Keyboard.h"
+#include "interrupts/InterruptDiscriptorTable.h"
+
+
+class InterruptDiscriptorTable;
 
 extern GlobalDescriptorTable gdt;
 extern InterruptDiscriptorTable idt;
