@@ -24,7 +24,7 @@ struct IdtEntry {
 struct IdtDiscriptor {
 		uint16_t size;
 		uint32_t offset;
-};
+}__attribute__((packed));
 
 //possible should be void ____()
 extern void* isr_0;
@@ -68,6 +68,7 @@ class InterruptDiscriptorTable {
 	private:
 		size_t size;
 		IdtEntry idt[255];
+		IdtDiscriptor idtd;
 	public:
 
 		IdtEntry encode(uint32_t offset, uint16_t selector);
@@ -75,7 +76,6 @@ class InterruptDiscriptorTable {
 			//get the size of the IDT. -1 is x86 BULLSHIT
 			size_t sizeOfidt = (size * sizeof(IdtEntry)) - 1;
 			//build descriptor. no i cant spell
-			static IdtDiscriptor idtd;
 			writeInt((uint64_t) idt);
 			idtd.offset = (uint32_t) idt;
 			idtd.size = sizeOfidt;

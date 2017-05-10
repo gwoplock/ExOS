@@ -14,7 +14,7 @@ struct Flags {
 		uint8_t size : 1;
 		uint8_t Granularity :1;
 
-};
+}__attribute__((packed));
 struct Access {
 		uint8_t accessed :1;
 		uint8_t readWrite :1;
@@ -54,11 +54,12 @@ union FlagsU {
 struct GdtDescriptor {
 		uint16_t size;
 		uint32_t location;
-};
+}__attribute__((packed));
 class GlobalDescriptorTable {
 	private:
 		GdtEntry gdt[256];
 		size_t size;
+		GdtDescriptor gdtd;
 	public:
 		GlobalDescriptorTable( ) ;
 		GdtEntry encodeGlobalDescriptorTableEntry(uint32_t limit,
@@ -67,7 +68,7 @@ class GlobalDescriptorTable {
 			//get size, -1 because Int-hell hates you
 			size_t sizeOfGdt = size * sizeof(GdtEntry) - 1;
 			//get the info to tell cpu about the GDT
-			static GdtDescriptor gdtd;
+
 			gdtd.size = sizeOfGdt;
 			gdtd.location = (uint32_t) gdt;
 			//load that shit
