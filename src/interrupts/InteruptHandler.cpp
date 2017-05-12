@@ -12,24 +12,25 @@ extern "C" {/* Use C linkage for kernel_main. */
 #endif
 
 void irq_handler(int line){
-	writeInt((uint32_t)line);
-	terminalPutChar(' ');
-	//if(line ==1/*KB*/){
-	//	uint8_t key = KB.getKey();
-	//	if (key != '\0') {
-	//		//nope. put that key down
-	//		terminalPutChar(key);
-	//	} else {
-	//		//handle the specail key
-	//		//terminalHandleSpecialKey(_newKeyScancode, &mods);
-	//	}
-	//}
-	sendEOI(line);
+	if(line ==1/*KB*/){
+		//char scancode= inb(0x60);
+		//writeInt(scancode);
+		uint8_t key = KB.getKey();
+		if (key != '\0') {
+			//nope. put that key down
+			terminalPutChar(key);
+		} else {
+			//handle the specail key
+			//terminalHandleSpecialKey(_newKeyScancode, &mods);
+		}
+	}
+	PIC_sendEOI(line);
 }
 
 void isr_handler(int interruptNumber){
-	writeInt((uint32_t)interruptNumber);
 	terminalPutChar(' ');
+	writeInt((uint32_t)interruptNumber);
+
 }
 
 #if defined(__cplusplus)
