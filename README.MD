@@ -20,7 +20,7 @@ We are currently testing the code that was converted to c++.
 * ~~IDT~~
 * ~~PIC~~
 * ~~Console~~
-* Keyboard
+* ~~Keyboard~~
 * ~~Paging~~
 * Page frame allocation
 
