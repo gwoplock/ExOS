@@ -69,7 +69,7 @@ enum ModKeyMasks{
 class Keyboard {
 	private:
 		SCAN_CODE scanCodeSet;
-		uint16_t modKeys;
+		uint16_t modKeys = 0;
 		static const uint8_t PORT = 0x60;
 	public:
 		Keyboard( );
@@ -77,6 +77,9 @@ class Keyboard {
 		uint8_t getScancode();
 		uint8_t getKey(){
 			return getKey(modKeys);
+		}
+		uint8_t getKey(uint8_t scancode){
+			return getKey(scancode, modKeys);
 		}
 		uint8_t getKey(uint16_t modKeys);
 		uint8_t getKey(uint8_t _scanCode, uint16_t modKeys);

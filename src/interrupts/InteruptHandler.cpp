@@ -13,15 +13,12 @@ extern "C" {/* Use C linkage for kernel_main. */
 
 void irq_handler(int line){
 	if(line ==1/*KB*/){
-		//char scancode= inb(0x60);
-		//writeInt(scancode);
-		uint8_t key = KB.getKey();
-		if (key != '\0') {
-			//nope. put that key down
+		uint8_t scanCode = KB.getScancode();
+		uint8_t key = KB.getKey(scanCode);
+		if(key != '\0' && !(scanCode & 0x80)){
 			terminalPutChar(key);
 		} else {
-			//handle the specail key
-			//terminalHandleSpecialKey(_newKeyScancode, &mods);
+			//special key
 		}
 	}
 	PIC_sendEOI(line);
