@@ -10,8 +10,7 @@ PageFrameAllocator::PageFrameAllocator( ) {
 	// TODO Auto-generated constructor stub
 
 }
-PageFrameAllocator::PageFrameAllocator(bool buildFlag) {
-	buildFlag = !buildFlag;
+void PageFrameAllocator::build() {
 	lastUsedPage = 0;
 	for (int i = 0; i < (1024 * 1025) / 8; i++) {
 		physPageAvalibility[i] = 0;

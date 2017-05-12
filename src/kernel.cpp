@@ -10,17 +10,20 @@ InterruptDiscriptorTable idt;
 GlobalDescriptorTable gdt;
 PageTable pageTable;
 Keyboard KB;
+PageFrameAllocator frameAlloc;
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
-	void kernelMain(void/*multiboot shit*/) {
+	void kernelMain(multiboot_info_t* mbd) {
 		asm("cli");
 		terminalInit((uint16_t*) 0xC00B8000);
 		gdt.build( );
 		gdt.load( );
 		pageTable.build( );
 		interruptSetUp( );
+		getMemMap(mbd);
+		frameAlloc.build();
 		while (true) {
 			asm("hlt");
 		}

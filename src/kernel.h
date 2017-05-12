@@ -11,10 +11,10 @@
 #include "global.h"
 #include "drivers/ProgrammableInterruptController.h"
 #include "memory/PageTable.h"
-
+#include "memory/PageFrameAllocator.h"
 #include "drivers/Keyboard.h"
 #include "interrupts/InterruptDiscriptorTable.h"
-
+#include "drivers/Console.h"
 
 class InterruptDiscriptorTable;
 class GlobalDescriptorTable;
@@ -23,8 +23,8 @@ extern GlobalDescriptorTable gdt;
 extern InterruptDiscriptorTable idt;
 extern PageTable pageTable;
 extern Keyboard KB;
+extern PageFrameAllocator frameAlloc;
 
-#include "drivers/Console.h"
 void interruptSetUp();
 void fixPaging();
 

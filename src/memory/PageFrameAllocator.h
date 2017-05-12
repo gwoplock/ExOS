@@ -19,7 +19,7 @@ class PageFrameAllocator {
 		uint8_t physPageAvalibility[(1024*1024)/8];
 	public:
 		PageFrameAllocator( );
-		PageFrameAllocator(bool build);
+		void build();
 		bool isAvalible(int page);
 		void* allocatePhysMem(size_t sizeToAlloc);
 		void* getNextVirtAddr(uint32_t sizeInPages);
