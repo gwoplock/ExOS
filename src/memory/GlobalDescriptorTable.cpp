@@ -15,25 +15,31 @@ GlobalDescriptorTable::GlobalDescriptorTable( ) {
 	nullAccess.accessI = 0;
 	FlagsU nullFlags;
 	nullFlags.flagsI = 0;
-	_gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0xF00F, (uint32_t) 0xB00B,
-			nullAccess.accessS, nullFlags.flagsS);
-
+	_gdt[0] = encodeGlobalDescriptorTableEntry((uint32_t) 0x0000F00F,
+			(uint32_t) 0x0000B00B, nullAccess.accessS, nullFlags.flagsS);
+	terminalWriteString("    ");
+	writeInt( *(uint64_t*) &_gdt[0]);
+	terminalWriteString("    ");
+	BREAKPOINT
 	size++;
 
 	AccessU kernelCodeAccess;
 	kernelCodeAccess.accessI = 0x9A;
 	FlagsU kernelCodeFlags;
 	kernelCodeFlags.flagsI = 0xCF;
-	_gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
+	_gdt[1] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
 			(uint32_t) 0, kernelCodeAccess.accessS, kernelCodeFlags.flagsS);
+	terminalWriteString("    ");
+	writeInt( *(uint64_t*) &_gdt[1]);
+	terminalWriteString("    ");
+	BREAKPOINT
 	size++;
 	AccessU kernelDataAccess;
 	kernelDataAccess.accessI = 0x92;
 	FlagsU kernelDataFlags;
 	kernelDataFlags.flagsI = 0xCF;
-	_gdt[size] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
+	_gdt[2] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
 			(uint32_t) 0, kernelDataAccess.accessS, kernelDataFlags.flagsS);
-
 	size++;
 
 }
@@ -54,5 +60,34 @@ GdtEntry GlobalDescriptorTable::encodeGlobalDescriptorTableEntry(uint32_t limit,
 
 	toRet.limFlags = limFlags;
 	return toRet;
+}
+
+void GlobalDescriptorTable::build( ) {
+	//TODO change flag and access ints into structs
+	size = 0;
+
+	AccessU nullAccess;
+	nullAccess.accessI = 0;
+	FlagsU nullFlags;
+	nullFlags.flagsI = 0;
+	_gdt[0] = encodeGlobalDescriptorTableEntry((uint32_t) 0x0000F00F,
+			(uint32_t) 0x0000B00B, nullAccess.accessS, nullFlags.flagsS);
+	size++;
+
+	AccessU kernelCodeAccess;
+	kernelCodeAccess.accessI = 0x9A;
+	FlagsU kernelCodeFlags;
+	kernelCodeFlags.flagsI = 0xCF;
+	_gdt[1] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
+			(uint32_t) 0, kernelCodeAccess.accessS, kernelCodeFlags.flagsS);
+	size++;
+	AccessU kernelDataAccess;
+	kernelDataAccess.accessI = 0x92;
+	FlagsU kernelDataFlags;
+	kernelDataFlags.flagsI = 0xCF;
+	_gdt[2] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
+			(uint32_t) 0, kernelDataAccess.accessS, kernelDataFlags.flagsS);
+	size++;
+
 }
 

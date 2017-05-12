@@ -67,22 +67,22 @@ extern void* irq_15;
 class InterruptDiscriptorTable {
 	private:
 		size_t size;
-		IdtEntry idt[255];
+		IdtEntry _idt[255];
 		IdtDiscriptor idtd;
 	public:
 
 		IdtEntry encode(uint32_t offset, uint16_t selector);
 		void load( ) {
 			//get the size of the IDT. -1 is x86 BULLSHIT
-			size_t sizeOfidt = (size * sizeof(IdtEntry)) - 1;
+			size_t sizeOfidt = (48 * sizeof(IdtEntry)) - 1;
 			//build descriptor. no i cant spell
-			writeInt((uint32_t) idt);
-			idtd.offset = (uint32_t) idt;
+			idtd.offset = (uint32_t) _idt;
 			idtd.size = sizeOfidt;
 			//send the mem address to asm. tell cpu where IDT is
-			asm ("LIDT %[idt]" : : [idt] "m" (idtd));
+			asm ("LIDT %[idtd]" : : [idtd] "m" (idtd));
 		}
 		InterruptDiscriptorTable( );
+		void build();
 };
 
 #endif /* INTERRUPTDISCRIPTORTABLE_H_ */

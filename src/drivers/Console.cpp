@@ -13,6 +13,7 @@ size_t terminalColumn;
 uint8_t terminalColor;
 uint16_t* terminalBuffer;
 
+
 void terminalInit(uint16_t* bufferStart) {
 	//start at the begining
 	terminalRow = 0;

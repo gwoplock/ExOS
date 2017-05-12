@@ -16,6 +16,8 @@
 #include <stdint.h>
 #include "AsmHelper.h"
 
+
+
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");
 #define KernelPageDirStart 768
 #define KernelPageStart 786432

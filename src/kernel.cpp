@@ -20,25 +20,23 @@ extern "C" {/* Use C linkage for kernel_main. */
 		/* begin test code*/
 		//gdt test -> broken
 		terminalInit((uint16_t*) 0xC00B8000);
+		gdt.build();
 		gdt.load( );
-		//BREAKPOINT
 		//term test
-
 		terminalWriteString("Hello World!");
-		//BREAKPOINT
 		//paging test
 		pageTable.build( );
 		//IDT test
 		interruptSetUp();
 		//KB test
-		uint8_t keyOld = '\0';
+		/*uint8_t keyOld = '\0';
 		while (true) {
 			uint8_t keyNew = KB.getKey( );
 			if (keyNew != keyOld && keyNew != '\0') {
 				terminalPutChar(keyNew);
 				keyOld = keyNew;
 			}
-		}
+		}*/
 
 		/*end test code*/
 		while (true) {
@@ -52,7 +50,8 @@ extern "C" {/* Use C linkage for kernel_main. */
 #endif
 
 void interruptSetUp( ) {
-	//picRemap(0x20, 0x28);
+	idt.build();
+	picRemap(0x20, 0x28);
 	idt.load( );
 	//maskIrq(0);
 	asm("sti");

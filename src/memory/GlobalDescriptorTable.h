@@ -9,6 +9,9 @@
 #define GLOBALDESCRIPTORTABLE_H_
 #include "../drivers/Console.h"
 #include "../global.h"
+
+
+
 struct Flags {
 		uint8_t zero : 6;
 		uint8_t size : 1;
@@ -54,7 +57,7 @@ union FlagsU {
 };
 struct GdtDescriptor {
 		uint16_t size;
-		uint32_t location;
+		GdtEntry* location;
 }__attribute__((packed));
 class GlobalDescriptorTable {
 	private:
@@ -63,21 +66,19 @@ class GlobalDescriptorTable {
 		GdtDescriptor gdtd;
 	public:
 		GlobalDescriptorTable( ) ;
+		GlobalDescriptorTable( const GlobalDescriptorTable &) = delete;
+		auto operator= (const GlobalDescriptorTable &) = delete;
 		GdtEntry encodeGlobalDescriptorTableEntry(uint32_t limit,
 				uint32_t baseAddress, Access access, Flags flags);
 		void load( ) {
 			//get size, -1 because Int-hell hates you
-			size = 3;
-			size_t sizeOfGdt = (3 * sizeof(GdtEntry)) - 1;
-			writeInt(123450);
+			size_t sizeOfGdt = (size * sizeof(GdtEntry)) - 1;
 			//get the info to tell cpu about the GDT
-			BREAKPOINT
 			gdtd.size = (uint16_t)sizeOfGdt;
-			gdtd.location = (uint32_t) _gdt;
-			//load
-			BREAKPOINT
+			gdtd.location = &_gdt[0];
 			asm ("LGDT %[gdtd]" : : [gdtd] "m" (gdtd));
 		}
+		void build();
 };
 
 #endif /* GLOBALDESCRIPTORTABLE_H_ */
