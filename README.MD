@@ -13,16 +13,10 @@ This operating system is based around the [MIT exokernel](https://pdos.csail.mit
 
 ## Current Status
 
-We are currently testing the code that was converted to c++. 
+We are currently getting libc intigrated
 
 ### What's Left
-* ~~GDT~~
-* ~~IDT~~
-* ~~PIC~~
-* ~~Console~~
-* ~~Keyboard~~
-* ~~Paging~~
-* Page frame allocation
+I have no clue, I'll update this then I get an idea...
 
 
 ## Next Steps
