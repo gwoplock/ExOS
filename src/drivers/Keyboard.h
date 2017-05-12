@@ -83,6 +83,9 @@ class Keyboard {
 		}
 		uint8_t getKey(uint16_t modKeys);
 		uint8_t getKey(uint8_t _scanCode, uint16_t modKeys);
+		uint16_t* getModkeys(){
+			return &modKeys;
+		}
 };
 
 #endif /* KEYBOARD_H_ */

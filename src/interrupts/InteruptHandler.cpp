@@ -18,7 +18,7 @@ void irq_handler(int line){
 		if(key != '\0' && !(scanCode & 0x80)){
 			terminalPutChar(key);
 		} else {
-			//special key
+			terminalHandleSpecialKey(scanCode, KB.getModkeys());
 		}
 	}
 	PIC_sendEOI(line);
