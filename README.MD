@@ -13,10 +13,10 @@ This operating system is based around the [MIT exokernel](https://pdos.csail.mit
 
 ## Current Status
 
-We are currently getting libc intigrated
+I am currently reading the research papers on this. There probably wont be a commit for at least a month. Please stand by.
 
 ### What's Left
-I have no clue, I'll update this then I get an idea...
+A lot
 
 
 ## Next Steps
