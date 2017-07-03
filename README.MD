@@ -13,16 +13,17 @@ This operating system is based around the [MIT exokernel](https://pdos.csail.mit
 
 ## Current Status
 
-I am currently reading the research papers on this. There probably wont be a commit for at least a month. Please stand by.
+so theoretically I am writing the last few things needed to add hard drive support. First one im doing is USB floppy support because that is what im using as the disk with my OS on it. Also because I hate myself
 
 ### What's Left
-A lot
+* basic USB support
+* floppy support
 
 
 ## Next Steps
 
-* libc
-* libc++
+* ~~libc~~ (maybe later)
+* ~~libc++~~ (maybe later)
 * USB floppy support    
 * Program Loading and running  
 * SATA HDD support  
