@@ -21,8 +21,8 @@ class PageFrameAllocator {
 		PageFrameAllocator( );
 		void build();
 		bool isAvalible(int page);
-		void* allocatePhysMem(size_t sizeToAlloc);
-		void* getNextVirtAddr(uint32_t sizeInPages);
+		void* allocatePhysMem(size_t sizeToAlloc, void* baseVirtAddress);
+		void* getNextVirtAddr(uint32_t sizeInPages, void* baseVirtAddress);
 
 };
 

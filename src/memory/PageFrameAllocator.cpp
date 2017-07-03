@@ -56,9 +56,9 @@ bool PageFrameAllocator::isAvalible(int page) {
 	return (bool) ! (physPageAvalibility[byte] & (0b1 << bit));
 }
 
-void* PageFrameAllocator::allocatePhysMem(size_t size) {
+void* PageFrameAllocator::allocatePhysMem(size_t size, void* baseVirtAddress) {
 	uint32_t sizeInPages = (size / fourKb) + ( (size & 0xFFF) != 0);
-	void* vertAddress = getNextVirtAddr(sizeInPages);
+	void* vertAddress = getNextVirtAddr(sizeInPages, baseVirtAddress);
 	if (vertAddress == (void*) -1) {
 		return (void*) -1;
 	}
@@ -80,8 +80,8 @@ void* PageFrameAllocator::allocatePhysMem(size_t size) {
 	return toRet;
 }
 
-void* PageFrameAllocator::getNextVirtAddr(uint32_t sizeInPages) {
-	for (int i = 0; i < 1024 * 1024; i++) {
+void* PageFrameAllocator::getNextVirtAddr(uint32_t sizeInPages, void* baseVirtAddress) {
+	for (int i = ((size_t)baseVirtAddress / fourKb); i < 1024 * 1024; i++) {
 		if(!pageTable.getPageTables()[i].present){
 			for (uint32_t n = 0; n < sizeInPages; n++){
 				if (pageTable.getPageTables()[i+n].present){

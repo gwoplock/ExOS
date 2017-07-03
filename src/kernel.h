@@ -15,9 +15,10 @@
 #include "drivers/Keyboard.h"
 #include "interrupts/InterruptDiscriptorTable.h"
 #include "drivers/Console.h"
-
+#include "memory/malloc.h"
 class InterruptDiscriptorTable;
 class GlobalDescriptorTable;
+class PageFrameAllocator;
 
 extern GlobalDescriptorTable gdt;
 extern InterruptDiscriptorTable idt;

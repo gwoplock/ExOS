@@ -2,7 +2,11 @@ AS = /home/garrett/opt/cross/bin/i686-elf-as
 GPP = /home/garrett/opt/cross/bin/i686-elf-g++
 GCC = /home/garrett/opt/cross/bin/i686-elf-gcc
 OS_CPP = /home/garrett/workspace/OS\ C++
-OBJS = boot.o isr_wrapper.o Console.o kernel.o GDT.o IDT.o IntHand.o Keyboard.o ProgrammableInterruptController.o PageTable.o mem.o PageFrameAllocator.o
+CRTBEGIN_OBJ:=$(shell $(GCC) $(CFLAGS) -print-file-name=crtbegin.o)
+CRTEND_OBJ:=$(shell $(GCC) $(CFLAGS) -print-file-name=crtend.o)
+OBJS = boot.o isr_wrapper.o Console.o kernel.o GDT.o IDT.o IntHand.o Keyboard.o 
+OBJS += ProgrammableInterruptController.o PageTable.o mem.o PageFrameAllocator.o 
+OBJS += malloc.o
 CFLAGS = -c -ffreestanding -O2 -Wall -Wextra
 BOOT = /mnt/boot
 
@@ -42,15 +46,16 @@ Console.o: $(OS_CPP)/src/drivers/Console.cpp
 Keyboard.o: $(OS_CPP)/src/drivers/Keyboard.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/Keyboard.cpp
 
+malloc.o: $(OS_CPP)/src/memory/malloc.c
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/malloc.c
+
 $(BOOT)/kernel.bin: $(OBJS)
 	$(GCC) -T $(OS_CPP)/linker.ld -o /run/media/garrett/disk/boot/kernel.bin -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
 	sync
 
 all: $(BOOT)/kernel.bin
-	#if [ -a /mnt/boot/kernel.bin ] ; \
-	#then \
-	#	rm /mnt/boot/kernel.bin ; \
-	#fi;
+
 
 clean:
 	rm ./*.o
+	

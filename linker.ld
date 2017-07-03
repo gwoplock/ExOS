@@ -24,5 +24,6 @@ SECTIONS {
        *(.bss)
        _ebss = .;
    }
+   kernelEnd = .;
    kernelSize = . - kernelStart;
 }

@@ -24,6 +24,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 		interruptSetUp( );
 		getMemMap(mbd);
 		frameAlloc.build();
+		mallocInit();
 		while (true) {
 			asm("hlt");
 		}

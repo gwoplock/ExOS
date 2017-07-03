@@ -1,6 +1,8 @@
 global _loader                          ; Make entry point visible to linker.
 extern kernelMain                            ; _main is defined elsewhere
- 
+;extern _init
+;extern _fini
+
 ; setting up the Multiboot header - see GRUB docs for details
 MODULEALIGN equ  1<<0             ; align loaded modules on page boundaries
 MEMINFO     equ  1<<1             ; provide memory map
@@ -91,7 +93,9 @@ StartInHigherHalf:
     ; pass Multiboot info structure -- WARNING: This is a physical address and may not be
     ; in the first 4MB!
     push ebx
-    call  kernelMain                  ; call kernel proper
+    ;call _init
+    call  kernelMain  
+    ;call _fini               
     hlt                          ; halt machine should kernel return
  
  
