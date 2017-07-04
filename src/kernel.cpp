@@ -12,12 +12,17 @@ PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
 
+typedef int32_t int;
+typedef int64_t long;
+
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 	void kernelMain(multiboot_info_t* mbd) {
 		asm("cli");
 		terminalInit((uint16_t*) 0xC00B8000);
+        // Green on black!
+        terminalSetColor (vgaEntryColor (VGA_COLOR_GREEN, VGA_COLOR_BLACK));
 		gdt.build( );
 		gdt.load( );
 		pageTable.build( );
@@ -25,6 +30,21 @@ extern "C" {/* Use C linkage for kernel_main. */
 		getMemMap(mbd);
 		frameAlloc.build();
 		mallocInit();
+
+        /* Tests for malloc go here */
+        int count = 2
+        long *array = malloc (count * sizeof (long));
+        // Populate array
+        for (int cx = 0; cx < count; cx++) {
+            *(array + cx) = cx;
+        }
+        // Print array
+        for (int cx = 0; cx < count; cx++) {
+            // writeInt should really be a writeLong shoudln't it...
+            writeInt (*(array + cx));
+        }
+        /* End malloc tests */
+
 		while (true) {
 			asm("hlt");
 		}
