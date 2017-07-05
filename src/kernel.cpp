@@ -12,8 +12,6 @@ PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
 
-typedef int32_t int;
-typedef int64_t long;
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
@@ -32,8 +30,8 @@ extern "C" {/* Use C linkage for kernel_main. */
 		mallocInit();
 
         /* Tests for malloc go here */
-        int count = 2
-        long *array = malloc (count * sizeof (long));
+        int32_t count = 2;
+        int64_t *array = (int64_t*) malloc (count * sizeof (int64_t));
         // Populate array
         for (int cx = 0; cx < count; cx++) {
             *(array + cx) = cx;
