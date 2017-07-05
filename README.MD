@@ -1,6 +1,8 @@
 # my-OS
 
-This operating system is based around the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) but removes the necessity to relink.  Removing this process will consumers with no computer knowledge access to the OS. To achive this, the executable is scanned to identify system calls.  Once they are identified, the native OS system calls are replaced with ExoOs userland system call in the LibOS. This replacemnt process is known as "Live relinking"
+ExoOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by removing the necessity to relink.  Removing this process will consumers with no computer knowledge access to the OS. To achive this, the executable is scanned to identify system calls.  Once they are identified, the native OS system calls are replaced with ExoOs userland system call in the LibOS. This replacemnt process is known as "Live relinking".
+
+*** Before Working on ExoOs, you should have a strong knoledge of the MIT Exokernel.  !!!
  
 ## Goals
 
