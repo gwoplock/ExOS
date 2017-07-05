@@ -1,6 +1,6 @@
-# my-OS
+# ExOS
 
-ExoOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by removing the necessity to relink.  Removing this process will consumers with no computer knowledge access to the OS. To achive this, the executable is scanned to identify system calls.  Once they are identified, the native OS system calls are replaced with ExoOs userland system call in the LibOS. This replacemnt process is known as "Live relinking".
+ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by removing the necessity to relink.  Removing this process will allow consumers with no computer knowledge access to the OS. To achive this, the executable is scanned to identify system calls.  Once they are identified, the native OS system calls are replaced with ExOS userland system call in the LibOS. This replacemnt process is known as "Live relinking".
 
 *** Before Working on ExoOs, you should have a strong knoledge of the MIT Exokernel.  !!!
  
@@ -15,7 +15,7 @@ ExoOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by re
 
 ## Current Status
 
-so theoretically I am writing the last few things needed to add hard drive support. First one im doing is USB floppy support because that is what im using as the disk with my OS on it. Also because I hate myself
+Currently I am writing the last few process needed for hard drive support. We are starting with USB floppy support because if the flxibility for develpment.
 
 ### What's Left
 * basic USB support
