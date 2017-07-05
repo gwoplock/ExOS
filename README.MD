@@ -1,6 +1,6 @@
 # my-OS
 
-This operating system is based around the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) but removes the necessity to relink.  Removing this process make it possible for it to consumers with no computer knowledge. The idea is to read through the executable for the system calls and replace them with a user land system call from the LibOS for the OS the program should be running under. Im calling this replacemnt process "Live relinking".sadf
+This operating system is based around the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) but removes the necessity to relink.  Removing this process will consumers with no computer knowledge access to the OS. To achive this, the executable is scanned to identify system calls.  Once they are identified, the native OS system calls are replaced with ExoOs userland system call in the LibOS. This replacemnt process is known as "Live relinking"
  
 ## Goals
 
