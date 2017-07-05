@@ -2,7 +2,7 @@
 
 ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by removing the necessity to relink.  Removing this process will allow consumers with no computer knowledge access to the OS. To achive this, the executable is scanned to identify system calls.  Once they are identified, the native OS system calls are replaced with ExOS userland system call in the LibOS. This replacemnt process is known as "Live relinking".
 
-*** Before Working on ExOS, you should have a strong knoledge of the MIT Exokernel.  ***
+***Before Working on ExOS, you should have a strong knoledge of the MIT Exokernel.***
  
 ## Goals
 
