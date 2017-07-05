@@ -16,13 +16,13 @@ boot.o: $(OS_CPP)/src/boot/boot.s
 isr_wrapper.o: $(OS_CPP)/src/interrupts/isr_wrapper.s
 	$(AS) $(OS_CPP)/src/interrupts/isr_wrapper.s -o isr_wrapper.o
 	
-kernel.o: $(OS_CPP)/src/kernel.cpp $(OS_CPP)/src/kernel.h
+kernel.o: $(OS_CPP)/src/kernel.cpp 
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/kernel.cpp -o kernel.o
 
-GDT.o: $(OS_CPP)/src/memory/GlobalDescriptorTable.cpp $(OS_CPP)/src/memory/GlobalDescriptorTable.h
-	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/GlobalDescriptorTable.cpp -o GDT.o
+GDT.o: $(OS_CPP)/src/memory/structures/GlobalDescriptorTable.cpp 
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/structures/GlobalDescriptorTable.cpp -o GDT.o
 	
-IDT.o: $(OS_CPP)/src/interrupts/InterruptDiscriptorTable.cpp $(OS_CPP)/src/interrupts/InterruptDiscriptorTable.h
+IDT.o: $(OS_CPP)/src/interrupts/InterruptDiscriptorTable.cpp 
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/interrupts/InterruptDiscriptorTable.cpp -o IDT.o
 
 IntHand.o: $(OS_CPP)/src/interrupts/InteruptHandler.cpp
@@ -31,14 +31,14 @@ IntHand.o: $(OS_CPP)/src/interrupts/InteruptHandler.cpp
 ProgrammableInterruptController.o: $(OS_CPP)/src/drivers/ProgrammableInterruptController.cpp
 	 $(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/ProgrammableInterruptController.cpp
 	 
-PageTable.o: $(OS_CPP)/src/memory/PageTable.cpp
-	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/PageTable.cpp
+PageTable.o: $(OS_CPP)/src/memory/structures/PageTable.cpp
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/structures/PageTable.cpp
 
 mem.o: $(OS_CPP)/src/memory/mem.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/mem.cpp
 
-PageFrameAllocator.o: $(OS_CPP)/src/memory/PageFrameAllocator.cpp
-	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/PageFrameAllocator.cpp
+PageFrameAllocator.o: $(OS_CPP)/src/memory/alloc/PageFrameAllocator.cpp
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/alloc/PageFrameAllocator.cpp
 
 Console.o: $(OS_CPP)/src/drivers/Console.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/Console.cpp
@@ -46,8 +46,8 @@ Console.o: $(OS_CPP)/src/drivers/Console.cpp
 Keyboard.o: $(OS_CPP)/src/drivers/Keyboard.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/Keyboard.cpp
 
-malloc.o: $(OS_CPP)/src/memory/malloc.c
-	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/malloc.c
+malloc.o: $(OS_CPP)/src/memory/alloc/malloc.c
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/alloc/malloc.c
 
 $(BOOT)/kernel.bin: $(OBJS)
 	$(GCC) -T $(OS_CPP)/linker.ld -o /run/media/garrett/disk/boot/kernel.bin -ffreestanding -O2 -nostdlib $(OBJS) -lgcc

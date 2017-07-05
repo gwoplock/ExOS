@@ -8,10 +8,10 @@
 #ifndef MALLOC_H_
 #define MALLOC_H_
 
-#include "../global.h"
-#include "PageTable.h"
+#include "../../global.h"
 #include "PageFrameAllocator.h"
-#include "../kernel.h"
+#include "../../kernel.h"
+#include "../structures/PageTable.h"
 
 extern void* currentTop;
 extern void* base;
