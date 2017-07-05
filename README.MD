@@ -1,6 +1,6 @@
 # my-OS
 
-This operating system is based around the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) but expands it to consumers with no computer knowledge. The idea is to read through the executable for the system calls and replace them with a user land system call from the LibOS for the OS the program should be running under. Im calling this replacemnt process "Live relinking". 
+This operating system is based around the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) but expands it to consumers with no computer knowledge. The idea is to read through the executable for the system calls and replace them with a user land system call from the LibOS for the OS the program should be running under. Im calling this replacemnt process "Live relinking".sadf
  
 ## Goals
 
@@ -36,11 +36,12 @@ so theoretically I am writing the last few things needed to add hard drive suppo
    * Possibly based on react OS's code
 * Mac OS X LibOS
 
-## Make Dependencies
-* compiler toolchain for i686-elf
+## Building
 
-## Compilation
+### Precompilation steps
 
-set the final build path in the linker to whatever you're using. then: 
-
-    make
+1. get yourself a cross compiler
+    * must be for i686-elf see [os dev wiki](http://wiki.osdev.org/GCC_Cross-Compiler#Preparing_for_the_build)
+2. set up a ***multiboot compliant*** bootloader
+    * I'm using grub legacy as my bootloader but you can use whatever
+3.a
