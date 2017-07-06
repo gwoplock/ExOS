@@ -60,4 +60,4 @@ Currently I am writing the last few process needed for hard drive support. We ar
     
 ## Compilation
 
-If everything went well in the precompilation stage, running `make all` should work. If you entounter issues at this stage, file an issue with the "bulding" tag (please include the build logs).
+If everything went well in the precompilation stage, running `make all` should work. If you encounter issues at this stage, file an issue with the "bulding" tag (please include the build logs).
