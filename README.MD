@@ -35,7 +35,7 @@ Currently I am writing the last few process needed for hard drive support. We ar
 * Linux LibOS
 * Multitasking
 * Windows LibOS
-   * Possibly based on react OS's code
+   * Possibly based on [ReactOS's](https://www.reactos.org/) code
 * Mac OS X LibOS
 
 ## Building
