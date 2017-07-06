@@ -1,6 +1,6 @@
 # ExOS
 
-ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by removing the necessity to relink.  Removing this process will allow consumers with no computer knowledge access to the OS. To achive this, the executable is scanned to identify system calls.  Once they are identified, the native OS system calls are replaced with ExOS userland system call in the LibOS. This replacemnt process is known as "Live relinking".
+ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by removing the necessity to relink. Removing this process will allow consumers with no advanced computer knowledge better access to the OS. To achive this, the executable is scanned to identify system calls. Once they are identified, the native OS system calls are replaced with the appropriate ExOS userland system call (located in the LibOSes). This replacement process is known as "Live relinking".
 
 ***Before Working on ExOS, you should have a strong knoledge of the MIT Exokernel.***
  
@@ -15,7 +15,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 
 ## Current Status
 
-Currently I am writing the last few process needed for hard drive support. We are starting with USB floppy support because if the flxibility for develpment.
+Currently I am writing the last few process needed for hard drive support. We are starting with USB floppy support because of the flexibility for development.
 
 ### What's Left
 * basic USB support
@@ -42,22 +42,22 @@ Currently I am writing the last few process needed for hard drive support. We ar
 
 ### Precompilation steps
 
-1. get yourself a cross compiler
-    * must be GCC as I use some attributes in GCC only
+1. Build a GCC cross compiler
+    * must be GCC as I use some attributes that are only in GCC
     * must be for i686-elf 
     * see [os dev wiki](http://wiki.osdev.org/GCC_Cross-Compiler#Preparing_for_the_build) for more information
-2. get some boot media
-    * im using a 3.5" floppy but you can use usb or even CDs or DVDs
-        * you can also use an emulator such as [Bochs](http://wiki.osdev.org/Bochs) or [QEMU](http://wiki.osdev.org/Qemu)
-    * if you're contributing ***please test on real hardware*** not just an emulator
-3. set up a ***multiboot compliant*** bootloader
-    * I'm using [grub legacy](http://wiki.osdev.org/GRUB_Legacy) as my bootloader but you can use whatever
-4. test bootloader installer
-    * just boot to the bootloader's menu screen to make sure it works
-5. configure the makefile
-    * I have hard coded in the paths for my compiler toolchain
-    * also I have hard coded the output for the linker to my floppy drive
-    * change these to mach your system
+2. Get a bootable medium
+    * I'm using a 3.5" floppy but you can use a USB flashdrive or even a CD/DVD
+        * You can also use an emulator such as [Bochs](http://wiki.osdev.org/Bochs) or [QEMU](http://wiki.osdev.org/Qemu) to boot from a disk image.
+    * If you're contributing ***please test on real hardware*** not just an emulator.
+3. Set up a ***multiboot compliant*** bootloader
+    * I'm using [grub legacy](http://wiki.osdev.org/GRUB_Legacy) as my bootloader but you can use whatever as long as it's ***multiboot compliant***.
+4. Test the bootloader installation
+    * Just boot to the bootloader's menu screen to make sure it works.
+5. Configure the makefile
+    * I have hard coded in the paths for my compiler toolchain. I have also hard coded the output for the linker to my floppy drive.
+        * Change them to mach your system.
     
 ## Compilation
-if everything went well in the precompilation you should just be able to run `make all` and it works. File an issue with the "bulding" tag if there is an issue (please include the build logs)
+
+If everything went well in the precompilation stage, running `make all` and should work. If you entounter issues at this stage, file an issue with the "bulding" tag (please include the build logs)
