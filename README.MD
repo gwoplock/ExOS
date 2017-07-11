@@ -14,12 +14,12 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 * Live relinking to allow unmodified programs to be run
 
 ## Current Status
-
-Currently I am writing the last few process needed for hard drive support. We are starting with USB floppy support because of the flexibility for development.
+I am currently trying to wrap my head around USB support so I can load stuff off my USB floppy drive. 
 
 ### What's Left
-* basic USB support
-* floppy support
+* PCI support - to access the USB hosts
+* basic USB support - access the drives
+* floppy support -  to access the files
 
 
 ## Next Steps
