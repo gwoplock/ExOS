@@ -2,6 +2,7 @@ AS = /home/garrett/opt/cross/bin/i686-elf-as
 GPP = /home/garrett/opt/cross/bin/i686-elf-g++
 GCC = /home/garrett/opt/cross/bin/i686-elf-gcc
 OS_CPP = /home/garrett/workspace/OS\ C++
+BUILD_TO = /run/media/garrett/disk/boot/kernel.bin
 CRTBEGIN_OBJ:=$(shell $(GCC) $(CFLAGS) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(GCC) $(CFLAGS) -print-file-name=crtend.o)
 OBJS = boot.o isr_wrapper.o Console.o kernel.o GDT.o IDT.o IntHand.o Keyboard.o 
@@ -53,7 +54,7 @@ New.o: $(OS_CPP)/src/memory/alloc/New.c
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/alloc/New.c
 
 $(BOOT)/kernel.bin: $(OBJS)
-	$(GCC) -T $(OS_CPP)/linker.ld -o /run/media/garrett/disk/boot/kernel.bin -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
+	$(GCC) -T $(OS_CPP)/linker.ld -o $(BUILD_TO) -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
 	sync
 
 all: $(BOOT)/kernel.bin
