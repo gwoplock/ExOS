@@ -7,7 +7,7 @@ CRTBEGIN_OBJ:=$(shell $(GCC) $(CFLAGS) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(GCC) $(CFLAGS) -print-file-name=crtend.o)
 OBJS = boot.o isr_wrapper.o Console.o kernel.o GDT.o IDT.o IntHand.o Keyboard.o 
 OBJS += ProgrammableInterruptController.o PageTable.o mem.o PageFrameAllocator.o 
-OBJS += malloc.o New.o
+OBJS += malloc.o New.o USB.o USBController.o
 CFLAGS = -c -ffreestanding -O2 -Wall -Wextra
 BOOT = /mnt/boot
 
@@ -52,6 +52,12 @@ malloc.o: $(OS_CPP)/src/memory/alloc/malloc.c
 	
 New.o: $(OS_CPP)/src/memory/alloc/New.c
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/memory/alloc/New.c
+	
+USB.o: $(OS_CPP)/src/drivers/PCI/USB/USB.c
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/PCI/USB/USB.c
+	
+USBController.o: $(OS_CPP)/src/drivers/PCI/USB/USBController.cpp
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/PCI/USB/USBController.cpp
 
 $(BOOT)/kernel.bin: $(OBJS)
 	$(GCC) -T $(OS_CPP)/linker.ld -o $(BUILD_TO) -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
