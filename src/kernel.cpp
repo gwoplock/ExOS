@@ -32,8 +32,9 @@ extern "C" {/* Use C linkage for kernel_main. */
 		getMemMap(mbd);
 		frameAlloc.build( );
 		mallocInit( );
+		terminalWriteString(" Done. Finding PCI busses");
+		PCIInit();
 		terminalWriteString(" Done. ");
-
 		terminalWriteString("   !!!!your computer is booted!!!");
 		while (true) {
 			asm("hlt");

@@ -13,8 +13,8 @@ USBController* uSBControllers;
 void USBInit(){
 	//enum USB controllers
 		//Enum PCI devices
-			//Enum PCI controllers (recrsive)
-				//Build list of controllers
+			//Enum PCI controllers (recrsive) |
+				//Build list of controllers   |Already done by PCIInit
 		//check if device is USB controller
 	//fill USB controller array with controller objects
 	//set max USB version

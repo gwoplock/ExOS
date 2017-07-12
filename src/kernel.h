@@ -16,6 +16,8 @@
 #include "memory/alloc/malloc.h"
 #include "memory/structures/GlobalDescriptorTable.h"
 #include "memory/structures/PageTable.h"
+#include "drivers/PCI/PCI.h"
+
 class InterruptDiscriptorTable;
 class GlobalDescriptorTable;
 class PageFrameAllocator;
