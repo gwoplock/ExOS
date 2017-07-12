@@ -10,7 +10,7 @@ PageFrameAllocator::PageFrameAllocator( ) {
 	// TODO Auto-generated constructor stub
 
 }
-void PageFrameAllocator::build() {
+void PageFrameAllocator::build( ) {
 	lastUsedPage = 0;
 	for (int i = 0; i < (1024 * 1025) / 8; i++) {
 		physPageAvalibility[i] = 0;
@@ -35,7 +35,7 @@ void PageFrameAllocator::build() {
 		i++;
 	}
 	size_t kernelPages =
-			( ( (size_t)( &kernelSize) + (uint32_t)
+			( ((size_t) ( &kernelSize) + (uint32_t)
 					& kernelStart - (uint32_t) pageTable.getKernelStart( ))
 					/ fourKb + 1);
 	int byte = KernelPageStart / 8;
@@ -59,18 +59,23 @@ bool PageFrameAllocator::isAvalible(int page) {
 void* PageFrameAllocator::allocatePhysMem(size_t size, void* baseVirtAddress) {
 	uint32_t sizeInPages = (size / fourKb) + ( (size & 0xFFF) != 0);
 	void* vertAddress = getNextVirtAddr(sizeInPages, baseVirtAddress);
+
 	if (vertAddress == (void*) -1) {
 		return (void*) -1;
 	}
+
 	void* toRet = (void*) -1;
 	while (sizeInPages) {
+
 		if (isAvalible(lastUsedPage)) {
+
 			if (toRet == (void*) -1) {
+
 				toRet = pageTable.page((void*) (lastUsedPage * fourKb),
 						vertAddress, fourKb);
 			} else {
 				pageTable.page((void*) (lastUsedPage * fourKb), vertAddress,
-						fourKb);
+				fourKb);
 			}
 			sizeInPages--;
 			vertAddress = (void*) ((uint32_t) vertAddress + fourKb);
@@ -80,19 +85,24 @@ void* PageFrameAllocator::allocatePhysMem(size_t size, void* baseVirtAddress) {
 	return toRet;
 }
 
-void* PageFrameAllocator::getNextVirtAddr(uint32_t sizeInPages, void* baseVirtAddress) {
-	for (int i = ((size_t)baseVirtAddress / fourKb); i < 1024 * 1024; i++) {
-		if(!pageTable.getPageTables()[i].present){
-			for (uint32_t n = 0; n < sizeInPages; n++){
-				if (pageTable.getPageTables()[i+n].present){
-					i+=n;
+void* PageFrameAllocator::getNextVirtAddr(uint32_t sizeInPages,
+		void* baseVirtAddress) {
+	for (int i = ((size_t) baseVirtAddress / fourKb); i < 1024 * 1024; i++) {
+		if ( !pageTable.getPageTables( )[i].present) {
+			uint32_t n = 0;
+			for (; n < sizeInPages; n++) {
+				if (pageTable.getPageTables( )[i + n].present) {
+					i += n;
 					break;
 				}
-				if (n == sizeInPages -1){
-					return (void*)(i*fourKb);
+				if (n == sizeInPages - 1) {
+					return (void*) (i * fourKb);
 				}
+			}
+			if (n == 0) {
+				return (void*) (i * fourKb);
 			}
 		}
 	}
-	return (void*)-1;
+	return (void*) -1;
 }

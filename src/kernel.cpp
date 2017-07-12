@@ -12,6 +12,20 @@ PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
 
+void * operator new(size_t size)
+{
+
+    void * p = malloc(size);
+    return p;
+}
+
+void operator delete(void * p)
+{
+
+}
+void operator delete(void*, long unsigned int){
+
+}
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
@@ -21,9 +35,8 @@ extern "C" {/* Use C linkage for kernel_main. */
 		terminalInit((uint16_t*) 0xC00B8000);
         // Green on black!
         terminalSetColor (vgaEntryColor (VGA_COLOR_GREEN, VGA_COLOR_BLACK));
-        terminalWriteString("Terminal active, Welcome to ExOS. Building GDT...");
+        terminalWriteString("Terminal active, Welcome to ExOS. Now preparing your system. preparing GDT...");
 		gdt.build( );
-		terminalWriteString(" Done.   Now installing the GDT...");
 		gdt.load( );
 		terminalWriteString(" Done. preparing the page Table...");
 		pageTable.build( );
@@ -34,7 +47,10 @@ extern "C" {/* Use C linkage for kernel_main. */
 		frameAlloc.build();
 		mallocInit();
         terminalWriteString(" Done. ");
-
+        //TESTING placement new.
+terminalWriteString("!!!foobar.!!!!");
+void* test = malloc(10);
+        //END TESTING
         terminalWriteString("   !!!!your computer is booted!!!");
 		while (true) {
 			asm("hlt");

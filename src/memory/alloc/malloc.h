@@ -13,7 +13,7 @@
 #include "../../kernel.h"
 #include "../structures/PageTable.h"
 
-extern void* currentTop;
+extern void* top;
 extern void* base;
 extern uint32_t kernelEnd;
 
