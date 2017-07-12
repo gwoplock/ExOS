@@ -21,28 +21,21 @@ extern "C" {/* Use C linkage for kernel_main. */
 		terminalInit((uint16_t*) 0xC00B8000);
         // Green on black!
         terminalSetColor (vgaEntryColor (VGA_COLOR_GREEN, VGA_COLOR_BLACK));
+        terminalWriteString("Terminal active, Welcome to ExOS. Building GDT...");
 		gdt.build( );
+		terminalWriteString(" Done.   Now installing the GDT...");
 		gdt.load( );
+		terminalWriteString(" Done. preparing the page Table...");
 		pageTable.build( );
+		terminalWriteString(" Done. setting up interrupts...");
 		interruptSetUp( );
+		terminalWriteString(" Done. Preparing the memory allocator...");
 		getMemMap(mbd);
 		frameAlloc.build();
 		mallocInit();
+        terminalWriteString(" Done. ");
 
-        /* Tests for malloc go here */
-        int32_t count = 2;
-        int64_t *array = (int64_t*) malloc (count * sizeof (int64_t));
-        // Populate array
-        for (int cx = 0; cx < count; cx++) {
-            *(array + cx) = cx;
-        }
-        // Print array
-        for (int cx = 0; cx < count; cx++) {
-            // writeInt should really be a writeLong shoudln't it...
-            writeInt (*(array + cx));
-        }
-        /* End malloc tests */
-
+        terminalWriteString("   !!!!your computer is booted!!!");
 		while (true) {
 			asm("hlt");
 		}
