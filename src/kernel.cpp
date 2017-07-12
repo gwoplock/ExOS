@@ -12,30 +12,16 @@ PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
 
-void * operator new(size_t size)
-{
-
-    void * p = malloc(size);
-    return p;
-}
-
-void operator delete(void * p)
-{
-
-}
-void operator delete(void*, long unsigned int){
-
-}
-
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 	void kernelMain(multiboot_info_t* mbd) {
 		asm("cli");
 		terminalInit((uint16_t*) 0xC00B8000);
-        // Green on black!
-        terminalSetColor (vgaEntryColor (VGA_COLOR_GREEN, VGA_COLOR_BLACK));
-        terminalWriteString("Terminal active, Welcome to ExOS. Now preparing your system. preparing GDT...");
+		// Green on black!
+		terminalSetColor(vgaEntryColor(VGA_COLOR_GREEN, VGA_COLOR_BLACK));
+		terminalWriteString(
+				"Terminal active, Welcome to ExOS. Now preparing your system. preparing GDT...");
 		gdt.build( );
 		gdt.load( );
 		terminalWriteString(" Done. preparing the page Table...");
@@ -44,14 +30,11 @@ extern "C" {/* Use C linkage for kernel_main. */
 		interruptSetUp( );
 		terminalWriteString(" Done. Preparing the memory allocator...");
 		getMemMap(mbd);
-		frameAlloc.build();
-		mallocInit();
-        terminalWriteString(" Done. ");
-        //TESTING placement new.
-terminalWriteString("!!!foobar.!!!!");
-void* test = malloc(10);
-        //END TESTING
-        terminalWriteString("   !!!!your computer is booted!!!");
+		frameAlloc.build( );
+		mallocInit( );
+		terminalWriteString(" Done. ");
+
+		terminalWriteString("   !!!!your computer is booted!!!");
 		while (true) {
 			asm("hlt");
 		}

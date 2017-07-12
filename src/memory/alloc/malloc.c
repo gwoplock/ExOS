@@ -17,8 +17,6 @@ void mallocInit( ) {
 }
 
 void* malloc(size_t size) {
-	BREAKPOINT
-	writeInt(size);
 	size_t space = (size_t) top - (size_t) base;
 	if (space > size) {
 		void* oldBase = base;

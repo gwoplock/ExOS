@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include "AsmHelper.h"
 #include "memory/alloc/malloc.h"
+#include "memory/alloc/New.h"
 
 
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");
