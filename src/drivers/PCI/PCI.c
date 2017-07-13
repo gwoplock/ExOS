@@ -7,9 +7,16 @@
 
 #include "PCI.h"
 
+//TODO clean up a lot
+
 uint8_t MAX_PCI_FUNCTION = 8;
 
+bool validPCIBuses[256];
+
 void PCIInit( ) {
+	for (uint16_t i = 0; i < 256; i++){
+		validPCIBuses[i] = false;
+	}
 	//bus, slot, function
 	if (isPCIMultiFunctionDevice(0, 0, 0)) {
 		for (uint8_t function = 0; function < MAX_PCI_FUNCTION; function++) {
@@ -54,7 +61,7 @@ uint16_t readPCIConfigWord(uint8_t bus, uint8_t slot, uint8_t func,
 
 void checkPCIBus(uint8_t bus) {
 	uint8_t device;
-//set bool in array for active bus
+	validPCIBuses[bus] = true;
 	for (device = 0; device < 32; device++) {
 		checkPCIDevice(bus, device);
 	}

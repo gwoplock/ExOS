@@ -11,6 +11,7 @@
 #include "../../global.h"
 
 extern int8_t MAX_PCI_FUNCTIONS;
+extern bool validPCIBuses[256];
 
 void PCIInit( );
 bool isPCIMultiFunctionDevice(uint8_t bus, uint8_t device, uint8_t function);

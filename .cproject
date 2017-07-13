@@ -53,8 +53,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<sourceEntries>
-					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
