@@ -11,11 +11,12 @@
 #include "../../global.h"
 #include "PCI.h"
 #include "PCIDevice.h"
+#include "../../Utils/Linked List/LinkedList.h"
 
 class PCIDeviceList {
 	private:
 		size_t _size;
-		PCIDevice * DeviceList;
+		LinkedList<PCIDevice*> _list;
 	public:
 		PCIDeviceList( );
 		PCIDeviceList(uint8_t BaseClass, uint8_t subClass);

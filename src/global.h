@@ -18,6 +18,8 @@
 #include "memory/alloc/malloc.h"
 #include "memory/alloc/New.h"
 
+//TODO when i have libc++ remove this line
+ extern void *__gxx_personality_v0;
 
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");
 #define KernelPageDirStart 768

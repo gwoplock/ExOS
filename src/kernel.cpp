@@ -12,6 +12,9 @@ PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
 
+//TODO when i have libc++ remove this line
+void *__gxx_personality_v0;
+
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
