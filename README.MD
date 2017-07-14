@@ -14,19 +14,21 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 * Live relinking to allow unmodified programs to be run
 
 ## Current Status
-I am currently trying to wrap my head around USB support so I can load stuff off my USB floppy drive. 
+I am woking on writing the code so support PCI devices. 
 
 ### What's Left
-* PCI support - to access the USB hosts
-* basic USB support - access the drives
-* floppy support -  to access the files
-
+* ~~Bus enumeration~~
+* Device scanning
+* virtual functions and inheritance (i think this is broken) 
+* PCI Header reading
 
 ## Next Steps
 
 * ~~libc~~ (maybe later)
 * ~~libc++~~ (maybe later)
-* USB floppy support
+* PCI support
+* primitive USB support
+* floppy support
 * Loading and running programs from disk
 * SATA HDD support
 * IDE HDD support
