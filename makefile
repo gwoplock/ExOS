@@ -8,7 +8,7 @@ CRTEND_OBJ:=$(shell $(GCC) $(CFLAGS) -print-file-name=crtend.o)
 OBJS = boot.o isr_wrapper.o Console.o kernel.o GDT.o IDT.o IntHand.o Keyboard.o 
 OBJS += ProgrammableInterruptController.o PageTable.o mem.o PageFrameAllocator.o 
 OBJS += malloc.o New.o USB.o USBController.o PCI.o PCIDeviceList.o PCIDevice.o
-OBJS += LinkedList.o LinkedListNode.o
+OBJS += 
 CFLAGS = -c -ffreestanding -O2 -Wall -Wextra
 BOOT = /mnt/boot
 
@@ -68,12 +68,6 @@ PCIDeviceList.o: $(OS_CPP)/src/drivers/PCI/PCIDeviceList.cpp
 	
 PCIDevice.o: $(OS_CPP)/src/drivers/PCI/PCIDevice.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/PCI/PCIDevice.cpp
-	
-LinkedList.o: $(OS_CPP)/src/Utils/Linked\ List/LinkedList.h
-	$(GPP) $(CFLAGS) $(OS_CPP)/src/Utils/Linked\ List/LinkedList.h
-
-LinkedListNode.o: $(OS_CPP)/src/Utils/Linked\ List/LinkedListNode.h
-	$(GPP) $(CFLAGS) $(OS_CPP)/src/Utils/Linked\ List/LinkedListNode.h
 
 $(BOOT)/kernel.bin: $(OBJS)
 	$(GCC) -T $(OS_CPP)/linker.ld -o $(BUILD_TO) -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
