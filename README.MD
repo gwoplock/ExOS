@@ -18,6 +18,7 @@ I am woking on writing the code so support PCI devices.
 
 ### What's Left
 * ~~Bus enumeration~~
+* handle templates
 * Device scanning
 * virtual functions and inheritance (i think this is broken) 
 * PCI Header reading
