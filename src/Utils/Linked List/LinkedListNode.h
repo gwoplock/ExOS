@@ -8,6 +8,7 @@
 #ifndef SRC_UTILS_LINKED_LIST_LINKEDLISTNODE_H_
 #define SRC_UTILS_LINKED_LIST_LINKEDLISTNODE_H_
 
+template<class T>
 class LinkedListNode {
 	public:
 		LinkedListNode( );

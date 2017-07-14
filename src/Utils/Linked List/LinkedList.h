@@ -7,7 +7,7 @@
 
 #ifndef SRC_UTILS_LINKEDLIST_H_
 #define SRC_UTILS_LINKEDLIST_H_
-
+template<class T>
 class LinkedList {
 	public:
 		LinkedList( );
