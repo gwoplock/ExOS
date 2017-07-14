@@ -68,6 +68,15 @@ PCIDeviceList.o: $(OS_CPP)/src/drivers/PCI/PCIDeviceList.cpp
 	
 PCIDevice.o: $(OS_CPP)/src/drivers/PCI/PCIDevice.cpp
 	$(GPP) $(CFLAGS) $(OS_CPP)/src/drivers/PCI/PCIDevice.cpp
+<<<<<<< HEAD
+=======
+	
+LinkedList.o: $(OS_CPP)/src/Utils/Linked\ List/LinkedList.h
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/Utils/Linked\ List/LinkedList.h
+
+LinkedListNode.o: $(OS_CPP)/src/Utils/Linked\ List/LinkedListNode.h
+	$(GPP) $(CFLAGS) $(OS_CPP)/src/Utils/Linked\ List/LinkedListNode.h
+>>>>>>> f5fb04e3c7c44b1baa96632f9854b72b1f197c4f
 
 $(BOOT)/kernel.bin: $(OBJS)
 	$(GCC) -T $(OS_CPP)/linker.ld -o $(BUILD_TO) -ffreestanding -O2 -nostdlib $(OBJS) -lgcc
