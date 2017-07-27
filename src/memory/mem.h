@@ -10,7 +10,7 @@
 
 #include "../global.h"
 #include "../kernel.h"
-#include "../multiboot spec/multiboot.h"
+#include "../multiboot_spec/multiboot.h"
 
 
 struct MultibootMemoryMap{

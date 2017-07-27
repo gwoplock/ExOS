@@ -9,7 +9,7 @@
 #define SRC_UTILS_LINKEDLIST_H_
 
 #include "../../global.h"
-#include "LinkedListNode.h"
+#include "../Linked_List/LinkedListNode.h"
 
 template<class T>
 class LinkedList {

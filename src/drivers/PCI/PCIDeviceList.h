@@ -11,7 +11,7 @@
 #include "../../global.h"
 #include "PCI.h"
 #include "PCIDevice.h"
-#include "../../Utils/Linked List/LinkedList.h"
+#include "../../Utils/Linked_List/LinkedList.h"
 
 class PCIDeviceList {
 	private:
