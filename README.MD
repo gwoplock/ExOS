@@ -14,20 +14,23 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 * Live relinking to allow unmodified programs to be run
 
 ## Current Status
-I am woking on writing the code so support PCI devices. 
+I am woking on porting newlib.
 
 ### What's Left
-* ~~Bus enumeration~~
-* handle templates
-* Device scanning
-* virtual functions and inheritance (i think this is broken) 
-* PCI Header reading
-
+* syscalls
+    * calling
+    * passing params
+    * passing return values
+* configure for build
+* test
 ## Next Steps
 
-* ~~libc~~ (maybe later)
-* ~~libc++~~ (maybe later)
-* PCI support
+* libc (~~maybe later~~)
+* libc++ (~~maybe later~~)
+* PCI support (waiting for libc(++))
+    * ~~Bus enumeration~~
+    * Device scanning
+    * PCI Header reading
 * primitive USB support
 * floppy support
 * Loading and running programs from disk
