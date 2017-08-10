@@ -18,9 +18,10 @@ I am woking on porting newlib.
 
 ### What's Left
 * syscalls
-    * calling
-    * passing params
-    * passing return values
+    * ~~calling~~
+    * ~~passing params~~
+    * ~~passing return values~~
+    * kernel side code to do them
 * configure for build
 * test
 ## Next Steps
