@@ -29,6 +29,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 		gdt.load( );
 		terminalWriteString(" Done. preparing the page Table...");
 		pageTable.build( );
+		pageTable.page(0xFFFFF000);
 		terminalWriteString(" Done. setting up interrupts...");
 		interruptSetUp( );
 		terminalWriteString(" Done. Preparing the memory allocator...");
