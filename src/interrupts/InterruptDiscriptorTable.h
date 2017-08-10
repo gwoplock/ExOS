@@ -63,6 +63,8 @@ extern void* irq_12;
 extern void* irq_13;
 extern void* irq_14;
 extern void* irq_15;
+//------------------------------------------
+extern void* sysCallAsmHandler;
 
 class InterruptDiscriptorTable {
 	private:

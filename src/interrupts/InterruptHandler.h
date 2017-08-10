@@ -11,6 +11,6 @@
 #include "../drivers/ProgrammableInterruptController.h"
 #include "../kernel.h"
 
-
+#define numOfSysCalls 22
 
 #endif /* INTERRUPTHANDLER_H_ */

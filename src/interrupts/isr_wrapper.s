@@ -213,3 +213,15 @@ irq_15:
 	mov $15, %eax
 	jmp irq_wrapper
 	
+.globl sysCallAsmHandler
+
+sysCallAsmHandler:
+	call sysCallHandler
+    iret
+
+	
+	
+	
+	
+	
+	
