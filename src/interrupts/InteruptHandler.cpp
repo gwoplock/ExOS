@@ -41,9 +41,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 		}
 	}
 
-#if defined(__cplusplus)
-}
-#endif
+
 //this is probly bad practice... oh well
 #define return &scratchSpace =
 
@@ -67,8 +65,8 @@ void fork(void** args) {
 }
 //TODO fix
 void fstat(void** args) {
-	int file = &(args[0]);
-	struct stat *st = args[1];
+	int file = & ((int*) args[0]);
+	struct stat *st = (struct stat*) args[1];
 	st->st_mode = S_IFCHR;
 	return 0 ;
 }
@@ -110,15 +108,24 @@ void wait(void** args) {
 	return - 1;
 }
 void write(void** args) {
-//TODO
+	int file = & ((int*) args[0]);
+	char * string = (char *) args[1];
+	int length = & ((int*) args[2]);
+	if (file == 1){
+		terminalWrite(string, length);
+	}
 }
 void getTimeOfDay(void** args) {
 
 }
 void stat(void** args) {
-	char* file = args[0];
-	struct stat *st = args[1];
+	char* file = (char *) args[0];
+	struct stat *st = (struct stat*) args[1];
 	st->st_mode = S_IFCHR;
 	return 0 ;
 }
 #undef return
+
+#if defined(__cplusplus)
+}
+#endif
