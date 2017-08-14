@@ -43,7 +43,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 
 
 //this is probly bad practice... oh well
-#define return &scratchSpace =
+#define return *scratchSpace =
 
 void test(void** args) {
 //do nothing. its a test
@@ -65,7 +65,7 @@ void fork(void** args) {
 }
 //TODO fix
 void fstat(void** args) {
-	int file = & ((int*) args[0]);
+	int file = * ((int*) args[0]);
 	struct stat *st = (struct stat*) args[1];
 	st->st_mode = S_IFCHR;
 	return 0 ;
@@ -94,7 +94,10 @@ void read(void** args) {
 	return 0 ;
 }
 void sbrk(void** args) {
-//TODO
+	//TODO this only works for the kernel.
+	int incr = *((int*) args[0]);
+	void* startOfNewMem = frameAlloc.allocatePhysMem(incr, pageTable.getKernelStart());
+	return startOfNewMem;
 }
 void times(void** args) {
 	return - 1;
@@ -108,9 +111,9 @@ void wait(void** args) {
 	return - 1;
 }
 void write(void** args) {
-	int file = & ((int*) args[0]);
+	int file = * ((int*) args[0]);
 	char * string = (char *) args[1];
-	int length = & ((int*) args[2]);
+	int length = * ((int*) args[2]);
 	if (file == 1){
 		terminalWrite(string, length);
 	}
