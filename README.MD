@@ -14,7 +14,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 * Live relinking to allow unmodified programs to be run
 
 ## Current Status
-I am woking on porting newlib.
+I am woking on porting newlib. i have moved newlib to a new [repo](https://github.com/gwoplock/newlib-exos)
 
 ### What's Left
 * syscalls
