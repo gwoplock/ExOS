@@ -12,10 +12,4 @@
 #include "../drivers/Console.h"
 #include "../kernel.h"
 
-#include <errno.h>
-#undef errno
-extern int errno;
-
-#define numOfSysCalls 22
-
 #endif /* INTERRUPTHANDLER_H_ */
