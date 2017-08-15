@@ -14,21 +14,20 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 * Live relinking to allow unmodified programs to be run
 
 ## Current Status
-I am woking on porting newlib. i have moved newlib to a new [repo](https://github.com/gwoplock/newlib-exos)
+Ok I gave up on newlib. I have figured out why templates didn't work (you have to extern c for linking those) and I have fixed that. Now we are back on track to get PCI working. 
+
 
 ### What's Left
-* syscalls
-    * ~~calling~~
-    * ~~passing params~~
-    * ~~passing return values~~
-    * kernel side code to do them
-* configure for build
-* test
+
+    * ~~Bus enumeration~~
+    * Device scanning
+    * PCI Header reading
+
 ## Next Steps
 
-* libc (~~maybe later~~)
-* libc++ (~~maybe later~~)
-* PCI support (waiting for libc(++))
+* libc (maybe later) (newlib is hard)
+* libc++ (maybe later) (needs libc and an os toolchain)
+* PCI support (~~waiting for libc(++)~~) (I dont need those so were back to this)
     * ~~Bus enumeration~~
     * Device scanning
     * PCI Header reading
