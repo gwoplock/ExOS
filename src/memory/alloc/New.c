@@ -19,3 +19,7 @@ void operator delete(void * p) {
 void operator delete(void*, long unsigned int) {
 
 }
+
+void* operator new[](unsigned long){
+
+}

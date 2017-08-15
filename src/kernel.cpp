@@ -12,14 +12,13 @@ PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
 
-//TODO when i have libc++ remove this line
-void *__gxx_personality_v0;
-
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 	void kernelMain(multiboot_info_t* mbd) {
+		BREAKPOINT
 		asm("cli");
+		terminalInit((uint16_t*) 0xC00B8000);
 		// Green on black!
 		terminalSetColor(vgaEntryColor(VGA_COLOR_GREEN, VGA_COLOR_BLACK));
 		terminalWriteString(

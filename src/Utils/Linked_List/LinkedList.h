@@ -33,6 +33,9 @@ class LinkedList {
 		void add(LinkedListNode<T>* toAdd){
 			_tail->next(toAdd);
 		}
+		auto head(){
+			return _head;
+		}
 };
 
 #endif /* SRC_UTILS_LINKEDLIST_H_ */

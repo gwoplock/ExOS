@@ -16,10 +16,11 @@
 class PCIDeviceList {
 	private:
 		size_t _size;
-		LinkedList<PCIDevice*> _list;
+		LinkedList<PCIDevice*>* _list;
 	public:
 		PCIDeviceList( );
-		PCIDeviceList(uint8_t BaseClass, uint8_t subClass);
+		PCIDeviceList(uint8_t BaseClass, uint8_t subClass, bool page);
+		PCIDevice* toArray();
 };
 
 #endif /* SRC_DRIVERS_PCI_PCIDEVICELIST_H_ */

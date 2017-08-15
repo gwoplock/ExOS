@@ -1,19 +1,22 @@
 /*
- * abort.c
-
+ * abort.h
  *
- *  Created on: Aug 14, 2017
+ *  Created on: Aug 15, 2017
  *      Author: garrett
  */
-#include "abort.h"
+
+#ifndef SRC_CLIBMISC_ABORT_H_
+#define SRC_CLIBMISC_ABORT_H_
+
+#include "../global.h"
+
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
-void abort(void) {
-
-}
+void abort(void);
 #if defined(__cplusplus)
 }/* Use C linkage for kernel_main. */
 #endif
 
+#endif /* SRC_CLIBMISC_ABORT_H_ */

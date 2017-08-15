@@ -21,8 +21,8 @@ class LinkedListNode {
 		void next(LinkedListNode<T>* next){
 			_next = next;
 		}
-		LinkedListNode<T> next(){
-			return next;
+		LinkedListNode<T>* next(){
+			return _next;
 		}
 		T data(){
 			return _data;
