@@ -20,7 +20,6 @@ extern "C" {/* Use C linkage for kernel_main. */
 #endif
 	void kernelMain(multiboot_info_t* mbd) {
 		asm("cli");
-		terminalInit((uint16_t*) 0xC00B8000);
 		// Green on black!
 		terminalSetColor(vgaEntryColor(VGA_COLOR_GREEN, VGA_COLOR_BLACK));
 		terminalWriteString(
@@ -29,7 +28,6 @@ extern "C" {/* Use C linkage for kernel_main. */
 		gdt.load( );
 		terminalWriteString(" Done. preparing the page Table...");
 		pageTable.build( );
-		pageTable.page(0xFFFFF000);
 		terminalWriteString(" Done. setting up interrupts...");
 		interruptSetUp( );
 		terminalWriteString(" Done. Preparing the memory allocator...");

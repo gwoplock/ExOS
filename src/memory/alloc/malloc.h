@@ -18,6 +18,12 @@ extern void* base;
 extern uint32_t kernelEnd;
 
 void mallocInit();
+#if defined(__cplusplus)
+extern "C" {/* Use C linkage for kernel_main. */
+#endif
 void* malloc(size_t size);
-
+void free(void *ptr);
+#if defined(__cplusplus)
+}/* Use C linkage for kernel_main. */
+#endif
 #endif /* MALLOC_H_ */

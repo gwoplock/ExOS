@@ -57,7 +57,6 @@ InterruptDiscriptorTable::InterruptDiscriptorTable( ) {
 	_idt[45] = encode((uint32_t) (unsigned) &irq_13, (uint16_t) 0x08);
 	_idt[46] = encode((uint32_t) (unsigned) &irq_14, (uint16_t) 0x08);
 	_idt[47] = encode((uint32_t) (unsigned) &irq_15, (uint16_t) 0x08);
-	_idt[0xE0] = enclode((uint32_t) (unsigned) &sysCallAsmHandler, (uint16_t) 0x08);
 	size = 225;
 }
 

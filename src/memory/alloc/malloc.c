@@ -15,7 +15,9 @@ void mallocInit( ) {
 	top = (void*) ( (size_t)( &kernelSize) + (uint32_t)
 			& kernelStart + fourKb);
 }
-
+#if defined(__cplusplus)
+extern "C" {/* Use C linkage for kernel_main. */
+#endif
 void* malloc(size_t size) {
 	size_t space = (size_t) top - (size_t) base;
 	if (space > size) {
@@ -32,3 +34,10 @@ void* malloc(size_t size) {
 		return malloc(size);
 	}
 }
+
+void free(void *ptr){
+
+}
+#if defined(__cplusplus)
+}/* Use C linkage for kernel_main. */
+#endif

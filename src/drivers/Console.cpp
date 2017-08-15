@@ -62,17 +62,23 @@ void terminalWrite(const char* _toPrint, size_t _length) {
 		terminalPutChar(_toPrint[_i]);
 }
 
+#if defined(__cplusplus)
+extern "C" {/* Use C linkage for kernel_main. */
+#endif
 //get a strings length
-size_t stringLength(const char* str) {
+size_t strlen(const char* str) {
 	size_t _length = 0;
 	while (str[_length])
 		_length++;
 	return _length;
 }
+#if defined(__cplusplus)
+}/* Use C linkage for kernel_main. */
+#endif
 
 //wright string of unknow length
 void terminalWriteString(const char* _toPrint) {
-	terminalWrite(_toPrint, stringLength(_toPrint));
+	terminalWrite(_toPrint, strlen(_toPrint));
 }
 
 //special keys. they do something
