@@ -28,9 +28,6 @@ Ok I gave up on newlib. I have figured out why templates didn't work (you have t
 * libc (maybe later) (newlib is hard)
 * libc++ (maybe later) (needs libc and an os toolchain)
 * PCI support (~~waiting for libc(++)~~) (I dont need those so were back to this)
-    * ~~Bus enumeration~~
-    * Device scanning
-    * PCI Header reading
 * primitive USB support
 * floppy support
 * Loading and running programs from disk
