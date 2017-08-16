@@ -24,7 +24,7 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 						if (isValidPCIFunction(i, k, n)) {
 							if (getPCIBaseClass(i, k, n) == baseClass
 									&& getPCISubClass(i, k, n) == subClass) {
-								PCIDevice* toAdd;
+								PCIDevice* toAdd = nullptr;
 								switch (getPCIHeaderType(i, k, n) & 0x7F) {
 									case 0x0 : {
 										toAdd = new PCIStandardDevice(i, k, n,
@@ -44,8 +44,13 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 
 									}
 								}
+								if(toAdd != nullptr){
 								_list->add(toAdd);
 								_size++;
+								} else {
+									//well fuck.
+									//TODO handle errors...
+								}
 							}
 						}
 					}
@@ -53,7 +58,7 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 					if (isValidPCIFunction(i, k, 0)) {
 						if (getPCIBaseClass(i, k, 0) == baseClass
 								&& getPCISubClass(i, k, 0) == subClass) {
-							PCIDevice* toAdd;
+							PCIDevice* toAdd =nullptr;
 							switch (getPCIHeaderType(i, k, 0) & 0x7F) {
 								case 0x0 : {
 									toAdd = new PCIStandardDevice(i, k, 0,
@@ -82,11 +87,11 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 	}
 }
 
-PCIDevice* PCIDeviceList::toArray( ) {
-	PCIDevice* listArr = new PCIDevice[_size];
+PCIDevice** PCIDeviceList::toArray( ) {
+	PCIDevice** listArr = new PCIDevice*[_size];
 	auto current = _list->head( );
-	for (int i = 0; i < _size; i++) {
-		listArr[i] = *current->data( );
+	for (unsigned int i = 0; i < _size; i++) {
+		listArr[i] = current->data( );
 		current = current->next( );
 	}
 	return listArr;

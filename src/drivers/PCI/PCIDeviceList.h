@@ -23,7 +23,7 @@ class PCIDeviceList {
 	public:
 		PCIDeviceList( );
 		PCIDeviceList(uint8_t BaseClass, uint8_t subClass, bool page);
-		PCIDevice* toArray();
+		PCIDevice** toArray();
 };
 
 #endif /* SRC_DRIVERS_PCI_PCIDEVICELIST_H_ */

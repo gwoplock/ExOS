@@ -16,10 +16,11 @@ void * operator new(size_t size) {
 void operator delete(void * p) {
 
 }
-void operator delete(void*, long unsigned int) {
+void operator delete(void* ptr, long unsigned int size/*maybe?*/) {
 
 }
 
-void* operator new[](unsigned long){
-
+void* operator new[](unsigned long size){
+	void * p = malloc(size);
+	return p;
 }
