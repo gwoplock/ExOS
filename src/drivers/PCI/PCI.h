@@ -17,7 +17,7 @@ void PCIInit( );
 bool isPCIMultiFunctionDevice(uint8_t bus, uint8_t device, uint8_t function);
 bool isValidPCIFunction(uint8_t bus, uint8_t device, uint8_t function);
 uint16_t getPCIVenderID(uint8_t bus, uint8_t slot, uint8_t function);
-uint16_t readPCIConfigWord(uint8_t bus, uint8_t slot, uint8_t func,
+uint32_t readPCIConfigWord(uint8_t bus, uint8_t slot, uint8_t func,
 		uint8_t offset);
 void checkPCIBus(uint8_t bus);
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t function);

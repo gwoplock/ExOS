@@ -12,7 +12,7 @@
 #include "../PCI.h"
 
 class PCIDevice {
-	private:
+	protected:
 		uint8_t _bus;
 		uint8_t _device;
 		uint8_t _function;
