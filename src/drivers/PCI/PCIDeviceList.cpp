@@ -24,9 +24,27 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 						if (isValidPCIFunction(i, k, n)) {
 							if (getPCIBaseClass(i, k, n) == baseClass
 									&& getPCISubClass(i, k, n) == subClass) {
-								//todo get the correct object for the device
-								//TODO deal with paging
-								_list->add(new PCIDevice(i, k, n, /*page*/ false));
+								PCIDevice* toAdd;
+								switch (getPCIHeaderType(i, k, n) & 0x7F) {
+									case 0x0 : {
+										toAdd = new PCIStandardDevice(i, k, n,
+												false);
+										break;
+									}
+									case 0x1 : {
+										toAdd = new PCIBridgeDevice(i, k, n,
+												false);
+										break;
+									}
+									case 0x2 : {
+										toAdd = new PCICardBusDevice(i, k,
+												n, false);
+									}
+									default : {
+
+									}
+								}
+								_list->add(toAdd);
 								_size++;
 							}
 						}
@@ -35,9 +53,26 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 					if (isValidPCIFunction(i, k, 0)) {
 						if (getPCIBaseClass(i, k, 0) == baseClass
 								&& getPCISubClass(i, k, 0) == subClass) {
-							//todo get the correct object for the device
-							//TODO deal with paging, maybe?
-							_list->add(new PCIDevice(i, k, 0,/*page*/ false));
+							PCIDevice* toAdd;
+							switch (getPCIHeaderType(i, k, 0) & 0x7F) {
+								case 0x0 : {
+									toAdd = new PCIStandardDevice(i, k, 0,
+											false);
+									break;
+								}
+								case 0x1 : {
+									toAdd = new PCIBridgeDevice(i, k, 0, false);
+									break;
+								}
+								case 0x2 : {
+									toAdd = new PCICardBusDevice(i, k, 0,
+											false);
+								}
+								default : {
+
+								}
+							}
+							_list->add(toAdd);
 							_size++;
 						}
 					}
@@ -47,12 +82,12 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 	}
 }
 
-PCIDevice* PCIDeviceList::toArray() {
+PCIDevice* PCIDeviceList::toArray( ) {
 	PCIDevice* listArr = new PCIDevice[_size];
-	auto current = _list->head();
-	for (int i = 0; i<_size; i++){
-		listArr[i] = *current->data();
-		current = current->next();
+	auto current = _list->head( );
+	for (int i = 0; i < _size; i++) {
+		listArr[i] = *current->data( );
+		current = current->next( );
 	}
 	return listArr;
 }

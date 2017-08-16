@@ -1,4 +1,4 @@
-SUBDIRS = USB
-OBS = PCI.o PCIDevice.o PCIDeviceList.o
+SUBDIRS = USB PCIDevices
+OBS = PCI.o PCIDeviceList.o
 
 include ../../../makefile.inc
