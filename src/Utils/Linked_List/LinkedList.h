@@ -31,11 +31,18 @@ class LinkedList {
 			add(new LinkedListNode<T>(toAdd));
 		}
 		void add(LinkedListNode<T>* toAdd){
-			_tail->next(toAdd);
+			if(_head == nullptr){
+				_head = toAdd;
+				_tail = toAdd;
+			}else{
+				_tail->next(toAdd);
+			}
+
 		}
 		auto head(){
 			return _head;
 		}
+		//TODO delete
 };
 
 #endif /* SRC_UTILS_LINKEDLIST_H_ */

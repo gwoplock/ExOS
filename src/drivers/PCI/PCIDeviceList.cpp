@@ -25,7 +25,8 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 							if (getPCIBaseClass(i, k, n) == baseClass
 									&& getPCISubClass(i, k, n) == subClass) {
 								//todo get the correct object for the device
-								_list->add(new PCIDevice(i, k, n, page));
+								//TODO deal with paging
+								_list->add(new PCIDevice(i, k, n, /*page*/ false));
 								_size++;
 							}
 						}
@@ -35,7 +36,8 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 						if (getPCIBaseClass(i, k, 0) == baseClass
 								&& getPCISubClass(i, k, 0) == subClass) {
 							//todo get the correct object for the device
-							_list->add(new PCIDevice(i, k, 0,page));
+							//TODO deal with paging, maybe?
+							_list->add(new PCIDevice(i, k, 0,/*page*/ false));
 							_size++;
 						}
 					}
