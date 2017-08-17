@@ -9,7 +9,7 @@
 #define SRC_DRIVERS_PCI_PCIDEVICE_H_
 
 #include "../../../global.h"
-#include "../PCI.h"
+
 
 class PCIDevice {
 	protected:

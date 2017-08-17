@@ -5,6 +5,8 @@
  *      Author: garrett
  */
 #include "PageFrameAllocator.h"
+#include "../mem.h"
+#include "../structures/PageTable.h"
 
 PageFrameAllocator::PageFrameAllocator( ) {
 	// TODO Auto-generated constructor stub

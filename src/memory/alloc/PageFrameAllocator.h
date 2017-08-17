@@ -9,7 +9,7 @@
 #define PAGEFRAMEALLOCATOR_H_
 
 #include "../../global.h"
-#include "../mem.h"
+
 //#include "../../kernel.h"
 //#include "../structures/PageTable.h"
 

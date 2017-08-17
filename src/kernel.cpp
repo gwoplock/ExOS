@@ -6,6 +6,19 @@
  */
 #include "kernel.h"
 
+#include "drivers/ProgrammableInterruptController.h"
+#include "memory/alloc/PageFrameAllocator.h"
+#include "drivers/Keyboard.h"
+#include "interrupts/InterruptDiscriptorTable.h"
+#include "drivers/Console.h"
+//#include "memory/alloc/malloc.h"
+#include "memory/structures/GlobalDescriptorTable.h"
+#include "memory/structures/PageTable.h"
+#include "drivers/PCI/PCI.h"
+#include "drivers/PCI/PCIDeviceList.h"
+#include "multiboot_spec/multiboot.h"
+#include  "memory/mem.h"
+
 InterruptDiscriptorTable idt;
 GlobalDescriptorTable gdt;
 PageTable pageTable;
@@ -36,7 +49,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 		terminalWriteString(" Done. Finding PCI buses...");
 		PCIInit();
 		terminalWriteString(" Done. Finding USB host controllers...");
-		//PCIDeviceList usbHostControllers(0x0C, 0x03, false);
+		PCIDeviceList usbHostControllers(0x0C, 0x03, false);
 		terminalWriteString("Done.");
 		terminalWriteString("   !!!!your computer is booted!!!");
 		while (true) {

@@ -8,8 +8,11 @@
 #ifndef PCISTANDARDDEVICE_H_
 #define PCISTANDARDDEVICE_H_
 
-#include "PCIDevice.h"
 #include "../../../global.h"
+#include "PCIDevice.h"
+
+
+//class PCIDevice;
 
 class PCIStandardDevice: public PCIDevice {
 	public:

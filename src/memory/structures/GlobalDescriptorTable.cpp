@@ -6,6 +6,7 @@
  */
 
 #include "GlobalDescriptorTable.h"
+#include "../../drivers/Console.h"
 
 GlobalDescriptorTable::GlobalDescriptorTable( ) {
 	//TODO change flag and access ints into structs

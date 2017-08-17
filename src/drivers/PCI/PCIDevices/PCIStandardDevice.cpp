@@ -6,6 +6,7 @@
  */
 
 #include "PCIStandardDevice.h"
+#include "../PCI.h"
 
 PCIStandardDevice::PCIStandardDevice( ) :
 		PCIDevice( ) {

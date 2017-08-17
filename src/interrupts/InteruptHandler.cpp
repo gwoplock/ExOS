@@ -6,7 +6,10 @@
  */
 
 #include "InterruptHandler.h"
-
+#include "../kernel.h"
+#include "../drivers/Keyboard.h"
+#include "../drivers/Console.h"
+#include "../drivers/ProgrammableInterruptController.h"
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif

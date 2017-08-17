@@ -10,5 +10,5 @@
 
 #include "../global.h"
 //#include "../drivers/Keyboard.h"
-#include "../kernel.h"
+
 #endif /* INTERRUPTHANDLER_H_ */

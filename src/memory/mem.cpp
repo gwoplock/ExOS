@@ -6,7 +6,7 @@
  */
 
 #include "mem.h"
-
+#include "structures/PageTable.h"
 MultibootMemoryMap memMap[256];
 
 void getMemMap(multiboot_info_t* mbt) {

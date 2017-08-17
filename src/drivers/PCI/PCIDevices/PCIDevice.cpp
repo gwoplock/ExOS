@@ -6,6 +6,7 @@
  */
 
 #include "PCIDevice.h"
+#include "../PCI.h"
 
 PCIDevice::PCIDevice( ) {
 	// TODO Auto-generated constructor stub
@@ -35,6 +36,7 @@ uint16_t PCIDevice::command( ) {
 }
 
 void PCIDevice::command(uint16_t com) {
+	(void) com;
 }
 
 uint8_t PCIDevice::classCode( ) {
@@ -58,6 +60,7 @@ uint8_t PCIDevice::BIST( ) {
 }
 
 void PCIDevice::BIST(uint8_t testCode) {
+	(void) testCode;
 }
 
 uint8_t PCIDevice::headerType( ) {
@@ -73,4 +76,5 @@ uint8_t PCIDevice::cacheLineSize( ) {
 }
 
 void PCIDevice::cacheLineSize(uint8_t lineSize) {
+	(void) lineSize;
 }

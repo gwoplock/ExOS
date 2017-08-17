@@ -9,10 +9,6 @@
 #define SRC_DRIVERS_PCI_PCIDEVICELIST_H_
 
 #include "../../global.h"
-#include "PCI.h"
-#include "PCIDevices/PCIStandardDevice.h"
-#include "PCIDevices/PCIBridgeDevice.h"
-#include "PCIDevices/PCICardBusDevice.h"
 #include "../../Utils/Linked_List/LinkedList.h"
 
 class PCIDevice;

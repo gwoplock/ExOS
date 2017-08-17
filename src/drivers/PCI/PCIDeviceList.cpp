@@ -7,6 +7,10 @@
  */
 
 #include "PCIDeviceList.h"
+#include "PCI.h"
+#include "PCIDevices/PCIStandardDevice.h"
+#include "PCIDevices/PCIBridgeDevice.h"
+#include "PCIDevices/PCICardBusDevice.h"
 
 PCIDeviceList::PCIDeviceList( ) {
 	_list = new LinkedList<PCIDevice*>;
@@ -14,6 +18,7 @@ PCIDeviceList::PCIDeviceList( ) {
 }
 
 PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
+	(void) page;
 	_list = new LinkedList<PCIDevice*>;
 	_size = 0;
 	for (int i = 0; i < 256; i++) {

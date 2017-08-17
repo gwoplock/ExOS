@@ -6,6 +6,9 @@
  */
 
 #include "malloc.h"
+#include "../../kernel.h"
+#include "../structures/PageTable.h"
+#include "PageFrameAllocator.h"
 
 void* top;
 void* base;

@@ -7,6 +7,9 @@
 
 #include "Console.h"
 #include "../kernel.h"
+#include "Keyboard.h"
+#include "../memory/structures/PageTable.h"
+#include "../memory/mem.h"
 
 size_t terminalRow;
 size_t terminalColumn;
