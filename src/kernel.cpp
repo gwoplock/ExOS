@@ -29,7 +29,7 @@ PageFrameAllocator frameAlloc;
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 	void kernelMain(multiboot_info_t* mbd) {
-		BREAKPOINT
+
 		asm("cli");
 		terminalInit((uint16_t*) 0xC00B8000);
 		// Green on black!

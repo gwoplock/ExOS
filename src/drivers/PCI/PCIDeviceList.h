@@ -22,6 +22,9 @@ class PCIDeviceList {
 		PCIDeviceList( );
 		PCIDeviceList(uint8_t BaseClass, uint8_t subClass, bool page);
 		PCIDevice** toArray();
+		size_t size(){
+			return _size;
+		}
 };
 
 #endif /* SRC_DRIVERS_PCI_PCIDEVICELIST_H_ */
