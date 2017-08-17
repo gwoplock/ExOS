@@ -36,7 +36,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 		terminalWriteString(" Done. Finding PCI buses...");
 		PCIInit();
 		terminalWriteString(" Done. Finding USB host controllers...");
-		PCIDeviceList usbHostControllers(0x0C, 0x03, false);
+		//PCIDeviceList usbHostControllers(0x0C, 0x03, false);
 		terminalWriteString("Done.");
 		terminalWriteString("   !!!!your computer is booted!!!");
 		while (true) {

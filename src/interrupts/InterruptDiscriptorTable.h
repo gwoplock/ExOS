@@ -8,9 +8,7 @@
 #ifndef INTERRUPTDISCRIPTORTABLE_H_
 #define INTERRUPTDISCRIPTORTABLE_H_
 
-#include "../drivers/Console.h"
 #include "../global.h"
-#include "../drivers/ProgrammableInterruptController.h"
 
 
 struct IdtEntry {

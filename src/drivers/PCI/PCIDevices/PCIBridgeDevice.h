@@ -9,6 +9,7 @@
 #define SRC_DRIVERS_PCI_PCIDEVICES_PCIBRIDGEDEVICE_H_
 
 #include "PCIDevice.h"
+#include "../../../global.h"
 
 class PCIBridgeDevice: public PCIDevice {
 	public:

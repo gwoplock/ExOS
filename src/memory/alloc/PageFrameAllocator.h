@@ -10,8 +10,8 @@
 
 #include "../../global.h"
 #include "../mem.h"
-#include "../../kernel.h"
-#include "../structures/PageTable.h"
+//#include "../../kernel.h"
+//#include "../structures/PageTable.h"
 
 class PageFrameAllocator {
 	private:

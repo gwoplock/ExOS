@@ -10,12 +10,12 @@
 
 #include "../../global.h"
 #include "PCI.h"
-#include "PCIDevices/PCIDevice.h"
 #include "PCIDevices/PCIStandardDevice.h"
 #include "PCIDevices/PCIBridgeDevice.h"
 #include "PCIDevices/PCICardBusDevice.h"
 #include "../../Utils/Linked_List/LinkedList.h"
 
+class PCIDevice;
 
 
 class PCIDeviceList {

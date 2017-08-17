@@ -9,7 +9,7 @@
 #define SRC_DRIVERS_PCI_USB_USB_H_
 
 #include "../../../global.h"
-#include "USBController.h"
+class USBController;
 
 extern uint8_t maxUSBVersion;
 extern USBController* uSBControllers;

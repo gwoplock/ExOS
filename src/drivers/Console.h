@@ -10,7 +10,6 @@
 
 #include "../global.h"
 
-#include "Keyboard.h"
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
@@ -64,7 +63,7 @@ void terminalScroll( );
 
 void writeInt(uint64_t num);
 
-#include "../memory/mem.h"
+
 
 
 #endif /* CONSOLE_H_ */

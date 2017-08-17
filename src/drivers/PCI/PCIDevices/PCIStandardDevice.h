@@ -9,7 +9,7 @@
 #define PCISTANDARDDEVICE_H_
 
 #include "PCIDevice.h"
-
+#include "../../../global.h"
 
 class PCIStandardDevice: public PCIDevice {
 	public:

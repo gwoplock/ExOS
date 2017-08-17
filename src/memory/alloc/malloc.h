@@ -9,9 +9,9 @@
 #define MALLOC_H_
 
 #include "../../global.h"
-#include "PageFrameAllocator.h"
+//#include "PageFrameAllocator.h"
 #include "../../kernel.h"
-#include "../structures/PageTable.h"
+//#include "../structures/PageTable.h"
 
 extern void* top;
 extern void* base;

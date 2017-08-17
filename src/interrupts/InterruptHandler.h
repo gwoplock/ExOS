@@ -8,8 +8,7 @@
 #ifndef INTERRUPTHANDLER_H_
 #define INTERRUPTHANDLER_H_
 
-#include "../drivers/ProgrammableInterruptController.h"
-#include "../drivers/Console.h"
+#include "../global.h"
+//#include "../drivers/Keyboard.h"
 #include "../kernel.h"
-
 #endif /* INTERRUPTHANDLER_H_ */

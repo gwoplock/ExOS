@@ -8,7 +8,7 @@
 #include "Keyboard.h"
 
 Keyboard::Keyboard( ) {
-	terminalWriteString("TESTIING TESTING TESTING");
+
 }
 
 uint8_t Keyboard::getScancode( ) {

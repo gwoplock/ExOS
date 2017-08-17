@@ -13,7 +13,7 @@
 #include "drivers/Keyboard.h"
 #include "interrupts/InterruptDiscriptorTable.h"
 #include "drivers/Console.h"
-#include "memory/alloc/malloc.h"
+//#include "memory/alloc/malloc.h"
 #include "memory/structures/GlobalDescriptorTable.h"
 #include "memory/structures/PageTable.h"
 #include "drivers/PCI/PCI.h"
