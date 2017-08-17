@@ -17,6 +17,7 @@
 #include "memory/structures/GlobalDescriptorTable.h"
 #include "memory/structures/PageTable.h"
 #include "drivers/PCI/PCI.h"
+#include "drivers/PCI/PCIDeviceList.h"
 
 class InterruptDiscriptorTable;
 class GlobalDescriptorTable;

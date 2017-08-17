@@ -10,6 +10,7 @@
 
 #include "PCIDevice.h"
 
+
 class PCIStandardDevice: public PCIDevice {
 	public:
 		PCIStandardDevice( );

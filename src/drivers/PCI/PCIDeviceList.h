@@ -16,6 +16,8 @@
 #include "PCIDevices/PCICardBusDevice.h"
 #include "../../Utils/Linked_List/LinkedList.h"
 
+
+
 class PCIDeviceList {
 	private:
 		size_t _size;
