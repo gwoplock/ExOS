@@ -20,8 +20,8 @@ Ok I gave up on newlib. I have figured out why templates didn't work (you have t
 ### What's Left
 
 * ~~Bus enumeration~~
-* ~~Device scanning~~
-* PCI Config space reading
+* ~~Device scanning~~ (it may not work. atleast my test code found 0 devices. this needs to be worked on)
+* PCI Config space reading (i can read the important one, header 0 for standard devices. could extend to more)
 
 ## Next Steps
 
