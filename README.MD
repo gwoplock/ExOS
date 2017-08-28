@@ -15,12 +15,13 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 
 ## Current Status
 
+I'm working with a friend on the PCI stuff. It is currently bugged and scanning returns no devices. In the meantime I'm impoving the comments in the code. 
 
 ### What's Left
 
 * ~~Bus enumeration~~
-* ~~Device scanning~~ (it may not work. atleast my test code found 0 devices. this needs to be worked on)
-* PCI Config space reading (i can read the important one, header 0 for standard devices. could extend to more)
+* Device scanning (it may not work. atleast my test code found 0 devices. this needs to be worked on)
+* ~~PCI Config space reading~~ (i can read the important one, header 0 for standard devices. could extend to more)
 
 ## Next Steps
 
