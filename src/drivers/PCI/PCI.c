@@ -14,18 +14,21 @@ uint8_t MAX_PCI_FUNCTION = 8;
 bool validPCIBuses[256];
 
 void PCIInit( ) {
+	//make sure all buses are invalid
 	for (uint16_t i = 0; i < 256; i++){
 		validPCIBuses[i] = false;
 	}
-	//bus, slot, function
+	//check if the first bus multifunction, if so check each function for buses.
 	if (isPCIMultiFunctionDevice(0, 0, 0)) {
 		for (uint8_t function = 0; function < MAX_PCI_FUNCTION; function++) {
 			if ( !isValidPCIFunction(0, 0, function)) {
 				break;
 			}
+			//check the valid function
 			checkPCIBus(function);
 		}
 	} else {
+		//check the base function if not multifunction
 		checkPCIBus(0);
 	}
 }
@@ -41,7 +44,7 @@ bool isValidPCIFunction(uint8_t bus, uint8_t device, uint8_t function) {
 uint16_t getPCIVenderID(uint8_t bus, uint8_t slot, uint8_t function) {
 	return readPCIConfigWord(bus, slot, function, 0);
 }
-
+//TODO rewrite
 uint32_t readPCIConfigWord(uint8_t bus, uint8_t slot, uint8_t func,
 		uint8_t offset) {
 	uint32_t address;
@@ -61,7 +64,9 @@ uint32_t readPCIConfigWord(uint8_t bus, uint8_t slot, uint8_t func,
 
 void checkPCIBus(uint8_t bus) {
 	uint8_t device;
+	//set that its a valid bus
 	validPCIBuses[bus] = true;
+	//check the devices on the bus
 	for (device = 0; device < 32; device++) {
 		checkPCIDevice(bus, device);
 	}
@@ -71,10 +76,12 @@ void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t function) {
 	uint8_t baseClass;
 	uint8_t subClass;
 	uint8_t secondaryBus;
-
+	//get the class codes
 	baseClass = getPCIBaseClass(bus, device, function);
 	subClass = getPCISubClass(bus, device, function);
+	//check the class codes to see if it's a bus
 	if ( (baseClass == 0x06) && (subClass == 0x04)) {
+		//check that bus
 		secondaryBus = getPCISecondaryBus(bus, device, function);
 		checkPCIBus(secondaryBus);
 	}

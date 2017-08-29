@@ -8,7 +8,7 @@
 #include "InterruptDiscriptorTable.h"
 
 InterruptDiscriptorTable::InterruptDiscriptorTable( ) {
-	// Possibly put &'s infront of isr_x etc
+	//encode each interrupt used with the proper function location and type
 	_idt[0] = encode((uint32_t) (unsigned) &isr_0, (uint16_t) 0x08);
 	_idt[1] = encode((uint32_t) (unsigned) &isr_1, (uint16_t) 0x08);
 	_idt[2] = encode((uint32_t) (unsigned) &isr_2, (uint16_t) 0x08);

@@ -11,20 +11,26 @@ PageTable::PageTable( ) {
 }
 PageTable::PageTable(bool buildFlag) {
 	buildFlag = !buildFlag;
+	//set all page dirs not present and set the addr to the page table.
 	for (int i = 0; i < 1024; i++) {
 		pageDir[i].present = 0;
 		pageDir[i].pageTableAddr = ( (uint32_t)( &pageTables[i * 1024])
 				- vKernelStart) >> 12;
 	}
+	//TODO set all page table entry to not present on dirs that are present
+	//calculate the number of pages the kernel takes up
 	size_t kernelPages = ( ( (size_t)( &kernelSize) + (uint32_t)
 			& kernelStart - vKernelStart) / fourKb + 1);
+	//also need the number of pages
 	size_t kernelDirs = (kernelPages / 1024) + 1;
+	//for every dir that we need mark it as present, and a few other things
 	for (size_t i = 0; i < kernelDirs; i++) {
 		pageDir[KernelPageDirStart + i].present = 1;
 		pageDir[KernelPageDirStart + i].writeThrough = 1;
 		pageDir[KernelPageDirStart + i].user_super = 1;
 		pageDir[KernelPageDirStart + i].read_write = 1;
 	}
+	//for each page set the props
 	for (size_t i = 0; i < kernelPages; i++) {
 		pageTables[KernelPageStart + i].read_write = 1;
 		pageTables[KernelPageStart + i].user_super = 0;
@@ -33,32 +39,41 @@ PageTable::PageTable(bool buildFlag) {
 		pageTables[KernelPageStart + i].physicalAddress = i;
 		pageTables[KernelPageStart + i].global = 1;
 	}
+	//change the page dir were using
 	movePageTable(pageDir);
 }
 void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
+	//convert from bytes to 4Kb pages
 	size_t sizeInPages = (size / fourKb)
 			+ ( ( ( ((uint32_t) size) & 0xFFF) != 0)
 					|| ( ( ((uint32_t) phyStart) & 0xFFF) != 0));
+	//covert to page dirs
 	size_t sizeInDirs = sizeInPages = (sizeInPages / 1024) + 1;
+	//calc the starting points
 	uint32_t startPage = (uint32_t) virtStart / fourKb;
 	uint32_t startDir = startPage / 1024;
+	//set the dirs present
+	//TODO add options for different flags
 	for (size_t i = 0; i < sizeInDirs; i++) {
 		pageDir[startDir + i].present = 1;
 	}
+	//dito for the page tables
 	for (size_t i = 0; i < sizeInPages; i++) {
 		pageTables[startPage + i].present = 1;
 		pageTables[startPage + i].global = 1;
 		pageTables[startPage + i].physicalAddress = ((uint32_t) phyStart
 				+ (i * fourKb)) >> 12;
 	}
+	//return the starting point
 	return (void*) ( ((uint32_t) virtStart & ~0xFFF)
 			| ((uint32_t) phyStart & 0xFFF));
 }
+//asm helper to move the page dir
 void PageTable::movePageTable(PageDirEntry pageDir[1024]) {
 	asm volatile ("mov %0, %%eax;"
 			"mov %%eax, %%cr3":: "r" (pageDir):"%eax");
 }
-
+//TODO move above to here
 void PageTable::build(){
 	for (int i = 0; i < 1024; i++) {
 		pageDir[i].present = 0;

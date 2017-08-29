@@ -10,7 +10,8 @@
 uint8_t maxUSBVersion = 0;
 USBController* uSBControllers;
 
-void USBInit(){
+void USBInit(){//how it works:
+//TODO:
 	//enum USB controllers
 		//Enum PCI devices
 			//Enum PCI controllers (recrsive) |

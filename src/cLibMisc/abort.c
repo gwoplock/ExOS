@@ -11,7 +11,7 @@
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 void abort(void) {
-
+//TODO
 }
 #if defined(__cplusplus)
 }/* Use C linkage for kernel_main. */

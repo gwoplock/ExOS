@@ -18,9 +18,12 @@ extern "C" {/* Use C linkage for kernel_main. */
 		if (line == 1/*KB*/) {
 			uint8_t scanCode = KB.getScancode( );
 			uint8_t key = KB.getKey(scanCode);
+			//if printable key
 			if (key != '\0' && ! (scanCode & 0x80)) {
+				//put the key
 				terminalPutChar(key);
 			} else {
+				//handle the special key
 				terminalHandleSpecialKey(scanCode, KB.getModkeys( ));
 			}
 		}
@@ -28,6 +31,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 	}
 
 	void isr_handler(int interruptNumber) {
+		//print the interrupt number
 		terminalPutChar(' ');
 		writeInt((uint32_t) interruptNumber);
 

@@ -24,13 +24,14 @@ extern "C" {/* Use C linkage for kernel_main. */
 void* malloc(size_t size) {
 	size_t space = (size_t) top - (size_t) base;
 	if (space > size) {
+		//if there is space in the current phys mem allocated
 		void* oldBase = base;
+		//move the base address
 		base = (void*) ((size_t) base + size);
+		//return the start of allocated space
 		return oldBase;
 	} else {
 		//TODO take into account out of mem
-		//writeInt((uint32_t)top);
-		//terminalPutChar(' ');
 		void* startOfNewMem = frameAlloc.allocatePhysMem(size - space,pageTable.getKernelStart());
 		size_t sizeOfNewMem = ((size-space)/fourKb + ( ((size-space) & 0xFFF) != 0)) * fourKb;
 		top = (void*) ((size_t) top + sizeOfNewMem + ((size_t)startOfNewMem - (size_t)top) );
@@ -39,7 +40,7 @@ void* malloc(size_t size) {
 }
 
 void free(void *ptr){
-
+//TODO
 }
 #if defined(__cplusplus)
 }/* Use C linkage for kernel_main. */

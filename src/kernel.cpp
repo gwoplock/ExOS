@@ -29,29 +29,39 @@ PageFrameAllocator frameAlloc;
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 	void kernelMain(multiboot_info_t* mbd) {
-
+		//turn off interrupts before configed
 		asm("cli");
+		//clear screen, set the pointer to the start of the VGA buffer.
 		terminalInit((uint16_t*) 0xC00B8000);
 		// Green on black!
 		terminalSetColor(vgaEntryColor(VGA_COLOR_GREEN, VGA_COLOR_BLACK));
 		terminalWriteString(
 				"Terminal active, Welcome to ExOS. Now preparing your system. preparing GDT...");
+		//build and replce grub's GDT with a custom writable one.
 		gdt.build( );
 		gdt.load( );
 		terminalWriteString(" Done. preparing the page Table...");
+		//rebuild page table. replaces the one built in boot.s
 		pageTable.build( );
 		terminalWriteString(" Done. setting up interrupts...");
+		//sets up interrups and enables them
 		interruptSetUp( );
 		terminalWriteString(" Done. Preparing the memory allocator...");
+		//get the memory map from grub
 		getMemMap(mbd);
+		//build the page frame allocator (allocate physical memory)
 		frameAlloc.build( );
+		//set malloc's support vars
 		mallocInit( );
 		terminalWriteString(" Done. Finding PCI buses...");
+		//find the valid PCI buses
 		PCIInit();
 		terminalWriteString(" Done. Finding USB host controllers...");
+		//find the (3 or less) USB host controllers. all have the same class/subclass code.
 		PCIDeviceList usbHostControllers(0x0C, 0x03, false);
 		terminalWriteString("Done.");
 		terminalWriteString("   !!!!your computer is booted!!!");
+		//dont return.
 		while (true) {
 			asm("hlt");
 		}
@@ -62,13 +72,15 @@ extern "C" {/* Use C linkage for kernel_main. */
 #endif
 
 void interruptSetUp( ) {
+	//build the IDT.
 	idt.build( );
+	//set the interrupt lines for the PIC
 	PIC_remap(0x20, 0x28);
+	//mask the timer line
 	IRQ_set_mask(0);
+	//load it to the CPU
 	idt.load( );
+	//enable interupts
 	asm("sti");
 }
 
-void fixPaging( ) {
-	//pageTable = PageTable(true);
-}

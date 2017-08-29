@@ -8,6 +8,7 @@
 #include "GlobalDescriptorTable.h"
 #include "../../drivers/Console.h"
 
+//this code nver runs, should be replaced with the stuf in ::build() when we get start files and shit
 GlobalDescriptorTable::GlobalDescriptorTable( ) {
 	//TODO change flag and access ints into structs
 	size = 0;
@@ -44,7 +45,7 @@ GlobalDescriptorTable::GlobalDescriptorTable( ) {
 	size++;
 
 }
-
+//follow the format, i dont like it and i think it sucks but im not intel
 GdtEntry GlobalDescriptorTable::encodeGlobalDescriptorTableEntry(uint32_t limit,
 		uint32_t baseAddress, Access access, Flags flags) {
 	GdtEntry toRet;
@@ -63,6 +64,7 @@ GdtEntry GlobalDescriptorTable::encodeGlobalDescriptorTableEntry(uint32_t limit,
 	return toRet;
 }
 
+//TODO comment
 void GlobalDescriptorTable::build( ) {
 	//TODO change flag and access ints into structs
 	size = 0;
