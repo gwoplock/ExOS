@@ -51,12 +51,33 @@ class PageTable {
 	public:
 		PageTable( );
 		PageTable(bool buildFlag);
+		/**
+		 * resetup paging, set it how I like it
+		 */
 		void build();
+		/**
+		 * page in some mem
+		 * @param phy Start
+		 * @param virt Start
+		 * @param size to page
+		 * @return the actual start point
+		 */
 		void* page(void* phyStart, void* virtStart, size_t size);
+		/**
+		 * asm helper to move the page dir
+		 * @param page Dir
+		 */
 		void movePageTable(PageDirEntry pagedir[1024]);
+		/**
+		 * @return the vertual kernel start
+		 */
 		void* getKernelStart(){
 			return (void *) vKernelStart;
 		}
+		/**
+		 * get the full page table
+		 * @return the page table
+		 */
 		PageTableEntry* getPageTables(){
 			return pageTables;
 		}

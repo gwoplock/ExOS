@@ -23,6 +23,5 @@ extern Keyboard KB;
 extern PageFrameAllocator frameAlloc;
 
 void interruptSetUp();
-void fixPaging();
 
 #endif

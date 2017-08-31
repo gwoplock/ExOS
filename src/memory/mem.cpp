@@ -8,7 +8,10 @@
 #include "mem.h"
 #include "structures/PageTable.h"
 MultibootMemoryMap memMap[256];
-
+/**
+ * read the multiboot mem map
+ * @param multiboot mem map
+ */
 void getMemMap(multiboot_info_t* mbt) {
 	uint32_t vKernelStart = (uint32_t) pageTable.getKernelStart();
 	mbt = (multiboot_info_t*) ((int32_t) mbt + vKernelStart);
@@ -23,7 +26,12 @@ void getMemMap(multiboot_info_t* mbt) {
 	}
 	memMap[i].type = 0xDEADC0DE;
 }
-
+/**
+ * copy some mem
+ * @param to
+ * @param from
+ * @param length
+ */
 void memcpy(void* to, void* from, size_t length) {
 	int* toArr = (int*) to;
 	int* fromArr = (int*) from;
@@ -36,7 +44,12 @@ void memcpy(void* to, void* from, size_t length) {
 	}
 }
 
-
+/**
+ * set some mem to a char
+ * @param start
+ * @param length
+ * @param set to
+ */
 void memSet(void* start, size_t length, char toSet) {
 	int toSetInt = (int) toSet;
 	for (size_t i = 1; i < sizeof(int) / sizeof(char); i++) {

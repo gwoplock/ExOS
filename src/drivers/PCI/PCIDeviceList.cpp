@@ -11,18 +11,23 @@
 #include "PCIDevices/PCIStandardDevice.h"
 #include "PCIDevices/PCIBridgeDevice.h"
 #include "PCIDevices/PCICardBusDevice.h"
+#include "../Console.h"
 
 PCIDeviceList::PCIDeviceList( ) {
 	_list = new LinkedList<PCIDevice*>;
 	_size = 0;
 }
-
+//TODO comment and fix
 PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 	(void) page;
 	_list = new LinkedList<PCIDevice*>;
 	_size = 0;
+BREAKPOINT
 	for (int i = 0; i < 256; i++) {
 		if (validPCIBuses[i]) {
+			BREAKPOINT
+			writeInt(i);
+			BREAKPOINT
 			for (int k = 0; k < 32; k++) {
 				if (isPCIMultiFunctionDevice(i, k, 0)) {
 					for (int n = 0; n < 8; n++) {
@@ -93,7 +98,9 @@ PCIDeviceList::PCIDeviceList(uint8_t baseClass, uint8_t subClass, bool page) {
 }
 
 PCIDevice** PCIDeviceList::toArray( ) {
+	//make array of PCIDevice*
 	PCIDevice** listArr = new PCIDevice*[_size];
+	//go through array and add each to the array
 	auto current = _list->head( );
 	for (unsigned int i = 0; i < _size; i++) {
 		listArr[i] = current->data( );
