@@ -11,12 +11,27 @@
 #include "../memory/structures/PageTable.h"
 #include "../memory/mem.h"
 
+/**
+ * current terminal row
+ */
 size_t terminalRow;
+/**
+ * current terminal column
+ */
 size_t terminalColumn;
+/**
+ * the color code we are using
+ */
 uint8_t terminalColor;
+/**
+ * the address of the start of the terminal
+ */
 uint16_t* terminalBuffer;
 
-
+/**
+ * clears the screen with \0 and sets the start point. also sets the blinking bar and colors.
+ * @param bufferStart - where the mem mapped terminal is
+ */
 void terminalInit(uint16_t* bufferStart) {
 	//start at the begining
 	terminalRow = 0;
@@ -35,19 +50,31 @@ void terminalInit(uint16_t* bufferStart) {
 	//set blinky bar at the begining
 	teminalUpdateBar(0, 0);
 }
-
+/**
+ * sets the FG and BG colors of the terminal
+ * @param color code
+ */
 void terminalSetColor(uint8_t color) {
 	terminalColor = color;
 }
 
-//put char at pos with color
+/**
+ *  fully encode char and place in the buffer
+ * @param the char to print
+ * @param the color code
+ * @param X Pos
+ * @param Y Pos
+ */
 void terminalPutEntryAt(char _toPrint, uint8_t _color, size_t _XPos,
 		size_t _YPos) {
 	const size_t _index = _YPos * VGA_WIDTH + _XPos;
 	terminalBuffer[_index] = vgaEntry(_toPrint, _color);
 }
 
-//print a char
+/**
+ * put char at next location
+ * @param char to print
+ */
 void terminalPutChar(char _toPrint) {
 	terminalPutEntryAt(_toPrint, terminalColor, terminalColumn, terminalRow);
 	if ( ++terminalColumn == VGA_WIDTH) {
@@ -59,7 +86,11 @@ void terminalPutChar(char _toPrint) {
 	teminalUpdateBar(terminalRow, terminalColumn);
 }
 
-//write a string of known length
+/**
+ * print a string of known length
+ * @param string to print
+ * @param length
+ */
 void terminalWrite(const char* _toPrint, size_t _length) {
 	for (size_t _i = 0; _i < _length; _i++)
 		terminalPutChar(_toPrint[_i]);
@@ -68,7 +99,11 @@ void terminalWrite(const char* _toPrint, size_t _length) {
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
-//get a strings length
+/**
+ * get string length
+ * @param string
+ * @return length
+ */
 size_t strlen(const char* str) {
 	size_t _length = 0;
 	while (str[_length])
@@ -79,12 +114,19 @@ size_t strlen(const char* str) {
 }/* Use C linkage for kernel_main. */
 #endif
 
-//wright string of unknow length
+/**
+ * print string of unknown length
+ * @param string to print
+ */
 void terminalWriteString(const char* _toPrint) {
 	terminalWrite(_toPrint, strlen(_toPrint));
 }
 
-//special keys. they do something
+/**
+ * process special keys
+ * @param what char to handle
+ * @param pointer to modkey flags
+ */
 void terminalHandleSpecialKey(char _specalChar, uint16_t* modsLocal) {
 	switch (_specalChar) {
 		//back space
@@ -164,7 +206,11 @@ void terminalHandleSpecialKey(char _specalChar, uint16_t* modsLocal) {
 		}
 	}
 }
-//move that blinky line
+/**
+ * move the blinking bar to the proper location
+ * @param row
+ * @param col
+ */
 void teminalUpdateBar(int row, int col) {
 	unsigned short position = (row * VGA_WIDTH) + col;
 	// cursor LOW port to vga INDEX register
@@ -175,7 +221,9 @@ void teminalUpdateBar(int row, int col) {
 	outb(0x3D5, (unsigned char) ( (position >> 8) & 0xFF));
 }
 
-//scroll up when out of room
+/**
+ * handle scrolling up when the last spot is used
+ */
 void terminalScroll( ) {
 	terminalRow = VGA_HEIGHT - 1;
 	memcpy((void*) (0xB8000 + (uint32_t)(pageTable.getKernelStart( ))),
@@ -186,7 +234,10 @@ void terminalScroll( ) {
 					+ (VGA_WIDTH * 2) * (VGA_HEIGHT - 1)), VGA_WIDTH * 2, '\0');
 }
 
-//write a number (backwards because i hate you)
+/**
+ * write a number. i think it works right
+ * @param number to print
+ */
 void writeInt(uint64_t num) {
 	uint8_t out[20];
 	for (int i = 0; i < 20; i++) {

@@ -61,15 +61,35 @@ struct GdtDescriptor {
 }__attribute__((packed));
 class GlobalDescriptorTable {
 	private:
+		/**
+		 * the actual gdt
+		 */
 		GdtEntry _gdt[256];
+		/**
+		 * length of gdt
+		 */
 		size_t size;
+		/**
+		 * the structure that the gdt reads
+		 */
 		GdtDescriptor gdtd;
 	public:
 		GlobalDescriptorTable( ) ;
-		GlobalDescriptorTable( const GlobalDescriptorTable &) = delete;
-		auto operator= (const GlobalDescriptorTable &) = delete;
+		//GlobalDescriptorTable( const GlobalDescriptorTable &) = delete;
+		//auto operator= (const GlobalDescriptorTable &) = delete;
+		/**
+		 * encode gdt entry
+		 * @param limit
+		 * @param base Address
+		 * @param access
+		 * @param flags
+		 * @return encoded GDT entry
+		 */
 		GdtEntry encodeGlobalDescriptorTableEntry(uint32_t limit,
 				uint32_t baseAddress, Access access, Flags flags);
+		/**
+		 * load the GDT into the cpu
+		 */
 		void load( ) {
 			//get size, -1 because Int-hell hates you
 			size_t sizeOfGdt = (size * sizeof(GdtEntry)) - 1;

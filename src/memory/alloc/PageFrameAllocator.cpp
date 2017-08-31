@@ -12,6 +12,9 @@ PageFrameAllocator::PageFrameAllocator( ) {
 	// TODO Auto-generated constructor stub
 
 }
+/**
+ * set up the allocator.
+ */
 void PageFrameAllocator::build( ) {
 	lastUsedPage = 0;
 	//make all avalible
@@ -56,13 +59,22 @@ void PageFrameAllocator::build( ) {
 		}
 	}
 }
-
+/**
+ * check if phys mem is available
+ * @param page to check
+ * @return the availability
+ */
 bool PageFrameAllocator::isAvalible(int page) {
 	size_t byte = page / 8;
 	size_t bit = page % 8;
 	return (bool) ! (physPageAvalibility[byte] & (0b1 << bit));
 }
 
+/**
+ * allocate phys mem to a process
+ * @param size to allocate
+ * @param base Virt Address to start checking, useful for the OS
+ */
 void* PageFrameAllocator::allocatePhysMem(size_t size, void* baseVirtAddress) {
 	//covert bytes to pages
 	uint32_t sizeInPages = (size / fourKb) + ( (size & 0xFFF) != 0);
@@ -94,7 +106,6 @@ void* PageFrameAllocator::allocatePhysMem(size_t size, void* baseVirtAddress) {
 	}
 	return toRet;
 }
-
 void* PageFrameAllocator::getNextVirtAddr(uint32_t sizeInPages,
 		void* baseVirtAddress) {
 	//starting at the base addr, find the next section of mem that is big enough

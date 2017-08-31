@@ -7,6 +7,8 @@
 
 #include "New.h"
 
+//TODO fix this file
+
 void * operator new(size_t size) {
 	//just call malloc, the compiler will run the constructor automaticly
 	void * p = malloc(size);

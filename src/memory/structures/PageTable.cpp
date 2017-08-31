@@ -42,6 +42,14 @@ PageTable::PageTable(bool buildFlag) {
 	//change the page dir were using
 	movePageTable(pageDir);
 }
+/**
+ * page in some mem
+ * @param phy Start
+ * @param virt Start
+ * @param size to page
+ * @return the actual start point
+ */
+//TODO check if already paged in, if so return error
 void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 	//convert from bytes to 4Kb pages
 	size_t sizeInPages = (size / fourKb)
@@ -68,12 +76,18 @@ void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 	return (void*) ( ((uint32_t) virtStart & ~0xFFF)
 			| ((uint32_t) phyStart & 0xFFF));
 }
-//asm helper to move the page dir
+/**
+ * asm helper to move the page dir
+ * @param page Dir
+ */
 void PageTable::movePageTable(PageDirEntry pageDir[1024]) {
 	asm volatile ("mov %0, %%eax;"
 			"mov %%eax, %%cr3":: "r" (pageDir):"%eax");
 }
 //TODO move above to here
+/**
+ * resetup paging, set it how I like it
+ */
 void PageTable::build(){
 	for (int i = 0; i < 1024; i++) {
 		pageDir[i].present = 0;

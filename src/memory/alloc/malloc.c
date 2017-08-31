@@ -10,9 +10,18 @@
 #include "../structures/PageTable.h"
 #include "PageFrameAllocator.h"
 
+/**
+ * top of the paged in mem
+ */
 void* top;
+/**
+ * base of free mem
+ */
 void* base;
 
+/**
+ * set up the vars needed for malloc
+ */
 void mallocInit( ) {
 	base = &kernelEnd;
 	top = (void*) ( (size_t)( &kernelSize) + (uint32_t)
@@ -21,6 +30,10 @@ void mallocInit( ) {
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
+/**
+ *  mem alloc
+ * @param size to alloc
+ */
 void* malloc(size_t size) {
 	size_t space = (size_t) top - (size_t) base;
 	if (space > size) {
@@ -38,7 +51,10 @@ void* malloc(size_t size) {
 		return malloc(size);
 	}
 }
-
+/**
+ * free mem
+ * @param ptr to the mem to free
+ */
 void free(void *ptr){
 //TODO
 }

@@ -10,7 +10,9 @@
 
 #include "../global.h"
 
-
+/**
+ * structure used by the cpu to handler interrupts
+ */
 struct IdtEntry {
 		uint16_t offset_1; // offset bits 0..15
 		uint16_t selector; // a code segment selector in GDT or LDT
@@ -19,11 +21,17 @@ struct IdtEntry {
 		uint16_t offset_2; // offset bits 16..31F
 }__attribute__((__packed__));
 
+/**
+ * how the cpu knows about the IDT
+ */
 struct IdtDiscriptor {
 		uint16_t size;
 		uint32_t offset;
 }__attribute__((packed));
 
+/**
+ * funct pointers to the ASM interrupt handler
+ */
 //possible should be void ____()
 extern void* isr_0;
 extern void* isr_1;
@@ -66,12 +74,29 @@ extern void* sysCallAsmHandler;
 
 class InterruptDiscriptorTable {
 	private:
+		/**
+		 * max interrupt number
+		 */
 		size_t size;
+		/**
+		 * the IDT
+		 */
 		IdtEntry _idt[255];
+		/**
+		 * the descriptor used by the cpu to deal with the IDT
+		 */
 		IdtDiscriptor idtd;
 	public:
-
+		/**
+		 *
+		 * @param really a funct pointer to the **ASM** interrupt handleer
+		 * @param selector that the code should run in
+		 * @return encoded entry for the IDT
+		 */
 		IdtEntry encode(uint32_t offset, uint16_t selector);
+		/**
+		 * create the IDT descriptor and load a pointer into the CPU
+		 */
 		void load( ) {
 			//get the size of the IDT. -1 is x86 BULLSHIT
 			size_t sizeOfidt = (48 * sizeof(IdtEntry)) - 1;

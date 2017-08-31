@@ -13,7 +13,10 @@
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
-
+/**
+ * handle hardware interrupts
+ * @param line from the PIC
+ */
 	void irq_handler(int line) {
 		if (line == 1/*KB*/) {
 			uint8_t scanCode = KB.getScancode( );
@@ -29,7 +32,10 @@ extern "C" {/* Use C linkage for kernel_main. */
 		}
 		PIC_sendEOI(line);
 	}
-
+/**
+ * handle faults from the cpu
+ * @param interrupt Number
+ */
 	void isr_handler(int interruptNumber) {
 		//print the interrupt number
 		terminalPutChar(' ');
