@@ -15,8 +15,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 
 ## Current Status
 
-I'm working with a friend on the PCI stuff. It is currently bugged and scanning returns no devices. In the meantime I'm impoving the comments in the code. 
-
+I'm working with a friend on the PCI stuff. It is currently bugged and scanning returns no devices. I'm reading about the USB protocal and figuring out how I'm going to impliment it in the kernel. 
 ### What's Left
 
 * ~~Bus enumeration~~
