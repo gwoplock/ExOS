@@ -242,6 +242,7 @@ void teminalUpdateBar(int row, int col) {
  * If a blank line is needed, use terminalWriteLine() instead
  */
 void newline( ) {
+    terminalPutChar(' ');
     terminalRow++;
     terminalColumn = 0;
     if (terminalRow == VGA_HEIGHT) {
