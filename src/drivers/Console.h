@@ -98,6 +98,12 @@ size_t stringLength(const char* str);
  */
 void terminalWriteString(const char* data);
 /**
+ * print string of unknown length
+ * move to the next line when done
+ * @param string to print
+ */
+void terminalWriteLine(const char* _toPrint);
+/**
  * process special keys
  * @param what char to handle
  * @param pointer to modkey flags
