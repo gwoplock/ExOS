@@ -15,7 +15,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 
 ## Current Status
 
-I'm working with a friend on the PCI stuff. It is currently bugged and scanning returns no devices. I'm reading about the USB protocal and figuring out how I'm going to impliment it in the kernel. 
+I'm working with a friend on the PCI stuff. It is currently bugged and scanning returns no devices. I'm reading about the USB protocol and figuring out how I'm going to impliment it in the kernel. 
 ### What's Left
 
 * ~~Bus enumeration~~
@@ -56,8 +56,8 @@ I'm working with a friend on the PCI stuff. It is currently bugged and scanning 
     * I'm using [grub legacy](http://wiki.osdev.org/GRUB_Legacy) as my bootloader but you can use whatever as long as it's ***multiboot compliant***.
 4. Test the bootloader installation
     * Just boot to the bootloader's menu screen to make sure it works.
-5. Configure the makefile
-    * I have hard coded in the paths for my compiler toolchain. I have also hard coded the output for the linker to my floppy drive.
+5. Configure the makefile (makefile.inc)
+    * Assumes that the compiler toolchain (i686-elf-*) is in the path. The floppy drive output is hardcoded based on who used the makefile last.
         * Will possibly be fixed in the future. You must manually change them to match your system for now.
     
 ## Compilation
