@@ -165,7 +165,7 @@ void terminalHandleSpecialKey(char _specalChar, uint16_t* modsLocal) {
 			} while ( ! (terminalBuffer[_index] & 0xff));
 			terminalPutEntryAt('\0', terminalColor, terminalColumn,
 					terminalRow);
-			teminalUpdateBar(terminalRow, terminalColumn);
+			teminalUpdateBar(terminalRow, --terminalColumn);
 			break;
 		}
 			//tab
