@@ -1,9 +1,9 @@
-AS = /home/garrett/opt/cross/bin/i686-elf-as
-GPP = /home/garrett/opt/cross/bin/i686-elf-g++
-GCC = /home/garrett/opt/cross/bin/i686-elf-gcc
-OS_CPP = /home/garrett/workspace/ExOS
-BUILD_TO = /run/media/garrett/EXOS/boot/kernel.bin
-CFLAGS = -c -ffreestanding -O2 -Wall -Wextra -fno-rtti -fno-exceptions
+AS = i686-elf-as
+GPP = i686-elf-g++
+GCC = i686-elf-gcc
+OS_CPP = /media/sdcard/ExOS
+BUILD_TO = /mnt/boot/kernel.bin
+CFLAGS = -c -ffreestanding -O2 -Wall -Wextra -fno-rtti -fno-exceptions -std=gnu++14
 OBJ_DIR = $(OS_CPP)/build
 
 %.o: %.c

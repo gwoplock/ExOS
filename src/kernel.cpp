@@ -35,32 +35,38 @@ extern "C" {/* Use C linkage for kernel_main. */
 		terminalInit((uint16_t*) 0xC00B8000);
 		// Green on black!
 		terminalSetColor(vgaEntryColor(VGA_COLOR_GREEN, VGA_COLOR_BLACK));
-		terminalWriteString(
-				"Terminal active, Welcome to ExOS. Now preparing your system. preparing GDT...");
+        terminalWriteLine("Terminal active, Welcome to ExOS!");
+        terminalWriteLine("Preparing your system:");
+        terminalWriteString("  Preparing GDT...");
 		//build and replce grub's GDT with a custom writable one.
 		gdt.build( );
 		gdt.load( );
-		terminalWriteString(" Done. preparing the page Table...");
+        terminalWriteLine(" Done!");
+        terminalWriteString("  Preparing the page table...");
 		//rebuild page table. replaces the one built in boot.s
 		pageTable.build( );
-		terminalWriteString(" Done. setting up interrupts...");
+        terminalWriteLine(" Done!");
+        terminalWriteString("  Setting up interrupts...");
 		//sets up interrups and enables them
 		interruptSetUp( );
-		terminalWriteString(" Done. Preparing the memory allocator...");
+        terminalWriteLine(" Done!");
+        terminalWriteString("  Preparing the memory allocator...");
 		//get the memory map from grub
 		getMemMap(mbd);
 		//build the page frame allocator (allocate physical memory)
 		frameAlloc.build( );
 		//set malloc's support vars
 		mallocInit( );
-		terminalWriteString(" Done. Finding PCI buses...");
+        terminalWriteLine(" Done!");
+        terminalWriteString("  Finding PCI buses...");
 		//find the valid PCI buses
 		PCIInit();
-		terminalWriteString(" Done. Finding USB host controllers...");
+        terminalWriteLine(" Done!");
+        terminalWriteString("  Finding USB host controllers...");
 		//find the (3 or less) USB host controllers. all have the same class/subclass code.
 		PCIDeviceList usbHostControllers(0x0C, 0x03, false);
-		terminalWriteString("Done.");
-		terminalWriteString("   !!!!your computer is booted!!!");
+        terminalWriteLine(" Done!");
+        terminalWriteString("\n\n\n\n!!!!ExOS fully booted!!!!");
 		//dont return.
 		while (true) {
 			asm("hlt");

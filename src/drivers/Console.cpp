@@ -12,6 +12,11 @@
 #include "../memory/mem.h"
 
 /**
+ * Function prototype for the internal use newline()
+ */
+void newline();
+
+/**
  * current terminal row
  */
 size_t terminalRow;
@@ -68,7 +73,13 @@ void terminalSetColor(uint8_t color) {
 void terminalPutEntryAt(char _toPrint, uint8_t _color, size_t _XPos,
 		size_t _YPos) {
 	const size_t _index = _YPos * VGA_WIDTH + _XPos;
-	terminalBuffer[_index] = vgaEntry(_toPrint, _color);
+    // Handle newlines
+    if (_toPrint == 0x0A) {
+        newline();
+    } else {
+	    terminalBuffer[_index] = vgaEntry(_toPrint, _color);
+        terminalColumn++;
+    }
 }
 
 /**
@@ -77,11 +88,8 @@ void terminalPutEntryAt(char _toPrint, uint8_t _color, size_t _XPos,
  */
 void terminalPutChar(char _toPrint) {
 	terminalPutEntryAt(_toPrint, terminalColor, terminalColumn, terminalRow);
-	if ( ++terminalColumn == VGA_WIDTH) {
-		terminalColumn = 0;
-		if ( ++terminalRow == VGA_HEIGHT) {
-			terminalScroll( );
-		}
+	if (terminalColumn == VGA_WIDTH) {
+        newline();
 	}
 	teminalUpdateBar(terminalRow, terminalColumn);
 }
@@ -123,6 +131,17 @@ void terminalWriteString(const char* _toPrint) {
 }
 
 /**
+ * print string of unknown length
+ * move to the next line when done
+ * @param string to print
+ */
+void terminalWriteLine(const char* _toPrint) {
+	terminalWrite(_toPrint, strlen(_toPrint));
+    newline();
+	teminalUpdateBar(terminalRow, terminalColumn);
+}
+
+/**
  * process special keys
  * @param what char to handle
  * @param pointer to modkey flags
@@ -146,7 +165,7 @@ void terminalHandleSpecialKey(char _specalChar, uint16_t* modsLocal) {
 			} while ( ! (terminalBuffer[_index] & 0xff));
 			terminalPutEntryAt('\0', terminalColor, terminalColumn,
 					terminalRow);
-			teminalUpdateBar(terminalRow, terminalColumn);
+			teminalUpdateBar(terminalRow, --terminalColumn);
 			break;
 		}
 			//tab
@@ -156,11 +175,7 @@ void terminalHandleSpecialKey(char _specalChar, uint16_t* modsLocal) {
 		}
 			//enter
 		case ('\x1C') : {
-			terminalPutChar(' ');
-			terminalColumn = 0;
-			if ( ++terminalRow == VGA_HEIGHT) {
-				terminalScroll( );
-			}
+            newline();
 			teminalUpdateBar(terminalRow, terminalColumn);
 			break;
 		}
@@ -222,6 +237,19 @@ void teminalUpdateBar(int row, int col) {
 }
 
 /**
+ * Move the cursor to the next line. Scroll if necessary
+ * Internal method, do not include in Console.h
+ * If a blank line is needed, use terminalWriteLine() instead
+ */
+void newline( ) {
+    terminalPutChar(' ');
+    terminalRow++;
+    terminalColumn = 0;
+    if (terminalRow == VGA_HEIGHT) {
+        terminalScroll();
+    }
+}
+/**
  * handle scrolling up when the last spot is used
  */
 void terminalScroll( ) {
@@ -256,5 +284,3 @@ void writeInt(uint64_t num) {
 	}
 	terminalWrite((const char *)out, 20);
 }
-
-
