@@ -20,24 +20,24 @@ PageTable::PageTable(bool buildFlag) {
 	//TODO set all page table entry to not present on dirs that are present
 	//calculate the number of pages the kernel takes up
 	size_t kernelPages = ( ( (size_t)( &kernelSize) + (uint32_t)
-			& kernelStart - vKernelStart) / fourKb + 1);
+			& kernelStart - vKernelStart) / FOUR_KB + 1);
 	//also need the number of pages
 	size_t kernelDirs = (kernelPages / 1024) + 1;
 	//for every dir that we need mark it as present, and a few other things
 	for (size_t i = 0; i < kernelDirs; i++) {
-		pageDir[KernelPageDirStart + i].present = 1;
-		pageDir[KernelPageDirStart + i].writeThrough = 1;
-		pageDir[KernelPageDirStart + i].user_super = 1;
-		pageDir[KernelPageDirStart + i].read_write = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].present = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].writeThrough = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].userSuper = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].readWrite = 1;
 	}
 	//for each page set the props
 	for (size_t i = 0; i < kernelPages; i++) {
-		pageTables[KernelPageStart + i].read_write = 1;
-		pageTables[KernelPageStart + i].user_super = 0;
-		pageTables[KernelPageStart + i].writeThrough = 1;
-		pageTables[KernelPageStart + i].present = 1;
-		pageTables[KernelPageStart + i].physicalAddress = i;
-		pageTables[KernelPageStart + i].global = 1;
+		pageTables[KERNEL_PAGE_START + i].readWrite = 1;
+		pageTables[KERNEL_PAGE_START + i].userSuper = 0;
+		pageTables[KERNEL_PAGE_START + i].writeThrough = 1;
+		pageTables[KERNEL_PAGE_START + i].present = 1;
+		pageTables[KERNEL_PAGE_START + i].physicalAddress = i;
+		pageTables[KERNEL_PAGE_START + i].global = 1;
 	}
 	//change the page dir were using
 	movePageTable(pageDir);
@@ -52,13 +52,13 @@ PageTable::PageTable(bool buildFlag) {
 //TODO check if already paged in, if so return error
 void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 	//convert from bytes to 4Kb pages
-	size_t sizeInPages = (size / fourKb)
+	size_t sizeInPages = (size / FOUR_KB)
 			+ ( ( ( ((uint32_t) size) & 0xFFF) != 0)
 					|| ( ( ((uint32_t) phyStart) & 0xFFF) != 0));
 	//covert to page dirs
 	size_t sizeInDirs = sizeInPages = (sizeInPages / 1024) + 1;
 	//calc the starting points
-	uint32_t startPage = (uint32_t) virtStart / fourKb;
+	uint32_t startPage = (uint32_t) virtStart / FOUR_KB;
 	uint32_t startDir = startPage / 1024;
 	//set the dirs present
 	//TODO add options for different flags
@@ -70,7 +70,7 @@ void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 		pageTables[startPage + i].present = 1;
 		pageTables[startPage + i].global = 1;
 		pageTables[startPage + i].physicalAddress = ((uint32_t) phyStart
-				+ (i * fourKb)) >> 12;
+				+ (i * FOUR_KB)) >> 12;
 	}
 	//return the starting point
 	return (void*) ( ((uint32_t) virtStart & ~0xFFF)
@@ -95,21 +95,21 @@ void PageTable::build(){
 				- vKernelStart) >> 12;
 	}
 	size_t kernelPages = ( ( (size_t)( &kernelSize) + (uint32_t)
-			& kernelStart - vKernelStart) / fourKb + 1);
+			& kernelStart - vKernelStart) / FOUR_KB + 1);
 	size_t kernelDirs = (kernelPages / 1024) + 1;
 	for (size_t i = 0; i < kernelDirs; i++) {
-		pageDir[KernelPageDirStart + i].present = 1;
-		pageDir[KernelPageDirStart + i].writeThrough = 1;
-		pageDir[KernelPageDirStart + i].user_super = 1;
-		pageDir[KernelPageDirStart + i].read_write = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].present = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].writeThrough = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].userSuper = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].readWrite = 1;
 	}
 	for (size_t i = 0; i < kernelPages; i++) {
-		pageTables[KernelPageStart + i].read_write = 1;
-		pageTables[KernelPageStart + i].user_super = 0;
-		pageTables[KernelPageStart + i].writeThrough = 1;
-		pageTables[KernelPageStart + i].present = 1;
-		pageTables[KernelPageStart + i].physicalAddress = i;
-		pageTables[KernelPageStart + i].global = 1;
+		pageTables[KERNEL_PAGE_START + i].readWrite = 1;
+		pageTables[KERNEL_PAGE_START + i].userSuper = 0;
+		pageTables[KERNEL_PAGE_START + i].writeThrough = 1;
+		pageTables[KERNEL_PAGE_START + i].present = 1;
+		pageTables[KERNEL_PAGE_START + i].physicalAddress = i;
+		pageTables[KERNEL_PAGE_START + i].global = 1;
 	}
 	movePageTable((PageDirEntry*)((uint32_t)pageDir - vKernelStart));
 }

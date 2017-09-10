@@ -15,17 +15,15 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "AsmHelper.h"
-#include "memory/alloc/malloc.h"
+#include "memory/alloc/Malloc.h"
 #include "memory/alloc/New.h"
-#include "cLibMisc/abort.h"
+#include "clib_misc/Abort.h"
 
 //bochs breakpoing ASM
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");
-//paging info
-#define KernelPageDirStart 768
-#define KernelPageStart 786432
+
 //helpful constant
-#define fourKb 4096
+#define FOUR_KB 4096
 
 
 #endif /* GLOBAL_H_ */

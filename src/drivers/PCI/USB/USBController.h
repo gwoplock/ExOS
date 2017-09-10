@@ -8,7 +8,7 @@
 #ifndef USBCONTROLLER_H_
 #define USBCONTROLLER_H_
 
-#include "../../../global.h"
+#include "../../../Global.h"
 
 class USBController {
 	public:

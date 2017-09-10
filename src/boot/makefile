@@ -1,8 +1,8 @@
-OBS = boot.o
+OBS = Boot.o
 
 include ../../makefile.inc
 
 
-boot.o: $(OS_CPP)/src/boot/boot.s 
-	@ nasm $(OS_CPP)/src/boot/boot.s -felf -o $(OBJ_DIR)/boot.o
+Boot.o: $(OS_CPP)/src/boot/Boot.s 
+	@ nasm $(OS_CPP)/src/boot/Boot.s -felf -o $(OBJ_DIR)/Boot.o
 	

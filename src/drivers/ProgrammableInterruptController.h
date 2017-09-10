@@ -8,7 +8,7 @@
 #ifndef PROGRAMMABLEINTERRUPTCONTROLLER_H_
 #define PROGRAMMABLEINTERRUPTCONTROLLER_H_
 
-#include "../global.h"
+#include "../Global.h"
 
 
 /*
@@ -60,13 +60,13 @@ void sendEOI(uint8_t line);*/
 #define ICW4_BUF_MASTER	0x0C		/* Buffered mode/master */
 #define ICW4_SFNM	0x10		/* Special fully nested (not) */
 
-void PIC_sendEOI(unsigned char irq);
+void PICSendEOI(unsigned char irq);
 
-void IRQ_clear_mask(unsigned char IRQline);
+void IRQClearMask(unsigned char IRQline);
 
-void IRQ_set_mask(unsigned char IRQline);
+void IRQSetMask(unsigned char IRQline);
 
-void PIC_remap(int offset1, int offset2);
+void PICRemap(int offset1, int offset2);
 
 
 #endif /* PROGRAMMABLEINTERRUPTCONTROLLER_H_ */

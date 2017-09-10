@@ -8,7 +8,7 @@
 #ifndef SRC_DRIVERS_PCI_PCI_H_
 #define SRC_DRIVERS_PCI_PCI_H_
 
-#include "../../global.h"
+#include "../../Global.h"
 
 extern int8_t MAX_PCI_FUNCTIONS;
 /**

@@ -8,7 +8,7 @@
 #ifndef ASMHELPER_H_
 #define ASMHELPER_H_
 
-#include "global.h"
+#include "Global.h"
 
 static inline uint8_t inb(uint16_t port) {
 	uint8_t ret;
@@ -36,7 +36,7 @@ static inline void outl(uint16_t port, uint32_t val) {
 
 }
 
-static inline void io_wait(void)
+static inline void IOWait(void)
 {
     asm volatile ( "jmp 1f\n\t"
                    "1:jmp 2f\n\t"

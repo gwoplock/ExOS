@@ -10,7 +10,7 @@
 
 //this code nver runs, should be replaced with the stuff in ::build() when we get start files and shit
 GlobalDescriptorTable::GlobalDescriptorTable( ) {
-	//TODO change flag and access ints into structs
+/*	//TODO change flag and access ints into structs
 	size = 0;
 
 	AccessU nullAccess;
@@ -43,7 +43,7 @@ GlobalDescriptorTable::GlobalDescriptorTable( ) {
 	_gdt[2] = encodeGlobalDescriptorTableEntry((uint32_t) 0xffffffff,
 			(uint32_t) 0, kernelDataAccess.accessS, kernelDataFlags.flagsS);
 	size++;
-
+*/
 }
 //follow the format, i dont like it and i think it sucks but im not intel
 /**

@@ -8,9 +8,9 @@
 #ifndef MEM_H_
 #define MEM_H_
 
-#include "../global.h"
-#include "../kernel.h"
-#include "../multiboot_spec/multiboot.h"
+#include "../Global.h"
+#include "../Kernel.h"
+#include "../multiboot_spec/Multiboot.h"
 
 
 struct MultibootMemoryMap{

@@ -8,14 +8,14 @@
 #ifndef GLOBALDESCRIPTORTABLE_H_
 #define GLOBALDESCRIPTORTABLE_H_
 //#include "../../drivers/Console.h"
-#include "../../global.h"
+#include "../../Global.h"
 
 
 
 struct Flags {
 		uint8_t zero : 6;
 		uint8_t size : 1;
-		uint8_t Granularity :1;
+		uint8_t granularity :1;
 
 }__attribute__((packed));
 struct Access {

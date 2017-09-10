@@ -1,5 +1,5 @@
-SUBDIRS = boot drivers interrupts memory multiboot_spec Utils cLibMisc
-OBS = kernel.o
+SUBDIRS = boot drivers interrupts memory multiboot_spec utils clib_misc
+OBS = Kernel.o
 
 include ../makefile.inc
 
