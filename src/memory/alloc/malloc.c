@@ -25,7 +25,7 @@ void* base;
 void mallocInit( ) {
 	base = &kernelEnd;
 	top = (void*) ( (size_t)( &kernelSize) + (uint32_t)
-			& kernelStart + fourKb);
+			& kernelStart + FOUR_KB);
 }
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
@@ -46,7 +46,7 @@ void* malloc(size_t size) {
 	} else {
 		//TODO take into account out of mem
 		void* startOfNewMem = frameAlloc.allocatePhysMem(size - space,pageTable.getKernelStart());
-		size_t sizeOfNewMem = ((size-space)/fourKb + ( ((size-space) & 0xFFF) != 0)) * fourKb;
+		size_t sizeOfNewMem = ((size-space)/FOUR_KB + ( ((size-space) & 0xFFF) != 0)) * FOUR_KB;
 		top = (void*) ((size_t) top + sizeOfNewMem + ((size_t)startOfNewMem - (size_t)top) );
 		return malloc(size);
 	}

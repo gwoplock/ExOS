@@ -20,7 +20,7 @@ PageTable::PageTable(bool buildFlag) {
 	//TODO set all page table entry to not present on dirs that are present
 	//calculate the number of pages the kernel takes up
 	size_t kernelPages = ( ( (size_t)( &kernelSize) + (uint32_t)
-			& kernelStart - vKernelStart) / fourKb + 1);
+			& kernelStart - vKernelStart) / FOUR_KB + 1);
 	//also need the number of pages
 	size_t kernelDirs = (kernelPages / 1024) + 1;
 	//for every dir that we need mark it as present, and a few other things
@@ -52,13 +52,13 @@ PageTable::PageTable(bool buildFlag) {
 //TODO check if already paged in, if so return error
 void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 	//convert from bytes to 4Kb pages
-	size_t sizeInPages = (size / fourKb)
+	size_t sizeInPages = (size / FOUR_KB)
 			+ ( ( ( ((uint32_t) size) & 0xFFF) != 0)
 					|| ( ( ((uint32_t) phyStart) & 0xFFF) != 0));
 	//covert to page dirs
 	size_t sizeInDirs = sizeInPages = (sizeInPages / 1024) + 1;
 	//calc the starting points
-	uint32_t startPage = (uint32_t) virtStart / fourKb;
+	uint32_t startPage = (uint32_t) virtStart / FOUR_KB;
 	uint32_t startDir = startPage / 1024;
 	//set the dirs present
 	//TODO add options for different flags
@@ -70,7 +70,7 @@ void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 		pageTables[startPage + i].present = 1;
 		pageTables[startPage + i].global = 1;
 		pageTables[startPage + i].physicalAddress = ((uint32_t) phyStart
-				+ (i * fourKb)) >> 12;
+				+ (i * FOUR_KB)) >> 12;
 	}
 	//return the starting point
 	return (void*) ( ((uint32_t) virtStart & ~0xFFF)
@@ -95,7 +95,7 @@ void PageTable::build(){
 				- vKernelStart) >> 12;
 	}
 	size_t kernelPages = ( ( (size_t)( &kernelSize) + (uint32_t)
-			& kernelStart - vKernelStart) / fourKb + 1);
+			& kernelStart - vKernelStart) / FOUR_KB + 1);
 	size_t kernelDirs = (kernelPages / 1024) + 1;
 	for (size_t i = 0; i < kernelDirs; i++) {
 		pageDir[KERNEL_PAGE_DIR_START + i].present = 1;

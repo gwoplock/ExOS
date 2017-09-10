@@ -26,8 +26,8 @@ void PageFrameAllocator::build( ) {
 	while (i < 255 && memMap[i].type != 0xDEADC0DE) {
 		if (memMap[i].type != 1) {
 			//convert unavalible mem address
-			uint32_t startPage = (uint64_t) memMap[i].base_addr / fourKb;
-			uint32_t sizeInPages = (memMap[i].length / fourKb) + 1
+			uint32_t startPage = (uint64_t) memMap[i].base_addr / FOUR_KB;
+			uint32_t sizeInPages = (memMap[i].length / FOUR_KB) + 1
 					+ ( ((uint64_t) memMap[i].base_addr & 0xFFF) != 0);
 			int byte = startPage / 8;
 			int bit = startPage % 8;
@@ -47,7 +47,7 @@ void PageFrameAllocator::build( ) {
 	size_t kernelPages =
 			( ((size_t) ( &kernelSize) + (uint32_t)
 					& kernelStart - (uint32_t) pageTable.getKernelStart( ))
-					/ fourKb + 1);
+					/ FOUR_KB + 1);
 	int byte = KERNEL_PAGE_START / 8;
 	int bit = KERNEL_PAGE_START % 8;
 	for (size_t k = 0; k < kernelPages; k++) {
@@ -77,7 +77,7 @@ bool PageFrameAllocator::isAvalible(int page) {
  */
 void* PageFrameAllocator::allocatePhysMem(size_t size, void* baseVirtAddress) {
 	//covert bytes to pages
-	uint32_t sizeInPages = (size / fourKb) + ( (size & 0xFFF) != 0);
+	uint32_t sizeInPages = (size / FOUR_KB) + ( (size & 0xFFF) != 0);
 	//find the vert address we'll use
 	void* vertAddress = getNextVirtAddr(sizeInPages, baseVirtAddress);
 	//out of mem
@@ -92,15 +92,15 @@ void* PageFrameAllocator::allocatePhysMem(size_t size, void* baseVirtAddress) {
 			//if we havent set the start address we return set it
 			if (toRet == (void*) -1) {
 
-				toRet = pageTable.page((void*) (lastUsedPage * fourKb),
-						vertAddress, fourKb);
+				toRet = pageTable.page((void*) (lastUsedPage * FOUR_KB),
+						vertAddress, FOUR_KB);
 			} else {
 				//page in the rest
-				pageTable.page((void*) (lastUsedPage * fourKb), vertAddress,
-				fourKb);
+				pageTable.page((void*) (lastUsedPage * FOUR_KB), vertAddress,
+				FOUR_KB);
 			}
 			sizeInPages--;
-			vertAddress = (void*) ((uint32_t) vertAddress + fourKb);
+			vertAddress = (void*) ((uint32_t) vertAddress + FOUR_KB);
 			lastUsedPage++;
 		}
 	}
@@ -109,7 +109,7 @@ void* PageFrameAllocator::allocatePhysMem(size_t size, void* baseVirtAddress) {
 void* PageFrameAllocator::getNextVirtAddr(uint32_t sizeInPages,
 		void* baseVirtAddress) {
 	//starting at the base addr, find the next section of mem that is big enough
-	for (int i = ((size_t) baseVirtAddress / fourKb); i < 1024 * 1024; i++) {
+	for (int i = ((size_t) baseVirtAddress / FOUR_KB); i < 1024 * 1024; i++) {
 		//check if its already paged in
 		if ( !pageTable.getPageTables( )[i].present) {
 			uint32_t n = 0;
@@ -120,12 +120,12 @@ void* PageFrameAllocator::getNextVirtAddr(uint32_t sizeInPages,
 					break;
 				}
 				if (n == sizeInPages - 1) {
-					return (void*) (i * fourKb);
+					return (void*) (i * FOUR_KB);
 				}
 			}
 			//this was added during debug, i dont think its ever used but im going to leave it here.
 			if (n == 0) {
-				return (void*) (i * fourKb);
+				return (void*) (i * FOUR_KB);
 			}
 		}
 	}
