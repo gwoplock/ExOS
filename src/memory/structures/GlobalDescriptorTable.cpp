@@ -6,7 +6,7 @@
  */
 
 #include "GlobalDescriptorTable.h"
-#include "../../drivers/Console.h"
+#include "../../drivers/TTY/Console.h"
 
 //this code nver runs, should be replaced with the stuff in ::build() when we get start files and shit
 GlobalDescriptorTable::GlobalDescriptorTable( ) {

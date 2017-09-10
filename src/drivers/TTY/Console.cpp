@@ -2,14 +2,15 @@
  * Console.cpp
  *
  *  Created on: May 5, 2017
- *      Author: garrett
+ *      Authors: garrett
+ *               Oskari
  */
 
 #include "Console.h"
-#include "../kernel.h"
-#include "Keyboard.h"
-#include "../memory/structures/PageTable.h"
-#include "../memory/mem.h"
+#include "../../kernel.h"
+#include "../Keyboard.h"
+#include "../../memory/structures/PageTable.h"
+#include "../../memory/mem.h"
 
 /**
  * Function prototype for the internal use newline()
@@ -17,25 +18,23 @@
 void newline();
 
 /**
- * current terminal row
+ * Current cursor position
  */
 size_t terminalRow;
-/**
- * current terminal column
- */
 size_t terminalColumn;
 /**
- * the color code we are using
+ * The color code currently in use
  */
 uint8_t terminalColor;
 /**
- * the address of the start of the terminal
+ * Pointer to the start of the terminal
  */
 uint16_t* terminalBuffer;
 
 /**
- * clears the screen with \0 and sets the start point. also sets the blinking bar and colors.
- * @param bufferStart - where the mem mapped terminal is
+ * Clears the screen with \0 and sets the start point
+ * Also sets the blinking bar and colors
+ * @param location of mem mapped terminal
  */
 void terminalInit(uint16_t* bufferStart) {
 	//start at the begining
@@ -56,7 +55,7 @@ void terminalInit(uint16_t* bufferStart) {
 	teminalUpdateBar(0, 0);
 }
 /**
- * sets the FG and BG colors of the terminal
+ * Sets the FG and BG colors of the terminal
  * @param color code
  */
 void terminalSetColor(uint8_t color) {
@@ -64,7 +63,7 @@ void terminalSetColor(uint8_t color) {
 }
 
 /**
- *  fully encode char and place in the buffer
+ * Fully encode char and place in the buffer
  * @param the char to print
  * @param the color code
  * @param X Pos
@@ -83,7 +82,7 @@ void terminalPutEntryAt(char _toPrint, uint8_t _color, size_t _XPos,
 }
 
 /**
- * put char at next location
+ * Put char at next location
  * @param char to print
  */
 void terminalPutChar(char _toPrint) {
@@ -95,7 +94,7 @@ void terminalPutChar(char _toPrint) {
 }
 
 /**
- * print a string of known length
+ * Print a string of known length
  * @param string to print
  * @param length
  */
@@ -108,7 +107,7 @@ void terminalWrite(const char* _toPrint, size_t _length) {
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 /**
- * get string length
+ * Get string length
  * @param string
  * @return length
  */
@@ -123,7 +122,7 @@ size_t strlen(const char* str) {
 #endif
 
 /**
- * print string of unknown length
+ * Print string of unknown length
  * @param string to print
  */
 void terminalWriteString(const char* _toPrint) {
@@ -131,8 +130,8 @@ void terminalWriteString(const char* _toPrint) {
 }
 
 /**
- * print string of unknown length
- * move to the next line when done
+ * Print string of unknown length
+ * Move to the next line when done
  * @param string to print
  */
 void terminalWriteLine(const char* _toPrint) {
@@ -142,7 +141,7 @@ void terminalWriteLine(const char* _toPrint) {
 }
 
 /**
- * process special keys
+ * Process special keys
  * @param what char to handle
  * @param pointer to modkey flags
  */
@@ -222,7 +221,7 @@ void terminalHandleSpecialKey(char _specalChar, uint16_t* modsLocal) {
 	}
 }
 /**
- * move the blinking bar to the proper location
+ * Move the cursor indicator to the proper location
  * @param row
  * @param col
  */
@@ -250,7 +249,7 @@ void newline( ) {
     }
 }
 /**
- * handle scrolling up when the last spot is used
+ * Handle scrolling up when the last spot is used
  */
 void terminalScroll( ) {
 	terminalRow = VGA_HEIGHT - 1;
@@ -261,26 +260,40 @@ void terminalScroll( ) {
 			(void*) (0xB8000 + (uint32_t)(pageTable.getKernelStart( ))
 					+ (VGA_WIDTH * 2) * (VGA_HEIGHT - 1)), VGA_WIDTH * 2, '\0');
 }
-
 /**
- * write a number. i think it works right
+ * Write an integer to the screen in base 10.
  * @param number to print
  */
 void writeInt(uint64_t num) {
-	uint8_t out[20];
-	for (int i = 0; i < 20; i++) {
+    writeIntBase(num, 10);
+}
+/**
+ * Write an integer to the screen converted to the given base 1 to 62
+ * @param number to print
+ * @param base to print as
+ */ 
+const char *digits =
+    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+void writeIntBase(uint64_t num, uint64_t base) {
+	uint8_t out[65];
+	for (int i = 0; i < 65; i++) {
 		out[i] = '\0';
 	}
-	if ( !num) {
+	if (!num) {
 		terminalPutChar('0');
 		return;
 	}
 
-	int n = 19;
+	int n = 63;
 	while (n>=0 && num != 0) {
-		out[n] = ('0' + (num % 10));
-		num /= 10;
+		out[n] = digits[num % base];
+		num /= base;
 		n--;
 	}
-	terminalWrite((const char *)out, 20);
+
+    /* Skip to the first non null char */
+    int pos;
+    for (pos = 0; !out[pos]; pos++);
+
+	terminalWriteString((const char*)(out + pos));
 }
