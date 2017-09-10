@@ -1,9 +1,17 @@
+/**
+ * printf.cpp
+ *
+ * Created on: September 9, 2017
+ *
+ * Author: Oskari
+ */
+
 /* stdarg.h is for variadics */
 #include <stdarg.h>
 #include "../../drivers/Console.h"
 #include "../printf/printf.h"
 /**
- * A very ugly printf. Must be fixed in the future.
+ * A simple printf implementation
  * @param format string
  * @param arguments to the format (will be converted live)
  */

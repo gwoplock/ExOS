@@ -2,7 +2,8 @@
  * Console.h
  *
  *  Created on: May 5, 2017
- *      Author: garrett
+ *      Authors: garrett
+ *               Oskari
  */
 
 #ifndef CONSOLE_H_
@@ -39,7 +40,7 @@ enum VgaColor {
 };
 
 /**
- * encode an entry for VGA display
+ * Encode an entry for VGA display
  * @param char to be printed
  * @param color code
  * @return VGA entry
@@ -49,7 +50,7 @@ static inline uint16_t vgaEntry(unsigned char _charToBePrinted,
 	return (uint16_t) _charToBePrinted | (uint16_t) _Color << 8;
 }
 /**
- * sets the FG and BG color
+ * Sets the FG and BG color
  * @param fg color
  * @param bg color
  * @return color fully encoded
@@ -58,17 +59,18 @@ static inline uint8_t vgaEntryColor(enum VgaColor _fg, enum VgaColor _bg) {
 	return _fg | _bg << 4;
 }
 /**
- * clears the screen with \0 and sets the start point. also sets the blinking bar and colors.
- * @param bufferStart - where the mem mapped terminal is
+ * Clears the screen with \0 and sets the start point
+ * Also sets the blinking bar and colors
+ * @param location of mem mapped terminal
  */
 void terminalInit(uint16_t* bufferstart);
 /**
- * sets the FG and BG colors of the terminal
+ * Sets the FG and BG colors of the terminal
  * @param color code
  */
 void terminalSetColor(uint8_t _Color);
 /**
- *  fully encode char and place in the buffer
+ * Fully encode char and place in the buffer
  * @param the char to print
  * @param the color code
  * @param X Pos
@@ -76,46 +78,47 @@ void terminalSetColor(uint8_t _Color);
  */
 void terminalPutEntryAt(char c, uint8_t _Color, size_t x, size_t y);
 /**
- * put char at next location
+ * Put char at next location
  * @param char to print
  */
 void terminalPutChar(char c);
 /**
- * print a string of known length
+ * Print a string of known length
  * @param string to print
  * @param length
  */
 void terminalWrite(const char* data, size_t size);
 /**
- * get string length
+ * Get string length
  * @param string
  * @return length
  */
 size_t stringLength(const char* str);
 /**
- * print string of unknown length
+ * Print string of unknown length
  * @param string to print
  */
 void terminalWriteString(const char* data);
 /**
- * print string of unknown length
- * move to the next line when done
+ * Print string of unknown length
+ * Move to the next line when done
  * @param string to print
  */
 void terminalWriteLine(const char* _toPrint);
 /**
- * process special keys
+ * Process special keys
  * @param what char to handle
  * @param pointer to modkey flags
  */
 void terminalHandleSpecialKey(char _specalChar, uint16_t* mods);
-/** move the blinking bar to the proper location
+/**
+ * Move the cursor indicator to the proper location
  * @param row
  * @param col
  */
 void teminalUpdateBar(int row, int col);
 /**
- * handle scrolling up when the last spot is used
+ * Handle scrolling up when the last spot is used
  */
 void terminalScroll( );
 /**
