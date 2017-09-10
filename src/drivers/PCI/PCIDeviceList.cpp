@@ -11,7 +11,7 @@
 #include "PCIDevices/PCIStandardDevice.h"
 #include "PCIDevices/PCIBridgeDevice.h"
 #include "PCIDevices/PCICardBusDevice.h"
-#include "../Console.h"
+#include "../TTY/Console.h"
 
 PCIDeviceList::PCIDeviceList( ) {
 	_list = new LinkedList<PCIDevice*>;

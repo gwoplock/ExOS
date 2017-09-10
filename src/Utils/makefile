@@ -1,4 +1,4 @@
-SUBDIRS = Linked_List
+SUBDIRS = Linked_List printf
 OBS =
 
 include ../../makefile.inc

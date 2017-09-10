@@ -6,7 +6,7 @@
  *      Author: garrett
  */
 #include "abort.h"
-#include "../drivers/Console.h"
+#include "../drivers/TTY/Console.h"
 
 extern "C"
 void /*__cxxabiv1::*/__cxa_pure_virtual(void) {
