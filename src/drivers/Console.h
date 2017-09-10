@@ -124,7 +124,7 @@ void terminalScroll( );
  */
 void writeInt(uint64_t num);
 /**
- * Write an integer to the screen converted to the given base (0<b<=36)
+ * Write an integer to the screen converted to the given base 1 to 62
  * @param number to print
  * @param base to print as
  */ 
