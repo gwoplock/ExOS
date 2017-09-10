@@ -8,7 +8,7 @@
 
 /* stdarg.h is for variadics */
 #include <stdarg.h>
-#include "../../drivers/Console.h"
+#include "../../drivers/TTY/Console.h"
 #include "../printf/printf.h"
 /**
  * A simple printf implementation

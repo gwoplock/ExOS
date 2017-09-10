@@ -1,5 +1,5 @@
 SUBDIRS =
-OBS = InterruptDiscriptorTable.o InteruptHandler.o isr_wrapper.o
+OBS = InterruptDiscriptorTable.o InterruptHandler.o isr_wrapper.o
 
 include ../../makefile.inc
 

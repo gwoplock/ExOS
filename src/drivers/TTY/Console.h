@@ -9,7 +9,7 @@
 #ifndef CONSOLE_H_
 #define CONSOLE_H_
 
-#include "../global.h"
+#include "../../global.h"
 
 /**
  * Dimensions of the VGA console

@@ -7,10 +7,10 @@
  */
 
 #include "Console.h"
-#include "../kernel.h"
-#include "Keyboard.h"
-#include "../memory/structures/PageTable.h"
-#include "../memory/mem.h"
+#include "../../kernel.h"
+#include "../Keyboard.h"
+#include "../../memory/structures/PageTable.h"
+#include "../../memory/mem.h"
 
 /**
  * Function prototype for the internal use newline()

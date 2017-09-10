@@ -1,5 +1,5 @@
-SUBDIRS = PCI
-OBS= Console.o Keyboard.o ProgrammableInterruptController.o
+SUBDIRS = PCI TTY
+OBS= Keyboard.o ProgrammableInterruptController.o
 
 include ../../makefile.inc
 

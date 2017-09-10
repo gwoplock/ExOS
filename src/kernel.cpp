@@ -10,7 +10,7 @@
 #include "memory/alloc/PageFrameAllocator.h"
 #include "drivers/Keyboard.h"
 #include "interrupts/InterruptDiscriptorTable.h"
-#include "drivers/Console.h"
+#include "drivers/TTY/Console.h"
 //#include "memory/alloc/malloc.h"
 #include "memory/structures/GlobalDescriptorTable.h"
 #include "memory/structures/PageTable.h"
@@ -67,7 +67,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 		//find the (3 or less) USB host controllers. all have the same class/subclass code.
 		PCIDeviceList usbHostControllers(0x0C, 0x03, false);
         terminalWriteLine(" Done!");
-        terminalWriteLine("\n\n\n\n!!!!ExOS fully booted!!!!");
+        terminalWriteLine("!!!!ExOS fully booted!!!!");
         printf("Test printf %d %c\n", 42, 'B');
         printf("Newline is 0x%x%c", '\n', '\n');
         for (int cx = 0; cx < 10; cx++) {
