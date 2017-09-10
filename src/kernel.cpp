@@ -17,7 +17,8 @@
 #include "drivers/PCI/PCI.h"
 #include "drivers/PCI/PCIDeviceList.h"
 #include "multiboot_spec/multiboot.h"
-#include  "memory/mem.h"
+#include "memory/mem.h"
+#include "Utils/printf/printf.h"
 
 InterruptDiscriptorTable idt;
 GlobalDescriptorTable gdt;
@@ -66,7 +67,8 @@ extern "C" {/* Use C linkage for kernel_main. */
 		//find the (3 or less) USB host controllers. all have the same class/subclass code.
 		PCIDeviceList usbHostControllers(0x0C, 0x03, false);
         terminalWriteLine(" Done!");
-        terminalWriteString("\n\n\n\n!!!!ExOS fully booted!!!!");
+        terminalWriteLine("\n\n\n\n!!!!ExOS fully booted!!!!");
+        printf("Test printf %d %c", 42, 'B');
 		//dont return.
 		while (true) {
 			asm("hlt");
