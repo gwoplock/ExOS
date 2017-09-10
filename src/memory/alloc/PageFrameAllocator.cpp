@@ -48,8 +48,8 @@ void PageFrameAllocator::build( ) {
 			( ((size_t) ( &kernelSize) + (uint32_t)
 					& kernelStart - (uint32_t) pageTable.getKernelStart( ))
 					/ fourKb + 1);
-	int byte = KernelPageStart / 8;
-	int bit = KernelPageStart % 8;
+	int byte = KERNEL_PAGE_START / 8;
+	int bit = KERNEL_PAGE_START % 8;
 	for (size_t k = 0; k < kernelPages; k++) {
 		physPageAvalibility[byte] |= 0b1 << bit;
 		bit++;

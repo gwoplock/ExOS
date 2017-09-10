@@ -12,8 +12,8 @@
 
 struct PageDirEntry {
 		char present :1;
-		char read_write :1;
-		char user_super :1;
+		char readWrite :1;
+		char userSuper :1;
 		char writeThrough :1;
 		char cache :1;
 		char accessed :1;
@@ -26,8 +26,8 @@ struct PageDirEntry {
 
 struct PageTableEntry {
 		char present :1;
-		char read_write :1;
-		char user_super :1;
+		char readWrite :1;
+		char userSuper :1;
 		char writeThrough :1;
 		char cache :1;
 		char accessed :1;
@@ -40,6 +40,10 @@ struct PageTableEntry {
 
 extern uint32_t kernelSize;
 extern uint32_t kernelStart;
+
+//paging info
+static const uint_fast16_t KERNEL_PAGE_DIR_START = 768;
+static const uint_fast32_t KERNEL_PAGE_START = 786432;
 
 class PageTable {
 

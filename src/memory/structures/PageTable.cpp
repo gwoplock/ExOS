@@ -25,19 +25,19 @@ PageTable::PageTable(bool buildFlag) {
 	size_t kernelDirs = (kernelPages / 1024) + 1;
 	//for every dir that we need mark it as present, and a few other things
 	for (size_t i = 0; i < kernelDirs; i++) {
-		pageDir[KernelPageDirStart + i].present = 1;
-		pageDir[KernelPageDirStart + i].writeThrough = 1;
-		pageDir[KernelPageDirStart + i].user_super = 1;
-		pageDir[KernelPageDirStart + i].read_write = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].present = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].writeThrough = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].userSuper = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].readWrite = 1;
 	}
 	//for each page set the props
 	for (size_t i = 0; i < kernelPages; i++) {
-		pageTables[KernelPageStart + i].read_write = 1;
-		pageTables[KernelPageStart + i].user_super = 0;
-		pageTables[KernelPageStart + i].writeThrough = 1;
-		pageTables[KernelPageStart + i].present = 1;
-		pageTables[KernelPageStart + i].physicalAddress = i;
-		pageTables[KernelPageStart + i].global = 1;
+		pageTables[KERNEL_PAGE_START + i].readWrite = 1;
+		pageTables[KERNEL_PAGE_START + i].userSuper = 0;
+		pageTables[KERNEL_PAGE_START + i].writeThrough = 1;
+		pageTables[KERNEL_PAGE_START + i].present = 1;
+		pageTables[KERNEL_PAGE_START + i].physicalAddress = i;
+		pageTables[KERNEL_PAGE_START + i].global = 1;
 	}
 	//change the page dir were using
 	movePageTable(pageDir);
@@ -98,18 +98,18 @@ void PageTable::build(){
 			& kernelStart - vKernelStart) / fourKb + 1);
 	size_t kernelDirs = (kernelPages / 1024) + 1;
 	for (size_t i = 0; i < kernelDirs; i++) {
-		pageDir[KernelPageDirStart + i].present = 1;
-		pageDir[KernelPageDirStart + i].writeThrough = 1;
-		pageDir[KernelPageDirStart + i].user_super = 1;
-		pageDir[KernelPageDirStart + i].read_write = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].present = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].writeThrough = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].userSuper = 1;
+		pageDir[KERNEL_PAGE_DIR_START + i].readWrite = 1;
 	}
 	for (size_t i = 0; i < kernelPages; i++) {
-		pageTables[KernelPageStart + i].read_write = 1;
-		pageTables[KernelPageStart + i].user_super = 0;
-		pageTables[KernelPageStart + i].writeThrough = 1;
-		pageTables[KernelPageStart + i].present = 1;
-		pageTables[KernelPageStart + i].physicalAddress = i;
-		pageTables[KernelPageStart + i].global = 1;
+		pageTables[KERNEL_PAGE_START + i].readWrite = 1;
+		pageTables[KERNEL_PAGE_START + i].userSuper = 0;
+		pageTables[KERNEL_PAGE_START + i].writeThrough = 1;
+		pageTables[KERNEL_PAGE_START + i].present = 1;
+		pageTables[KERNEL_PAGE_START + i].physicalAddress = i;
+		pageTables[KERNEL_PAGE_START + i].global = 1;
 	}
 	movePageTable((PageDirEntry*)((uint32_t)pageDir - vKernelStart));
 }

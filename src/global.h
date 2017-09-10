@@ -22,8 +22,8 @@
 //bochs breakpoing ASM
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");
 //paging info
-#define KernelPageDirStart 768
-#define KernelPageStart 786432
+// #define KernelPageDirStart 768
+// #define KernelPageStart 786432
 //helpful constant
 #define fourKb 4096
 
