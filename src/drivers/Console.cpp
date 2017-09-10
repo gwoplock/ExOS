@@ -267,11 +267,11 @@ void terminalScroll( ) {
  * @param number to print
  */
 void writeInt(uint64_t num) {
-	uint8_t out[20];
-	for (int i = 0; i < 20; i++) {
+	uint8_t out[21];
+	for (int i = 0; i < 21; i++) {
 		out[i] = '\0';
 	}
-	if ( !num) {
+	if (!num) {
 		terminalPutChar('0');
 		return;
 	}
@@ -282,5 +282,10 @@ void writeInt(uint64_t num) {
 		num /= 10;
 		n--;
 	}
-	terminalWrite((const char *)out, 20);
+
+    /* Skip to the first non null char */
+    int pos;
+    for (pos = 0; !out[pos]; pos++);
+
+	terminalWriteString((const char*)(out + pos));
 }

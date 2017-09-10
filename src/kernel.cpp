@@ -68,7 +68,11 @@ extern "C" {/* Use C linkage for kernel_main. */
 		PCIDeviceList usbHostControllers(0x0C, 0x03, false);
         terminalWriteLine(" Done!");
         terminalWriteLine("\n\n\n\n!!!!ExOS fully booted!!!!");
-        printf("Test printf %d %c", 42, 'B');
+        printf("Test printf %d %c\n", 42, 'B');
+        printf("Newline is %d%c", '\n', '\n');
+        for (int cx = 0; cx < 10; cx++) {
+            printf("%d", cx);
+        }
 		//dont return.
 		while (true) {
 			asm("hlt");
