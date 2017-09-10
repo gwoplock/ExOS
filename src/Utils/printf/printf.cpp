@@ -20,12 +20,16 @@ void printf (const char *format, ...) {
             in_format = 1;
         } else if (in_format && *format != 0) {
             switch (*format) {
+                case 'c':
+                    terminalPutChar(va_arg(args, uint32_t));
+                    in_format = 0;
+                    break;
                 case 'd':
                     writeInt(va_arg(args, uint32_t));
                     in_format = 0;
                     break;
-                case 'c':
-                    terminalPutChar(va_arg(args, uint32_t));
+                case 'x':
+                    writeIntBase(va_arg(args, uint32_t), 16);
                     in_format = 0;
                     break;
                 default:

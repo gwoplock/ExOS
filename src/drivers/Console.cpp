@@ -267,8 +267,18 @@ void terminalScroll( ) {
  * @param number to print
  */
 void writeInt(uint64_t num) {
-	uint8_t out[21];
-	for (int i = 0; i < 21; i++) {
+    writeIntBase(num, 10);
+}
+/**
+ * Write an integer to the screen converted to the given base 1 to 62
+ * @param number to print
+ * @param base to print as
+ */ 
+const char *digits =
+    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+void writeIntBase(uint64_t num, uint64_t base) {
+	uint8_t out[65];
+	for (int i = 0; i < 65; i++) {
 		out[i] = '\0';
 	}
 	if (!num) {
@@ -276,10 +286,10 @@ void writeInt(uint64_t num) {
 		return;
 	}
 
-	int n = 19;
+	int n = 63;
 	while (n>=0 && num != 0) {
-		out[n] = ('0' + (num % 10));
-		num /= 10;
+		out[n] = digits[num % base];
+		num /= base;
 		n--;
 	}
 

@@ -69,7 +69,7 @@ extern "C" {/* Use C linkage for kernel_main. */
         terminalWriteLine(" Done!");
         terminalWriteLine("\n\n\n\n!!!!ExOS fully booted!!!!");
         printf("Test printf %d %c\n", 42, 'B');
-        printf("Newline is %d%c", '\n', '\n');
+        printf("Newline is 0x%x%c", '\n', '\n');
         for (int cx = 0; cx < 10; cx++) {
             printf("%d", cx);
         }

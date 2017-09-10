@@ -119,9 +119,15 @@ void teminalUpdateBar(int row, int col);
  */
 void terminalScroll( );
 /**
- * write a number. i think it works right
+ * Write an integer to the screen in base 10.
  * @param number to print
  */
 void writeInt(uint64_t num);
+/**
+ * Write an integer to the screen converted to the given base (0<b<=36)
+ * @param number to print
+ * @param base to print as
+ */ 
+void writeIntBase(uint64_t num, uint64_t base);
 
 #endif /* CONSOLE_H_ */
