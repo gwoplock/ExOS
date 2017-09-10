@@ -8,9 +8,9 @@
 
 #include "PCIDeviceList.h"
 #include "PCI.h"
-#include "PCIDevices/PCIStandardDevice.h"
-#include "PCIDevices/PCIBridgeDevice.h"
-#include "PCIDevices/PCICardBusDevice.h"
+#include "PCI_devices/PCIStandardDevice.h"
+#include "PCI_devices/PCIBridgeDevice.h"
+#include "PCI_devices/PCICardBusDevice.h"
 #include "../TTY/Console.h"
 
 PCIDeviceList::PCIDeviceList( ) {

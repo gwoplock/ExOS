@@ -10,14 +10,14 @@
 #include "global.h"
 
 
-class InterruptDiscriptorTable;
+class InterruptDescriptorTable;
 class GlobalDescriptorTable;
 class PageFrameAllocator;
 class Keyboard;
 class PageTable;
 
 extern GlobalDescriptorTable gdt;
-extern InterruptDiscriptorTable idt;
+extern InterruptDescriptorTable idt;
 extern PageTable pageTable;
 extern Keyboard KB;
 extern PageFrameAllocator frameAlloc;

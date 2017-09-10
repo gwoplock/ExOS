@@ -9,7 +9,7 @@
 #define SRC_DRIVERS_PCI_PCIDEVICES_PCICARDBUSDEVICE_H_
 
 #include "PCIDevice.h"
-#include "../../../global.h"
+#include "../../../Global.h"
 
 class PCICardBusDevice: public PCIDevice {
 	public:

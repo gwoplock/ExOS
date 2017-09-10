@@ -6,7 +6,7 @@
  */
 
 #include "InterruptHandler.h"
-#include "../kernel.h"
+#include "../Kernel.h"
 #include "../drivers/Keyboard.h"
 #include "../drivers/TTY/Console.h"
 #include "../drivers/ProgrammableInterruptController.h"
@@ -17,7 +17,7 @@ extern "C" {/* Use C linkage for kernel_main. */
  * handle hardware interrupts
  * @param line from the PIC
  */
-	void irq_handler(int line) {
+	void IRQHandler(int line) {
 		if (line == 1/*KB*/) {
 			uint8_t scanCode = KB.getScancode( );
 			uint8_t key = KB.getKey(scanCode);
@@ -30,13 +30,13 @@ extern "C" {/* Use C linkage for kernel_main. */
 				terminalHandleSpecialKey(scanCode, KB.getModkeys( ));
 			}
 		}
-		PIC_sendEOI(line);
+		PICSendEOI(line);
 	}
 /**
  * handle faults from the cpu
  * @param interrupt Number
  */
-	void isr_handler(int interruptNumber) {
+	void ISRHandler(int interruptNumber) {
 		//print the interrupt number
 		terminalPutChar(' ');
 		writeInt((uint32_t) interruptNumber);

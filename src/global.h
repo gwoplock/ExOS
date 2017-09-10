@@ -15,9 +15,9 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "AsmHelper.h"
-#include "memory/alloc/malloc.h"
+#include "memory/alloc/Malloc.h"
 #include "memory/alloc/New.h"
-#include "cLibMisc/abort.h"
+#include "clib_misc/Abort.h"
 
 //bochs breakpoing ASM
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");

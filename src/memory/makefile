@@ -1,5 +1,5 @@
 SUBDIRS = alloc structures
-OBS = mem.o
+OBS = Mem.o
 
 include ../../makefile.inc
 

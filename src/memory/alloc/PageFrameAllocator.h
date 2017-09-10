@@ -8,7 +8,7 @@
 #ifndef PAGEFRAMEALLOCATOR_H_
 #define PAGEFRAMEALLOCATOR_H_
 
-#include "../../global.h"
+#include "../../Global.h"
 
 //#include "../../kernel.h"
 //#include "../structures/PageTable.h"

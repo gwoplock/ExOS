@@ -4,23 +4,23 @@
  *  Created on: Feb 20, 2017
  *      Author: garrett
  */
-#include "kernel.h"
+#include "Kernel.h"
 
 #include "drivers/ProgrammableInterruptController.h"
 #include "memory/alloc/PageFrameAllocator.h"
 #include "drivers/Keyboard.h"
-#include "interrupts/InterruptDiscriptorTable.h"
+#include "interrupts/InterruptDescriptorTable.h"
 #include "drivers/TTY/Console.h"
 //#include "memory/alloc/malloc.h"
 #include "memory/structures/GlobalDescriptorTable.h"
 #include "memory/structures/PageTable.h"
 #include "drivers/PCI/PCI.h"
 #include "drivers/PCI/PCIDeviceList.h"
-#include "multiboot_spec/multiboot.h"
-#include "memory/mem.h"
-#include "Utils/printf/printf.h"
+#include "multiboot_spec/Multiboot.h"
+#include "memory/Mem.h"
+#include "utils/printf/Printf.h"
 
-InterruptDiscriptorTable idt;
+InterruptDescriptorTable idt;
 GlobalDescriptorTable gdt;
 PageTable pageTable;
 Keyboard KB;
@@ -87,9 +87,9 @@ void interruptSetUp( ) {
 	//build the IDT.
 	idt.build( );
 	//set the interrupt lines for the PIC
-	PIC_remap(0x20, 0x28);
+	PICRemap(0x20, 0x28);
 	//mask the timer line
-	IRQ_set_mask(0);
+	IRQSetMask(0);
 	//load it to the CPU
 	idt.load( );
 	//enable interupts

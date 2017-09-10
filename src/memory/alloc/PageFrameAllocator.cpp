@@ -5,7 +5,7 @@
  *      Author: garrett
  */
 #include "PageFrameAllocator.h"
-#include "../mem.h"
+#include "../Mem.h"
 #include "../structures/PageTable.h"
 
 PageFrameAllocator::PageFrameAllocator( ) {

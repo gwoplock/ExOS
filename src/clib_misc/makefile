@@ -1,4 +1,4 @@
 SUBDIRS =
-OBS = abort.o
+OBS = Abort.o
 
 include ../../makefile.inc

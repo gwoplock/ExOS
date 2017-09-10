@@ -5,8 +5,8 @@
  *      Author: garrett
  */
 
-#include "malloc.h"
-#include "../../kernel.h"
+#include "Malloc.h"
+#include "../../Kernel.h"
 #include "../structures/PageTable.h"
 #include "PageFrameAllocator.h"
 

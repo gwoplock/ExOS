@@ -1,30 +1,30 @@
 /*
- * InterruptDiscriptorTable.h
+ * InterruptDescriptorTable.h
  *
  *  Created on: Feb 27, 2017
  *      Author: garrett
  */
 
-#ifndef INTERRUPTDISCRIPTORTABLE_H_
-#define INTERRUPTDISCRIPTORTABLE_H_
+#ifndef INTERRUPTDESCRIPTORTABLE_H_
+#define INTERRUPTDESCRIPTORTABLE_H_
 
-#include "../global.h"
+#include "../Global.h"
 
 /**
  * structure used by the cpu to handler interrupts
  */
 struct IdtEntry {
-		uint16_t offset_1; // offset bits 0..15
+		uint16_t offset1; // offset bits 0..15
 		uint16_t selector; // a code segment selector in GDT or LDT
 		uint8_t zero;      // unused, set to 0
-		uint8_t type_attr; // type and attributes, see below
-		uint16_t offset_2; // offset bits 16..31F
+		uint8_t typeAttr; // type and attributes, see below
+		uint16_t offset2; // offset bits 16..31F
 }__attribute__((__packed__));
 
 /**
  * how the cpu knows about the IDT
  */
-struct IdtDiscriptor {
+struct IdtDescriptor {
 		uint16_t size;
 		uint32_t offset;
 }__attribute__((packed));
@@ -33,46 +33,46 @@ struct IdtDiscriptor {
  * funct pointers to the ASM interrupt handler
  */
 //possible should be void ____()
-extern void* isr_0;
-extern void* isr_1;
-extern void* isr_2;
-extern void* isr_3;
-extern void* isr_4;
-extern void* isr_5;
-extern void* isr_6;
-extern void* isr_7;
-extern void* isr_8;
-extern void* isr_9;
-extern void* isr_10;
-extern void* isr_11;
-extern void* isr_12;
-extern void* isr_13;
-extern void* isr_14;
-extern void* isr_15;
-extern void* isr_16;
-extern void* isr_17;
-extern void* isr_18;
+extern void* ISR0;
+extern void* ISR1;
+extern void* ISR2;
+extern void* ISR3;
+extern void* ISR4;
+extern void* ISR5;
+extern void* ISR6;
+extern void* ISR7;
+extern void* ISR8;
+extern void* ISR9;
+extern void* ISR10;
+extern void* ISR11;
+extern void* ISR12;
+extern void* ISR13;
+extern void* ISR14;
+extern void* ISR15;
+extern void* ISR16;
+extern void* ISR17;
+extern void* ISR18;
 //--------------------------------------------
-extern void* irq_0;
-extern void* irq_1;
-extern void* irq_2;
-extern void* irq_3;
-extern void* irq_4;
-extern void* irq_5;
-extern void* irq_6;
-extern void* irq_7;
-extern void* irq_8;
-extern void* irq_9;
-extern void* irq_10;
-extern void* irq_11;
-extern void* irq_12;
-extern void* irq_13;
-extern void* irq_14;
-extern void* irq_15;
+extern void* IRQ0;
+extern void* IRQ1;
+extern void* IRQ2;
+extern void* IRQ3;
+extern void* IRQ4;
+extern void* IRQ5;
+extern void* IRQ6;
+extern void* IRQ7;
+extern void* IRQ8;
+extern void* IRQ9;
+extern void* IRQ10;
+extern void* IRQ11;
+extern void* IRQ12;
+extern void* IRQ13;
+extern void* IRQ14;
+extern void* IRQ15;
 //------------------------------------------
 extern void* sysCallAsmHandler;
 
-class InterruptDiscriptorTable {
+class InterruptDescriptorTable {
 	private:
 		/**
 		 * max interrupt number
@@ -85,7 +85,7 @@ class InterruptDiscriptorTable {
 		/**
 		 * the descriptor used by the cpu to deal with the IDT
 		 */
-		IdtDiscriptor idtd;
+		IdtDescriptor idtd;
 	public:
 		/**
 		 *
@@ -106,8 +106,8 @@ class InterruptDiscriptorTable {
 			//send the mem address to asm. tell cpu where IDT is
 			asm ("LIDT %[idtd]" : : [idtd] "m" (idtd));
 		}
-		InterruptDiscriptorTable( );
+		InterruptDescriptorTable( );
 		void build();
 };
 
-#endif /* INTERRUPTDISCRIPTORTABLE_H_ */
+#endif /* INTERRUPTDESCRIPTORTABLE_H_ */
