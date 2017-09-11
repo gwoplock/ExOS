@@ -7,7 +7,7 @@
 #ifndef KERNEL_H_
 #define KERNEL_H_
 
-#include "global.h"
+#include "Global.h"
 
 
 class InterruptDescriptorTable;
