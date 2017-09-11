@@ -1,5 +1,5 @@
 SUBDIRS =
-OBS = printf.o
+OBS = Printf.o
 
 include ../../../makefile.inc
 
