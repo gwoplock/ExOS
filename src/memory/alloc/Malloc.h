@@ -8,7 +8,7 @@
 #ifndef MALLOC_H_
 #define MALLOC_H_
 
-#include "../../global.h"
+#include "../../Global.h"
 
 /**
  * top of the paged in mem
