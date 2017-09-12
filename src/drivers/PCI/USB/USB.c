@@ -5,7 +5,7 @@
  *      Author: garrett
  */
 
-#include "USB.h"
+#include "drivers/PCI/USB/USB.h"
 
 uint8_t maxUSBVersion = 0;
 USBController* uSBControllers;

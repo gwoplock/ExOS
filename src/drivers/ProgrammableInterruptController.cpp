@@ -5,7 +5,7 @@
  *      Author: garrett
  */
 
-#include "ProgrammableInterruptController.h"
+#include "drivers/ProgrammableInterruptController.h"
 
 //TODO comment
 

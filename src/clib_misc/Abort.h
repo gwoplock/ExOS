@@ -8,7 +8,7 @@
 #ifndef SRC_CLIBMISC_ABORT_H_
 #define SRC_CLIBMISC_ABORT_H_
 
-#include "../global.h"
+#include "Global.h"
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */

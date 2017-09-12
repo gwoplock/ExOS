@@ -8,7 +8,7 @@
 #ifndef PAGETABLE_H_
 #define PAGETABLE_H_
 
-#include"../../Global.h"
+#include"Global.h"
 
 struct PageDirEntry {
 		char present :1;

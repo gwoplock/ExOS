@@ -8,7 +8,7 @@
 #ifndef INTERRUPTHANDLER_H_
 #define INTERRUPTHANDLER_H_
 
-#include "../Global.h"
+#include "Global.h"
 //#include "../drivers/Keyboard.h"
 
 #endif /* INTERRUPTHANDLER_H_ */
