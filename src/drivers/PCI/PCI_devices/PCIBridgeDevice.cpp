@@ -4,7 +4,7 @@
  *  Created on: Aug 16, 2017
  *      Author: garrett
  */
-#include "PCIBridgeDevice.h"
+#include "drivers/PCI/PCI_devices/PCIBridgeDevice.h"
 PCIBridgeDevice::PCIBridgeDevice( ) {
 	// TODO Auto-generated constructor stub
 

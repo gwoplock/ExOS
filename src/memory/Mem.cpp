@@ -5,8 +5,8 @@
  *      Author: garrett
  */
 
-#include "Mem.h"
-#include "structures/PageTable.h"
+#include "memory/Mem.h"
+#include "memory/structures/PageTable.h"
 MultibootMemoryMap memMap[256];
 /**
  * read the multiboot mem map

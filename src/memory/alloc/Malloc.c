@@ -5,10 +5,10 @@
  *      Author: garrett
  */
 
-#include "Malloc.h"
-#include "../../Kernel.h"
-#include "../structures/PageTable.h"
-#include "PageFrameAllocator.h"
+#include "memory/alloc/Malloc.h"
+#include "Kernel.h"
+#include "memory/structures/PageTable.h"
+#include "memory/alloc/PageFrameAllocator.h"
 
 /**
  * top of the paged in mem

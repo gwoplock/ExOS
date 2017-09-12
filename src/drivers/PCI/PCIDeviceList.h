@@ -8,8 +8,8 @@
 #ifndef SRC_DRIVERS_PCI_PCIDEVICELIST_H_
 #define SRC_DRIVERS_PCI_PCIDEVICELIST_H_
 
-#include "../../Global.h"
-#include "../../utils/linked_list/LinkedList.h"
+#include "Global.h"
+#include "utils/linked_list/LinkedList.h"
 
 class PCIDevice;
 

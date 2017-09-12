@@ -5,7 +5,7 @@
  *      Author: garrett
  */
 
-#include "InterruptDescriptorTable.h"
+#include "interrupts/InterruptDescriptorTable.h"
 
 //TODO comment what each interrupt is
 InterruptDescriptorTable::InterruptDescriptorTable( ) {

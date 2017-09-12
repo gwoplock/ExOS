@@ -5,8 +5,8 @@
  *      Author: garrett
  */
 
-#include "PCIDevice.h"
-#include "../PCI.h"
+#include "drivers/PCI/PCI_devices/PCIDevice.h"
+#include "drivers/PCI/PCI.h"
 
 PCIDevice::PCIDevice( ) {
 	// TODO Auto-generated constructor stub
