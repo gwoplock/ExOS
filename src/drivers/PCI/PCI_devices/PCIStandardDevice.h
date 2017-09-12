@@ -8,8 +8,8 @@
 #ifndef PCISTANDARDDEVICE_H_
 #define PCISTANDARDDEVICE_H_
 
-#include "../../../global.h"
-#include "PCIDevice.h"
+#include "Global.h"
+#include "drivers/PCI/PCI_devices/PCIDevice.h"
 
 
 //class PCIDevice;

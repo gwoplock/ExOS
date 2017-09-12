@@ -4,7 +4,7 @@
  *  Created on: Aug 16, 2017
  *      Author: garrett
  */
-#include "PCICardBusDevice.h"
+#include "drivers/PCI/PCI_devices/PCICardBusDevice.h"
 PCICardBusDevice::PCICardBusDevice( ) {
 	// TODO Auto-generated constructor stub
 

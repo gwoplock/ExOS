@@ -8,7 +8,7 @@
 #ifndef PROGRAMMABLEINTERRUPTCONTROLLER_H_
 #define PROGRAMMABLEINTERRUPTCONTROLLER_H_
 
-#include "../Global.h"
+#include "Global.h"
 
 
 /*

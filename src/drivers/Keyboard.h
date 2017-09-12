@@ -8,7 +8,7 @@
 #ifndef KEYBOARD_H_
 #define KEYBOARD_H_
 
-#include "../Global.h"
+#include "Global.h"
 /**
  * the possible scan code sets
  */

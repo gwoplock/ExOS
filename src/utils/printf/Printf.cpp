@@ -8,8 +8,8 @@
 
 /* stdarg.h is for variadics */
 #include <stdarg.h>
-#include "../../drivers/TTY/Console.h"
-#include "../printf/printf.h"
+#include "drivers/TTY/Console.h"
+#include "utils/printf/printf.h"
 /**
  * A simple printf implementation
  * @param format string

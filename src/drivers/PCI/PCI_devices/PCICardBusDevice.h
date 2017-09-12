@@ -8,8 +8,8 @@
 #ifndef SRC_DRIVERS_PCI_PCIDEVICES_PCICARDBUSDEVICE_H_
 #define SRC_DRIVERS_PCI_PCIDEVICES_PCICARDBUSDEVICE_H_
 
-#include "PCIDevice.h"
-#include "../../../Global.h"
+#include "drivers/PCI/PCI_devices/PCIDevice.h"
+#include "Global.h"
 
 class PCICardBusDevice: public PCIDevice {
 	public:

@@ -3,7 +3,7 @@ GPP = i686-elf-g++
 GCC = i686-elf-gcc
 OS_CPP = /media/sdcard/ExOS
 BUILD_TO = /mnt/boot/kernel.bin
-CFLAGS = -c -ffreestanding -O2 -Wall -Wextra -fno-rtti -fno-exceptions -std=gnu++14
+CFLAGS = -c -ffreestanding -O2 -Wall -Wextra -fno-rtti -fno-exceptions -std=gnu++14 -I$(OS_CPP)/src
 OBJ_DIR = $(OS_CPP)/build
 
 %.o: %.c

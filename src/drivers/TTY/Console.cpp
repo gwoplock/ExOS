@@ -6,11 +6,11 @@
  *               Oskari
  */
 
-#include "Console.h"
-#include "../../Kernel.h"
-#include "../Keyboard.h"
-#include "../../memory/structures/PageTable.h"
-#include "../../memory/Mem.h"
+#include "drivers/TTY/Console.h"
+#include "Kernel.h"
+#include "drivers/Keyboard.h"
+#include "memory/structures/PageTable.h"
+#include "memory/Mem.h"
 
 /**
  * Function prototype for the internal use newline()
