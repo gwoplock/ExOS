@@ -8,6 +8,8 @@
 #ifndef SRC_DRIVERS_PCI_USB_HOSTCONTROLLER_HOSTCONTROLLER_H_
 #define SRC_DRIVERS_PCI_USB_HOSTCONTROLLER_HOSTCONTROLLER_H_
 
+#include "Global.h"
+
 class HostController {
 	protected:
 		void* _BAR0;

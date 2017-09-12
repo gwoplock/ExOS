@@ -8,7 +8,7 @@
 #ifndef SRC_DRIVERS_PCI_USB_HOSTCONTROLLER_OHCI_H_
 #define SRC_DRIVERS_PCI_USB_HOSTCONTROLLER_OHCI_H_
 
-#include "../../../../global.h"
+#include "Global.h"
 #include "HostController.h"
 
 class OHCI: public HostController {
