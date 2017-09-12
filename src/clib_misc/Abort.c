@@ -5,7 +5,7 @@
  *  Created on: Aug 14, 2017
  *      Author: garrett
  */
-#include "clib_misc/abort.h"
+#include "clib_misc/Abort.h"
 #include "drivers/TTY/Console.h"
 
 extern "C"

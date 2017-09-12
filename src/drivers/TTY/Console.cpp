@@ -293,7 +293,9 @@ void writeIntBase(uint64_t num, uint64_t base) {
 
     /* Skip to the first non null char */
     int pos;
-    for (pos = 0; !out[pos]; pos++);
+    for (pos = 0; !out[pos]; pos++){
+
+    }
 
 	terminalWriteString((const char*)(out + pos));
 }

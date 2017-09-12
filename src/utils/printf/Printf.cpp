@@ -9,7 +9,7 @@
 /* stdarg.h is for variadics */
 #include <stdarg.h>
 #include "drivers/TTY/Console.h"
-#include "utils/printf/printf.h"
+#include "utils/printf/Printf.h"
 /**
  * A simple printf implementation
  * @param format string
