@@ -8,8 +8,8 @@
 #ifndef SRC_UTILS_LINKEDLIST_H_
 #define SRC_UTILS_LINKEDLIST_H_
 
-#include "../../Global.h"
-#include "../linked_list/LinkedListNode.h"
+#include "Global.h"
+#include "utils/linked_list/LinkedListNode.h"
 
 template<class T>
 class LinkedList {

@@ -6,11 +6,11 @@
  *               Oskari
  */
 
-#include "Console.h"
-#include "../../Kernel.h"
-#include "../Keyboard.h"
-#include "../../memory/structures/PageTable.h"
-#include "../../memory/Mem.h"
+#include "drivers/TTY/Console.h"
+#include "Kernel.h"
+#include "drivers/Keyboard.h"
+#include "memory/structures/PageTable.h"
+#include "memory/Mem.h"
 
 /**
  * Function prototype for the internal use newline()
@@ -293,7 +293,9 @@ void writeIntBase(uint64_t num, uint64_t base) {
 
     /* Skip to the first non null char */
     int pos;
-    for (pos = 0; !out[pos]; pos++);
+    for (pos = 0; !out[pos]; pos++){
+
+    }
 
 	terminalWriteString((const char*)(out + pos));
 }

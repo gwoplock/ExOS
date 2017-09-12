@@ -6,12 +6,12 @@
  *      Author: garrett
  */
 
-#include "PCIDeviceList.h"
-#include "PCI.h"
-#include "PCI_devices/PCIStandardDevice.h"
-#include "PCI_devices/PCIBridgeDevice.h"
-#include "PCI_devices/PCICardBusDevice.h"
-#include "../TTY/Console.h"
+#include "drivers/PCI/PCIDeviceList.h"
+#include "drivers/PCI/PCI.h"
+#include "drivers/PCI/PCI_devices/PCIStandardDevice.h"
+#include "drivers/PCI/PCI_devices/PCIBridgeDevice.h"
+#include "drivers/PCI/PCI_devices/PCICardBusDevice.h"
+#include "drivers/TTY/Console.h"
 
 PCIDeviceList::PCIDeviceList( ) {
 	_list = new LinkedList<PCIDevice*>;
