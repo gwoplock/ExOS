@@ -5,8 +5,8 @@
  *      Author: garrett
  */
 
-#include "PCIStandardDevice.h"
-#include "../PCI.h"
+#include "drivers/PCI/PCI_devices/PCIStandardDevice.h"
+#include "drivers/PCI/PCI.h"
 
 PCIStandardDevice::PCIStandardDevice( ) :
 		PCIDevice( ) {

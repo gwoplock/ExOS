@@ -8,7 +8,7 @@
 #ifndef INTERRUPTDESCRIPTORTABLE_H_
 #define INTERRUPTDESCRIPTORTABLE_H_
 
-#include "../Global.h"
+#include "Global.h"
 
 /**
  * structure used by the cpu to handler interrupts

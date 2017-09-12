@@ -5,8 +5,8 @@
  *  Created on: Aug 14, 2017
  *      Author: garrett
  */
-#include "abort.h"
-#include "../drivers/TTY/Console.h"
+#include "clib_misc/Abort.h"
+#include "drivers/TTY/Console.h"
 
 extern "C"
 void /*__cxxabiv1::*/__cxa_pure_virtual(void) {

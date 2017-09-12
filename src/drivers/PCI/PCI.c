@@ -5,7 +5,7 @@
  *      Author: garrett
  */
 
-#include "PCI.h"
+#include "drivers/PCI/PCI.h"
 
 //TODO clean up a lot
 

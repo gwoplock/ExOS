@@ -8,7 +8,7 @@
 #ifndef NEW_H_
 #define NEW_H_
 
-#include "../../Global.h"
+#include "Global.h"
 
 void * operator new(size_t size);
 void operator delete(void * p);

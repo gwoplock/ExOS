@@ -5,7 +5,7 @@
  *      Author: garrett
  */
 
-#include "PageTable.h"
+#include "memory/structures/PageTable.h"
 
 PageTable::PageTable( ) {
 }

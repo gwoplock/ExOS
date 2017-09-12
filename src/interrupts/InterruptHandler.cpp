@@ -5,11 +5,11 @@
  *      Author: garrett
  */
 
-#include "InterruptHandler.h"
-#include "../Kernel.h"
-#include "../drivers/Keyboard.h"
-#include "../drivers/TTY/Console.h"
-#include "../drivers/ProgrammableInterruptController.h"
+#include "interrupts/InterruptHandler.h"
+#include "Kernel.h"
+#include "drivers/Keyboard.h"
+#include "drivers/TTY/Console.h"
+#include "drivers/ProgrammableInterruptController.h"
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
