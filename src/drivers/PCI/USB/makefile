@@ -1,4 +1,4 @@
 SUBDIRS = HostController
-OBS = USB.o USBController.o
+OBS = USB.o
 
 include ../../../../makefile.inc
