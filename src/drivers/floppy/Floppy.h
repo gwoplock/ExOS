@@ -12,6 +12,14 @@
 #include "../../Global.h"
 
 /**
+ * Struct that contains the Floppy types
+ */
+typedef struct {
+    uint8_t master;
+    uint8_t slave;
+} fdtypes_t;
+
+/**
  * Struct that contains a CHS address
  */
 typedef struct {
@@ -50,5 +58,11 @@ inline chs_t LBAToCHS (uint32_t lba) {
         .sect = (lba % (2 * SPT)) % SPT + 1
     };
 }
+
+/**
+ * Get the types of floppy drives
+ * @return struct with the drive types
+ */
+fdtypes_t getDriveTypes ( );
 
 #endif

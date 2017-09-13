@@ -19,6 +19,8 @@
 #include "multiboot_spec/Multiboot.h"
 #include "memory/Mem.h"
 #include "utils/printf/Printf.h"
+#include "drivers/CMOS/CMOS.h"
+#include "drivers/floppy/Floppy.h"
 
 InterruptDescriptorTable idt;
 GlobalDescriptorTable gdt;
@@ -59,6 +61,15 @@ extern "C" {/* Use C linkage for kernel_main. */
 		//set malloc's support vars
 		mallocInit( );
         terminalWriteLine(" Done!");
+        // Get the floppy drive types from CMOS
+        terminalWriteString("  Finding floppy drive types...");
+        fdtypes_t drives = getDriveTypes();
+        terminalWriteLine(" Done!");
+        printf ("  Master: %x\n", drives.master);
+        printf ("  Slave: %x\n", drives.slave);
+        // Keep track of which drives are supported
+        uint8_t masterSupported = drives.master == 0x04;
+        uint8_t slaveSupported = drives.slave == 0x04;
         terminalWriteString("  Finding PCI buses...");
 		//find the valid PCI buses
 		PCIInit();
