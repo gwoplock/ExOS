@@ -2,7 +2,7 @@
 
 ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by removing the necessity to relink. Removing this process will allow consumers with no advanced computer knowledge better access to the OS. To achive this, the executable is scanned to identify system calls. Once they are identified, the native OS system calls are replaced with the appropriate ExOS userland system calls (from the LibOS). This replacement process is known as "live relinking".
 
-***Before Working on ExOS, you should have a strong knoledge of the MIT Exokernel.***
+***Before Working on ExOS, you should have a strong knowledge of the MIT Exokernel.***
  
 ## Goals
 
@@ -13,32 +13,50 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
     * Mac OS X  
 * Live relinking to allow unmodified programs to be run
 
-## Current Status
+## Short term work
+* Garrett
+	- [ ] Read USB spec
+	- [ ] USB abstract class
+	- [ ] OHCI driver
+	- [ ] UHCI driver
+	- [ ] EHCI driver
+	- [ ] XHCI driver
+	
+* Oskari
+	- [ ] Floppy drive driver
+	
+* Jacob
+	- [ ] Fixing PCI enumeration bug
 
-I'm working with a friend on the PCI stuff. It is currently bugged and scanning returns no devices. I'm reading about the USB protocol and figuring out how I'm going to impliment it in the kernel. 
-### What's Left
+* Ben
+	- [ ] Fat12 file system driver
+	
+## Long term work
+* Load files from floppy drives
+* Some basic file systems support
+* libC
+	* probably from NewLib
+* Decide on a format for the libOS
+* live relinking or something
+* Linux libOS
+* Windows libOS
+	* Possibly based on [ReactOS](https://www.reactos.org/)
+* Mac OS X libOS
 
-* ~~Bus enumeration~~
-* Device scanning (it may not work. atleast my test code found 0 devices. this needs to be worked on)
-* ~~PCI Config space reading~~ (i can read the important one, header 0 for standard devices. could extend to more)
-
-## Next Steps
-
-* libc (maybe later) (newlib is hard)
-* libc++ (maybe later) (needs libc and an os toolchain)
-* PCI support (~~waiting for libc(++)~~) (I dont need those so were back to this)
-* primitive USB support
-* floppy support
-* Loading and running programs from disk
-* SATA HDD support
-* IDE HDD support
-* LibOS format
-* Live relinking
-* Linux LibOS
-* Multitasking
-* Windows LibOS
-   * Possibly based on [ReactOS's](https://www.reactos.org/) code
-* Mac OS X LibOS
+## Major systems to support
+- [ ] PCI
+- [ ] PCI Express
+- [ ] USB
+- [ ] Text Graphics
+- [ ] Regular Graphics
+- [ ] Sound
+- [ ] Ethernet
+- [ ] WIFi
+- [ ] SATA
+- [ ] IDE
+- [ ] SCSI (maybe probably)
+- [ ] SAS
+- [ ] M.2
 
 ## Building
 
