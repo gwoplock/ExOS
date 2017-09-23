@@ -66,7 +66,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 	* Garrett: exos@garrettbattaglia.info
 	* Oskari: Coming soon
 
-### But, what can ***I** do???
+### But, what can ***I*** do???
 The best thing you can do is write code. If you know a system like the ones listed above, write a driver for it. If there's a bug that catches your fancy try and patch it. 
 
 If you can't code theres still stuff for you. If you can write our readme or wiki might intrest you. You can run this and test it out. If you have an issue open a bug. 
