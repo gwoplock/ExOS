@@ -58,6 +58,15 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 - [ ] SAS
 - [ ] M.2
 
+## Helping out
+
+### contacting us
+* [slack](https://join.slack.com/t/exos-dev/shared_invite/enQtMjI2OTE2NjYzOTU4LTJhZTIyOTNkYmY2MjcxN2RjZTUzZjhkYTAzZTNlOThkODZkZmE5ODI3ODA0MjBlNDY3Mjg3OWNjODQ0ZGM3NDU)
+* Email
+	* Garrett: exos@garrettbattaglia.info
+	* Oskari: Coming soon
+
+
 ## Building
 
 ### Precompilation steps
