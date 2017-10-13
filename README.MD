@@ -15,7 +15,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 
 ## Short term work
 * Garrett
-	- [ ] Read USB spec
+	- [ ] Read USB spec - still going, its long
 	- [ ] USB abstract class
 	- [ ] OHCI driver
 	- [ ] UHCI driver
@@ -26,7 +26,8 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 	- [ ] Floppy drive driver
 	
 * Jacob
-	- [ ] Fixing PCI enumeration bug
+	
+	- [ ] replace current PCI enum. strat. The new strat will get all devices at boot. When a device is requested it will be found in the list of devices.
 
 * Ben
 	- [ ] Fat12 file system driver
