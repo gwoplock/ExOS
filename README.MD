@@ -85,7 +85,8 @@ If you can't code theres still stuff for you. If you can write our readme or wik
         * You can also use an emulator such as [Bochs](http://wiki.osdev.org/Bochs) or [QEMU](http://wiki.osdev.org/Qemu) to boot from a disk image.
     * If you're contributing ***please test on real hardware*** not just an emulator.
 3. Set up a ***multiboot compliant*** bootloader
-    * I'm using [grub legacy](http://wiki.osdev.org/GRUB_Legacy) as my bootloader but you can use whatever as long as it's ***multiboot compliant***.
+    * I'm using [grub legacy](http://wiki.osdev.org/GRUB_Legacy) as my bootloader but you can use whatever as long as it's ***multiboot compliant***. 
+    * I'm not 100% sure that all of them work the more i look into it. I will try grub and see.
 4. Test the bootloader installation
     * Just boot to the bootloader's menu screen to make sure it works.
 5. Configure the makefile (makefile.inc)
