@@ -2,7 +2,7 @@
 
 ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by removing the necessity to relink. Removing this process will allow consumers with no advanced computer knowledge better access to the OS. To achive this, the executable is scanned to identify system calls. Once they are identified, the native OS system calls are replaced with the appropriate ExOS userland system calls (from the LibOS). This replacement process is known as "live relinking".
 
-***Before Working on ExOS, you should have a strong knoledge of the MIT Exokernel.***
+***Before Working on ExOS, you should have a strong knowledge of the MIT Exokernel.***
  
 ## Goals
 
@@ -13,32 +13,64 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
     * Mac OS X  
 * Live relinking to allow unmodified programs to be run
 
-## Current Status
+## Short term work
+* Garrett
+	- [ ] Read USB spec - still going, its long
+	- [ ] USB abstract class
+	- [ ] OHCI driver
+	- [ ] UHCI driver
+	- [ ] EHCI driver
+	- [ ] XHCI driver
+	
+* Oskari
+	- [ ] Floppy drive driver
+	
+* Jacob
+	
+	- [ ] replace current PCI enum. strat. The new strat will get all devices at boot. When a device is requested it will be found in the list of devices.
 
-I'm working with a friend on the PCI stuff. It is currently bugged and scanning returns no devices. I'm reading about the USB protocol and figuring out how I'm going to impliment it in the kernel. 
-### What's Left
+* Ben
+	- [ ] Fat12 file system driver
+	
+## Long term work
+* Load files from floppy drives
+* Some basic file systems support
+* libC
+	* probably from NewLib
+* Decide on a format for the libOS
+* live relinking or something
+* Linux libOS
+* Windows libOS
+	* Possibly based on [ReactOS](https://www.reactos.org/)
+* Mac OS X libOS
 
-* ~~Bus enumeration~~
-* Device scanning (it may not work. atleast my test code found 0 devices. this needs to be worked on)
-* ~~PCI Config space reading~~ (i can read the important one, header 0 for standard devices. could extend to more)
+## Major systems to support
+- [ ] PCI
+- [ ] PCI Express
+- [ ] USB
+- [ ] Text Graphics
+- [ ] Regular Graphics
+- [ ] Sound
+- [ ] Ethernet
+- [ ] WIFi
+- [ ] SATA
+- [ ] IDE
+- [ ] SCSI (maybe probably)
+- [ ] SAS
+- [ ] M.2
 
-## Next Steps
+## Helping out
 
-* libc (maybe later) (newlib is hard)
-* libc++ (maybe later) (needs libc and an os toolchain)
-* PCI support (~~waiting for libc(++)~~) (I dont need those so were back to this)
-* primitive USB support
-* floppy support
-* Loading and running programs from disk
-* SATA HDD support
-* IDE HDD support
-* LibOS format
-* Live relinking
-* Linux LibOS
-* Multitasking
-* Windows LibOS
-   * Possibly based on [ReactOS's](https://www.reactos.org/) code
-* Mac OS X LibOS
+### Contacting us
+* [slack](https://join.slack.com/t/exos-dev/shared_invite/enQtMjI2OTE2NjYzOTU4LTJhZTIyOTNkYmY2MjcxN2RjZTUzZjhkYTAzZTNlOThkODZkZmE5ODI3ODA0MjBlNDY3Mjg3OWNjODQ0ZGM3NDU)
+* Email
+	* Garrett: exos@garrettbattaglia.info
+	* Oskari: xxc3ncoredxx@gmail.com (the typo is intentional)
+
+### But, what can ***I*** do???
+The best thing you can do is write code. If you know a system like the ones listed above, write a driver for it. If there's a bug that catches your fancy try and patch it. 
+
+If you can't code theres still stuff for you. If you can write our readme or wiki might intrest you. You can run this and test it out. If you have an issue open a bug. 
 
 ## Building
 
@@ -53,7 +85,8 @@ I'm working with a friend on the PCI stuff. It is currently bugged and scanning 
         * You can also use an emulator such as [Bochs](http://wiki.osdev.org/Bochs) or [QEMU](http://wiki.osdev.org/Qemu) to boot from a disk image.
     * If you're contributing ***please test on real hardware*** not just an emulator.
 3. Set up a ***multiboot compliant*** bootloader
-    * I'm using [grub legacy](http://wiki.osdev.org/GRUB_Legacy) as my bootloader but you can use whatever as long as it's ***multiboot compliant***.
+    * I'm using [grub legacy](http://wiki.osdev.org/GRUB_Legacy) as my bootloader but you can use whatever as long as it's ***multiboot compliant***. 
+    * I'm not 100% sure that all of them work the more i look into it. I will try grub and see.
 4. Test the bootloader installation
     * Just boot to the bootloader's menu screen to make sure it works.
 5. Configure the makefile (makefile.inc)
