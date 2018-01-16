@@ -9,24 +9,24 @@
 #ifndef FLOPPY_H_
 #define FLOPPY_H_
 
-#include "../../Global.h"
+#include "Global.h"
 
 /**
  * Struct that contains the Floppy types
  */
-typedef struct {
-    uint8_t master;
-    uint8_t slave;
-} fdtypes_t;
+struct fdtypes_t {
+		uint8_t master;
+		uint8_t slave;
+};
 
 /**
  * Struct that contains a CHS address
  */
-typedef struct {
-    uint16_t cyl;
-    uint16_t head;
-    uint16_t sect;
-} chs_t;
+struct chs_t {
+		uint16_t cyl;
+		uint16_t head;
+		uint16_t sect;
+};
 
 /**
  * The floppy registers:
@@ -74,7 +74,7 @@ const uint8_t DOR_DRIVE1 = 0x01;    // 0000 00|01|
 const uint8_t DOR_DRIVE2 = 0x02;    // 0000 00|10|
 const uint8_t DOR_DRIVE3 = 0x03;    // 0000 00|11|
 const uint8_t DOR_ENABLE = 0x04;    // 0000 0|1|00
-const uint8_t DOR_DMA    = 0x08;    // 0000 |1|000
+const uint8_t DOR_DMA = 0x08;    // 0000 |1|000
 const uint8_t DOR_MOTOR0 = 0x10;    // 000|1| 0000
 const uint8_t DOR_MOTOR1 = 0x20;    // 00|1|0 0000
 const uint8_t DOR_MOTOR2 = 0x40;    // 0|1|00 0000
@@ -105,10 +105,10 @@ const uint8_t MSR_DRIVE0_SEEK = 0x01;   // 0000 000|1|
 const uint8_t MSR_DRIVE1_SEEK = 0x02;   // 0000 00|1|0
 const uint8_t MSR_DRIVE2_SEEK = 0x04;   // 0000 0|1|00
 const uint8_t MSR_DRIVE3_SEEK = 0x08;   // 0000 |1|000
-const uint8_t MSR_FDC_BUSY    = 0x10;   // 000|1| 0000
-const uint8_t MSR_FDC_DMA     = 0x20;   // 00|1|0 0000
-const uint8_t MSR_DIRECTION   = 0x40;   // 0|1|00 0000
-const uint8_t MSR_DATA_READY  = 0x80;   // |1|000 0000
+const uint8_t MSR_FDC_BUSY = 0x10;   // 000|1| 0000
+const uint8_t MSR_FDC_DMA = 0x20;   // 00|1|0 0000
+const uint8_t MSR_DIRECTION = 0x40;   // 0|1|00 0000
+const uint8_t MSR_DATA_READY = 0x80;   // |1|000 0000
 
 /**
  * Floppy commands
@@ -148,8 +148,8 @@ const uint16_t HPC = 2;     // Heads per cylinder
  * @param sector number
  * @return LBA format (logical base address)
  */
-inline uint32_t CHSToLBA (uint16_t cyl, uint16_t head, uint16_t sect) {
-    return (uint32_t) (((cyl * HPC + head) * SPT) + sect - 1);
+inline uint32_t CHSToLBA(uint16_t cyl, uint16_t head, uint16_t sect) {
+	return (uint32_t)( ( (cyl * HPC + head) * SPT) + sect - 1);
 }
 
 /**
@@ -157,19 +157,19 @@ inline uint32_t CHSToLBA (uint16_t cyl, uint16_t head, uint16_t sect) {
  * @param logical base address
  * @return strut containing cyl, head, sect
  */
-inline chs_t LBAToCHS (uint32_t lba) {
-    return (chs_t) {
-        .cyl = lba / (2 * SPT),
-        .head = (lba % (2 * SPT)) / SPT,
-        .sect = (lba % (2 * SPT)) % SPT + 1
-    };
+inline chs_t LBAToCHS(uint32_t lba) {
+return (chs_t) {
+	.cyl = lba / (2 * SPT),
+	.head = (lba % (2 * SPT)) / SPT,
+	.sect = (lba % (2 * SPT)) % SPT + 1
+};
 }
 
 /**
  * Get the types of floppy drives
  * @return struct with the drive types
  */
-fdtypes_t getDriveTypes ( );
+fdtypes_t getDriveTypes( );
 
 /**
  * Set DMA channel 2 to transfer data from memory address 0x1000 to 0x23FF
@@ -178,16 +178,16 @@ fdtypes_t getDriveTypes ( );
  * (with 512 byte sectors)
  * Transfer length is counter + 1
  */
-void initFloppyDMA ( );
+void initFloppyDMA( );
 
 /**
  * Prepare the drive for DMA read
  */
-void prepareDMARead ( );
+void prepareDMARead( );
 
 /**
  * Prepare the drive for DMA write
  */
-void prepareDMAWrite ( );
+void prepareDMAWrite( );
 
 #endif
