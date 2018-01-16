@@ -105,7 +105,7 @@ const uint8_t MSR_DRIVE0_SEEK = 0x01;   // 0000 000|1|
 const uint8_t MSR_DRIVE1_SEEK = 0x02;   // 0000 00|1|0
 const uint8_t MSR_DRIVE2_SEEK = 0x04;   // 0000 0|1|00
 const uint8_t MSR_DRIVE3_SEEK = 0x08;   // 0000 |1|000
-const uint8_8 MSR_FDC_BUSY    = 0x10;   // 000|1| 0000
+const uint8_t MSR_FDC_BUSY    = 0x10;   // 000|1| 0000
 const uint8_t MSR_FDC_DMA     = 0x20;   // 00|1|0 0000
 const uint8_t MSR_DIRECTION   = 0x40;   // 0|1|00 0000
 const uint8_t MSR_DATA_READY  = 0x80;   // |1|000 0000
@@ -130,7 +130,7 @@ const uint8_t SCAN_EQUAL = 17;
 const uint8_t PERPENDICULAR_MODE = 18;  // * Used during init, once, maybe
 const uint8_t CONFIGURE = 19;           // * Set controller parameters
 const uint8_t LOCK = 20;                // * Protect parameterss from reset
-const uint8_t VERIFY = 22
+const uint8_t VERIFY = 22;
 const uint8_t SCAN_LOW_OR_EQUAL = 25;
 const uint8_t SCAN_HIGH_OR_EQUAL = 29;
 
