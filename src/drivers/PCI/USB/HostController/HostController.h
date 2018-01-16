@@ -9,7 +9,7 @@
 #define SRC_DRIVERS_PCI_USB_HOSTCONTROLLER_HOSTCONTROLLER_H_
 
 #include "Global.h"
-
+#include "drivers/PCI/USB/USBEvent.h"
 class HostController {
 	protected:
 		void* _BAR0;
@@ -35,6 +35,7 @@ class HostController {
 			_BAR4 = BAR4;
 		}
 		virtual ~HostController( );
+		USBEvent* poll();
 };
 
 #endif /* SRC_DRIVERS_PCI_USB_HOSTCONTROLLER_HOSTCONTROLLER_H_ */
