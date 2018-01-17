@@ -6,11 +6,13 @@
 #define EXOS_FAT12_H
 
 #include "Fat12File.h"
+#include "drivers/filesys/fat/FatStructs.h"
 
 class Fat12FS{
+	private:
+		FatBPB FSInfo;
 	public:
-		//TODO void* -> filedesc*
-		File* open(char* path, int flags, int mode);
+		Fat12File* open(char* path, int flags, int mode);
 
 };
 
