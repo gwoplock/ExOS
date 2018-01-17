@@ -6,3 +6,5 @@
 .~lock.*
 *.swp
 *.swo
+.idea/
+cmake-build-debug/
