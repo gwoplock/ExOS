@@ -10,10 +10,17 @@
 
 class Fat12File: public File{
 	private:
-		size_t lastCluster;
-		Fat12FS device;
+		size_t _lastCluster;
+		Fat12FS _device;
+		uint32_t _lastByteRead;
+		uint32_t _lastByteLoaded;
+		void* _fileLoc;
+		size_t _fileLocSize;
+		uint32_t _fileLocStartInFile;
 	public:
 		size_t read(char* buffer, size_t size);
+
+		bool readFromDisk();
 };
 
 #endif //EXOS_FAT12FILE_H

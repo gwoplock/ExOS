@@ -8,12 +8,17 @@
 #include "Fat12File.h"
 #include "drivers/filesys/fat/FatStructs.h"
 
-class Fat12FS{
+class Fat12FS
+{
 	private:
-		FatBPB FSInfo;
+		FatBPB _FSInfo;
 	public:
-		Fat12File* open(char* path, int flags, int mode);
+		Fat12File *open(char *path, int flags, int mode);
 
+		FatBPB *FSInfo()
+		{
+			return _FSInfo;
+		}
 };
 
 
