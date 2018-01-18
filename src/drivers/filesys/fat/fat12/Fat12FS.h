@@ -8,19 +8,18 @@
 #include "Fat12File.h"
 #include "drivers/filesys/fat/FatStructs.h"
 
-class Fat12FS
-{
+class Fat12File;
+
+class Fat12FS {
 	private:
-		FatBPB _FSInfo;
+		FatBPB* _FSInfo;
 	public:
 		Fat12File *open(char *path, int flags, int mode);
 
-		FatBPB *FSInfo()
-		{
+		FatBPB *FSInfo( ) {
 			return _FSInfo;
 		}
 		bool readCluster(uint16_t cluser, void* fileLoc, size_t fileLocSize);
 };
-
 
 #endif //EXOS_FAT12_H

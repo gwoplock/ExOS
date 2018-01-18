@@ -8,10 +8,12 @@
 #include "drivers/filesys/File.h"
 #include "Fat12FS.h"
 
+class Fat12FS;
+
 class Fat12File: public File{
 	private:
 		size_t _lastCluster;
-		Fat12FS _device;
+		Fat12FS* _device;
 		uint32_t _lastByteRead;
 		uint32_t _lastByteLoaded;
 		void* _fileLoc;
