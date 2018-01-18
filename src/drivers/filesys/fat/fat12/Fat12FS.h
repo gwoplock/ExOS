@@ -19,6 +19,7 @@ class Fat12FS
 		{
 			return _FSInfo;
 		}
+		bool readCluster(uint16_t cluser, void* fileLoc, size_t fileLocSize);
 };
 
 
