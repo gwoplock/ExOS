@@ -11,5 +11,6 @@ Fat12File *Fat12FS::open(char *path, int flags, int mode)
 }
 
 bool Fat12FS::readCluster(uint16_t cluser, void* fileLoc, size_t fileLocSize){
-
+	assert(fileLocSize >= (_FSInfo->secPerCluster * _FSInfo->bytePerSec));
+	//TODO read from disk
 }

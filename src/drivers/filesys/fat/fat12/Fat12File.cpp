@@ -28,19 +28,22 @@ bool Fat12File::readFromDisk()
 {
 	uint16_t firstFatSec = _device->FSInfo()->resSec;
 	unsigned char FAT_table[_device->FSInfo()->bytePerSec];
-	unsigned int fat_offset = _lastCluster + (_lastCluster / 2);// multiply by 1.5
-	unsigned int fat_sector = firstFatSec + (fat_offset / _device->FSInfo()->bytePerSec);
-	unsigned int ent_offset = fat_offset % _device->FSInfo()->bytePerSec;
+	while(read < _fileLocSize && _fileLocSize-read >= (_FSInfo->secPerCluster * _FSInfo->bytePerSec)) {
+		unsigned int fat_offset = _lastCluster + (_lastCluster / 2);// multiply by 1.5
+		unsigned int fat_sector = firstFatSec + (fat_offset / _device->FSInfo()->bytePerSec);
+		unsigned int ent_offset = fat_offset % _device->FSInfo()->bytePerSec;
 
-	unsigned short table_value = *(unsigned short*)&FAT_table[ent_offset];
+		unsigned short table_value = *(unsigned short *) &FAT_table[ent_offset];
 
-	if(_lastCluster & 0x0001)
-		table_value = table_value >> 4;
-	else
-		table_value = table_value & 0x0FFF;
-	if (table_value >=  0xFF8){
-		return false;
-	} else {
-		bool ret = _device->readCluster(table_value, _fileLoc, _fileLocSize);
+		if (_lastCluster & 0x0001)
+			table_value = table_value >> 4;
+		else
+			table_value = table_value & 0x0FFF;
+		if (table_value >= 0xFF8) {
+			return false;
+		} else {
+			bool ret = _device->readCluster(table_value, _fileLoc + read, _fileLocSize - read);
+			read += (_device.FSInfo()->secPerCluster * _device * FSInfo()->bytePerSec);
+		}
 	}
 }
