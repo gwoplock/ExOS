@@ -40,10 +40,15 @@ bool Fat12File::readFromDisk()
 		else
 			table_value = table_value & 0x0FFF;
 		if (table_value >= 0xFF8) {
-			return false;
+			free(_fileLoc + read);
+			return true;
 		} else {
 			bool ret = _device->readCluster(table_value, _fileLoc + read, _fileLocSize - read);
+			if (!ret){
+				return false;
+			}
 			read += (_device.FSInfo()->secPerCluster * _device * FSInfo()->bytePerSec);
 		}
 	}
+	return true;
 }
