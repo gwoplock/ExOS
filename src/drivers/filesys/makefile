@@ -1,4 +1,3 @@
-SUBDIRS = fat
-OBS = File.o
+SUBDIRS = fat general
 
 include ../../../makefile.inc
