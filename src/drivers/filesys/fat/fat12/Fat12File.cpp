@@ -42,6 +42,7 @@ bool Fat12File::readFromDisk()
 		if (table_value >= 0xFF8) {
 			//TODO make sure this frees everything
 			free(_fileLoc + read);
+			_fileLocSize=read;
 			return true;
 		} else {
 			bool ret = _device->readCluster(table_value, _fileLoc + read, _fileLocSize - read);
@@ -49,7 +50,9 @@ bool Fat12File::readFromDisk()
 				return false;
 			}
 			read += (_device.FSInfo()->secPerCluster * _device * FSInfo()->bytePerSec);
+			_lastCluster = table_value;
 		}
 	}
+	_lastByteLoaded += read;
 	return true;
 }

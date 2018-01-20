@@ -18,6 +18,7 @@ class Fat12File: public File{
 		uint32_t _lastByteLoaded;
 		void* _fileLoc;
 		size_t _fileLocSize;
+		//TODO what is this for
 		uint32_t _fileLocStartInFile;
 	public:
 		size_t read(char* buffer, size_t size);
