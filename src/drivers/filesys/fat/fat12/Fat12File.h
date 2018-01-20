@@ -21,6 +21,11 @@ class Fat12File: public File{
 		//TODO what is this for
 		uint32_t _fileLocStartInFile;
 	public:
+		Fat12File(size_t firstCluster){
+			_lastCluster = firstCluster;
+			void* _fileLoc = malloc((_device->FSInfo()->bytePerSec)*(_device->FSInfo()->secPerCluster));
+			_device->readCluster(firstCluster, _fileLoc, (_device->FSInfo()->bytePerSec)*(_device->FSInfo()->secPerCluster));
+		}
 		size_t read(char* buffer, size_t size);
 
 		bool readFromDisk();

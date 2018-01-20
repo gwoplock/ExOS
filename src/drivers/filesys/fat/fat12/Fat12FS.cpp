@@ -6,7 +6,8 @@
 
 Fat12File *Fat12FS::open(char *path, int flags, int mode)
 {
-	Fat12File *ret = new Fat12File();
+	//TODO find file
+	Fat12File *ret = new Fat12File(0);
 	return ret;
 }
 
