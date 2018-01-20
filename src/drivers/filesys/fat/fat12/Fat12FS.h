@@ -10,7 +10,7 @@
 
 class Fat12File;
 
-class Fat12FS {
+class Fat12FS : public FS{
 	private:
 		FatBPB* _FSInfo;
 		//TODO replace with device.
