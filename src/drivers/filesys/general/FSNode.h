@@ -5,6 +5,8 @@
 #ifndef EXOS_FSNODE_H
 #define EXOS_FSNODE_H
 
+#include "Global.h"
+
 enum Type{
 	FILE, DIR, LINK
 };
@@ -17,7 +19,7 @@ class FSNode{
 		Type _type;
 	public:
 		uint32_t startSector();
-		Permissions permissons();
+		//Permissions permissons();
 };
 
 #endif //EXOS_FSNODE_H

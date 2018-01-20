@@ -5,7 +5,9 @@
 #ifndef EXOS_ASSERT_H
 #define EXOS_ASSERT_H
 
-extern "c"{
+#include "Global.h"
+
+extern "C"{
 void assert(uint8_t expression);
 };
 

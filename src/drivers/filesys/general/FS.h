@@ -4,6 +4,11 @@
 
 #ifndef EXOS_FS_H
 #define EXOS_FS_H
+
+#include "Global.h"
+#include "FSNode.h"
+#include "File.h"
+
 class FS{
 	private:
 		FSNode _root;

@@ -5,8 +5,9 @@
 #ifndef EXOS_FAT12_H
 #define EXOS_FAT12_H
 
-#include "Fat12File.h"
 #include "drivers/filesys/fat/FatStructs.h"
+#include "Global.h"
+#include "drivers/filesys/general/FS.h"
 
 class Fat12File;
 

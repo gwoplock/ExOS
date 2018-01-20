@@ -5,10 +5,11 @@
 #ifndef EXOS_FAT12FILE_H
 #define EXOS_FAT12FILE_H
 
-#include "drivers/filesys/File.h"
+#include "drivers/filesys/general/File.h"
 #include "Fat12FS.h"
+#include "Global.h"
 
-class Fat12FS;
+//class Fat12FS;
 
 class Fat12File: public File{
 	private:

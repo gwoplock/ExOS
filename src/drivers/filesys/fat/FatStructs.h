@@ -5,6 +5,8 @@
 #ifndef EXOS_FATSTRUCTS_H
 #define EXOS_FATSTRUCTS_H
 
+#include "Global.h"
+
 struct FatBPB{
 	uint8_t jmp[3];
 	uint8_t oemIdent[8];
