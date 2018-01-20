@@ -40,6 +40,7 @@ bool Fat12File::readFromDisk()
 		else
 			table_value = table_value & 0x0FFF;
 		if (table_value >= 0xFF8) {
+			//TODO make sure this frees everything
 			free(_fileLoc + read);
 			return true;
 		} else {

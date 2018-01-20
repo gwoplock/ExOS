@@ -13,6 +13,8 @@ class Fat12File;
 class Fat12FS {
 	private:
 		FatBPB* _FSInfo;
+		//TODO replace with device.
+		void* _device;
 	public:
 		Fat12File *open(char *path, int flags, int mode);
 
