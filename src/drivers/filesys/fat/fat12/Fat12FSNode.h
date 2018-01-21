@@ -16,7 +16,9 @@ class Fat12FSNode: public FSNode {
 		virtual uint32_t startSector(){
 
 		}
-		virtual ~Fat12FSNode( );
+		virtual ~Fat12FSNode( ){
+
+		}
 };
 
 #endif /* SRC_DRIVERS_FILESYS_FAT_FAT12_FAT12FSNODE_H_ */
