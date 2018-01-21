@@ -4,6 +4,7 @@
 
 #include "Fat12FS.h"
 #include "Fat12File.h"
+#include "Fat12FSNode.h"
 
 File *Fat12FS::open(char *path, int flags, int mode) {
 	//TODO find file
@@ -32,7 +33,7 @@ bool Fat12FS::readCluster(uint16_t cluster, void* fileLoc, size_t fileLocSize) {
 }
 //TODO check var sizes
 void Fat12FS::buildDirStructure( ) {
-	_root = new FSNode( );
+	_root = new Fat12FSNode( );
 	uint8_t* tempCluster = (uint8_t*) malloc(_FSInfo->bytePerSec);
 	uint16_t startSector = (_FSInfo->resSec)
 			+ (_FSInfo->FATs * _FSInfo->secPerFAT);
