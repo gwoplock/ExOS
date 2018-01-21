@@ -10,9 +10,11 @@
 #include "File.h"
 
 class FS{
-	private:
-		FSNode _root;
+	protected:
+		FSNode* _root;
+		void* _device;
 	public:
-		File* open(char *path, int flags, int mode);
+		virtual File* open(char *path, int flags, int mode) = 0;
+		virtual void buildDirStructure() = 0;
 };
 #endif //EXOS_FS_H

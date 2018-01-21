@@ -17,8 +17,21 @@ class FSNode{
 		uint32_t _size;
 		FSNode** _children;
 		Type _type;
+		size_t _childernCount;
 	public:
-		uint32_t startSector();
+		FSNode(){
+			_name="root";
+			_size =0;
+			_type=DIR;
+		}
+		FSNode(char* name, uint32_t size, Type type){
+			_name=name;
+			_size = size;
+			_type =type;
+			_children = nullptr;
+			_childernCount = 0;
+		}
+		virtual uint32_t startSector() = 0;
 		//Permissions permissons();
 };
 

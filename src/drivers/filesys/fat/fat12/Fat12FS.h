@@ -14,15 +14,14 @@ class Fat12File;
 class Fat12FS : public FS{
 	private:
 		FatBPB* _FSInfo;
-		//TODO replace with device.
-		void* _device;
 	public:
-		Fat12File *open(char *path, int flags, int mode);
+		File *open(char *path, int flags, int mode);
 
 		FatBPB *FSInfo( ) {
 			return _FSInfo;
 		}
 		bool readCluster(uint16_t cluser, void* fileLoc, size_t fileLocSize);
+		void buildDirStructure();
 };
 
 #endif //EXOS_FAT12_H
