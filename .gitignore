@@ -6,3 +6,5 @@
 .~lock.*
 *.swp
 *.swo
+bx_enh_dbg.ini
+.vscode/

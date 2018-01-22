@@ -35,7 +35,7 @@ extern "C" {/* Use C linkage for kernel_main. */
  * @param size to alloc
  */
 void* malloc(size_t size) {
-	size_t space = (size_t) top - (size_t) base;
+	/*size_t space = (size_t) top - (size_t) base;
 	if (space > size) {
 		//if there is space in the current phys mem allocated
 		void* oldBase = base;
@@ -49,7 +49,7 @@ void* malloc(size_t size) {
 		size_t sizeOfNewMem = ((size-space)/FOUR_KB + ( ((size-space) & 0xFFF) != 0)) * FOUR_KB;
 		top = (void*) ((size_t) top + sizeOfNewMem + ((size_t)startOfNewMem - (size_t)top) );
 		return malloc(size);
-	}
+	}*/
 }
 /**
  * free mem
