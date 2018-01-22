@@ -11,17 +11,14 @@
 #include "Global.h"
 
 /**
- * top of the paged in mem
- */
-extern void* top;
-/**
- * base of free mem
- */
-extern void* base;
-/**
  * end of the kernel
  */
 extern uint32_t kernelEnd;
+
+struct memHeader{
+	bool used;
+	memHeader *next;
+};
 
 /**
  * set up the vars needed for malloc
