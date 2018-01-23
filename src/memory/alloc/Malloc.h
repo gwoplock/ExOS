@@ -27,16 +27,19 @@ void mallocInit();
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
+
 	/**
 	 *  mem alloc
 	 * @param size to alloc
 	 */
 void* malloc(size_t size);
+
 /**
  * free mem
  * @param ptr to the mem to free
  */
 void free(void *ptr);
+
 #if defined(__cplusplus)
 }/* Use C linkage for kernel_main. */
 #endif

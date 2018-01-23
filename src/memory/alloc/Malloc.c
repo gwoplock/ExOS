@@ -48,12 +48,12 @@ void *malloc(size_t size)
 		if (next == nullptr && (i - top) > size && !(i->used)) {
 			//at end
 			current->used = true;
-			if (current->next == ((memHeader * )(((uint8_t *) i) + size))) {
-				((memHeader * )(((uint8_t *) i) + size))->used = false;
-				((memHeader * )(((uint8_t *) i) + size))->next = i->next;
+			if (current->next == ((memHeader * )(((uint8_t *) i +1) + size))) {
+				((memHeader * )(((uint8_t *) i+1) + size))->used = false;
+				((memHeader * )(((uint8_t *) i+1) + size))->next = i->next;
 			}
 			i->used = true;
-			i->next = ((uint8_t *) i) + size;
+			i->next = ((uint8_t *) i+1) + size;
 			return i + sizeof(memHeader);
 		} else if ((i - i->next) > size && !(i->used)) {
 			return i + sizeof(memHeader);
