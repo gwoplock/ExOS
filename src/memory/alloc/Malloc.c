@@ -104,15 +104,46 @@ void free(void *ptr)
 	compFreeSpace();
 }
 
+#if defined(__cplusplus)
+}/* Use C linkage for kernel_main. */
+#endif
+
 void compFreeSpace()
 {
 	for (memHeader *i = &kernelEnd; i < top; i = i->next) {
-		if (i->used == false && i->next->used==false){
+		if (i->used == false && i->next->used == false) {
 			i->next = i->next->next;
 		}
 	}
 }
 
-#if defined(__cplusplus)
-}/* Use C linkage for kernel_main. */
-#endif
+void *realloc(void *ptr, size_t size)
+{
+	memHeader *i = &kernelEnd;
+	for (; i < top && i->next <= ptr && i->next->next > ptr; i = i->next);
+	memHeader *next = i->next;
+	if ((uint8_t) ptr + size == next) {
+		return ptr;
+	} else if ((uint8_t) ptr + size < next) {
+		free((uint8_t *) ptr + size);
+		return ptr;
+	} else if ((uint8_t) ptr + size < next) {
+		if (!next->used) {
+			size_t found = 0;
+			while (!next->used && next->next != nullptr && found <= size - i - next){
+				found += next - next->next;
+				next = next->next;
+			}
+			if(found == size){
+				i->next = next;
+				return ptr;
+			}
+		}
+		void* res = malloc(size);
+		memcpy(res, ptr, i-next);
+		free(prt);
+		return res;
+		//malloc, copy free
+	}
+
+}
