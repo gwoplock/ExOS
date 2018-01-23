@@ -40,31 +40,32 @@ extern "C" {/* Use C linkage for kernel_main. */
  */
 void *malloc(size_t size)
 {
+	size += sizeof(memHeader);
 	//size_t space = (size_t) top - (size_t) & kernelEnd;
 	//if (space > size) {
-		//have space
-		for (memHeader *i; i < &kernelEnd; i = i->next) {
-			if (next == nullptr && (current - top) > size && !(i->used)) {
-				//at end
-				current->used = true;
-				if(current->next ==((memHeader*)(((uint8_t*)current) + size)) ) {
-					((memHeader *)(((uint8_t *) current) + size))->used = false;
-					((memHeader * )(((uint8_t *) current) + size))->next = current->next;
-				}
-				current->used = true;
-				current->next = ((uint8_t *) current) + size;
-				return i;
-			} else if ((current - i->next) > size && !(i->used)) {
-				return i;
+	//have space
+	for (memHeader *i; i < &kernelEnd; i = i->next) {
+		if (next == nullptr && (i - top) > size && !(i->used)) {
+			//at end
+			current->used = true;
+			if (current->next == ((memHeader * )(((uint8_t *) i) + size))) {
+				((memHeader * )(((uint8_t *) i) + size))->used = false;
+				((memHeader * )(((uint8_t *) i) + size))->next = i->next;
 			}
+			i->used = true;
+			i->next = ((uint8_t *) i) + size;
+			return i + sizeof(memHeader);
+		} else if ((i - i->next) > size && !(i->used)) {
+			return i + sizeof(memHeader);
 		}
+	}
 	//} else {
-		//need to page in
-		//TODO handle out of mem
-		void *startOfNewMem = frameAlloc.allocatePhysMem(size - space, pageTable.getKernelStart());
-		size_t sizeOfNewMem = ((size - space) / FOUR_KB + (((size - space) & 0xFFF) != 0)) * FOUR_KB;
-		top = (void *) ((size_t) top + sizeOfNewMem + ((size_t) startOfNewMem - (size_t) top));
-		return malloc(size);
+	//need to page in
+	//TODO handle out of mem
+	void *startOfNewMem = frameAlloc.allocatePhysMem(size - space, pageTable.getKernelStart());
+	size_t sizeOfNewMem = ((size - space) / FOUR_KB + (((size - space) & 0xFFF) != 0)) * FOUR_KB;
+	top = (void *) ((size_t) top + sizeOfNewMem + ((size_t) startOfNewMem - (size_t) top));
+	return malloc(size);
 	//}
 
 	/*
