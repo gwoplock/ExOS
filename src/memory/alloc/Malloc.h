@@ -43,4 +43,7 @@ void free(void *ptr);
 #if defined(__cplusplus)
 }/* Use C linkage for kernel_main. */
 #endif
+
+void compFreeSpace();
+
 #endif /* MALLOC_H_ */

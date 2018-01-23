@@ -48,12 +48,12 @@ void *malloc(size_t size)
 		if (next == nullptr && (i - top) > size && !(i->used)) {
 			//at end
 			current->used = true;
-			if (current->next == ((memHeader * )(((uint8_t *) i +1) + size))) {
-				((memHeader * )(((uint8_t *) i+1) + size))->used = false;
-				((memHeader * )(((uint8_t *) i+1) + size))->next = i->next;
+			if (current->next == ((memHeader * )(((uint8_t *) i + 1) + size))) {
+				((memHeader * )(((uint8_t *) i + 1) + size))->used = false;
+				((memHeader * )(((uint8_t *) i + 1) + size))->next = i->next;
 			}
 			i->used = true;
-			i->next = ((uint8_t *) i+1) + size;
+			i->next = ((uint8_t *) i + 1) + size;
 			return i + sizeof(memHeader);
 		} else if ((i - i->next) > size && !(i->used)) {
 			return i + sizeof(memHeader);
@@ -93,13 +93,24 @@ void *malloc(size_t size)
  */
 void free(void *ptr)
 {
-	memHeader *i =&kernelEnd;
-	for(; i < top && i->next <= ptr && i->next->next >ptr; i = i->next);
-	if(i == top){
+	memHeader *i = &kernelEnd;
+	for (; i < top && i->next <= ptr && i->next->next > ptr; i = i->next);
+	//TODO hmm something is fishy about this
+	if (i == top) {
 		ptr->next = i->next;
 	}
 	ptr->used = false;
-	i->next=ptr;
+	i->next = ptr;
+	compFreeSpace();
+}
+
+void compFreeSpace()
+{
+	for (memHeader *i = &kernelEnd; i < top; i = i->next) {
+		if (i->used == false && i->next->used==false){
+			i->next = i->next->next;
+		}
+	}
 }
 
 #if defined(__cplusplus)
