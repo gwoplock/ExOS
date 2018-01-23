@@ -46,6 +46,13 @@ void *malloc(size_t size)
 		for (memHeader *i; i < &kernelEnd; i = i->next) {
 			if (next == nullptr && (current - top) > size && !(i->used)) {
 				//at end
+				current->used = true;
+				if(current->next ==((memHeader*)(((uint8_t*)current) + size)) ) {
+					((memHeader *)(((uint8_t *) current) + size))->used = false;
+					((memHeader * )(((uint8_t *) current) + size))->next = current->next;
+				}
+				current->used = true;
+				current->next = ((uint8_t *) current) + size;
 				return i;
 			} else if ((current - i->next) > size && !(i->used)) {
 				return i;
