@@ -9,19 +9,18 @@
 #include "Kernel.h"
 #include "memory/structures/PageTable.h"
 #include "memory/alloc/PageFrameAllocator.h"
-
+#include "memory/Mem.h"
 void *top;
-void*;
 
 /**
  * set up the vars needed for malloc
  */
 void mallocInit()
 {
-	top = (((size_t)(&kernelSize) + (uint32_t) & kernelStart - vKernelStart) / FOUR_KB + 1) * FOUR_KB +
-	      FOUR_KB - 1;
-	&kernelEnd->used = false;
-	&kernelEnd->next = nullptr;
+	top = (void*)((((size_t)(&kernelSize) + (uint32_t) & kernelStart - (uint32_t)pageTable.getKernelStart()) / FOUR_KB + 1) * FOUR_KB +
+	      FOUR_KB - 1);
+	((memHeader*)&kernelEnd)->used = false;
+	((memHeader*)&kernelEnd)->next = nullptr;
 
 	/*
 	base = &kernelEnd;
@@ -44,16 +43,16 @@ void *malloc(size_t size)
 	//size_t space = (size_t) top - (size_t) & kernelEnd;
 	//if (space > size) {
 	//have space
-	for (memHeader *i = &kernelEnd; i < top; i = i->next) {
-		if (next == nullptr && (i - top) > size && !(i->used)) {
+	for (memHeader *i = (memHeader*)&kernelEnd; i < top; i = i->next) {
+		if (i->next == nullptr && ((uint32_t)i - (uint32_t)top) > size && !(i->used)) {
 			//at end
-			current->used = true;
-			if (current->next == ((memHeader * )(((uint8_t *) i + 1) + size))) {
+			i->used = true;
+			if (i->next == ((memHeader * )(((uint8_t *) i + 1) + size))) {
 				((memHeader * )(((uint8_t *) i + 1) + size))->used = false;
 				((memHeader * )(((uint8_t *) i + 1) + size))->next = i->next;
 			}
 			i->used = true;
-			i->next = ((uint8_t *) i + 1) + size;
+			i->next = (memHeader*)(((uint8_t *) i + 1) + size);
 			return i + sizeof(memHeader);
 		} else if ((i - i->next) > size && !(i->used)) {
 			return i + sizeof(memHeader);
@@ -62,8 +61,8 @@ void *malloc(size_t size)
 	//} else {
 	//need to page in
 	//TODO handle out of mem
-	void *startOfNewMem = frameAlloc.allocatePhysMem(size - space, pageTable.getKernelStart());
-	size_t sizeOfNewMem = ((size - space) / FOUR_KB + (((size - space) & 0xFFF) != 0)) * FOUR_KB;
+	void *startOfNewMem = frameAlloc.allocatePhysMem(size, pageTable.getKernelStart());
+	size_t sizeOfNewMem = ((size) / FOUR_KB + (((size) & 0xFFF) != 0)) * FOUR_KB;
 	top = (void *) ((size_t) top + sizeOfNewMem + ((size_t) startOfNewMem - (size_t) top));
 	return malloc(size);
 	//}
@@ -93,14 +92,14 @@ void *malloc(size_t size)
  */
 void free(void *ptr)
 {
-	memHeader *i = &kernelEnd;
+	memHeader *i = (memHeader*)&kernelEnd;
 	for (; i < top && i->next <= ptr && i->next->next > ptr; i = i->next);
 	//TODO hmm something is fishy about this
 	if (i == top) {
-		ptr->next = i->next;
+		((memHeader*)ptr)->next = i->next;
 	}
-	ptr->used = false;
-	i->next = ptr;
+	((memHeader*)ptr)->used = false;
+	i->next = (memHeader*)ptr;
 	compFreeSpace();
 }
 
@@ -110,7 +109,7 @@ void free(void *ptr)
 
 void compFreeSpace()
 {
-	for (memHeader *i = &kernelEnd; i < top; i = i->next) {
+	for (memHeader *i = (memHeader*)&kernelEnd; i < top; i = i->next) {
 		if (i->used == false && i->next->used == false) {
 			i->next = i->next->next;
 		}
@@ -119,18 +118,18 @@ void compFreeSpace()
 
 void *realloc(void *ptr, size_t size)
 {
-	memHeader *i = &kernelEnd;
+	memHeader *i = (memHeader*)&kernelEnd;
 	for (; i < top && i->next <= ptr && i->next->next > ptr; i = i->next);
 	memHeader *next = i->next;
-	if ((uint8_t) ptr + size == next) {
+	if ((uint8_t*) ptr + size == (uint8_t*)next) {
 		return ptr;
-	} else if ((uint8_t) ptr + size < next) {
+	} else if ((uint8_t*) ptr + size < (uint8_t*)next) {
 		free((uint8_t *) ptr + size);
 		return ptr;
-	} else if ((uint8_t) ptr + size < next) {
+	} else if ((uint8_t*) ptr + size < (uint8_t*)next) {
 		if (!next->used) {
 			size_t found = 0;
-			while (!next->used && next->next != nullptr && found <= size - i - next){
+			while (!next->used && next->next != nullptr && found <= size - (uint32_t)i - (uint32_t)next){
 				found += next - next->next;
 				next = next->next;
 			}
@@ -141,9 +140,8 @@ void *realloc(void *ptr, size_t size)
 		}
 		void* res = malloc(size);
 		memcpy(res, ptr, i-next);
-		free(prt);
+		free(ptr);
 		return res;
-		//malloc, copy free
 	}
 
 }
