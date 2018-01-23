@@ -10,15 +10,16 @@
 #include "memory/structures/PageTable.h"
 #include "memory/alloc/PageFrameAllocator.h"
 
-int topPaged;
+void *top;
+void*;
 
 /**
  * set up the vars needed for malloc
  */
 void mallocInit()
 {
-	topPaged = (((size_t)(&kernelSize) + (uint32_t) & kernelStart - vKernelStart) / FOUR_KB + 1) * FOUR_KB +
-	           FOUR_KB - 1;
+	top = (((size_t)(&kernelSize) + (uint32_t) & kernelStart - vKernelStart) / FOUR_KB + 1) * FOUR_KB +
+	      FOUR_KB - 1;
 	&kernelEnd->used = false;
 	&kernelEnd->next = nullptr;
 
@@ -39,6 +40,26 @@ extern "C" {/* Use C linkage for kernel_main. */
  */
 void *malloc(size_t size)
 {
+	//size_t space = (size_t) top - (size_t) & kernelEnd;
+	//if (space > size) {
+		//have space
+		for (memHeader *i; i < &kernelEnd; i = i->next) {
+			if (next == nullptr && (current - top) > size && !(i->used)) {
+				//at end
+				return i;
+			} else if ((current - i->next) > size && !(i->used)) {
+				return i;
+			}
+		}
+	//} else {
+		//need to page in
+		//TODO handle out of mem
+		void *startOfNewMem = frameAlloc.allocatePhysMem(size - space, pageTable.getKernelStart());
+		size_t sizeOfNewMem = ((size - space) / FOUR_KB + (((size - space) & 0xFFF) != 0)) * FOUR_KB;
+		top = (void *) ((size_t) top + sizeOfNewMem + ((size_t) startOfNewMem - (size_t) top));
+		return malloc(size);
+	//}
+
 	/*
 	size_t space = (size_t) top - (size_t) base;
 	if (space > size) {
