@@ -44,7 +44,7 @@ void *malloc(size_t size)
 	//size_t space = (size_t) top - (size_t) & kernelEnd;
 	//if (space > size) {
 	//have space
-	for (memHeader *i; i < &kernelEnd; i = i->next) {
+	for (memHeader *i = &kernelEnd; i < top; i = i->next) {
 		if (next == nullptr && (i - top) > size && !(i->used)) {
 			//at end
 			current->used = true;
@@ -93,7 +93,13 @@ void *malloc(size_t size)
  */
 void free(void *ptr)
 {
-//TODO
+	memHeader *i =&kernelEnd;
+	for(; i < top && i->next <= ptr && i->next->next >ptr; i = i->next);
+	if(i == top){
+		ptr->next = i->next;
+	}
+	ptr->used = false;
+	i->next=ptr;
 }
 
 #if defined(__cplusplus)
