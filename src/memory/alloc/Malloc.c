@@ -40,28 +40,38 @@ extern "C" {/* Use C linkage for kernel_main. */
 void *malloc(size_t size)
 {
 	//TODO for loop
-	memHeaer* c = &kernelEnd;
+	memHeader* c = (memHeader*)&kernelEnd;
 	for (; c != nullptr; c = c->next) {
 		if (c->next == nullptr) {
-			if (c - top >= (size + sizeof(memHeader)) && !c->used) {
-				//TODO alloc
-				//TODO new header
-				//TODO return
+			if ((uint32_t)c - (uint32_t)top >= (size + sizeof(memHeader)) && !c->used) {
+				//TODO this may not work
+				memHeader* temp = (memHeader*)(((uint8_t*)(c+1)) + size);
+				temp->next = c->next;
+				temp->used = false;
+				c->next = temp;
+				c->used = true;
+				return c+1;
 			} else {
-				//TODO new page frame
+				void* startOfNewMem = frameAlloc.allocatePhysMem(size,pageTable.getKernelStart());
+				size_t sizeOfNewMem = ((size)/FOUR_KB + ( (size & 0xFFF) != 0)) * FOUR_KB;
+				top = (void*) ((size_t) top + sizeOfNewMem + ((size_t)startOfNewMem - (size_t)top) );
+				return malloc(size);
 			}
 		} else if (!c->used && (c->next - c) == size) {
-			//TODO alloc
-			//TODO return
+			c->used = true;
+			return c+1;
 		} else if (!c->used && (c->next - c) >= (size + sizeof(memHeader))) {
-			//TODO alloc
-			//TODO new header
-			//TODO return
+			memHeader* temp = (memHeader*)(((uint8_t*)(c+1)) + size);
+			temp->next = c->next;
+			temp->used = false;
+			c->next = temp;
+			c->used = true;
+			return c+1;
 		} else {
-			//TODO continue
+			continue;
 		}
 	}
-	
+
 	/*size += sizeof(memHeader);
 	//size_t space = (size_t) top - (size_t) & kernelEnd;
 	//if (space > size) {
