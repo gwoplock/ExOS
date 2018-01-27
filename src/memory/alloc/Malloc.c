@@ -39,7 +39,27 @@ extern "C" {/* Use C linkage for kernel_main. */
  */
 void *malloc(size_t size)
 {
-	size += sizeof(memHeader);
+	//TODO for loop
+	memHeaer* c = nullptr;
+	if(c->next == nullptr){
+		if(c-top >= (size + sizeof(memHeader)) && !c->used){
+			//TODO alloc
+			//TODO new header
+			//TODO return
+		} else {
+			//TODO new page frame
+		}
+	} else if(!c->used && (c->next - c) == size ){
+		//TODO alloc
+		//TODO return
+	} else if (!c->used && (c->next - c) >= (size + sizeof(memHeader))){
+		//TODO alloc
+		//TODO new header
+		//TODO return
+	} else {
+		//TODO continue
+	}
+	/*size += sizeof(memHeader);
 	//size_t space = (size_t) top - (size_t) & kernelEnd;
 	//if (space > size) {
 	//have space

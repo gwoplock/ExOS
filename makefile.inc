@@ -3,7 +3,7 @@ GPP = i686-elf-g++
 GCC = i686-elf-gcc
 OS_CPP = /Users/garrettbattaglia/Documents/dev/Exos/exos
 BUILD_TO = /Users/garrettbattaglia/Documents/dev/Exos/exos/kernel.bin
-CFLAGS = -c -ffreestanding -O2 -Wall -Wextra -fno-rtti -fno-exceptions -std=gnu++14 -I$(OS_CPP)/src
+CFLAGS = -c -ffreestanding -O2 -Wall -Wextra -fno-rtti -fno-exceptions -g -std=gnu++14 -I$(OS_CPP)/src
 OBJ_DIR = $(OS_CPP)/build
 
 %.o: %.c
