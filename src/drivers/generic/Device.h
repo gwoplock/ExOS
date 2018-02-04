@@ -1,3 +1,6 @@
+#ifndef DEVICE_H_
+#define DEVICE_H_
+
 #include "Global.h"
 
 
@@ -17,3 +20,5 @@ class Device
 };
 
 extern Device* deviceList;
+
+#endif
