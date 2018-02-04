@@ -13,7 +13,6 @@ class Device
 
   public:
     Device():_Id(++lastDeviceId){
-
     }
 };
 
