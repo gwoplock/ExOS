@@ -1,4 +1,10 @@
-#include "Device.h"
+#include "Global.h"
+
+
+
+
+uint32_t lastDeviceId;
+
 
 class Device
 {
@@ -9,8 +15,6 @@ class Device
     Device():_Id(++lastDeviceId){
 
     }
-}
+};
 
-Device *deviceList;
-
-uint32_t lastDeviceId;
+Device* deviceList = nullptr;
