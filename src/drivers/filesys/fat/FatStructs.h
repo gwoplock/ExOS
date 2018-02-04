@@ -52,7 +52,14 @@ struct FatNormalFileName {
 };
 
 struct FatLongFileName {
-
+	uint8_t order;
+	uint16_t nameFirst[5];
+	uint8_t attribute;
+	uint8_t type;
+	uint8_t checksum;
+	uint16_t nameMid[5];
+	uint16_t zero;
+	uint16_t nameEnd[2];
 };
 
 #endif //EXOS_FATSTRUCTS_H
