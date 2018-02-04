@@ -13,6 +13,12 @@ class Fat12FSNode: public FSNode {
 	private:
 		uint32_t startCluster;
 	public:
+		Fat12FSNode(char* name, uint32_t size, Type type, uint32_t cluster):FSNode(name,size,type), startCluster(cluster){
+
+		}
+		Fat12FSNode():FSNode(){
+			
+		}
 		virtual uint32_t startSector(){
 
 		}

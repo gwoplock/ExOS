@@ -5,12 +5,4 @@
  *      Author: garrett
  */
 
-Fat12FSNode::Fat12FSNode( ) {
-	// TODO Auto-generated constructor stub
-
-}
-
-Fat12FSNode::~Fat12FSNode( ) {
-	// TODO Auto-generated destructor stub
-}
-
+#include "Fat12FSNode.h"

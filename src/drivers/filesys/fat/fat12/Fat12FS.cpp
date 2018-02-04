@@ -75,9 +75,18 @@ void Fat12FS::parseEntry(uint8_t* sector){
 		_tempLongName[tempLeng+10+10+4+1] = '\0';
 
 	} else {
-		//normal file name
+		FatNormalFileName* entry = (FatNormalFileName*) sector;
+		Type type = (entry->attribute && 0x10) != 0 ? DIR : FILE;
+		char* name  = nullptr;
 		if(false /*have long file name stored*/){
-			//end of name, add name to entry we just read
+			name = (char*) malloc(strlen(_tempLongName) * sizeof(uint16_t));
+			memcpy(name, _tempLongName, strlen(_tempLongName)*2);
+		} else {
+			name = (char*) malloc(strlen((char*)entry->name) * sizeof(uint8_t));
+			memcpy(name, entry->name, strlen((char*)entry->name));
 		}
+		uint32_t size =  entry->size;
+		uint32_t cluster = entry->lowClusterNumber;
+		Fat12FSNode* tmp = new Fat12FSNode(name, size, type, cluster);
 	}
 }
