@@ -14,7 +14,7 @@ class Fat12File;
 class Fat12FS : public FS{
 	private:
 		FatBPB* _FSInfo;
-		char* _tempLongName;
+		char* _tempLongName = nullptr;
 	public:
 		File *open(char *path, int flags, int mode);
 

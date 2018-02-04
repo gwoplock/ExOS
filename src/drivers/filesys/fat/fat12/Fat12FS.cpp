@@ -35,17 +35,27 @@ bool Fat12FS::readCluster(uint16_t cluster, void* fileLoc, size_t fileLocSize) {
 void Fat12FS::buildDirStructure( ) {
 	_root = new Fat12FSNode( );
 	uint8_t* tempSector = (uint8_t*) malloc(_FSInfo->bytePerSec);
+	uint8_t sectorOffset = 0;
 	uint16_t startSector = (_FSInfo->resSec)
 			+ (_FSInfo->FATs * _FSInfo->secPerFAT);
 	uint16_t rootDirSize = (float) _FSInfo->dirEntryCount
 			/ (float) _FSInfo->bytePerSec
 			+ (_FSInfo->dirEntryCount % _FSInfo->bytePerSec != 0);
+			//_device->read(startSector+i, tempCluster)
+			//TODO there may be an issue if the size of a sector != a mult of the size of an entry... we will deal with that latter
 	for (size_t i = 0; i < rootDirSize; i++) {
-		//_device->read(startSectot+i, tempCluster)
-		if(tempSector[0] == 0){
+		if(tempSector[sectorOffset] == 0){
 			break;
 		}
-		parseEntry(tempSector);
+		parseEntry(tempSector + sectorOffset);
+		if (_tempLongName == nullptr){
+			sectorOffset += sizeof(FatNormalFileName);
+		} else {
+			sectorOffset += sizeof(FatLongFileName);
+		}
+		if (sectorOffset >= _FSInfo->bytePerSec){
+			//_device->read(startSectot+i, tempCluster)
+		}
 	}
 }
 
