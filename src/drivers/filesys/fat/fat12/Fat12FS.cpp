@@ -5,12 +5,24 @@
 #include "Fat12FS.h"
 #include "Fat12File.h"
 #include "Fat12FSNode.h"
-#include "drivers/TTY/Console.h"
+#include "utils/string/Split.h"
 
 File *Fat12FS::open(char *path, int flags, int mode) {
-	//TODO find file
-	Fat12File *ret = new Fat12File(0);
+	Fat12FSNode* file = find(path,(Fat12FSNode*)_root );
+	Fat12File *ret = new Fat12File(file->startCluster());
 	return ret;
+}
+
+Fat12FSNode* Fat12FS::find(char* path, Fat12FSNode* root){
+	char** split = strSplit(path, '/');
+	if (split == nullptr){
+		return root;
+	}
+	for (int i=0; i< root->childernCount(); i++){
+		if (strcmp(root->children()[i]->name(), split[0]) == 0){
+			return find(split[1], (Fat12FSNode*)root->children()[i]);
+		}
+	}
 }
 
 //todo names, var sizes, structure taken from osdev wiki

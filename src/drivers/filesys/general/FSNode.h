@@ -44,6 +44,9 @@ class FSNode{
 		Type type(){
 			return _type;
 		}
+		char* name(){
+			return _name;
+		}
 		virtual uint32_t startSector() = 0;
 		//Permissions permissons();
 };

@@ -88,18 +88,7 @@ void terminalPutChar(char c);
  * @param length
  */
 void terminalWrite(const char* data, size_t size);
-/**
- * Get string length
- * @param string
- * @return length
- */
-#if defined(__cplusplus)
-extern "C" {/* Use C linkage for kernel_main. */
-#endif
-size_t strlen(const char* str);
-#if defined(__cplusplus)
-}
-#endif
+
 /**
  * Print string of unknown length
  * @param string to print

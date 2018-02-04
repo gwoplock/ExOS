@@ -20,6 +20,8 @@
 #include "clib_misc/Abort.h"
 #include "clib_misc/Assert.h"
 #include "memory/Mem.h"
+#include "utils/string/StrCmp.h"
+#include "utils/string/StrLen.h"
 
 //bochs breakpoing ASM
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");

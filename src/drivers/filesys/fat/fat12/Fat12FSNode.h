@@ -11,9 +11,9 @@
 
 class Fat12FSNode: public FSNode {
 	private:
-		uint32_t startCluster;
+		uint32_t _startCluster;
 	public:
-		Fat12FSNode(char* name, uint32_t size, Type type, uint32_t cluster):FSNode(name,size,type), startCluster(cluster){
+		Fat12FSNode(char* name, uint32_t size, Type type, uint32_t cluster):FSNode(name,size,type), _startCluster(cluster){
 
 		}
 		Fat12FSNode():FSNode(){
@@ -24,6 +24,9 @@ class Fat12FSNode: public FSNode {
 		}
 		virtual ~Fat12FSNode( ){
 
+		}
+		uint32_t startCluster(){
+			return _startCluster;
 		}
 };
 

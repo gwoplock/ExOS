@@ -26,6 +26,7 @@ class Fat12FS : public FS{
 		void buildDirStructure();
 		Fat12FSNode* parseEntry(uint8_t* sector);
 		void buildTree(Fat12FSNode* root);
+		Fat12FSNode* find(char* path, Fat12FSNode* root);
 };
 
 #endif //EXOS_FAT12_H
