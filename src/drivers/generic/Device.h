@@ -3,7 +3,7 @@
 
 
 
-uint32_t lastDeviceId;
+extern uint32_t lastDeviceId;
 
 
 class Device
@@ -16,4 +16,4 @@ class Device
     }
 };
 
-Device* deviceList = nullptr;
+extern Device* deviceList;

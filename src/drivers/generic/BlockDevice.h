@@ -4,5 +4,5 @@
 class BlockDevice :public Device{
 private:
 public:
-virtual read() = 0;
-}
+virtual void read(uint32_t sector, void* readTo) = 0;
+};

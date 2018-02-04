@@ -1,4 +1,4 @@
 SUBDIRS = 
-OBS= Device.o
+OBS= Device.o BlockDevice.o CharDevice.o
 
 include ../../../makefile.inc
