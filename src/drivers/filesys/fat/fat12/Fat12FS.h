@@ -25,6 +25,7 @@ class Fat12FS : public FS{
 		bool readCluster(uint16_t cluser, void* fileLoc, size_t fileLocSize);
 		void buildDirStructure();
 		Fat12FSNode* parseEntry(uint8_t* sector);
+		void buildTree(Fat12FSNode* root);
 };
 
 #endif //EXOS_FAT12_H

@@ -34,8 +34,9 @@ bool Fat12FS::readCluster(uint16_t cluster, void* fileLoc, size_t fileLocSize) {
 }
 //TODO check var sizes
 void Fat12FS::buildDirStructure( ) {
-	_root = new Fat12FSNode( );
-	uint8_t* tempSector = (uint8_t*) malloc(_FSInfo->bytePerSec);
+	//This conversion may not work correctly... oh well
+	_root = new Fat12FSNode("Root", 0, DIR, ( (_FSInfo->resSec) + (_FSInfo->FATs * _FSInfo->secPerFAT) )/_FSInfo->secPerCluster);
+	/*uint8_t* tempSector = (uint8_t*) malloc(_FSInfo->bytePerSec);
 	uint8_t sectorOffset = 0;
 	uint16_t startSector = (_FSInfo->resSec)
 			+ (_FSInfo->FATs * _FSInfo->secPerFAT);
@@ -56,11 +57,43 @@ void Fat12FS::buildDirStructure( ) {
 		}
 		if(ret != nullptr){
 			_root->add(ret);
+			if(ret->type() == DIR){
+				buildTree(ret);
+			}
 		}
 		if (sectorOffset >= _FSInfo->bytePerSec){
 			//_device->read(startSectot+i, tempCluster)
 		}
+	}*/
+	buildTree((Fat12FSNode*)_root);
+}
+
+void Fat12FS::buildTree(Fat12FSNode* dir){
+	uint8_t* tempSector = (uint8_t*) malloc(_FSInfo->bytePerSec);
+	size_t offset = 0;
+	while(tempSector[offset] != 0){
+		Fat12FSNode* ret = parseEntry(tempSector + offset);
+		if (_tempLongName == nullptr){
+			offset += sizeof(FatNormalFileName);
+		} else {
+			offset += sizeof(FatLongFileName);
+		}
+		if(ret != nullptr){
+			_root->add(ret);
+			if(ret->type() == DIR){
+				buildTree(ret);
+			}
+		}
+		if (offset >= _FSInfo->bytePerSec){
+			//_device->read(startSectot+i, tempCluster)
+		}
 	}
+	/*for (size_t i =0; i<dir->childernCount() ; i++){
+		if(root->children()[i]->type() == DIR){
+			//TODO add
+		}
+	}*/
+	free(tempSector);
 }
 
 Fat12FSNode* Fat12FS::parseEntry(uint8_t* sector){
