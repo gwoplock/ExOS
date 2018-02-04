@@ -42,10 +42,23 @@ void Fat12FS::buildDirStructure( ) {
 			+ (_FSInfo->dirEntryCount % _FSInfo->bytePerSec != 0);
 	for (size_t i = 0; i < rootDirSize; i++) {
 		//_device->read(startSectot+i, tempCluster)
+		if(tempSector[0] == 0){
+			break;
+		}
 		parseEntry(tempSector);
 	}
 }
 
 void Fat12FS::parseEntry(uint8_t* sector){
-
+	if(sector[0] == 0xE5){
+		return;
+	}
+	if (sector[10] == 0x0F){
+		//long file name
+	} else {
+		//normal file name
+		if(false /*have long file name stored*/){
+			//end of name, add name to entry we just read
+		}
+	}
 }
