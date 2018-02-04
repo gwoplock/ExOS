@@ -5,6 +5,7 @@
 #include "Fat12FS.h"
 #include "Fat12File.h"
 #include "Fat12FSNode.h"
+#include "drivers/TTY/Console.h"
 
 File *Fat12FS::open(char *path, int flags, int mode) {
 	//TODO find file
@@ -64,7 +65,15 @@ void Fat12FS::parseEntry(uint8_t* sector){
 		return;
 	}
 	if (sector[10] == 0x0F){
-		//long file name
+		//i belive this wont overrun and will end with a null in the right spot. also i hope this doesnt add a null somewhere
+		FatLongFileName* entry = (FatLongFileName*)sector;
+		uint32_t tempLeng = strlen(_tempLongName);
+		_tempLongName = (char*) realloc(_tempLongName, tempLeng + 10+10+4);
+		memcpy(_tempLongName+tempLeng, &entry->nameFirst, 10);
+		memcpy(_tempLongName+tempLeng +10, &entry->nameMid, 10);
+		memcpy(_tempLongName+tempLeng+10+10, &entry->nameEnd, 4);
+		_tempLongName[tempLeng+10+10+4+1] = '\0';
+
 	} else {
 		//normal file name
 		if(false /*have long file name stored*/){

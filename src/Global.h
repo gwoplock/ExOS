@@ -19,6 +19,7 @@
 #include "memory/alloc/New.h"
 #include "clib_misc/Abort.h"
 #include "clib_misc/Assert.h"
+#include "memory/Mem.h"
 
 //bochs breakpoing ASM
 #define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");
