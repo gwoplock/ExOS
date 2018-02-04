@@ -31,6 +31,10 @@ class FSNode{
 			_children = nullptr;
 			_childernCount = 0;
 		}
+		void add(FSNode* toAdd){
+			_children = (FSNode**) realloc(_children, sizeof(FSNode*) * (++_childernCount));
+			_children[_childernCount-1] = toAdd;
+		}
 		virtual uint32_t startSector() = 0;
 		//Permissions permissons();
 };

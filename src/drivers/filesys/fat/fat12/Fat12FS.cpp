@@ -48,11 +48,14 @@ void Fat12FS::buildDirStructure( ) {
 		if(tempSector[sectorOffset] == 0){
 			break;
 		}
-		parseEntry(tempSector + sectorOffset);
+		Fat12FSNode* ret = parseEntry(tempSector + sectorOffset);
 		if (_tempLongName == nullptr){
 			sectorOffset += sizeof(FatNormalFileName);
 		} else {
 			sectorOffset += sizeof(FatLongFileName);
+		}
+		if(ret != nullptr){
+			_root->add(ret);
 		}
 		if (sectorOffset >= _FSInfo->bytePerSec){
 			//_device->read(startSectot+i, tempCluster)
@@ -60,9 +63,9 @@ void Fat12FS::buildDirStructure( ) {
 	}
 }
 
-void Fat12FS::parseEntry(uint8_t* sector){
+Fat12FSNode* Fat12FS::parseEntry(uint8_t* sector){
 	if(sector[0] == 0xE5){
-		return;
+		return nullptr;
 	}
 	if (sector[10] == 0x0F){
 		//i belive this wont overrun and will end with a null in the right spot. also i hope this doesnt add a null somewhere
@@ -73,7 +76,7 @@ void Fat12FS::parseEntry(uint8_t* sector){
 		memcpy(_tempLongName+tempLeng +10, &entry->nameMid, 10);
 		memcpy(_tempLongName+tempLeng+10+10, &entry->nameEnd, 4);
 		_tempLongName[tempLeng+10+10+4+1] = '\0';
-
+		return nullptr;
 	} else {
 		FatNormalFileName* entry = (FatNormalFileName*) sector;
 		Type type = (entry->attribute && 0x10) != 0 ? DIR : FILE;
@@ -87,6 +90,7 @@ void Fat12FS::parseEntry(uint8_t* sector){
 		}
 		uint32_t size =  entry->size;
 		uint32_t cluster = entry->lowClusterNumber;
-		Fat12FSNode* tmp = new Fat12FSNode(name, size, type, cluster);
+		return new Fat12FSNode(name, size, type, cluster);
+		
 	}
 }

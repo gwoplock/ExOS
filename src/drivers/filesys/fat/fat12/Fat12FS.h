@@ -8,6 +8,7 @@
 #include "drivers/filesys/fat/FatStructs.h"
 #include "Global.h"
 #include "drivers/filesys/general/FS.h"
+#include "Fat12FSNode.h"
 
 class Fat12File;
 
@@ -23,7 +24,7 @@ class Fat12FS : public FS{
 		}
 		bool readCluster(uint16_t cluser, void* fileLoc, size_t fileLocSize);
 		void buildDirStructure();
-		void parseEntry(uint8_t* sector);
+		Fat12FSNode* parseEntry(uint8_t* sector);
 };
 
 #endif //EXOS_FAT12_H
