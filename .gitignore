@@ -11,3 +11,5 @@ bx_enh_dbg.ini
 .idea/
 cmake-build-debug/
 kernel.bin
+.idea/
+cmake-build-debug/

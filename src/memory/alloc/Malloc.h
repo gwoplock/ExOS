@@ -46,4 +46,6 @@ void free(void *ptr);
 
 void compFreeSpace();
 
+void *realloc(void *ptr, size_t size);
+
 #endif /* MALLOC_H_ */
