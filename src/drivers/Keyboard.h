@@ -123,6 +123,12 @@ class Keyboard :public CharDevice {
 		uint16_t* getModkeys( ) {
 			return &modKeys;
 		}
+		virtual void read(char* readTo){
+			*readTo = getKey();
+		}
+		virtual char read(){
+			return getKey();
+		}
 };
 
 #endif /* KEYBOARD_H_ */

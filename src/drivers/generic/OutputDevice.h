@@ -7,7 +7,7 @@ class OutputDevice : public Device
 {
   private:
   public:
-  void write(char* toWrite, size_t size);
+  virtual void write(char* toWrite, size_t size) = 0;
 };
 
 #endif

@@ -7,8 +7,8 @@ class CharDevice : public Device
 {
   private:
   public:
-  void read(char* readTo);
-  char read();
+  virtual void read(char* readTo) =0 ;
+  virtual char read()=0;
 };
 
 #endif
