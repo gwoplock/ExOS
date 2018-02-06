@@ -4,7 +4,7 @@
 char **strSplit(char *to_split, char delim)
 {
 	int spl_ind = -1;
-	for (int i = 0; i < strlen(to_split); i++) {
+	for (unsigned int i = 0; i < strlen(to_split); i++) {
 		if (to_split[i] == delim) {
 			spl_ind = i;
 			break;
