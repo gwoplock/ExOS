@@ -73,7 +73,7 @@ void *malloc(size_t size)
 			continue;
 		}
 	}
-
+return nullptr;
 	/*size += sizeof(memHeader);
 	//size_t space = (size_t) top - (size_t) & kernelEnd;
 	//if (space > size) {
@@ -178,5 +178,5 @@ void *realloc(void *ptr, size_t size)
 		free(ptr);
 		return res;
 	}
-
+return null;
 }
