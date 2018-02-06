@@ -7,6 +7,8 @@ class CharDevice : public Device
 {
   private:
   public:
+  void read(char* readTo);
+  char read();
 };
 
 #endif

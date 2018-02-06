@@ -3,8 +3,11 @@
 
 #include "Device.h"
 
-class OutputDevice: public Device{
-
+class OutputDevice : public Device
+{
+  private:
+  public:
+  void write(char* toWrite, size_t size);
 };
 
 #endif
