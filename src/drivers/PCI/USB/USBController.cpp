@@ -7,6 +7,7 @@
 
 #include "drivers/PCI/USB/USBController.h"
 
+
 USBController::USBController( ) {
 	// TODO Auto-generated constructor stub
 

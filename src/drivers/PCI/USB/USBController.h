@@ -9,8 +9,9 @@
 #define USBCONTROLLER_H_
 
 #include "Global.h"
+#include "drivers/PCI/PCI_devices/PCIStandardDevice.h"
 
-class USBController {
+class USBController :public PCIStandardDevice{
 	public:
 		USBController( );
 };
