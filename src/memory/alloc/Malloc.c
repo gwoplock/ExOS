@@ -178,5 +178,5 @@ void *realloc(void *ptr, size_t size)
 		free(ptr);
 		return res;
 	}
-return null;
+return nullptr;
 }
