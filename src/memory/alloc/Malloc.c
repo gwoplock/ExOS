@@ -59,10 +59,10 @@ void *malloc(size_t size)
 				top = (void*) ((size_t) top + sizeOfNewMem + ((size_t)startOfNewMem - (size_t)top) );
 				return malloc(size);
 			}
-		} else if (!c->used && (c->next - c) == size) {
+		} else if (!c->used && (unsigned)(c->next - c) == size) {
 			c->used = true;
 			return c+1;
-		} else if (!c->used && (c->next - c) >= (size + sizeof(memHeader))) {
+		} else if (!c->used && (unsigned)(c->next - c) >= (size + sizeof(memHeader))) {
 			memHeader* temp = (memHeader*)(((uint8_t*)(c+1)) + size);
 			temp->next = c->next;
 			temp->used = false;
@@ -73,7 +73,7 @@ void *malloc(size_t size)
 			continue;
 		}
 	}
-
+return nullptr;
 	/*size += sizeof(memHeader);
 	//size_t space = (size_t) top - (size_t) & kernelEnd;
 	//if (space > size) {
@@ -102,7 +102,7 @@ void *malloc(size_t size)
 	return malloc(size);
 	//}
 
-	/*
+	
 	size_t space = (size_t) top - (size_t) base;
 	if (space > size) {
 		//if there is space in the current phys mem allocated
@@ -178,5 +178,5 @@ void *realloc(void *ptr, size_t size)
 		free(ptr);
 		return res;
 	}
-
+return nullptr;
 }
