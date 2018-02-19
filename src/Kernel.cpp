@@ -70,24 +70,6 @@ void kernelMain(multiboot_info_t *mbd)
 	PCIDeviceList usbHostControllers(0x0C, 0x03, false);
 	terminalWriteLine(" Done!");
 	terminalWriteLine("!!!!ExOS fully booted!!!!");
-	printf("Test printf %d %c\n", 42, 'B');
-	printf("Newline is 0x%x%c", '\n', '\n');
-	uint32_t i = (uint32_t) malloc(10);
-	printf("malloc returned 0x%x\n", i);
-	i = (uint32_t)malloc(100);
-	printf("malloc returned 0x%x\n", i);
-	 i =(uint32_t) malloc(50);
-	printf("malloc returned 0x%x\n", i);
-	 i = (uint32_t)malloc(1);
-	printf("malloc returned 0x%x\n", i);
-	printf("freeing 1 byte");
-	free((void*)i);
-	 i = (uint32_t)malloc(1);
-	printf("malloc returned 0x%x\n", i);
-/*
-	for (int cx = 0; cx < 10; cx++) {
-		printf("%d", cx);
-	}*/
 	//dont return.
 	while (true) {
 		asm("hlt");
