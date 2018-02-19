@@ -7,6 +7,20 @@
 
 #include "drivers/PCI/PCI.h"
 
+uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
+{
+	ConfigAddress addr;
+	addr.enable = 1;
+	addr.zero1 = 0;
+	addr.zero2 = 0;
+	addr.registerNum = offset;
+	addr.functionNum = function;
+	addr.deviceNum = device;
+	addr.busNum = bus;
+	outl(0xcf8, *(uint32_t*)&addr);
+	return inl(0xCFC);
+}
+
 /*
 //TODO clean up a lot
 

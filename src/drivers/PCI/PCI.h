@@ -10,8 +10,24 @@
 
 #include "Global.h"
 
-/*
 extern int8_t MAX_PCI_FUNCTIONS;
+
+struct ConfigAddress
+{
+	uint8_t zero1 : 2;
+	uint8_t registerNum : 6;
+	uint8_t functionNum : 3;
+	uint8_t deviceNum : 5;
+	uint8_t busNum : 8;
+	uint8_t zero2 : 7;
+	uint8_t enable : 1;
+};
+
+uint32_t
+readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset);
+
+/*
+
 /**
  * bool array of valid PCI buses
  
