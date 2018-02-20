@@ -46,6 +46,7 @@ uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function)
 
 void checkPCIBus(uint8_t bus)
 {
+	printf("    Checking bus: %d\n", bus)
 	for (uint8_t device = 0; device < MAX_PCI_DEVICES_PER_BUS; device++)
 	{
 		for (uint8_t func = 0; func < MAX_PCI_FUNCTIONS; func++)
@@ -60,18 +61,15 @@ void checkPCIBus(uint8_t bus)
 
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 {
-	printf("    Found device at bus: %d, device: %d, func: %d\n", bus, device, func);
-	printf("      The vender id is %x\n", getPCIVender(bus, device, func));
+	printf("      Found device at bus: %d, device: %d, func: %d\n", bus, device, func);
+	printf("        The vender id is %x\n", getPCIVender(bus, device, func));
 	uint32_t classCode = getPCIClass(bus, device, func);
 	printf("      Has a class code of %x\n", classCode);
 	if (classCode == 0x604)
 	{
 		uint8_t secondBus = getPCISecondBus(bus, device, func);
-		printf("      is a PCI->PCI with a 2nd bus of %d\n", secondBus);
-		if (secondBus != bus)
-		{
+		printf("        is a PCI->PCI with a 2nd bus of %d\n", secondBus);
 			checkPCIBus(secondBus);
-		}
 	}
 }
 
