@@ -58,9 +58,14 @@ void checkPCIBus(uint8_t bus)
 
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 {
-	printf("  found device at bus: %d, device: %d, func: %d\n", bus, device, func);
+	printf("    found device at bus: %d, device: %d, func: %d\n", bus, device, func);
+	uint16_t classCode = getPCIClass(bus, device, func);
+	printf("      Has a class code of %x\n", classCode);
 }
 
+uint16_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func){
+	return readPCIConfigWord(bus, device, func, 0x0A) & 0xFFFF;
+}
 /*
 //TODO clean up a lot
 
