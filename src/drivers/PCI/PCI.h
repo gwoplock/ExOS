@@ -22,7 +22,7 @@ struct ConfigAddress
 	uint8_t busNum : 8;
 	uint8_t zero2 : 7;
 	uint8_t enable : 1;
-};
+} __attribute__((__packed__));
 
 uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset);
 
@@ -34,8 +34,9 @@ void checkPCIBus(uint8_t bus);
 
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func);
 
-uint16_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func);
+uint32_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func);
 
+uint8_t getPCISecondBus(uint8_t bus, uint8_t device, uint8_t func);
 
 /*
 

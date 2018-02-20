@@ -8,22 +8,25 @@
 #include "drivers/PCI/PCI.h"
 #include "utils/printf/Printf.h"
 
+
 uint8_t MAX_PCI_FUNCTIONS = 7;
 uint8_t MAX_PCI_DEVICES_PER_BUS = 32;
 
-uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
+/*uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
 {
 	ConfigAddress addr;
 	addr.enable = 1;
 	addr.zero1 = 0;
 	addr.zero2 = 0;
-	addr.registerNum = offset;
+	addr.registerNum = offset & 0xFC;
 	addr.functionNum = function;
 	addr.deviceNum = device;
 	addr.busNum = bus;
+	//printf("reading PCI register: %x\n", *(uint32_t *)&addr);
 	outl(0xcf8, *(uint32_t *)&addr);
+	//printf( "read %x", inl(0xCFC));
 	return inl(0xCFC);
-}
+}*/
 
 void enumPCIDevices()
 {
@@ -58,14 +61,26 @@ void checkPCIBus(uint8_t bus)
 
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 {
-	printf("    found device at bus: %d, device: %d, func: %d\n", bus, device, func);
-	uint16_t classCode = getPCIClass(bus, device, func);
-	printf("      Has a class code of %x\n", classCode);
+	//printf("    Found device at bus: %d, device: %d, func: %d\n", bus, device, func);
+	//printf("      The vender id is %x\n", getPCIVender(bus,device,func));
+	uint32_t classCode = getPCIClass(bus, device, func);
+	//printf("      Has a class code of %x\n", classCode);
+	if (classCode == 0x604) {
+		uint8_t secondBus = getPCISecondBus(bus,device,func);
+		printf("      is a PCI->PCI with a 2nd bus of %d", secondBus);
+		checkPCIBus(secondBus);
+	}
 }
 
-uint16_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func){
-	return readPCIConfigWord(bus, device, func, 0x0A) & 0xFFFF;
+uint32_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func){
+	return readPCIConfigWord(bus, device, func, 10);
 }
+
+uint8_t getPCISecondBus(uint8_t bus, uint8_t device, uint8_t func){
+	printf("2nd bus: %d", readPCIConfigWord(bus,device,func, 18));
+	return readPCIConfigWord(bus,device,func,18) >> 8;
+}
+
 /*
 //TODO clean up a lot
 
@@ -134,22 +149,25 @@ uint16_t getPCIVenderID(uint8_t bus, uint8_t slot, uint8_t function) {
  * @param func
  * @param offset into config space
  * @return uint32 of the config space starting at offset.
- 
+ */
 uint32_t readPCIConfigWord(uint8_t bus, uint8_t slot, uint8_t func,
 		uint8_t offset) {
 	uint32_t address;
-	uint32_t lbus = (uint32_t) bus;
-	uint32_t lslot = (uint32_t) slot;
-	uint32_t lfunc = (uint32_t) func;
-	uint32_t tmp = 0;
-
-	address = (uint32_t)(
-			(lbus << 16) | (lslot << 11) | (lfunc << 8) | (offset & 0xfc)
-					| ((uint32_t) 0x80000000));
-
-	outl(0xCF8, address);
-	tmp = inl(0xCFC);
-	return (tmp);
+    uint32_t lbus  = (uint32_t)bus;
+    uint32_t lslot = (uint32_t)slot;
+    uint32_t lfunc = (uint32_t)func;
+    uint16_t tmp = 0;
+ 
+    /* create configuration address as per Figure 1 */
+    address = (uint32_t)((lbus << 16) | (lslot << 11) |
+              (lfunc << 8) | (offset & 0xfc) | ((uint32_t)0x80000000));
+ 
+    /* write out the address */
+    outl (0xCF8, address);
+    /* read in the data */
+    /* (offset & 2) * 8) = 0 will choose the first word of the 32 bits register */
+    tmp = (uint16_t)((inl (0xCFC) >> ((offset & 2) * 8)) & 0xffff);
+    return (tmp);
 }
 /**
  * check devices on bus for other buses
