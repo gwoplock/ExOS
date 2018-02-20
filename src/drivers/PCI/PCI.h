@@ -10,7 +10,7 @@
 
 #include "Global.h"
 
-extern int8_t MAX_PCI_FUNCTIONS;
+extern uint8_t MAX_PCI_FUNCTIONS;
 
 struct ConfigAddress
 {
@@ -23,8 +23,14 @@ struct ConfigAddress
 	uint8_t enable : 1;
 };
 
-uint32_t
-readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset);
+uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset);
+
+void enumPCIDevices();
+
+uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function);
+
+void checkPCIBus(uint8_t bus);
+
 
 /*
 

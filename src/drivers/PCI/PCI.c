@@ -7,6 +7,8 @@
 
 #include "drivers/PCI/PCI.h"
 
+uint8_t MAX_PCI_FUNCTIONS = 7;
+
 uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
 {
 	ConfigAddress addr;
@@ -17,14 +19,33 @@ uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_
 	addr.functionNum = function;
 	addr.deviceNum = device;
 	addr.busNum = bus;
-	outl(0xcf8, *(uint32_t*)&addr);
+	outl(0xcf8, *(uint32_t *)&addr);
 	return inl(0xCFC);
+}
+
+void enumPCIDevices()
+{
+	for (uint8_t func = 0; func <= MAX_PCI_FUNCTIONS; func++)
+	{
+		if (getPCIVender(0, 0, func) == 0xFFFF)
+		{
+			checkPCIBus(func);
+		}
+	}
+}
+
+uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function){
+
+}
+
+void checkPCIBus(uint8_t bus){
+
 }
 
 /*
 //TODO clean up a lot
 
-uint8_t MAX_PCI_FUNCTION = 8;
+
 /**
  * bool array of valid PCI buses
  
