@@ -8,6 +8,7 @@
 #include "drivers/PCI/PCI.h"
 
 uint8_t MAX_PCI_FUNCTIONS = 7;
+uint8_t MAX_PCI_DEVICES_PER_BUS =32;
 
 uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
 {
@@ -39,7 +40,9 @@ uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function){
 }
 
 void checkPCIBus(uint8_t bus){
-
+	for (uint8_t device =0; device < MAX_PCI_DEVICES_PER_BUS; device++){
+		//checkDevice
+	}
 }
 
 /*

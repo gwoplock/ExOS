@@ -11,6 +11,7 @@
 #include "Global.h"
 
 extern uint8_t MAX_PCI_FUNCTIONS;
+extern uint8_t MAX_PCI_DEVICES_PER_BUS;
 
 struct ConfigAddress
 {
