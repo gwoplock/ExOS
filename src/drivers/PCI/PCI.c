@@ -35,7 +35,7 @@ void enumPCIDevices()
 }
 
 uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function){
-
+	return readPCIConfigWord(bus, device, function, 0) & 0xFFFF;
 }
 
 void checkPCIBus(uint8_t bus){
