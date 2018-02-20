@@ -41,7 +41,11 @@ uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function){
 
 void checkPCIBus(uint8_t bus){
 	for (uint8_t device =0; device < MAX_PCI_DEVICES_PER_BUS; device++){
-		//checkDevice
+		for (uint8_t func = 0; func < MAX_PCI_FUNCTIONS; func++){
+			if (getPCIVender(bus, device, func) != 0xFFFF){
+				//check function
+			}
+		}
 	}
 }
 
