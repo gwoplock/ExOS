@@ -46,7 +46,7 @@ uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function)
 
 void checkPCIBus(uint8_t bus)
 {
-	printf("    Checking bus: %d\n", bus)
+	printf("    Checking bus: %d\n", bus);
 	for (uint8_t device = 0; device < MAX_PCI_DEVICES_PER_BUS; device++)
 	{
 		for (uint8_t func = 0; func < MAX_PCI_FUNCTIONS; func++)
