@@ -77,13 +77,12 @@ void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 
 uint32_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func)
 {
-	return readPCIConfigWord(bus, device, func, 10);
+	return readPCIConfigWord(bus, device, func, 0x0A);
 }
 
 uint8_t getPCISecondBus(uint8_t bus, uint8_t device, uint8_t func)
 {
-	printf("2nd bus: %d", readPCIConfigWord(bus, device, func, 18));
-	return readPCIConfigWord(bus, device, func, 18) >> 8;
+	return readPCIConfigWord(bus, device, func, 0x18) >> 8;
 }
 
 /*
