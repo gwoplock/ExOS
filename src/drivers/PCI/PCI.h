@@ -32,6 +32,10 @@ uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function);
 
 void checkPCIBus(uint8_t bus);
 
+void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func);
+
+uint16_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func);
+
 
 /*
 

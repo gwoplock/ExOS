@@ -64,6 +64,9 @@ void kernelMain(multiboot_info_t *mbd)
 	terminalWriteString("  Finding PCI buses...");
 	//find the valid PCI buses
 	//PCIInit();
+	//test code
+	enumPCIDevices();
+
 	terminalWriteLine(" Done!");
 	terminalWriteString("  Finding USB host controllers...");
 	//find the (3 or less) USB host controllers. all have the same class/subclass code.

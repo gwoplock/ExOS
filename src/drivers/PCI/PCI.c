@@ -6,9 +6,10 @@
  */
 
 #include "drivers/PCI/PCI.h"
+#include "utils/printf/Printf.h"
 
 uint8_t MAX_PCI_FUNCTIONS = 7;
-uint8_t MAX_PCI_DEVICES_PER_BUS =32;
+uint8_t MAX_PCI_DEVICES_PER_BUS = 32;
 
 uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
 {
@@ -30,23 +31,34 @@ void enumPCIDevices()
 	{
 		if (getPCIVender(0, 0, func) == 0xFFFF)
 		{
-			checkPCIBus(func);
+			break;
 		}
+		checkPCIBus(func);
 	}
 }
 
-uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function){
+uint16_t getPCIVender(uint8_t bus, uint8_t device, uint8_t function)
+{
 	return readPCIConfigWord(bus, device, function, 0) & 0xFFFF;
 }
 
-void checkPCIBus(uint8_t bus){
-	for (uint8_t device =0; device < MAX_PCI_DEVICES_PER_BUS; device++){
-		for (uint8_t func = 0; func < MAX_PCI_FUNCTIONS; func++){
-			if (getPCIVender(bus, device, func) != 0xFFFF){
-				//check function
+void checkPCIBus(uint8_t bus)
+{
+	for (uint8_t device = 0; device < MAX_PCI_DEVICES_PER_BUS; device++)
+	{
+		for (uint8_t func = 0; func < MAX_PCI_FUNCTIONS; func++)
+		{
+			if (getPCIVender(bus, device, func) != 0xFFFF)
+			{
+				checkPCIFunction(bus, device, func);
 			}
 		}
 	}
+}
+
+void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
+{
+	printf("  found device at bus: %d, device: %d, func: %d\n", bus, device, func);
 }
 
 /*
