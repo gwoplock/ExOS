@@ -21,3 +21,7 @@ void USBInit(){//how it works:
 	//set max USB version
 }
 
+//todo types
+void addUSBHostController(int bus, int device, int function){
+
+}

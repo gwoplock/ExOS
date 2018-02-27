@@ -7,6 +7,7 @@
 
 #include "drivers/PCI/PCI.h"
 #include "utils/printf/Printf.h"
+#include "USB/USB.h"
 
 uint8_t MAX_PCI_FUNCTIONS = 7;
 uint8_t MAX_PCI_DEVICES_PER_BUS = 32;
@@ -61,16 +62,44 @@ void checkPCIBus(uint8_t bus)
 
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 {
+	asm("hlt");
 	printf("      Found device at bus: %d, device: %d, func: %d\n", bus, device, func);
 	printf("        The vender id is %x\n", getPCIVender(bus, device, func));
 	uint32_t classCode = getPCIClass(bus, device, func);
-	printf("      Has a class code of %x\n", classCode);
-	if (classCode == 0x604)
+	printf("        Has a class code of %x\n", classCode);
+	uint8_t baseClass = (classCode >> 8) & 0xFF;
+	uint8_t subClass = classCode & 0xFF;
+	switch (baseClass)
+	{
+	case 0x06:
+	{
+		if (subClass == 0x04)
+		{
+			uint8_t secondBus = getPCISecondBus(bus, device, func);
+			printf("        is a PCI->PCI with a 2nd bus of %d\n", secondBus);
+			checkPCIBus(secondBus);
+		}
+	}
+	case 0x0C:
+	{
+		if (subClass == 0x03){
+			addUSBHostController(bus, device, func);
+			printf("        This is a USB host controller\n");
+		}
+		break;
+	}
+	default:
+	{
+		printf("        This device is unkown\n");
+		break;
+	}
+	}
+	/*if (classCode == 0x604)
 	{
 		uint8_t secondBus = getPCISecondBus(bus, device, func);
 		printf("        is a PCI->PCI with a 2nd bus of %d\n", secondBus);
 			checkPCIBus(secondBus);
-	}
+	}*/
 }
 
 uint32_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func)
