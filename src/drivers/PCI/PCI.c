@@ -12,6 +12,10 @@
 uint8_t MAX_PCI_FUNCTIONS = 7;
 uint8_t MAX_PCI_DEVICES_PER_BUS = 32;
 
+uint8_t getPCIProgIF(uint8_t bus, uint8_t device, uint8_t function){
+	return (readPCIConfigWord(bus, device, function, 0x08) >> 8) & 0xFFFF;
+}
+
 /*uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
 {
 	ConfigAddress addr;
