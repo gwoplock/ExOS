@@ -24,7 +24,7 @@ struct ConfigAddress
 	uint8_t enable : 1;
 } __attribute__((__packed__));
 
-uint8_t getPCIProgIF(uint8_t bus, uint8_t device, uint8_t function)
+uint8_t getPCIProgIF(uint8_t bus, uint8_t device, uint8_t function);
 
 uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset);
 

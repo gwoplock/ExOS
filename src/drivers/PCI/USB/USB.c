@@ -47,7 +47,7 @@ void addUSBHostController(int bus, int device, int function){
 			//OTHER HCI
 			break;
 		}
-		case 0xFE{
+		case 0xFE:{
 			//Not a HCI
 			break;
 		}
