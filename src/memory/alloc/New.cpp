@@ -16,10 +16,11 @@ void * operator new(size_t size) {
 }
 
 void operator delete(void * p) {
-//TODO
+	free(p);
 }
 void operator delete(void* ptr, long unsigned int size/*maybe?*/) {
-//TODO
+	(void) size;
+	free(ptr);
 }
 
 void* operator new[](unsigned long size){

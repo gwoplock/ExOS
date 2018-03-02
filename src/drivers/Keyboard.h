@@ -9,6 +9,7 @@
 #define KEYBOARD_H_
 
 #include "Global.h"
+#include "generic/CharDevice.h"
 /**
  * the possible scan code sets
  */
@@ -74,7 +75,7 @@ enum ModKeyMasks {
 	NUM_LOCK = 1 << 10,  //!< NUM_LOCK
 };
 
-class Keyboard {
+class Keyboard :public CharDevice {
 	private:
 		SCAN_CODE scanCodeSet;
 		uint16_t modKeys = 0;
@@ -121,6 +122,12 @@ class Keyboard {
 		 */
 		uint16_t* getModkeys( ) {
 			return &modKeys;
+		}
+		virtual void read(char* readTo){
+			*readTo = getKey();
+		}
+		virtual char read(){
+			return getKey();
 		}
 };
 

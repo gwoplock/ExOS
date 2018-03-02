@@ -12,7 +12,7 @@
 #include "drivers/PCI/PCI_devices/PCIBridgeDevice.h"
 #include "drivers/PCI/PCI_devices/PCICardBusDevice.h"
 #include "drivers/TTY/Console.h"
-
+/*
 PCIDeviceList::PCIDeviceList( ) {
 	_list = new LinkedList<PCIDevice*>;
 	_size = 0;
@@ -108,3 +108,4 @@ PCIDevice** PCIDeviceList::toArray( ) {
 	}
 	return listArr;
 }
+*/

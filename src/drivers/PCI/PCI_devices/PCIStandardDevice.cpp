@@ -21,61 +21,61 @@ PCIStandardDevice::~PCIStandardDevice( ) {
 }
 
 uint32_t PCIStandardDevice::BAR0( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x10);
+	//return readPCIConfigWord(_bus, _device, _function, 0x10);
 }
 
 uint32_t PCIStandardDevice::BAR1( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x14);
+	///return readPCIConfigWord(_bus, _device, _function, 0x14);
 }
 
 uint32_t PCIStandardDevice::BAR2( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x18);
+	//return readPCIConfigWord(_bus, _device, _function, 0x18);
 }
 
 uint32_t PCIStandardDevice::BAR3( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x1C);
+	//return readPCIConfigWord(_bus, _device, _function, 0x1C);
 }
 
 uint32_t PCIStandardDevice::BAR4( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x20);
+	//return readPCIConfigWord(_bus, _device, _function, 0x20);
 }
 
 uint32_t PCIStandardDevice::BAR5( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x24);
+	//return readPCIConfigWord(_bus, _device, _function, 0x24);
 }
 
 uint32_t PCIStandardDevice::cardBusCISptr( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x28);
+	//return readPCIConfigWord(_bus, _device, _function, 0x28);
 }
 
 uint16_t PCIStandardDevice::subsystemID( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x2C+16);
+	//return readPCIConfigWord(_bus, _device, _function, 0x2C+16);
 }
 
 uint16_t PCIStandardDevice::subsystemVenderID( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x2c);
+	//return readPCIConfigWord(_bus, _device, _function, 0x2c);
 }
 
 uint32_t PCIStandardDevice::expandROMbaseAddr( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x30);
+	//return readPCIConfigWord(_bus, _device, _function, 0x30);
 }
 
 uint8_t PCIStandardDevice::capabilitiesPtr( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x34);
+	//return readPCIConfigWord(_bus, _device, _function, 0x34);
 }
 
 uint8_t PCIStandardDevice::interruptLine( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x3c);
+	//return readPCIConfigWord(_bus, _device, _function, 0x3c);
 }
 
 uint8_t PCIStandardDevice::interruptPin( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x3c+8);
+	//return readPCIConfigWord(_bus, _device, _function, 0x3c+8);
 }
 
 uint8_t PCIStandardDevice::minGrant( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x3c+16);
+	//return readPCIConfigWord(_bus, _device, _function, 0x3c+16);
 }
 
 uint8_t PCIStandardDevice::maxLatency( ) {
-	return readPCIConfigWord(_bus, _device, _function, 0x3c+24);
+	//return readPCIConfigWord(_bus, _device, _function, 0x3c+24);
 }

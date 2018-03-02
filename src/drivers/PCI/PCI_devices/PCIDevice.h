@@ -9,9 +9,9 @@
 #define SRC_DRIVERS_PCI_PCIDEVICE_H_
 
 #include "Global.h"
+#include "drivers/generic/SpecialDevice.h"
 
-
-class PCIDevice {
+class PCIDevice: public SpecialDevice {
 	protected:
 		uint8_t _bus;
 		uint8_t _device;
