@@ -6,3 +6,7 @@
 .~lock.*
 *.swp
 *.swo
+.idea/
+.vscode/
+cmake-build-debug/
+kernel.bin

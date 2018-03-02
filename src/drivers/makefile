@@ -1,4 +1,4 @@
-SUBDIRS = PCI TTY floppy
+SUBDIRS = PCI TTY
 OBS= Keyboard.o ProgrammableInterruptController.o
 
 include ../../makefile.inc
