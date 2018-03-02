@@ -6,7 +6,9 @@
  */
 
 #include "drivers/PCI/USB/USB.h"
+#include "drivers/PCI/PCI.h"
 
+//TODO better host coontroller marking
 uint8_t maxUSBVersion = 0;
 USBController* uSBControllers;
 
@@ -21,3 +23,39 @@ void USBInit(){//how it works:
 	//set max USB version
 }
 
+//todo types
+void addUSBHostController(int bus, int device, int function){
+	uint8_t progIF = getPCIProgIF(bus, device, function);
+	switch (progIF){
+		case 0x00:{
+			//UHCI
+			break;
+		}
+		case 0x10:{
+			//OHCI
+			break;
+		}
+		case 0x20:{
+			//EHCI
+			break;
+		}
+		case 0x30:{
+			//XHCI
+			break;
+		}
+		case 0x80:{
+			//OTHER HCI
+			break;
+		}
+		case 0xFE:{
+			//Not a HCI
+			break;
+		}
+		default:{
+			//error
+		}
+	}
+	//create correct object
+	//store in array
+	//mark as valid host controller 
+}

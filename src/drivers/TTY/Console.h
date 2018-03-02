@@ -88,12 +88,7 @@ void terminalPutChar(char c);
  * @param length
  */
 void terminalWrite(const char* data, size_t size);
-/**
- * Get string length
- * @param string
- * @return length
- */
-size_t stringLength(const char* str);
+
 /**
  * Print string of unknown length
  * @param string to print
@@ -132,5 +127,7 @@ void writeInt(uint64_t num);
  * @param base to print as
  */ 
 void writeIntBase(uint64_t num, uint64_t base);
+
+
 
 #endif /* CONSOLE_H_ */

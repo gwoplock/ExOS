@@ -6,3 +6,10 @@
 .~lock.*
 *.swp
 *.swo
+bx_enh_dbg.ini
+.vscode/
+.idea/
+cmake-build-debug/
+kernel.bin
+.idea/
+cmake-build-debug/
