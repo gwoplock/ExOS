@@ -15,8 +15,9 @@ extern uint8_t MAX_PCI_DEVICES_PER_BUS;
 
 struct ConfigAddress
 {
-	uint8_t zero1 : 2;
+	//uint8_t zero1 : 2;
 	uint8_t registerNum : 6;
+	uint8_t zero1 :2;
 	uint8_t functionNum : 3;
 	uint8_t deviceNum : 5;
 	uint8_t busNum : 8;
@@ -36,7 +37,7 @@ void checkPCIBus(uint8_t bus);
 
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func);
 
-uint32_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func);
+uint16_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func);
 
 uint8_t getPCISecondBus(uint8_t bus, uint8_t device, uint8_t func);
 

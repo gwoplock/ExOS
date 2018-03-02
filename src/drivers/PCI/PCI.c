@@ -16,24 +16,56 @@ uint8_t getPCIProgIF(uint8_t bus, uint8_t device, uint8_t function){
 	return (readPCIConfigWord(bus, device, function, 0x08) >> 8) & 0xFFFF;
 }
 
-/*uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
+//TODO rewrite
+/**
+ * read 32 bits from PCI config space
+ * @param bus
+ * @param slot
+ * @param func
+ * @param offset into config space
+ * @return uint32 of the config space starting at offset.
+ */
+/*uint32_t readPCIConfigWord(uint8_t bus, uint8_t slot, uint8_t func,
+						   uint8_t offset)
+{
+	uint32_t address;
+	uint32_t lbus = (uint32_t)bus;
+	uint32_t lslot = (uint32_t)slot;
+	uint32_t lfunc = (uint32_t)func;
+	uint16_t tmp = 0;
+
+	/* create configuration address as per Figure 1 
+	address = (uint32_t)((lbus << 16) | (lslot << 11) |
+						 (lfunc << 8) | (offset & 0xfc) | ((uint32_t)0x80000000));
+
+	/* write out the address 
+	//printf("reading PCI register (old): %x\n", address);
+	outl(0xCF8, address);
+	/* read in the data 
+	/* (offset & 2) * 8) = 0 will choose the first word of the 32 bits register 
+	tmp = (uint16_t)((inl(0xCFC) >> ((offset & 2) * 8)) & 0xffff);
+	return (tmp);
+}*/
+
+uint32_t readPCIConfigWord/*New*/(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
 {
 	ConfigAddress addr;
 	addr.enable = 1;
-	addr.zero1 = 0;
+	//addr.zero1 = 0;
 	addr.zero2 = 0;
 	addr.registerNum = offset & 0xFC;
 	addr.functionNum = function;
 	addr.deviceNum = device;
 	addr.busNum = bus;
-	//printf("reading PCI register: %x\n", *(uint32_t *)&addr);
+	//printf("reading PCI register (new): %x\n", *(uint32_t *)&addr);
 	outl(0xcf8, *(uint32_t *)&addr);
 	//printf( "read %x", inl(0xCFC));
 	return inl(0xCFC);
-}*/
+}
 
 void enumPCIDevices()
 {
+	//printf("old: 0x%x, new: 0x%x", readPCIConfigWord(0,2,4,8), readPCIConfigWordNew(0,2,4,8) );
 	for (uint8_t func = 0; func <= MAX_PCI_FUNCTIONS; func++)
 	{
 		if (getPCIVender(0, 0, func) == 0xFFFF)
@@ -106,9 +138,9 @@ void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 	}*/
 }
 
-uint32_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func)
+uint16_t getPCIClass(uint8_t bus, uint8_t device, uint8_t func)
 {
-	return readPCIConfigWord(bus, device, func, 0x0A);
+	return readPCIConfigWord(bus, device, func, 0x08)>>16;
 }
 
 uint8_t getPCISecondBus(uint8_t bus, uint8_t device, uint8_t func)
@@ -176,35 +208,7 @@ bool isValidPCIFunction(uint8_t bus, uint8_t device, uint8_t function) {
 uint16_t getPCIVenderID(uint8_t bus, uint8_t slot, uint8_t function) {
 	return readPCIConfigWord(bus, slot, function, 0);
 }
-//TODO rewrite
-/**
- * read 32 bits from PCI config space
- * @param bus
- * @param slot
- * @param func
- * @param offset into config space
- * @return uint32 of the config space starting at offset.
- */
-uint32_t readPCIConfigWord(uint8_t bus, uint8_t slot, uint8_t func,
-						   uint8_t offset)
-{
-	uint32_t address;
-	uint32_t lbus = (uint32_t)bus;
-	uint32_t lslot = (uint32_t)slot;
-	uint32_t lfunc = (uint32_t)func;
-	uint16_t tmp = 0;
 
-	/* create configuration address as per Figure 1 */
-	address = (uint32_t)((lbus << 16) | (lslot << 11) |
-						 (lfunc << 8) | (offset & 0xfc) | ((uint32_t)0x80000000));
-
-	/* write out the address */
-	outl(0xCF8, address);
-	/* read in the data */
-	/* (offset & 2) * 8) = 0 will choose the first word of the 32 bits register */
-	tmp = (uint16_t)((inl(0xCFC) >> ((offset & 2) * 8)) & 0xffff);
-	return (tmp);
-}
 /**
  * check devices on bus for other buses
  * @param bus
