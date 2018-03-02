@@ -67,16 +67,9 @@ extern "C" {/* Use C linkage for kernel_main. */
         terminalWriteLine(" Done!");
         printf ("  Master: %x\n", drives.master);
         printf ("  Slave: %x\n", drives.slave);
-        // Keep track of which drives are supported (only 1.44M 3.5 inch)
-        uint8_t masterSupported = drives.master == _1440KB35;
-        uint8_t slaveSupported = drives.slave == _1440KB35;
-        if (!(masterSupported || slaveSupported)) {
-            printf ("  No supported drives found :(\n");
-        } else {
-            printf ("  Initializing floppy ISA DMA transfer...");
-            initFloppyDMA ();
-            printf (" Done!\n");
-        }
+        // Keep track of which drives are supported
+        uint8_t masterSupported = drives.master == 0x04;
+        uint8_t slaveSupported = drives.slave == 0x04;
         terminalWriteString("  Finding PCI buses...");
 		//find the valid PCI buses
 		PCIInit();
