@@ -9,6 +9,7 @@
 #define SRC_DRIVERS_PCI_PCIDEVICELIST_H_
 
 #include "Global.h"
+/*
 #include "utils/linked_list/LinkedList.h"
 
 class PCIDevice;
@@ -26,5 +27,5 @@ class PCIDeviceList {
 			return _size;
 		}
 };
-
+*/
 #endif /* SRC_DRIVERS_PCI_PCIDEVICELIST_H_ */
