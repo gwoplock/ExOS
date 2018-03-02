@@ -24,13 +24,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 	
 * Oskari
 	- [ ] Floppy drive driver
-	
-* Jacob
-	
-	- [ ] replace current PCI enum. strat. The new strat will get all devices at boot. When a device is requested it will be found in the list of devices.
 
-* Ben
-	- [ ] Fat12 file system driver
 	
 ## Long term work
 * Load files from floppy drives
@@ -45,7 +39,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 * Mac OS X libOS
 
 ## Major systems to support
-- [ ] PCI
+- [x ] PCI - workingish
 - [ ] PCI Express
 - [ ] USB
 - [ ] Text Graphics
