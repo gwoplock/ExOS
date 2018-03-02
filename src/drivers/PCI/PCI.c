@@ -68,11 +68,10 @@ void enumPCIDevices()
 	//printf("old: 0x%x, new: 0x%x", readPCIConfigWord(0,2,4,8), readPCIConfigWordNew(0,2,4,8) );
 	for (uint8_t func = 0; func <= MAX_PCI_FUNCTIONS; func++)
 	{
-		if (getPCIVender(0, 0, func) == 0xFFFF)
+		if (getPCIVender(0, 0, func) != 0xFFFF)
 		{
-			break;
+			checkPCIBus(func);
 		}
-		checkPCIBus(func);
 	}
 }
 
