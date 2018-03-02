@@ -39,7 +39,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 * Mac OS X libOS
 
 ## Major systems to support
-- [x ] PCI - workingish
+- [x] PCI - workingish
 - [ ] PCI Express
 - [ ] USB
 - [ ] Text Graphics
