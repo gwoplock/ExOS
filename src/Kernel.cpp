@@ -63,15 +63,13 @@ void kernelMain(multiboot_info_t *mbd)
 	terminalWriteLine(" Done!");
 	terminalWriteString("  Finding PCI buses...");
 	//find the valid PCI buses
-	//PCIInit();
-	//test code
 	enumPCIDevices();
 
 	terminalWriteLine(" Done!");
-	terminalWriteString("  Finding USB host controllers...");
+	//terminalWriteString("  Finding USB host controllers...");
 	//find the (3 or less) USB host controllers. all have the same class/subclass code.
 	//PCIDeviceList usbHostControllers(0x0C, 0x03, false);
-	terminalWriteLine(" Done!");
+	//terminalWriteLine(" Done!");
 	terminalWriteLine("!!!!ExOS fully booted!!!!");
 	//dont return.
 	while (true) {
