@@ -9,7 +9,7 @@
 #include "drivers/TTY/Console.h"
 
 extern "C"
-void /*__cxxabiv1::*/__cxa_pure_virtual(void) {
+void __cxa_pure_virtual(void) {
 	terminalWriteString("pure virtual method called.......");
 	abort( );
 }

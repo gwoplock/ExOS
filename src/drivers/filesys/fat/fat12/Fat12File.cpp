@@ -35,13 +35,11 @@ size_t Fat12File::read(char *buffer, size_t size)
 //TODO naming and types and general structure, taken from osdev wiki
 bool Fat12File::readFromDisk()
 {
-	//uint16_t firstFatSec = _device->FSInfo()->resSec;
 	unsigned char FAT_table[_device->FSInfo()->bytePerSec];
 	uint32_t read = 0;
 	while (read < _fileLocSize && _fileLocSize - read >= (_device->FSInfo()->secPerCluster * _device->FSInfo()->bytePerSec))
 	{
 		unsigned int fat_offset = _lastCluster + (_lastCluster / 2); // multiply by 1.5
-		//unsigned int fat_sector = firstFatSec + (fat_offset / _device->FSInfo()->bytePerSec);
 		unsigned int ent_offset = fat_offset % _device->FSInfo()->bytePerSec;
 
 		unsigned short table_value = *(unsigned short *)&FAT_table[ent_offset];
