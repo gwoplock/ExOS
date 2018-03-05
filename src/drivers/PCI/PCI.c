@@ -83,6 +83,7 @@ void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 			printf("        is a PCI->PCI with a 2nd bus of %d\n", secondBus);
 			checkPCIBus(secondBus);
 		}
+		break;
 	}
 	case 0x0C:
 	{

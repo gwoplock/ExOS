@@ -12,8 +12,10 @@ PCIDevice::PCIDevice()
 {
 	// TODO Auto-generated constructor stub
 }
-PCIDevice::PCIDevice(uint8_t bus, uint8_t device, uint8_t function, bool page)
-{
+PCIDevice::~PCIDevice(){
+
+}
+PCIDevice::PCIDevice(uint8_t bus, uint8_t device, uint8_t function, bool page) {
 	_bus = bus;
 	_device = device;
 	_function = function;
