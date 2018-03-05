@@ -75,8 +75,6 @@ class GlobalDescriptorTable {
 		GdtDescriptor gdtd;
 	public:
 		GlobalDescriptorTable( ) ;
-		//GlobalDescriptorTable( const GlobalDescriptorTable &) = delete;
-		//auto operator= (const GlobalDescriptorTable &) = delete;
 		/**
 		 * encode gdt entry
 		 * @param limit
