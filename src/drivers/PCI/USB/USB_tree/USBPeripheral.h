@@ -18,6 +18,12 @@ class USBPeripheral
     size_t portCount(){
         return _portCount;
     }
+    void left(USBPeripheral* sib){
+      _left = sib;
+    }
+        void right(USBPeripheral* sib){
+      _left = sib;
+    }
 };
 
 #endif

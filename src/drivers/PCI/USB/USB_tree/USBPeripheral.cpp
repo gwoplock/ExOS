@@ -7,21 +7,21 @@ USBPeripheral::USBPeripheral(size_t port, size_t portCount, USBPeripheral* paren
     memSet((void*)_ports, (sizeof(USBPeripheral*) * portCount), 0);
     _parent = parent;
     if (parent != nullptr){
-        parent.add(port, this);
+        parent->add(port, this);
     }
 }
 void USBPeripheral::add(size_t port, USBPeripheral* toAdd){
     //TODO not done
-    if (_portCour== 1){
-        toadd._left(nullptr);
-        toAdd.right(nullptr);
+    if (_portCount== 1){
+        toAdd->left(nullptr);
+        toAdd->right(nullptr);
     } 
     if (port == 0){
-        toadd._left(nullptr);
+        toAdd->left(nullptr);
         //TODo right
     } else if (_portCount -1 == port){
         //TODO left
-        toAdd.right(nullptr);
+        toAdd->right(nullptr);
     } else {
         //TODO both
     }
