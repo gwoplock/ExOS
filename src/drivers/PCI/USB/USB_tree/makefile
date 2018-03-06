@@ -1,3 +1,3 @@
 SUBDIRS = 
-OBS = USBPeripheral.o
+OBS = USBPeripheral.o USBDevice.o USBHub.o
 include ../../../../../makefile.inc
