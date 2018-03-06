@@ -15,6 +15,7 @@ class USBPeripheral
   public:
     USBPeripheral(size_t port, size_t portCount, USBPeripheral* parent);
     void add(size_t port, USBPeripheral* toAdd);
+    void remove(size_t port);
     size_t portCount(){
         return _portCount;
     }

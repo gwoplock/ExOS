@@ -51,3 +51,9 @@ void USBPeripheral::add(size_t port, USBPeripheral* toAdd){
     }
 
 }
+
+ void USBPeripheral::remove(size_t port){
+     assert(_ports[port] != nullptr);
+     _ports[port]->_right->_left = _ports[port]->_left;
+      _ports[port]->_left->_right = _ports[port]->_right;
+ }
