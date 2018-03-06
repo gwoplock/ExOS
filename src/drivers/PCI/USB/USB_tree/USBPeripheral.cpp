@@ -12,18 +12,42 @@ USBPeripheral::USBPeripheral(size_t port, size_t portCount, USBPeripheral* paren
 }
 void USBPeripheral::add(size_t port, USBPeripheral* toAdd){
     //TODO not done
+
+    _ports[port] = toAdd;
+
     if (_portCount== 1){
         toAdd->left(nullptr);
         toAdd->right(nullptr);
     } 
     if (port == 0){
         toAdd->left(nullptr);
-        //TODo right
+        for (int i = port; i < _portCount; i++){
+            if (_ports[i] != nullptr){
+                toAdd->right(_ports[i]);
+                break;
+            }
+        }
     } else if (_portCount -1 == port){
-        //TODO left
+        for (int i = port; i > 0; i--){
+            if (_ports[i] != nullptr){
+                toAdd->left(_ports[i]);
+                break;
+            }
+        }
         toAdd->right(nullptr);
     } else {
-        //TODO both
+        for (int i = port; i > 0; i--){
+            if (_ports[i] != nullptr){
+                toAdd->left(_ports[i]);
+                break;
+            }
+        }
+        for (int i = port; i < _portCount; i++){
+            if (_ports[i] != nullptr){
+                toAdd->right(_ports[i]);
+                break;
+            }
+        }
     }
 
 }
