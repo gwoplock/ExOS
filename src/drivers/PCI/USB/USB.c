@@ -10,7 +10,7 @@
 
 //TODO better host coontroller marking
 uint8_t maxUSBVersion = 0;
-USBController* uSBControllers;
+//USBController* uSBControllers;
 
 void USBInit(){//how it works:
 //TODO:

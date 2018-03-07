@@ -1,4 +1,4 @@
-SUBDIRS = HostController USB_tree
-OBS = USB.o USBEvent.o
+SUBDIRS =
+OBS = USB.o
 
 include ../../../../makefile.inc
