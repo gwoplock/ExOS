@@ -15,7 +15,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 
 ## Short term work
 * Garrett
-	- [ ] Read USB spec - still going, its long
+	- [x] Read USB spec - still going, its long
 	- [ ] USB abstract class
 	- [ ] OHCI driver
 	- [ ] UHCI driver
