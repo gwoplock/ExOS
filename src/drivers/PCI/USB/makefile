@@ -1,4 +1,4 @@
 SUBDIRS =
-OBS = USB.o
+OBS = USB.o USBFunction.o
 
 include ../../../../makefile.inc
