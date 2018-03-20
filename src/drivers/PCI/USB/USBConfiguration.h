@@ -1,3 +1,5 @@
+#ifndef USB_CONFIGUREATION_H_
+#define USB_CONFIGUREATION_H_
 
 #include "Global.h"
 
@@ -5,3 +7,5 @@
 class USBConfiguration{
 
 };
+
+#endif
