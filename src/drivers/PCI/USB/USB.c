@@ -8,6 +8,7 @@
 #include "USB.h"
 #include "drivers/PCI/PCI.h"
 #include "hostController/USBHostController.h"
+#include "hostController/USBEHCIController.h"
 
 USBHostController* usbControllers[3];
 
@@ -29,6 +30,7 @@ void addUSBHostController(int bus, int device, int function){
 		}
 		case 0x20:{
 			//EHCI
+			usbControllers[1] = new USBEHCIController();
 			break;
 		}
 		case 0x30:{
@@ -47,7 +49,4 @@ void addUSBHostController(int bus, int device, int function){
 			//error
 		}
 	}
-	//create correct object
-	//store in array
-	//mark as valid host controller 
 }
