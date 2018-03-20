@@ -4,7 +4,7 @@ USBFunction::USBFunction(){
 
 }
 
-USBFunction(USBHub hub){
+USBFunction::USBFunction(USBHub hub){
     //find out about device
     //wait 100MS
     //enable port

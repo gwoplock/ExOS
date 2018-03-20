@@ -2,6 +2,10 @@
 #define USB_FUNCTION_H_
 
 #include "drivers/generic/Device.h"
+#include "hostController/USBHostController.h"
+#include "USBHub.h"
+#include "USBConfiguration.h"
+
 
 //TODO: we need a USB base class, to be made as I learn more
 class USBFunction :public Device{

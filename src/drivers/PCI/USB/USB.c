@@ -5,22 +5,14 @@
  *      Author: garrett
  */
 
-#include "drivers/PCI/USB/USB.h"
+#include "USB.h"
 #include "drivers/PCI/PCI.h"
+#include "hostController/USBHostController.h"
 
-//TODO better host coontroller marking
-uint8_t maxUSBVersion = 0;
-//USBController* uSBControllers;
+USBHostController* usbControllers[3];
 
-void USBInit(){//how it works:
-//TODO:
-	//enum USB controllers
-		//Enum PCI devices
-			//Enum PCI controllers (recrsive) |
-				//Build list of controllers   |Already done by PCIInit
-		//check if device is USB controller
-	//fill USB controller array with controller objects
-	//set max USB version
+void USBInit(){
+	memSet(usbControllers, 3*sizeof(USBHostController*), 0);
 }
 
 //todo types
