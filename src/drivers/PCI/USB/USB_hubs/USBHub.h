@@ -16,6 +16,8 @@ class USBHub{
         USBHub(USBHostController* host):_host(host){
             //TODO port count
         }
+       USBHub(USBHostController* host, bool rootHubOnly):_host(host){
+        }
 
 };
 

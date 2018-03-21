@@ -7,17 +7,11 @@
 //TODO superclass
 class USBHostController : public PCIStandardDevice {
     protected:
-        uint8_t _bus;
-        uint8_t _device;
-        uint8_t _function;
     public:
         USBHostController(){
 
         }
-        USBHostController(int bus, int device, int function){
-            _bus= bus;
-            _device = device;
-            _function = function;
+        USBHostController(int bus, int device, int function):PCIStandardDevice(bus, device,function, true){
         }
 
 };

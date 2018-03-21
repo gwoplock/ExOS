@@ -33,7 +33,9 @@ class USBEHCIRootHub : public USBHub {
         USBEHCIRootHub():USBHub(){
 
         }
-        USBEHCIRootHub(USBEHCIController* host):USBHub(host){
+        USBEHCIRootHub(USBEHCIController* host):USBHub(host, true){
+            _ports = (EHCIPortStatCont*)(_host->BAR0() + 0); //TODO add properly, CAPLENGTH (from host) + 44
+            //TODO get port count from _host
 
         }
 };
