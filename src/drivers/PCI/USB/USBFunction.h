@@ -3,7 +3,7 @@
 
 #include "drivers/generic/Device.h"
 #include "hostController/USBHostController.h"
-#include "USBHub.h"
+#include "USB_hubs/USBHub.h"
 #include "USBConfiguration.h"
 
 

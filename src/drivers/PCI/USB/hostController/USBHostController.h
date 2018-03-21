@@ -2,10 +2,11 @@
 #define USB_HOST_CONTROLLER_H_
 
 #include "Global.h"
+#include "drivers/PCI/PCI_devices/PCIStandardDevice.h"
 
 //TODO superclass
-class USBHostController {
-    private:
+class USBHostController : public PCIStandardDevice {
+    protected:
         uint8_t _bus;
         uint8_t _device;
         uint8_t _function;

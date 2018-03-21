@@ -4,13 +4,15 @@
 #include "Global.h"
 #include "USBHostController.h"
 class USBEHCIController: public USBHostController{
-   public:
-    USBEHCIController(){
+    private:
+    
+    public:
+        USBEHCIController(){
 
-    }
-    USBEHCIController(int bus, int device, int function) : USBHostController(bus,device,function){
+        }
+        USBEHCIController(int bus, int device, int function) : USBHostController(bus,device,function){
 
-    }
+        }
 };
 
 #endif
