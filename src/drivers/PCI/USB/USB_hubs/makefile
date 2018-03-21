@@ -1,4 +1,4 @@
 SUBDIRS = 
-OBS = USBHub.o
+OBS = USBHub.o USBEHCIRootHub.o
 
 include ../../../../../makefile.inc
