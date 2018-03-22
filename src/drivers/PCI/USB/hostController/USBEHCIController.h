@@ -44,6 +44,22 @@ struct CapReg{
     CompaninoPortRoute portRoute;
 };
 
+struct USBCmd {
+    uint8_t runStop:1;
+    uint8_t reset:1;
+    uint8_t frameSizeList:2;
+    uint8_t periodSchedEnable:1;
+    uint8_t asyncSchedEnable:1;
+    uint8_t intOnAsyncDoorbell:1;
+    uint8_t lightReset:1;
+    uint8_t asyncSchedParkModeCount:2;
+    uint8_t reserved1:1;
+    uint8_t asyncSchedParkModeEnable:1;
+    uint8_t reserved2:4;
+    uint8_t interruptThreshCont;
+    uint8_t reserved3;
+};
+
 struct operReg{
     USBCmd cmd;
     USBStat stat;
