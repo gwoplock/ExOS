@@ -45,7 +45,16 @@ struct CapReg{
 };
 
 struct operReg{
-//TODO 
+    USBCmd cmd;
+    USBStat stat;
+    IntEnable intEnable;
+    FrameIndex frameIndex;
+    ControlDataSegment CDSeg;
+    FrameListBase frameListBase;
+    AsyncListAddr asyncListAddr;
+    uint8_t reserved[35];
+    ConfigFlags flags;
+    PortSC ports;
 };
 
 
