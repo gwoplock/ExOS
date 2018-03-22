@@ -60,6 +60,21 @@ struct USBCmd {
     uint8_t reserved3;
 };
 
+struct USBstat {
+    uint8_t rxInt:1;
+    uint8_t errInt:1;
+    uint8_t portChange:1;
+    uint8_t frameListRollover:1;
+    uint8_t systemError:1;
+    uint8_t asyncDoorbell:1;
+    uint8_t reserved1:6;
+    uint8_t hcHalted:1;
+    uint8_t reclamation:1;
+    uint8_t periodiCSchedStat:1;
+    uint8_t asyncSchedStat:1;
+    uint16_t reserved2;
+};
+
 struct operReg{
     USBCmd cmd;
     USBStat stat;
