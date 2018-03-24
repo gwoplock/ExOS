@@ -60,7 +60,7 @@ struct USBCmd {
     uint8_t reserved3;
 };
 
-struct USBstat {
+struct USBStat {
     uint8_t rxInt:1;
     uint8_t errInt:1;
     uint8_t portChange:1;
@@ -74,18 +74,70 @@ struct USBstat {
     uint8_t asyncSchedStat:1;
     uint16_t reserved2;
 };
+struct IntEnable{
+    uint8_t usbIntEnable:1;
+    uint8_t ErrIntEnable:1;
+    uint8_t portChangeIntEnable:1;
+    uint8_t frameListRollIntEnable:1;
+    uint8_t hostSystemIntEnable:1;
+    uint8_t intOnAsyncAdvanceEnable:1;
+    uint8_t reserved1:2;
+    uint16_t reserved2;
+    uint8_t reserved3;
+};
+struct FrameIndex{
+    uint16_t frameIndex:13;
+    uint8_t reserved1:3;
+    uint16_t reserved2;
+};
+struct FrameListBase{
+    uint16_t reserved:12;
+    uint32_t baseAddr:20;
+};
+
+struct AsyncListAddr{
+    uint8_t reserved:5;
+    uint32_t linkPointerLow:28;
+};
+
+struct ConfigFlags{
+    uint8_t configFlag:1;
+    uint32_t reserved:31;
+};
+
+struct EHCIPortStatCont{
+    uint8_t conStat:1;
+    uint8_t conStatChange:1;
+    uint8_t portEnable:1;
+    uint8_t portEnableChange:1;
+    uint8_t overCurrent:1;
+    uint8_t overCurrentChage:1;
+    uint8_t forceResume:1;
+    uint8_t suspend:1;
+    uint8_t reset:1;
+    uint8_t reserved1:1;
+    uint8_t lineStat:2;
+    uint8_t power:1;
+    uint8_t owner:1;
+    uint8_t indicatorCont:2;
+    uint8_t testCont:4;
+    uint8_t wakeOnConnect:1;
+    uint8_t wakeOnDisconnect:1;
+    uint8_t wakeOnOvercurrent:1;
+    uint8_t reserved2;
+};
 
 struct operReg{
     USBCmd cmd;
     USBStat stat;
     IntEnable intEnable;
     FrameIndex frameIndex;
-    ControlDataSegment CDSeg;
+    uint32_t  CDSeg;
     FrameListBase frameListBase;
     AsyncListAddr asyncListAddr;
     uint8_t reserved[35];
     ConfigFlags flags;
-    PortSC ports;
+    EHCIPortStatCont ports;
 };
 
 
