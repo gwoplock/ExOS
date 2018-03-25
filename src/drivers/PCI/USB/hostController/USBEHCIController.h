@@ -140,11 +140,19 @@ struct operReg{
     EHCIPortStatCont ports;
 };
 
+struct FrameListLinkPointer{
+    uint8_t t :1;
+    uint8_t type:2;
+    uint8_t zero:2;
+    uint32_t linkPointer: 28;
+} ;
 
 class USBEHCIController: public USBHostController{
     private:
         CapReg* _caps;
         operReg* _oper;
+        FrameListLinkPointer* _frameList;
+        size_t _frameListSize;
     public:
         USBEHCIController(){
 
@@ -152,6 +160,35 @@ class USBEHCIController: public USBHostController{
         USBEHCIController(int bus, int device, int function) : USBHostController(bus,device,function){
             _caps = (CapReg*)BAR0();
             _oper = (operReg*)((uint32_t) _caps + _caps->capLeng);
+
+            switch (_oper->cmd.frameSizeList){
+                case 0b00:{
+                    _frameListSize =1024;
+                    break;
+                }
+                case 0b01:{
+                     _frameListSize =512;
+                    break;
+                }
+                case 0b10:{
+                     _frameListSize =256;
+                    break;
+                }
+               default:{
+                   //error
+               }
+            }
+
+            _frameList = new FrameListLinkPointer[_frameListSize];
+           for (size_t i =0; i < _frameListSize; i++){
+               _frameList[i].t =1;
+           }
+            _oper->intEnable.ErrIntEnable = 1;
+            _oper->intEnable.portChangeIntEnable =1;
+            _oper->intEnable.hostSystemIntEnable =1;
+            _oper->frameListBase.baseAddr = (uint32_t)_frameList >> 12;
+            _oper->cmd.runStop =1;
+            _oper->flags.configFlag =1;
         }
 };
 
