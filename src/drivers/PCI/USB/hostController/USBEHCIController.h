@@ -7,7 +7,7 @@
 struct HWVersion{
     uint8_t major;
     uint8_t minor;
-};
+}__attribute__((__packed__));
 struct HWStrucParams{
     uint8_t numOfPorts:4;
     uint8_t ppc:1;
@@ -19,7 +19,7 @@ struct HWStrucParams{
     uint8_t reserved2:3;
     uint8_t debugPortNum:4;
     uint8_t reserved3;
-};
+}__attribute__((__packed__));
 
 struct HWCapParams{
     uint8_t addrCap:1;
@@ -29,11 +29,11 @@ struct HWCapParams{
     uint8_t isochornousSchedThersh:4;
     uint8_t ehciExtendCapsPtr;
     uint16_t reserved2;
-};
+}__attribute__((__packed__));
 
 struct CompaninoPortRoute{
     //TODO.... 15 nibble array
-};
+}__attribute__((__packed__));
 
 struct CapReg{
     uint8_t capLeng;
@@ -42,7 +42,7 @@ struct CapReg{
     HWStrucParams structParams;
     HWCapParams capParams;
     CompaninoPortRoute portRoute;
-};
+}__attribute__((__packed__));
 
 struct USBCmd {
     uint8_t runStop:1;
@@ -58,7 +58,7 @@ struct USBCmd {
     uint8_t reserved2:4;
     uint8_t interruptThreshCont;
     uint8_t reserved3;
-};
+}__attribute__((__packed__));
 
 struct USBStat {
     uint8_t rxInt:1;
@@ -73,7 +73,7 @@ struct USBStat {
     uint8_t periodiCSchedStat:1;
     uint8_t asyncSchedStat:1;
     uint16_t reserved2;
-};
+}__attribute__((__packed__));
 struct IntEnable{
     uint8_t usbIntEnable:1;
     uint8_t ErrIntEnable:1;
@@ -84,26 +84,26 @@ struct IntEnable{
     uint8_t reserved1:2;
     uint16_t reserved2;
     uint8_t reserved3;
-};
+}__attribute__((__packed__));
 struct FrameIndex{
     uint16_t frameIndex:13;
     uint8_t reserved1:3;
     uint16_t reserved2;
-};
+}__attribute__((__packed__));
 struct FrameListBase{
     uint16_t reserved:12;
     uint32_t baseAddr:20;
-};
+}__attribute__((__packed__));
 
 struct AsyncListAddr{
     uint8_t reserved:5;
     uint32_t linkPointerLow:28;
-};
+}__attribute__((__packed__));
 
 struct ConfigFlags{
     uint8_t configFlag:1;
     uint32_t reserved:31;
-};
+}__attribute__((__packed__));
 
 struct EHCIPortStatCont{
     uint8_t conStat:1;
@@ -125,7 +125,7 @@ struct EHCIPortStatCont{
     uint8_t wakeOnDisconnect:1;
     uint8_t wakeOnOvercurrent:1;
     uint8_t reserved2;
-};
+}__attribute__((__packed__));
 
 struct operReg{
     USBCmd cmd;
@@ -138,14 +138,14 @@ struct operReg{
     uint8_t reserved[35];
     ConfigFlags flags;
     EHCIPortStatCont ports;
-};
+}__attribute__((__packed__));
 
 struct FrameListLinkPointer{
     uint8_t t :1;
     uint8_t type:2;
     uint8_t zero:2;
     uint32_t linkPointer: 28;
-} ;
+}__attribute__((__packed__));
 
 class USBEHCIController: public USBHostController{
     private:
