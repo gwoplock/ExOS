@@ -5,6 +5,8 @@
 #include "Global.h"
 #include "drivers/PCI/USB/hostController/USBHostController.h"
 #include "drivers/generic/SpecialDevice.h"
+#include "utils/printf/Printf.h"
+
 //TODO superclass
 class USBHub :public SpecialDevice{
     protected:
@@ -23,7 +25,7 @@ class USBHub :public SpecialDevice{
 
         }
         virtual void findDevices(){
-
+            printf("Virtual funcs arent working");
         }
 
 };
