@@ -9,8 +9,12 @@
 #include "drivers/PCI/PCI.h"
 #include "hostController/USBHostController.h"
 #include "hostController/USBEHCIController.h"
+#include "USB_hubs/USBHub.h"
+#include "USB_hubs/USBEHCIRootHub.h"
+
 
 USBHostController* usbControllers[3];
+USBHub* testRoot;
 
 void USBInit(){
 	memSet(usbControllers, 3*sizeof(USBHostController*), 0);
@@ -31,6 +35,8 @@ void addUSBHostController(int bus, int device, int function){
 		case 0x20:{
 			//EHCI
 			usbControllers[1] = new USBEHCIController();
+			testRoot=new USBEHCIRootHub((USBEHCIController*)usbControllers[1]);
+			testRoot->findDevices();
 			break;
 		}
 		case 0x30:{

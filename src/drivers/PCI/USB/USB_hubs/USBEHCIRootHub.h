@@ -4,7 +4,7 @@
 #include "Global.h"
 #include "USBHub.h"
 #include "drivers/PCI/USB/hostController/USBEHCIController.h"
-
+#include "utils/printf/Printf.h"
 
 
 class USBEHCIRootHub : public USBHub {
@@ -15,9 +15,14 @@ class USBEHCIRootHub : public USBHub {
 
         }
         USBEHCIRootHub(USBEHCIController* host):USBHub(host, true){
-            _ports = (EHCIPortStatCont*)(_host->BAR0() + 0); //TODO add properly, CAPLENGTH (from host) + 44
-            //TODO get port count from _host
+            _ports = (EHCIPortStatCont*)(((uint32_t)(((USBEHCIController*)_host)->caps()->capLeng ))+ 0x44); //TODO add properly, CAPLENGTH (from host) + 44
+            _portCount = ((USBEHCIController*)_host)->caps()->structParams.numOfPorts;
 
+        }
+        virtual void findDevices(){
+            for (int i = 0; i < _portCount; i++){
+                printf("found a device\n");
+            }
         }
 };
 
