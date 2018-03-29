@@ -7,14 +7,21 @@
 
 #include "drivers/PCI/PCI_devices/PCIStandardDevice.h"
 #include "drivers/PCI/PCI.h"
-
+#include "Kernel.h"
 PCIStandardDevice::PCIStandardDevice( ) :
 		PCIDevice( ) {
 	// TODO Auto-generated constructor stub
 
 }
 PCIStandardDevice::PCIStandardDevice(uint8_t bus, uint8_t device, uint8_t function, bool page):PCIDevice(bus, device, function, page) {
-
+	if (page){
+		pageTable.page(BAR0(), BAR0(),1) ;
+		pageTable.page(BAR1(), BAR1(),1) ;
+		pageTable.page(BAR2(), BAR2(),1) ;
+		pageTable.page(BAR3(), BAR3(),1) ;
+		pageTable.page(BAR4(), BAR4(),1) ;
+		pageTable.page(BAR5(), BAR5(),1) ;
+	}
 }
 PCIStandardDevice::~PCIStandardDevice( ) {
 	// TODO Auto-generated destructor stub

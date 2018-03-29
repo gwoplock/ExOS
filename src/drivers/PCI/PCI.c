@@ -13,10 +13,12 @@ uint8_t MAX_PCI_FUNCTIONS = 7;
 uint8_t MAX_PCI_DEVICES_PER_BUS = 32;
 
 uint8_t getPCIProgIF(uint8_t bus, uint8_t device, uint8_t function){
-	return (readPCIConfigWord(bus, device, function, 0x08) >> 8) & 0xFFFF;
+	auto progIF = readPCIConfigWord(bus, device, function, 0x08); 
+	printf("reading progIF and got: %d", progIF);
+	return (progIF>> 8) & 0xFFFF;
 }
 
-uint32_t readPCIConfigWord/*New*/(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
+uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
 {
 	ConfigAddress addr;
 	addr.enable = 1;
@@ -34,7 +36,6 @@ uint32_t readPCIConfigWord/*New*/(uint8_t bus, uint8_t device, uint8_t function,
 
 void enumPCIDevices()
 {
-	//printf("old: 0x%x, new: 0x%x", readPCIConfigWord(0,2,4,8), readPCIConfigWordNew(0,2,4,8) );
 	for (uint8_t func = 0; func <= MAX_PCI_FUNCTIONS; func++)
 	{
 		if (getPCIVender(0, 0, func) != 0xFFFF)
@@ -90,8 +91,8 @@ void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 		if (subClass == 0x03){
 			addUSBHostController(bus, device, func);
 			printf("        This is a USB host controller\n");
+			break;
 		}
-		break;
 	}
 	default:
 	{
