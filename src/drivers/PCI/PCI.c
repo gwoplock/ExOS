@@ -66,7 +66,6 @@ void checkPCIBus(uint8_t bus)
 
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 {
-	asm("hlt");
 	printf("      Found device at bus: %d, device: %d, func: %d\n", bus, device, func);
 	printf("        The vender id is %x\n", getPCIVender(bus, device, func));
 	uint32_t classCode = getPCIClass(bus, device, func);
@@ -88,8 +87,8 @@ void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 	case 0x0C:
 	{
 		if (subClass == 0x03){
-			addUSBHostController(bus, device, func);
 			printf("        This is a USB host controller\n");
+			addUSBHostController(bus, device, func);
 			break;
 		}
 	}

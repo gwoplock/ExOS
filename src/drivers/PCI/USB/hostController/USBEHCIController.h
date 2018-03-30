@@ -158,11 +158,11 @@ class USBEHCIController: public USBHostController{
 
         }
         USBEHCIController(int bus, int device, int function) : USBHostController(bus,device,function){
-            printf("making EHCI controller \n");
+            BREAKPOINT
             _caps = (CapReg*)BAR0();
-            printf("bar0 = %x\n", BAR0());
+            BREAKPOINT
             _oper = (operReg*)((uint32_t) _caps + _caps->capLeng);
-
+BREAKPOINT
             switch (_oper->cmd.frameSizeList){
                 case 0b00:{
                     _frameListSize =1024;
@@ -180,16 +180,23 @@ class USBEHCIController: public USBHostController{
                    //error
                }
             }
-
+BREAKPOINT
             _frameList = new FrameListLinkPointer[_frameListSize];
+          BREAKPOINT
            for (size_t i =0; i < _frameListSize; i++){
                _frameList[i].t =1;
            }
+           BREAKPOINT
             _oper->intEnable.ErrIntEnable = 1;
+            BREAKPOINT
             _oper->intEnable.portChangeIntEnable =1;
+            BREAKPOINT
             _oper->intEnable.hostSystemIntEnable =1;
+            BREAKPOINT
             _oper->frameListBase.baseAddr = (uint32_t)_frameList >> 12;
+            BREAKPOINT
             _oper->cmd.runStop =1;
+            BREAKPOINT
             _oper->flags.configFlag =1;
         }
         auto caps(){

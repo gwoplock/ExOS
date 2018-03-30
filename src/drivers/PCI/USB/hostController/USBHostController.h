@@ -12,7 +12,6 @@ class USBHostController : public PCIStandardDevice {
 
         }
         USBHostController(int bus, int device, int function):PCIStandardDevice(bus, device,function, true){
-            printf("making base Host controller\n");
         }
 
 };

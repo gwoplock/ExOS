@@ -34,11 +34,10 @@ void addUSBHostController(int bus, int device, int function){
 		}
 		case 0x20:{
 			//EHCI
-			printf("        Is an EHCI controller\n");
-			usbControllers[1] = new USBEHCIController();
-			printf("done building EHCI controller \n");
-			//testRoot=new USBEHCIRootHub((USBEHCIController*)usbControllers[1]);
-			//testRoot->findDevices();
+			printf("          Is an EHCI controller\n");
+			usbControllers[1] = new USBEHCIController(bus, device, function);
+			testRoot=new USBEHCIRootHub((USBEHCIController*)usbControllers[1]);
+			testRoot->findDevices();
 			break;
 		}
 		case 0x30:{
