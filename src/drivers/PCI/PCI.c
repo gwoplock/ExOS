@@ -14,7 +14,6 @@ uint8_t MAX_PCI_DEVICES_PER_BUS = 32;
 
 uint8_t getPCIProgIF(uint8_t bus, uint8_t device, uint8_t function){
 	auto progIF = readPCIConfigWord(bus, device, function, 0x08); 
-	printf("reading progIF and got: %d", progIF);
 	return (progIF>> 8) & 0xFFFF;
 }
 

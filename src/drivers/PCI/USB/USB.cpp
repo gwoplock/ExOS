@@ -23,7 +23,6 @@ void USBInit(){
 //todo types
 void addUSBHostController(int bus, int device, int function){
 	uint8_t progIF = getPCIProgIF(bus, device, function);
-	printf("progIF: %d", progIF);
 	switch (progIF){
 		case 0x00:{
 			//UHCI
@@ -35,10 +34,11 @@ void addUSBHostController(int bus, int device, int function){
 		}
 		case 0x20:{
 			//EHCI
-			printf("making a host controller");
+			printf("        Is an EHCI controller\n");
 			usbControllers[1] = new USBEHCIController();
-			testRoot=new USBEHCIRootHub((USBEHCIController*)usbControllers[1]);
-			testRoot->findDevices();
+			printf("done building EHCI controller \n");
+			//testRoot=new USBEHCIRootHub((USBEHCIController*)usbControllers[1]);
+			//testRoot->findDevices();
 			break;
 		}
 		case 0x30:{

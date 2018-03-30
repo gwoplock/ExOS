@@ -24,7 +24,7 @@
 #include "utils/string/StrLen.h"
 
 //bochs breakpoing ASM
-#define BREAKPOINT asm("xchgw %%bx, %%bx" : : : "%bx");
+#define BREAKPOINT printf("hitbreakpoint");asm("hlt");asm("hlt");
 
 //helpful constant
 #define FOUR_KB 4096

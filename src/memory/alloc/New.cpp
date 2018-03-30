@@ -6,13 +6,14 @@
  */
 
 #include "memory/alloc/New.h"
-
+#include "utils/printf/Printf.h"
 //TODO fix this file
 
 void * operator new(size_t size) {
 	//just call malloc, the compiler will run the constructor automaticly
-	void * p = malloc(size);
-	return p;
+	printf("called new\n");
+	//void * p = /*malloc(size);*/ ::operator new(size);
+	return malloc(size);
 }
 
 void operator delete(void * p) {

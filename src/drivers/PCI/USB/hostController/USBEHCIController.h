@@ -3,7 +3,7 @@
 
 #include "Global.h"
 #include "USBHostController.h"
-
+#include "utils/printf/Printf.h"
 struct HWVersion{
     uint8_t major;
     uint8_t minor;
@@ -158,7 +158,9 @@ class USBEHCIController: public USBHostController{
 
         }
         USBEHCIController(int bus, int device, int function) : USBHostController(bus,device,function){
+            printf("making EHCI controller \n");
             _caps = (CapReg*)BAR0();
+            printf("bar0 = %x\n", BAR0());
             _oper = (operReg*)((uint32_t) _caps + _caps->capLeng);
 
             switch (_oper->cmd.frameSizeList){

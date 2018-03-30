@@ -3,7 +3,7 @@
 
 #include "Global.h"
 #include "drivers/PCI/PCI_devices/PCIStandardDevice.h"
-
+#include "utils/printf/Printf.h"
 //TODO superclass
 class USBHostController : public PCIStandardDevice {
     protected:
@@ -12,6 +12,7 @@ class USBHostController : public PCIStandardDevice {
 
         }
         USBHostController(int bus, int device, int function):PCIStandardDevice(bus, device,function, true){
+            printf("making base Host controller\n");
         }
 
 };

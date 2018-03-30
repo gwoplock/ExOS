@@ -11,3 +11,4 @@ kernel.bin: $(SUBDIRS)
 
 clean:
 	rm $(OBJ_DIR)/*.o
+	rm $(BUILD_TO)
