@@ -23,13 +23,16 @@ void USBInit(){
 //todo types
 void addUSBHostController(int bus, int device, int function){
 	uint8_t progIF = getPCIProgIF(bus, device, function);
+	
 	switch (progIF){
 		case 0x00:{
 			//UHCI
+			printf("          Is an UHCI controller\n");
 			break;
 		}
 		case 0x10:{
 			//OHCI
+			printf("          Is an OHCI controller\n");
 			break;
 		}
 		case 0x20:{
@@ -42,18 +45,22 @@ void addUSBHostController(int bus, int device, int function){
 		}
 		case 0x30:{
 			//XHCI
+			printf("          Is an UHCI controller\n");
 			break;
 		}
 		case 0x80:{
 			//OTHER HCI
+			printf("          Is an Other HCI controller\n");
 			break;
 		}
 		case 0xFE:{
 			//Not a HCI
+			printf("          Is an not a controller\n");
 			break;
 		}
 		default:{
 			//error
 		}
+		BREAKPOINT
 	}
 }

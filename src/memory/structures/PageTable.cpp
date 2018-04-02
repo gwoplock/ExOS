@@ -6,7 +6,7 @@
  */
 
 #include "memory/structures/PageTable.h"
-
+#include "utils/printf/Printf.h"
 PageTable::PageTable( ) {
 }
 PageTable::PageTable(bool buildFlag) {
@@ -96,6 +96,8 @@ void PageTable::build(){
 	}
 	size_t kernelPages = ( ( (size_t)( &kernelSize) + (uint32_t)
 			& kernelStart - vKernelStart) / FOUR_KB + 1);
+			printf("kernel pages = %d", kernelPages );
+			//BREAKPOINT
 	size_t kernelDirs = (kernelPages / 1024) + 1;
 	for (size_t i = 0; i < kernelDirs; i++) {
 		pageDir[KERNEL_PAGE_DIR_START + i].present = 1;
