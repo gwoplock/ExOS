@@ -178,7 +178,6 @@ class USBEHCIController: public USBHostController{
                }
             }
             auto toMalloc = sizeof(FrameListLinkPointer) *_frameListSize;
-            printf("mallocing\n");
             auto malloced = malloc (toMalloc);
             _frameList = (FrameListLinkPointer*) malloced;
            for (size_t i =0; i < _frameListSize; i++){

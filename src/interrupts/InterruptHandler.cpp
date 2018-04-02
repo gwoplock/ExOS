@@ -42,7 +42,6 @@ extern "C" {/* Use C linkage for kernel_main. */
 		//print the interrupt number
 		terminalPutChar(' ');
 		writeInt((uint32_t) interruptNumber);
-		BREAKPOINT
 	}
 
 #undef return
