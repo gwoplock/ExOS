@@ -70,7 +70,7 @@ void kernelMain(multiboot_info_t *mbd)
 	//find the (3 or less) USB host controllers. all have the same class/subclass code.
 	//PCIDeviceList usbHostControllers(0x0C, 0x03, false);
 	//terminalWriteLine(" Done!");
-	terminalWriteLine("!!!!ExOS fully booted!!!!");
+	terminalWriteLine("!!!!ExOS fully booted!!!! 1");
 	//dont return.
 	while (true) {
 		asm("hlt");

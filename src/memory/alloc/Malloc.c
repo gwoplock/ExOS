@@ -10,6 +10,7 @@
 #include "memory/structures/PageTable.h"
 #include "memory/alloc/PageFrameAllocator.h"
 #include "memory/Mem.h"
+#include "utils/printf/Printf.h"
 
 void *top;
 
@@ -19,8 +20,8 @@ void *top;
  */
 void mallocInit()
 {
-	top = (void*)((((size_t)(&kernelSize) + (uint32_t) & kernelStart - (uint32_t)pageTable.getKernelStart()) / FOUR_KB + 1) * FOUR_KB +
-	      FOUR_KB - 1);
+	top = (void*)((((size_t)(&kernelSize) + (uint32_t) & kernelStart) / FOUR_KB + 1) * FOUR_KB /*+
+	      FOUR_KB*/ - 1);
 	((memHeader*)&kernelEnd)->used = false;
 	((memHeader*)&kernelEnd)->next = nullptr;
 
@@ -39,10 +40,10 @@ void *malloc(size_t size)
 	memHeader* c = (memHeader*)&kernelEnd;
 	for (; c != nullptr; c = c->next) {
 		if (c->next == nullptr) {
-			if ((uint32_t)c - (uint32_t)top >= (size + sizeof(memHeader)) && !c->used) {
+			if ( ((uint32_t)top >= (uint32_t)c + sizeof(memHeader) + size + sizeof(memHeader)) && !c->used) {
 				//TODO this may not work
-				memHeader* temp = (memHeader*)(((uint8_t*)(c+1)) + size);
-				temp->next = c->next;
+				memHeader* temp = (memHeader*)((uint32_t)c + sizeof(c) + size);
+				temp->next = nullptr;
 				temp->used = false;
 				c->next = temp;
 				c->used = true;

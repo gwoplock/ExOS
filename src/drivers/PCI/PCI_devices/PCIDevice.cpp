@@ -8,12 +8,7 @@
 #include "drivers/PCI/PCI_devices/PCIDevice.h"
 #include "drivers/PCI/PCI.h"
 
-PCIDevice::PCIDevice()
-{
-	// TODO Auto-generated constructor stub
-}
-PCIDevice::PCIDevice(uint8_t bus, uint8_t device, uint8_t function, bool page)
-{
+PCIDevice::PCIDevice(uint8_t bus, uint8_t device, uint8_t function, bool page) {
 	_bus = bus;
 	_device = device;
 	_function = function;

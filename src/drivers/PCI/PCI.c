@@ -13,10 +13,11 @@ uint8_t MAX_PCI_FUNCTIONS = 7;
 uint8_t MAX_PCI_DEVICES_PER_BUS = 32;
 
 uint8_t getPCIProgIF(uint8_t bus, uint8_t device, uint8_t function){
-	return (readPCIConfigWord(bus, device, function, 0x08) >> 8) & 0xFFFF;
+	auto progIF = readPCIConfigWord(bus, device, function, 0x08); 
+	return (progIF>> 8) & 0xFFFF;
 }
 
-uint32_t readPCIConfigWord/*New*/(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
+uint32_t readPCIConfigWord(uint8_t bus, uint8_t device, uint8_t function, uint8_t offset)
 {
 	ConfigAddress addr;
 	addr.enable = 1;
@@ -34,7 +35,6 @@ uint32_t readPCIConfigWord/*New*/(uint8_t bus, uint8_t device, uint8_t function,
 
 void enumPCIDevices()
 {
-	//printf("old: 0x%x, new: 0x%x", readPCIConfigWord(0,2,4,8), readPCIConfigWordNew(0,2,4,8) );
 	for (uint8_t func = 0; func <= MAX_PCI_FUNCTIONS; func++)
 	{
 		if (getPCIVender(0, 0, func) != 0xFFFF)
@@ -66,7 +66,6 @@ void checkPCIBus(uint8_t bus)
 
 void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 {
-	asm("hlt");
 	printf("      Found device at bus: %d, device: %d, func: %d\n", bus, device, func);
 	printf("        The vender id is %x\n", getPCIVender(bus, device, func));
 	uint32_t classCode = getPCIClass(bus, device, func);
@@ -83,14 +82,15 @@ void checkPCIFunction(uint8_t bus, uint8_t device, uint8_t func)
 			printf("        is a PCI->PCI with a 2nd bus of %d\n", secondBus);
 			checkPCIBus(secondBus);
 		}
+		break;
 	}
 	case 0x0C:
 	{
 		if (subClass == 0x03){
-			addUSBHostController(bus, device, func);
 			printf("        This is a USB host controller\n");
+			addUSBHostController(bus, device, func);
+			break;
 		}
-		break;
 	}
 	default:
 	{
