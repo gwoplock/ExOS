@@ -20,7 +20,7 @@ void *top;
  */
 void mallocInit()
 {
-	top = (void*)((((size_t)(&kernelSize) + (uint32_t) & kernelStart - (uint32_t)pageTable.getKernelStart()) / FOUR_KB + 1) * FOUR_KB /*+
+	top = (void*)((((size_t)(&kernelSize) + (uint32_t) & kernelStart) / FOUR_KB + 1) * FOUR_KB /*+
 	      FOUR_KB*/ - 1);
 		  printf("top = %x", top);
 		  BREAKPOINT
@@ -40,17 +40,21 @@ extern "C" {/* Use C linkage for kernel_main. */
 void *malloc(size_t size)
 {
 	BREAKPOINT
-	printf("in Malloc\n");
+	printf("in Malloc, top  = %x\n", top);
 	memHeader* c = (memHeader*)&kernelEnd;
-	printf("set c to %x\n", c);
+	
 	for (; c != nullptr; c = c->next) {
 		printf("looped\n");
+		printf("set c to %x\n", c);
 		if (c->next == nullptr) {
+			printf("set c to %x\n", c);
 			printf("next is nullptr\n");
-			if (((uint32_t)c - (uint32_t)top >= (size + 2*sizeof(memHeader))) && !c->used) {
+			printf("top addr = %x\n (uint32_t)top = %x", (uint32_t)c + sizeof(memHeader) + size + sizeof(memHeader), (uint32_t)top);
+			if ( ((uint32_t)top >= (uint32_t)c + sizeof(memHeader) + size + sizeof(memHeader)) && !c->used) {
 				printf("have space\n");
 				//TODO this may not work
-				memHeader* temp = (memHeader*)(((uint8_t*)(c+1)) + size);
+				printf("set c to %x\n", c);
+				memHeader* temp = (memHeader*)((uint32_t)c + sizeof(c) + size);
 				printf("set temp to, %x\n", temp);
 				temp->next = nullptr;
 				printf("set temps next\n");
