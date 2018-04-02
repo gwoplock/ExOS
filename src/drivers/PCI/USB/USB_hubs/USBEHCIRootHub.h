@@ -22,7 +22,9 @@ class USBEHCIRootHub : public USBHub {
         }
         virtual void findDevices(){
             for (int i = 0; i < _portCount; i++){
-                printf("found a device\n");
+                if (_ports[i].conStat == 1){
+                    printf("found a device\n");
+                }
             }
         }
 };
