@@ -19,7 +19,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 	- [ ] USB abstract class
 	- [ ] OHCI driver
 	- [ ] UHCI driver
-	- [ ] EHCI driver
+	- [x] EHCI driver - mostly, still may have some issues with the root hub
 	- [ ] XHCI driver
 	
 * Oskari
