@@ -5,6 +5,7 @@
 #include "drivers/generic/SpecialDevice.h"
 #include "Kernel.h"
 #include "drivers/ProgrammableInterruptController.h"
+#include "utils/printf/Printf.h"
 struct PIT_CMD{
     uint8_t BCD:1;
     uint8_t opMode:3;
@@ -32,7 +33,7 @@ class ProgrammableIntervalTimer : public SpecialDevice{
         void setTimer(unsigned int ticks){
             ticksRemaining = ticks;
             IRQClearMask(interruptLine);
-            while(ticks != 0){
+            while(ticksRemaining != 0){
                 ;
             }
             IRQSetMask(interruptLine);

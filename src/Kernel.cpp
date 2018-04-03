@@ -20,6 +20,8 @@
 #include "memory/Mem.h"
 #include "utils/printf/Printf.h"
 #include "drivers/timers/ProgrammableIntervalTimer.h"
+#include "drivers/timers/Sleep.h"
+
 InterruptDescriptorTable idt;
 GlobalDescriptorTable gdt;
 PageTable pageTable;
@@ -56,6 +58,7 @@ void kernelMain(multiboot_info_t *mbd)
 	terminalWriteLine(" Done!");
 	terminalWriteString("  Setting up PIT...");
 	pit = ProgrammableIntervalTimer();
+	terminalWriteLine("  Done!");
 	terminalWriteString("  Preparing the memory allocator...");
 	//get the memory map from grub
 	getMemMap(mbd);
