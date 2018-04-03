@@ -15,12 +15,13 @@ class GlobalDescriptorTable;
 class PageFrameAllocator;
 class Keyboard;
 class PageTable;
-
+class ProgrammableIntervalTimer;
 extern GlobalDescriptorTable gdt;
 extern InterruptDescriptorTable idt;
 extern PageTable pageTable;
 extern Keyboard KB;
 extern PageFrameAllocator frameAlloc;
+extern ProgrammableIntervalTimer pit;
 
 void interruptSetUp();
 

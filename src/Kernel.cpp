@@ -19,12 +19,13 @@
 #include "multiboot_spec/Multiboot.h"
 #include "memory/Mem.h"
 #include "utils/printf/Printf.h"
-
+#include "drivers/programmableIntervalTimer/ProgrammableIntervalTimer.h"
 InterruptDescriptorTable idt;
 GlobalDescriptorTable gdt;
 PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
+ProgrammableIntervalTimer pit;
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
@@ -53,6 +54,8 @@ void kernelMain(multiboot_info_t *mbd)
 	//sets up interrups and enables them
 	interruptSetUp();
 	terminalWriteLine(" Done!");
+	terminalWriteString("  Setting up PIT...");
+	pit = ProgrammableIntervalTimer();
 	terminalWriteString("  Preparing the memory allocator...");
 	//get the memory map from grub
 	getMemMap(mbd);
