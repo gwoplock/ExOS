@@ -7,6 +7,7 @@
 #include "utils/printf/Printf.h"
 #include "Kernel.h"
 #include "memory/structures/PageTable.h"
+#include "drivers/timers/Sleep.h"
 class USBEHCIRootHub : public USBHub {
     private:
         EHCIPortStatCont* _ports;
@@ -24,6 +25,15 @@ class USBEHCIRootHub : public USBHub {
             for (int i = 0; i < _portCount; i++){
                 if (_ports[i].conStat == 1){
                     printf("found a device\n");
+                    printf("resetting device\n");
+                    _ports[i].portEnable =0;
+                    _ports[i].reset =1;
+                    milisleep(80);
+                    printf("done resetting\n");
+                    _ports[i].reset = 0;
+                    milisleep(5);
+                    printf("port enabled\n");
+
                 }
             }
         }
