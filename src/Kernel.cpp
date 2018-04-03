@@ -19,7 +19,7 @@
 #include "multiboot_spec/Multiboot.h"
 #include "memory/Mem.h"
 #include "utils/printf/Printf.h"
-#include "drivers/programmableIntervalTimer/ProgrammableIntervalTimer.h"
+#include "drivers/timers/ProgrammableIntervalTimer.h"
 InterruptDescriptorTable idt;
 GlobalDescriptorTable gdt;
 PageTable pageTable;
