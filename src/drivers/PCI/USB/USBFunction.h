@@ -3,7 +3,7 @@
 
 #include "drivers/generic/Device.h"
 #include "hostController/USBHostController.h"
-#include "USB_hubs/USBHub.h"
+#include "USB_hubs/USBHubAbstract.h"
 #include "USBConfiguration.h"
 
 
@@ -18,7 +18,7 @@ class USBFunction :public Device{
     USBHostController _host;
     public:
     USBFunction();
-    USBFunction(USBHub hub);
+    USBFunction(USBHubAbstract* hub);
 
 };
 

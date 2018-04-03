@@ -9,12 +9,12 @@
 #include "drivers/PCI/PCI.h"
 #include "hostController/USBHostController.h"
 #include "hostController/USBEHCIController.h"
-#include "USB_hubs/USBHub.h"
+#include "USB_hubs/RootHub.h"
 #include "USB_hubs/USBEHCIRootHub.h"
 
 
 USBHostController* usbControllers[3];
-USBHub* testRoot;
+USBRootHub* testRoot;
 
 void USBInit(){
 	memSet(usbControllers, 3*sizeof(USBHostController*), 0);

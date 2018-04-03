@@ -4,11 +4,7 @@ USBFunction::USBFunction(){
 
 }
 
-USBFunction::USBFunction(USBHub hub){
-    //find out about device
-    //wait 100MS
-    //enable port
-    //send reset for > 50MS
+USBFunction::USBFunction(USBHubAbstract* hub){
     //address device
     //read max data payload
     //read configs

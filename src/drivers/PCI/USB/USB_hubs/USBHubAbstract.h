@@ -8,25 +8,19 @@
 #include "utils/printf/Printf.h"
 
 //TODO superclass
-class USBHub :public SpecialDevice{
+class USBHubAbstract :public SpecialDevice{
     protected:
         //TODO size
         int _portCount;
         USBHostController* _host; 
     public:
-        USBHub(){
+        USBHubAbstract():SpecialDevice(){
 
         }
-        USBHub(USBHostController* host):_host(host){
-            //TODO port count
+        USBHubAbstract(USBHostController* host): _host(host){
+            
         }
-        USBHub(USBHostController* host, bool rootHubOnly):_host(host){
-           (void) rootHubOnly;
-
-        }
-        virtual void findDevices(){
-            printf("Virtual funcs arent working");
-        }
+        virtual void findDevices()=0;
 
 };
 
