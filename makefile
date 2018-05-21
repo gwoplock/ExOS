@@ -16,11 +16,12 @@ SRC_SUBDIRS       = $(shell find $(SRCDIR) -type d -print)
 C_SRC_FILES       =  $(foreach dir, $(SRC_SUBDIRS), $(wildcard $(dir)/*.c))
 CPP_SRC_FILES     = $(foreach dir, $(SRC_SUBDIRS), $(wildcard $(dir)/*.cpp))
 SPECIAL_SRC_FILES = Boot.s ISRWrapper.s
+LINKER_FILE       = $(TOPDIR)/linker.ld
 
 #object files
 OBJFILES = $(patsubst %.c,$(OBJDIR)/%.o,$(C_SRC_FILES)) \
-$(patsubst %.cpp,$(OBJDIR)/%.o,$(CPP_SRC_FILES)) \
-$(OBJDIR)/Boot.o $(OBJDIR)/ISRWrapper.o
+           $(patsubst %.cpp,$(OBJDIR)/%.o,$(CPP_SRC_FILES)) \
+           $(OBJDIR)/Boot.o $(OBJDIR)/ISRWrapper.o
 
 #programs
 AS    = i686-elf-as
@@ -30,8 +31,9 @@ MKDIR = mkdir --parents
 
 #flags
 INCLUDES = -I$(TOPDIR)/src
-LDFLAGS  = -ffreestanding -O2 -fno-rtti -fno-exceptions -nostartfiles -nostdlib -lgcc 
+LDFLAGS  = -ffreestanding -O2 -fno-rtti -fno-exceptions -nostartfiles -nostdlib $(INCLUDES) -lgcc 
 CFLAGS   = -c -ffreestanding -O2 -Wno-packed-bitfield-compat -Wall -Wextra  -fno-rtti -fno-exceptions -g -std=gnu++14 $(INCLUDES)
+LINK     = -lgcc
 
 #Text minip
 RED    = $$(tput setaf 1)
@@ -84,8 +86,7 @@ $(BIN_NAME): $(OBJFILES)
 ifeq ($(VERBOSE),no)
 	@echo 'Constructing' $(RED)$@$(NORMAL)
 endif
-	$(RUN)$(GCC) -T $(TOPDIR)/linker.ld -o '$@' -ffreestanding -O2 -fno-rtti -fno-exceptions -nostartfiles -nostdlib $(OBJFILES) -lgcc
-	@#$(RUN)$(GCC) $(LDFLAGS) -o '$@' $(OBJFILES) $(INCLUDES)
+	$(RUN)$(GCC) -T $(LINKER_FILE)  -o '$@' $(LDFLAGS) $(OBJFILES) $(LINK)
 
 #general rules
 $(OBJDIR)/%.o: %.c 
