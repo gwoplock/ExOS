@@ -6,7 +6,14 @@
 #include "Fat12File.h"
 #include "Fat12FSNode.h"
 #include "utils/string/Split.h"
-
+/**
+ * @brief open a file
+ * 
+ * @param path path to open
+ * @param flags not currently used
+ * @param mode not currently used
+ * @return File* opened file, is a Fat12File
+ */
 File *Fat12FS::open(char *path, int flags, int mode)
 {
 	(void)flags;

@@ -9,6 +9,10 @@
 #include "drivers/TTY/Console.h"
 
 extern "C"
+/**
+ * @brief staandard c++ lib function to abort if a pure virtual func is called
+ * 
+ */
 void __cxa_pure_virtual(void) {
 	terminalWriteString("pure virtual method called.......");
 	abort( );

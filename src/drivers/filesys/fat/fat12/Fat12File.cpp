@@ -4,7 +4,13 @@
 
 #include "Fat12File.h"
 #include "memory/Mem.h"
-
+/**
+ * @brief read bytes into buffer
+ * 
+ * @param buffer what to read into
+ * @param size how many to read
+ * @return size_t how many actually read
+ */
 size_t Fat12File::read(char *buffer, size_t size)
 {
 	size_t bytesRead = 0;
@@ -32,6 +38,12 @@ size_t Fat12File::read(char *buffer, size_t size)
 	return 0;
 }
 
+/**
+ * @brief read clusters from disk into buffer
+ * @note will try to fill the buffer
+ * @return true able to read
+ * @return false unable to read
+ */
 //TODO naming and types and general structure, taken from osdev wiki
 bool Fat12File::readFromDisk()
 {
