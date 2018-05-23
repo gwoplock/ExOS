@@ -7,18 +7,28 @@
 
 #include "Global.h"
 
+/**
+ * @brief time as used in fat
+ * 
+ */
 struct FatTime{
 	uint8_t hour:5;
 	uint8_t min:6;
 	uint8_t second:5;
 } __attribute__((__packed__));
-
+/**
+ * @brief date as used in fat
+ * 
+ */
 struct FatDay{
 	uint8_t year:7;
 	uint8_t month:4;
 	uint8_t day:5;
 }__attribute__((__packed__));
-
+/**
+ * @brief fat base info
+ * 
+ */
 struct FatBPB{
 	uint8_t jmp[3];
 	uint8_t oemIdent[8];
@@ -35,7 +45,10 @@ struct FatBPB{
 	uint32_t hiddenSec;
 	uint32_t largeSecCount;
 }__attribute__((__packed__));
-
+/**
+ * @brief fat 8.3 filenames and file info
+ * 
+ */
 struct FatNormalFileName {
 	uint8_t name[11];
 	uint8_t attribute;
@@ -50,7 +63,12 @@ struct FatNormalFileName {
 	uint16_t lowClusterNumber;
 	uint32_t size;
 }__attribute__((__packed__));
-
+/**
+ * @brief fat long file name (>8.3)
+ * @note long file names always have a normal file name before(?) the
+ * loing file name
+ * @see FatNormalFileName
+ */
 struct FatLongFileName {
 	uint8_t order;
 	uint16_t nameFirst[5];
