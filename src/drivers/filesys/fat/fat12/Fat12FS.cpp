@@ -22,7 +22,13 @@ File *Fat12FS::open(char *path, int flags, int mode)
 	Fat12File *ret = new Fat12File(file->startCluster());
 	return ret;
 }
-
+/**
+ * @brief find a file from path
+ * 
+ * @param path file to find
+ * @param root starting point
+ * @return Fat12FSNode* the file at path, null if not found
+ */
 Fat12FSNode *Fat12FS::find(char *path, Fat12FSNode *root)
 {
 	char **split = strSplit(path, '/');
@@ -39,7 +45,15 @@ Fat12FSNode *Fat12FS::find(char *path, Fat12FSNode *root)
 	}
 	return nullptr;
 }
-
+/**
+ * @brief read a cluster from disk
+ * 
+ * @param cluster cluster to read
+ * @param fileLoc where to read to
+ * @param fileLocSize how much to read
+ * @return true 
+ * @return false 
+ */
 //todo names, var sizes, structure taken from osdev wiki
 bool Fat12FS::readCluster(uint16_t cluster, void *fileLoc, size_t fileLocSize)
 {
@@ -58,6 +72,11 @@ bool Fat12FS::readCluster(uint16_t cluster, void *fileLoc, size_t fileLocSize)
 		first_sector_of_cluster++;
 	}
 }
+
+/**
+ * @brief build the directory structure into a DAG
+ * 
+ */
 //TODO check var sizes
 void Fat12FS::buildDirStructure()
 {
@@ -65,7 +84,11 @@ void Fat12FS::buildDirStructure()
 	_root = new Fat12FSNode("Root", 0, DIR, ((_FSInfo->resSec) + (_FSInfo->FATs * _FSInfo->secPerFAT)) / _FSInfo->secPerCluster, this);
 	buildTree((Fat12FSNode *)_root);
 }
-
+/**
+ * @brief build a dir structure starting at dir
+ * 
+ * @param dir where to start
+ */
 void Fat12FS::buildTree(Fat12FSNode *dir)
 {
 	(void)dir;
@@ -104,6 +127,13 @@ void Fat12FS::buildTree(Fat12FSNode *dir)
 	free(tempSector);
 }
 
+/**
+ * @brief parse an etry in the FAT
+ * 
+ * @param sector sector to chech
+ * @return Fat12FSNode* node in graph 
+ * @see Fat12FS::buildTree
+ */
 Fat12FSNode *Fat12FS::parseEntry(uint8_t *sector)
 {
 	if (sector[0] == 0xE5)
