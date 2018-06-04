@@ -23,7 +23,7 @@ struct ConfigAddress
 	uint8_t busNum : 8;
 	uint8_t zero2 : 7;
 	uint8_t enable : 1;
-} __attribute__((__packed__));
+} __attribute__((__packed__)) __attribute__((__may_alias__));
 
 uint8_t getPCIProgIF(uint8_t bus, uint8_t device, uint8_t function);
 

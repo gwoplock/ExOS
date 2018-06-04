@@ -34,7 +34,7 @@ INCLUDES = -I$(TOPDIR)/src
 LDFLAGS  = -ffreestanding -O2 -fno-rtti -fno-exceptions -nostartfiles \
            -nostdlib
 CFLAGS   = -c -ffreestanding -O2 -Wno-packed-bitfield-compat -Wall -Wextra \
-           -fno-rtti -fno-exceptions -g -std=gnu++14 $(INCLUDES)
+           -fno-rtti -fno-exceptions -g -std=gnu++14 -fno-strict-aliasing $(INCLUDES)
 LINK     = -lgcc
 
 #Text minip

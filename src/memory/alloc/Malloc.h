@@ -13,7 +13,7 @@
 /**
  * end of the kernel
  */
-extern uint32_t kernelEnd;
+extern void* kernelEnd;
 
 struct memHeader{
 	bool used;

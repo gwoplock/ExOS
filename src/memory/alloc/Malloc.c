@@ -20,8 +20,8 @@ void *top;
  */
 void mallocInit()
 {
-	top = (void*)((((size_t)(&kernelSize) + (uint32_t) & kernelStart) / FOUR_KB + 1) * FOUR_KB /*+
-	      FOUR_KB*/ - 1);
+	top = (void*)((((size_t)(&kernelSize) + (uint32_t) & kernelStart) 
+	/ FOUR_KB + 1) * FOUR_KB /*+FOUR_KB*/ - 1);
 	((memHeader*)&kernelEnd)->used = false;
 	((memHeader*)&kernelEnd)->next = nullptr;
 
