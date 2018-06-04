@@ -190,7 +190,7 @@ class USBEHCIController: public USBHostController{
             _oper->cmd.runStop =1;
             _oper->flags.configFlag =1;
         }
-        auto caps(){
+        CapReg* caps(){
             return _caps;
         }
 };
