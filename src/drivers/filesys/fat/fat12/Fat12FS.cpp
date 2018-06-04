@@ -71,6 +71,7 @@ bool Fat12FS::readCluster(uint16_t cluster, void *fileLoc, size_t fileLocSize)
 		//TODO return on read error
 		first_sector_of_cluster++;
 	}
+	return true;
 }
 
 /**
