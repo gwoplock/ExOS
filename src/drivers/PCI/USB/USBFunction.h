@@ -9,17 +9,17 @@
 
 //TODO: we need a USB base class, to be made as I learn more
 class USBFunction :public Device{
-    protected:
-    USBConfiguration** _configs;
-    size_t _currnetConfig;
-    uint8_t _address;
-    //TODO check size
-    int _maxDataSize;
-    USBHostController _host;
-    USBHubAbstract* _hub;
-    public:
-    USBFunction();
-    USBFunction(USBHubAbstract* hub);
+	protected:
+	USBConfiguration** _configs;
+	size_t _currnetConfig;
+	uint8_t _address;
+	//TODO check size
+	int _maxDataSize;
+	USBHostController _host;
+	USBHubAbstract* _hub;
+	public:
+	USBFunction();
+	USBFunction(USBHubAbstract* hub);
 
 };
 

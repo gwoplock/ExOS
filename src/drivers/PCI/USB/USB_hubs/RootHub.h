@@ -5,13 +5,13 @@
 #include "USBHubAbstract.h"
 
 class USBRootHub: public USBHubAbstract{
-    public:
-        USBRootHub():USBHubAbstract(){
+	public:
+		USBRootHub():USBHubAbstract(){
 
-        }   
-        USBRootHub(USBHostController* host): USBHubAbstract(host){
-            
-        }
+		}   
+		USBRootHub(USBHostController* host): USBHubAbstract(host){
+			
+		}
 };
 
 #endif

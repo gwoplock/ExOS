@@ -9,18 +9,18 @@
 
 //TODO superclass
 class USBHubAbstract :public SpecialDevice{
-    protected:
-        //TODO size
-        int _portCount;
-        USBHostController* _host; 
-    public:
-        USBHubAbstract():SpecialDevice(){
+	protected:
+		//TODO size
+		int _portCount;
+		USBHostController* _host; 
+	public:
+		USBHubAbstract():SpecialDevice(){
 
-        }
-        USBHubAbstract(USBHostController* host): _host(host){
-            
-        }
-        virtual void findDevices()=0;
+		}
+		USBHubAbstract(USBHostController* host): _host(host){
+			
+		}
+		virtual void findDevices()=0;
 
 };
 

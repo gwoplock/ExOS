@@ -4,8 +4,8 @@
 #include "Device.h"
 
 class SpecialDevice : public Device{
-    private:
-    public:
+	private:
+	public:
 };
 
 #endif

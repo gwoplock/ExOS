@@ -6,14 +6,14 @@
 #include "utils/printf/Printf.h"
 //TODO superclass
 class USBHostController : public PCIStandardDevice {
-    protected:
-    public:
-        USBHostController(){
+	protected:
+	public:
+		USBHostController(){
 
-        }
-        USBHostController(int bus, int device, int function):
-        PCIStandardDevice(bus, device,function, true){
-        }
+		}
+		USBHostController(int bus, int device, int function):
+		PCIStandardDevice(bus, device,function, true){
+		}
 
 };
 
