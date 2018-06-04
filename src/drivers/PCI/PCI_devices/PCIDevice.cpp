@@ -37,7 +37,7 @@ uint16_t PCIDevice::command()
 
 void PCIDevice::command(uint16_t com)
 {
-	//(void)com;
+	(void)com;
 }
 
 uint8_t PCIDevice::classCode()
@@ -67,7 +67,7 @@ uint8_t PCIDevice::BIST()
 
 void PCIDevice::BIST(uint8_t testCode)
 {
-	//(void) testCode;
+	(void) testCode;
 }
 
 uint8_t PCIDevice::headerType()
@@ -87,5 +87,5 @@ uint8_t PCIDevice::cacheLineSize()
 
 void PCIDevice::cacheLineSize(uint8_t lineSize)
 {
-	//(void) lineSize;
+	(void) lineSize;
 }

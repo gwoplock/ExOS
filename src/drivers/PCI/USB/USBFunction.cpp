@@ -5,6 +5,7 @@ USBFunction::USBFunction(){
 }
 
 USBFunction::USBFunction(USBHubAbstract* hub){
+    _hub = hub;
     //address device
     //read max data payload
     //read configs

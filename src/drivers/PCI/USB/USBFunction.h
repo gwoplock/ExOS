@@ -16,6 +16,7 @@ class USBFunction :public Device{
     //TODO check size
     int _maxDataSize;
     USBHostController _host;
+    USBHubAbstract* _hub;
     public:
     USBFunction();
     USBFunction(USBHubAbstract* hub);
