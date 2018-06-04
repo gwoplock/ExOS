@@ -18,7 +18,8 @@ void getMemMap(multiboot_info_t* mbt) {
 	MultibootMemoryMap* mmap = (MultibootMemoryMap*) (mbt->mmap_addr
 			+ vKernelStart);
 	int i = 0;
-	while ((uint32_t) mmap < mbt->mmap_addr + mbt->mmap_length + vKernelStart) {
+	while ((uint32_t) mmap < mbt->mmap_addr + mbt->mmap_length + 
+		  vKernelStart) {
 		memMap[i] = *mmap;
 		mmap = (MultibootMemoryMap*) ((unsigned int) mmap + mmap->size
 				+ sizeof (mmap->size));
@@ -39,8 +40,8 @@ void memcpy(void* to, void* from, size_t length) {
 		toArr[i] = fromArr[i];
 	}
 	for (size_t i = 0; i < length % sizeof(int); i++) {
-		* ((char*) to + i + length - length % sizeof(int)) = * ((char*) from + i
-				+ length - length % sizeof(int));
+		* ((char*) to + i + length - length % sizeof(int)) = 
+		* ((char*) from + i + length - length % sizeof(int));
 	}
 }
 

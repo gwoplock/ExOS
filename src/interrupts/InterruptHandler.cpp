@@ -16,10 +16,10 @@
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
-/**
- * handle hardware interrupts
- * @param line from the PIC
- */
+	/**
+	 * handle hardware interrupts
+	 * @param line from the PIC
+	 */
 	void IRQHandler(int line) {
 		switch (line) {
 			case 0:{
@@ -40,17 +40,15 @@ extern "C" {/* Use C linkage for kernel_main. */
 		}
 		PICSendEOI(line);
 	}
-/**
- * handle faults from the cpu
- * @param interrupt Number
- */
+	/**
+	 * handle faults from the cpu
+	 * @param interrupt Number
+	 */
 	void ISRHandler(int interruptNumber) {
 		//print the interrupt number
 		terminalPutChar(' ');
 		writeInt((uint32_t) interruptNumber);
 	}
-
-#undef return
 
 #if defined(__cplusplus)
 }

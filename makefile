@@ -33,9 +33,9 @@ MKDIR = mkdir --parents
 INCLUDES = -I$(TOPDIR)/src
 LDFLAGS  = -ffreestanding -O2 -fno-rtti -fno-exceptions -nostartfiles \
            -nostdlib
-CWARNING = -Wno-packed-bitfield-compat -Wall -Wextra -Wno-write-strings
-CFLAGS   = -c -ffreestanding -O2   $(CWARNING) \
-           -fno-rtti -fno-exceptions -g -std=gnu++11 -fno-strict-aliasing \
+CWARNINGS = -Wno-packed-bitfield-compat -Wall -Wextra -Wno-write-strings
+CFLAGS   = -c -ffreestanding -O2   $(CWARNINGS) -Werror -fno-rtti\
+           -fno-exceptions -g -std=gnu++11 -fno-strict-aliasing \
 		    $(INCLUDES)
 LINK     = -lgcc
 

@@ -8,19 +8,18 @@
 #include "clib_misc/Abort.h"
 #include "drivers/TTY/Console.h"
 
-extern "C"
-/**
- * @brief staandard c++ lib function to abort if a pure virtual func is called
- * 
- */
-void __cxa_pure_virtual(void) {
-	terminalWriteString("pure virtual method called.......");
-	abort( );
-}
-
 #if defined(__cplusplus)
-extern "C" {/* Use C linkage for kernel_main. */
+extern "C" {
 #endif
+	/**
+ 	* @brief standard c++ lib function to abort if a pure virtual func is called
+ 	* 
+ 	*/
+	void __cxa_pure_virtual(void) {
+		terminalWriteString("pure virtual method called.......");
+		abort( );
+	}
+
 	/**
 	 * std abort function. does nothing right now.
 	 */
@@ -30,6 +29,6 @@ extern "C" {/* Use C linkage for kernel_main. */
 		asm("hlt");
 	}
 #if defined(__cplusplus)
-}/* Use C linkage for kernel_main. */
+}
 #endif
 

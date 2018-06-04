@@ -55,15 +55,22 @@ Fat12FSNode *Fat12FS::find(char *path, Fat12FSNode *root)
  * @return false 
  */
 //todo names, var sizes, structure taken from osdev wiki
-bool Fat12FS::readCluster(uint16_t cluster, void *fileLoc, size_t fileLocSize)
+bool Fat12FS::readCluster(uint16_t cluster, void *fileLoc, 
+						  size_t fileLocSize)
 {
 	(void)fileLoc;
 	assert(fileLocSize >= (_FSInfo->secPerCluster * _FSInfo->bytePerSec));
-	uint32_t fat_size =
-		(_FSInfo->secCount != 0) ? _FSInfo->secCount : _FSInfo->largeSecCount;
-	uint32_t root_dir_sectors = ((_FSInfo->dirEntryCount * 32) + (_FSInfo->bytePerSec - 1)) / _FSInfo->bytePerSec;
-	uint32_t first_data_sector = _FSInfo->resSec + (_FSInfo->FATs * fat_size) + root_dir_sectors;
-	uint32_t first_sector_of_cluster = ((cluster - 2) * _FSInfo->secPerCluster) + first_data_sector;
+	uint32_t fat_size =(_FSInfo->secCount != 0) ? _FSInfo->secCount :
+		 				_FSInfo->largeSecCount;
+	uint32_t root_dir_sectors = ((_FSInfo->dirEntryCount * 32) + 
+								(_FSInfo->bytePerSec - 1)) / 
+								_FSInfo->bytePerSec;
+	uint32_t first_data_sector = _FSInfo->resSec + 
+								(_FSInfo->FATs * fat_size) + 
+								root_dir_sectors;
+	uint32_t first_sector_of_cluster = ((cluster - 2) * 
+									   _FSInfo->secPerCluster) +
+									    first_data_sector;
 	for (uint32_t i = 0; i < _FSInfo->secPerCluster; i++)
 	{
 		//TODO after _device isnt void* uncommetn below
@@ -82,7 +89,9 @@ bool Fat12FS::readCluster(uint16_t cluster, void *fileLoc, size_t fileLocSize)
 void Fat12FS::buildDirStructure()
 {
 	//This conversion may not work correctly... oh well
-	_root = new Fat12FSNode("Root", 0, DIR, ((_FSInfo->resSec) + (_FSInfo->FATs * _FSInfo->secPerFAT)) / _FSInfo->secPerCluster, this);
+	_root = new Fat12FSNode("Root", 0, DIR, ((_FSInfo->resSec) + 
+						   (_FSInfo->FATs * _FSInfo->secPerFAT)) 
+						   / _FSInfo->secPerCluster, this);
 	buildTree((Fat12FSNode *)_root);
 }
 /**
@@ -146,7 +155,8 @@ Fat12FSNode *Fat12FS::parseEntry(uint8_t *sector)
 		//i belive this wont overrun and will end with a null in the right spot. also i hope this doesnt add a null somewhere
 		FatLongFileName *entry = (FatLongFileName *)sector;
 		uint32_t tempLeng = strlen(_tempLongName);
-		_tempLongName = (char *)realloc(_tempLongName, tempLeng + 10 + 10 + 4);
+		_tempLongName = (char *)realloc(_tempLongName, tempLeng +
+						10 + 10 + 4);
 		memcpy(_tempLongName + tempLeng, &entry->nameFirst, 10);
 		memcpy(_tempLongName + tempLeng + 10, &entry->nameMid, 10);
 		memcpy(_tempLongName + tempLeng + 10 + 10, &entry->nameEnd, 4);

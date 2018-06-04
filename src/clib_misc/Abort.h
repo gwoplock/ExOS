@@ -11,14 +11,14 @@
 #include "Global.h"
 
 #if defined(__cplusplus)
-extern "C" {/* Use C linkage for kernel_main. */
+extern "C" {
 #endif
 	/**
 	 * std abort function. does nothing right now.
 	 */
 	void abort(void);
 #if defined(__cplusplus)
-}/* Use C linkage for kernel_main. */
+}
 #endif
 
 #endif /* SRC_CLIBMISC_ABORT_H_ */

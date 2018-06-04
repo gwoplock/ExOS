@@ -55,30 +55,30 @@ class Fat12File: public File{
 		//TODO what is this for
 		uint32_t _fileLocStartInFile;
 	public:
-	/**
-	 * @brief Construct a new Fat 12 File object
-	 * 
-	 * @param firstCluster the cluster to start with
-	 */
+		/**
+		 * @brief Construct a new Fat 12 File object
+		 * 
+		 * @param firstCluster the cluster to start with
+	 	*/
 		Fat12File(size_t firstCluster){
 			_lastCluster = firstCluster;
 			void* _fileLoc = malloc((_device->FSInfo()->bytePerSec)*(_device->FSInfo()->secPerCluster));
 			_device->readCluster(firstCluster, _fileLoc, (_device->FSInfo()->bytePerSec)*(_device->FSInfo()->secPerCluster));
 		}
 		/**
- * @brief read bytes into buffer
- * 
- * @param buffer what to read into
- * @param size how many to read
- * @return size_t how many actually read
- */
+ 		* @brief read bytes into buffer
+		* 
+		* @param buffer what to read into
+		* @param size how many to read
+		* @return size_t how many actually read
+ 		*/
 		size_t read(char* buffer, size_t size);
-/**
- * @brief read clusters from disk into buffer
- * @note will try to fill the buffer
- * @return true able to read
- * @return false unable to read
- */
+		/**
+ 		* @brief read clusters from disk into buffer
+ 		* @note will try to fill the buffer
+ 		* @return true able to read
+ 		* @return false unable to read
+ 		*/
 		bool readFromDisk();
 };
 

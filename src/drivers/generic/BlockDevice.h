@@ -6,9 +6,9 @@
 
 class BlockDevice : public Device
 {
-  private:
-  public:
-    virtual void read(uint32_t sector, void *readTo) = 0;
+	private:
+	public:
+		virtual void read(uint32_t sector, void *readTo) = 0;
 };
 
 #endif

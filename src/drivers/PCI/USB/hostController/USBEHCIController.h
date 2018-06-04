@@ -157,7 +157,8 @@ class USBEHCIController: public USBHostController{
         USBEHCIController(){
 
         }
-        USBEHCIController(int bus, int device, int function) : USBHostController(bus,device,function){
+        USBEHCIController(int bus, int device, int function) : 
+        USBHostController(bus,device,function){
             _caps = (CapReg*)BAR0();
             _oper = (operReg*)((uint32_t) _caps + _caps->capLeng);
             switch (_oper->cmd.frameSizeList){

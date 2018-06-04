@@ -22,14 +22,14 @@ class FS{
 		 */
 		void* _device;
 	public:
-	/**
-	 * @brief open a file
-	 * 
-	 * @param path path to file
-	 * @param flags open flags
-	 * @param mode how to open
-	 * @return File* file object for file
-	 */
+		/**
+		* @brief open a file
+		* 
+		* @param path path to file
+		* @param flags open flags
+		* @param mode how to open
+		* @return File* file object for file
+		*/
 		virtual File* open(char *path, int flags, int mode) = 0;
 		/**
 		 * @brief build the directory structure

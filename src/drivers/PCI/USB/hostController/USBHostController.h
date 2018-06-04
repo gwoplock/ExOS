@@ -11,7 +11,8 @@ class USBHostController : public PCIStandardDevice {
         USBHostController(){
 
         }
-        USBHostController(int bus, int device, int function):PCIStandardDevice(bus, device,function, true){
+        USBHostController(int bus, int device, int function):
+        PCIStandardDevice(bus, device,function, true){
         }
 
 };

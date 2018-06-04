@@ -13,8 +13,7 @@ extern "C"{
 	 * 
 	 * @param expression: thing to check
 	 */
-void assert(uint8_t expression);
-};
-
+	void assert(uint8_t expression);
+}
 
 #endif //EXOS_ASSERT_H
