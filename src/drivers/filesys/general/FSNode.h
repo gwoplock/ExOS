@@ -25,7 +25,7 @@ class FSNode
 	 * @brief name of file reped by node
 	 * 
 	 */
-	char *_name;
+	char *  _name;
 	/**
 	 * @brief size of the file
 	 * @note 0 if not a file
