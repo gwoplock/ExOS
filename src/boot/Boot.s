@@ -7,8 +7,10 @@ extern kernelMain                            ; _main is defined elsewhere
 MODULEALIGN equ  1<<0             ; align loaded modules on page boundaries
 MEMINFO     equ  1<<1             ; provide memory map
 FLAGS       equ  MODULEALIGN | MEMINFO  ; this is the Multiboot 'flag' field
-MAGIC       equ    0x1BADB002     ; 'magic number' lets bootloader find the header
-CHECKSUM    equ -(MAGIC + FLAGS)  ; checksum required
+MAGIC       equ  0xE85250D6     ; 'magic number' lets bootloader find the header
+ARCH        equ  0
+LENGTH      equ  16
+CHECKSUM    equ -(MAGIC + ARCH + LENGTH)  ; checksum required
  
 ; This is the virtual base address of kernel space. It must be used to convert virtual
 ; addresses into physical addresses until paging is enabled. Note that this is not
@@ -42,9 +44,15 @@ section .text
 align 4
 MultiBootHeader:
     dd MAGIC
-    dd FLAGS
+    dd ARCH
+    dd LENGTH
     dd CHECKSUM
- 
+    dd 0
+    dd 0
+    dd 8
+
+
+
 ; reserve initial kernel stack space -- that's 16k.
 STACKSIZE equ 0x4000
  

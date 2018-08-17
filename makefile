@@ -84,7 +84,7 @@ config:
 	@echo 'HOST ' $(HOSTTYPE)
 	@echo 
 
-$(BIN_NAME): $(OBJFILES)
+$(BIN_NAME): $(OBJFILES) $(LINKER_FILE)
 ifeq ($(VERBOSE),no)
 	@echo 'Constructing' $(RED)$@$(NORMAL)
 endif
