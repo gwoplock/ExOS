@@ -59,13 +59,19 @@ void kernelMain(multiboot_info_t *mbd)
 	terminalWriteString("  Setting up PIT...");
 	pit = ProgrammableIntervalTimer();
 	terminalWriteLine("  Done!");
-	terminalWriteString("  Preparing the memory allocator...");
+	terminalWriteLine("  Preparing the memory allocator...");
 	//get the memory map from grub
+	terminalWriteString("    Reading grub mem map");
 	getMemMap(mbd);
+	terminalWriteLine("    Done!");
 	//build the page frame allocator (allocate physical memory)
+	terminalWriteString("    Setting up frame allocator");
 	frameAlloc.build();
+	terminalWriteLine("    Done!");
 	//set malloc's support vars
+	terminalWriteString("    Setting up malloc");
 	mallocInit();
+	terminalWriteLine("    Done!");
 	terminalWriteLine(" Done!");
 	terminalWriteString("  Finding PCI buses...");
 	//find the valid PCI buses
