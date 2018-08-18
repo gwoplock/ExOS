@@ -48,6 +48,7 @@ extern "C" {/* Use C linkage for kernel_main. */
 		//print the interrupt number
 		terminalPutChar(' ');
 		writeInt((uint32_t) interruptNumber);
+		asm("cli; hlt");
 	}
 
 #undef return

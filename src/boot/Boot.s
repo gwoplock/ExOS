@@ -3,6 +3,16 @@ extern kernelMain                            ; _main is defined elsewhere
 ;extern _init
 ;extern _fini
 
+;multiboot1
+; setting up the Multiboot header - see GRUB docs for details
+;MODULEALIGN equ  1<<0             ; align loaded modules on page boundaries
+;MEMINFO     equ  1<<1             ; provide memory map
+;FLAGS       equ  MODULEALIGN | MEMINFO  ; this is the Multiboot 'flag' field
+;MAGIC       equ    0x1BADB002     ; 'magic number' lets bootloader find the header
+;CHECKSUM equ -(MAGIC + FLAGS) ; checksum required
+
+
+;multiboot2
 ; setting up the Multiboot header - see GRUB docs for details
 MODULEALIGN equ  1<<0             ; align loaded modules on page boundaries
 MEMINFO     equ  1<<1             ; provide memory map
@@ -42,6 +52,7 @@ BootPageDirectory:
  
 section .text
 align 4
+;multiboot2
 MultiBootHeader:
     dd MAGIC
     dd ARCH
@@ -51,6 +62,11 @@ MultiBootHeader:
     dd 0
     dd 8
 
+;multiboot1
+;MultiBootHeader:
+;    dd MAGIC
+;    dd FLAGS
+;    dd CHECKSUM
 
 
 ; reserve initial kernel stack space -- that's 16k.

@@ -1,4 +1,4 @@
-ENTRY(loader)
+ENTRY(_loader)
 OUTPUT_FORMAT(elf32-i386)
 
 SECTIONS {
