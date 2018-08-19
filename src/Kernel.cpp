@@ -33,7 +33,7 @@ ProgrammableIntervalTimer pit;
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 
-void kernelMain(multiboot_info_t *mbd)
+void kernelMain(void *mbd)
 {
 	//turn off interrupts before configed
 	asm("cli");
@@ -43,6 +43,8 @@ void kernelMain(multiboot_info_t *mbd)
 	terminalSetColor(vgaEntryColor(VGA_COLOR_GREEN, VGA_COLOR_BLACK));
 	terminalWriteLine("Terminal active, Welcome to ExOS!");
 	terminalWriteLine("Preparing your system:");
+	terminalWriteLine("  Reading Multiboot structures");
+	
 	terminalWriteString("  Preparing GDT...");
 	//build and replce grub's GDT with a custom writable one.
 	gdt.build();
