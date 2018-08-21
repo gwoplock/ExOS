@@ -12,7 +12,7 @@ MultibootMemoryMap memMap[256];
  * read the multiboot mem map
  * @param multiboot mem map
  */
-void getMemMap(multiboot_info_t* mbt) {
+/*void getMemMap(multiboot_info_t* mbt) {
 	uint32_t vKernelStart = (uint32_t) pageTable.getKernelStart();
 	mbt = (multiboot_info_t*) ((int32_t) mbt + vKernelStart);
 	MultibootMemoryMap* mmap = (MultibootMemoryMap*) (mbt->mmap_addr
@@ -25,7 +25,7 @@ void getMemMap(multiboot_info_t* mbt) {
 		i++;
 	}
 	memMap[i].type = 0xDEADC0DE;
-}
+}*/
 /**
  * copy some mem
  * @param to

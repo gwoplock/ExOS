@@ -33,7 +33,7 @@ ProgrammableIntervalTimer pit;
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
 
-void kernelMain(void *mbd)
+void kernelMain(void *MBI)
 {
 	//turn off interrupts before configed
 	asm("cli");
@@ -44,7 +44,7 @@ void kernelMain(void *mbd)
 	terminalWriteLine("Terminal active, Welcome to ExOS!");
 	terminalWriteLine("Preparing your system:");
 	terminalWriteLine("  Reading Multiboot structures");
-	
+
 	terminalWriteString("  Preparing GDT...");
 	//build and replce grub's GDT with a custom writable one.
 	gdt.build();
@@ -64,7 +64,7 @@ void kernelMain(void *mbd)
 	terminalWriteLine("  Preparing the memory allocator...");
 	//get the memory map from grub
 	terminalWriteString("    Reading grub mem map");
-	getMemMap(mbd);
+	//getMemMap(mbd);
 	terminalWriteLine("    Done!");
 	//build the page frame allocator (allocate physical memory)
 	terminalWriteString("    Setting up frame allocator");

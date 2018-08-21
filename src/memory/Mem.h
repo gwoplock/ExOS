@@ -27,6 +27,6 @@ void memcpy(void* to, void* from, size_t length);
 void memSet(void* start, size_t length, char toSet);
 
 
-void getMemMap(multiboot_info_t* mdb);
+//void getMemMap(multiboot_info_t* mdb);
 
 #endif /* MEM_H_ */
