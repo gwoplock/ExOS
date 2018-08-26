@@ -102,13 +102,13 @@ void PageTable::build(){
 			printf("kernel pages = %d", kernelPages );
 			//BREAKPOINT
 	size_t kernelDirs = (kernelPages / 1024) + 1;
-	for (size_t i = 0; i < kernelDirs; i++) {
+	for (size_t i = 0; i <= kernelDirs; i++) {
 		pageDir[KERNEL_PAGE_DIR_START + i].present = 1;
 		pageDir[KERNEL_PAGE_DIR_START + i].writeThrough = 1;
 		pageDir[KERNEL_PAGE_DIR_START + i].userSuper = 1;
 		pageDir[KERNEL_PAGE_DIR_START + i].readWrite = 1;
 	}
-	for (size_t i = 0; i < kernelPages; i++) {
+	for (size_t i = 0; i <= kernelPages; i++) {
 		pageTables[KERNEL_PAGE_START + i].readWrite = 1;
 		pageTables[KERNEL_PAGE_START + i].userSuper = 0;
 		pageTables[KERNEL_PAGE_START + i].writeThrough = 1;
