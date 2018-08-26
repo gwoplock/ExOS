@@ -16,7 +16,8 @@
 #include "memory/structures/PageTable.h"
 #include "drivers/PCI/PCI.h"
 #include "drivers/PCI/PCIDeviceList.h"
-#include "multiboot_spec/Multiboot.h"
+#include "multiboot_spec/Multiboot2.h"
+#include "multiboot_spec/Multiboot2Info.h"
 #include "memory/Mem.h"
 #include "utils/printf/Printf.h"
 #include "drivers/timers/ProgrammableIntervalTimer.h"
@@ -28,7 +29,7 @@ PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
 ProgrammableIntervalTimer pit;
-
+Multiboot2Info mb2i;
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
 #endif
@@ -43,8 +44,6 @@ void kernelMain(void *MBI)
 	terminalSetColor(vgaEntryColor(VGA_COLOR_GREEN, VGA_COLOR_BLACK));
 	terminalWriteLine("Terminal active, Welcome to ExOS!");
 	terminalWriteLine("Preparing your system:");
-	terminalWriteLine("  Reading Multiboot structures");
-
 	terminalWriteString("  Preparing GDT...");
 	//build and replce grub's GDT with a custom writable one.
 	gdt.build();
@@ -63,6 +62,9 @@ void kernelMain(void *MBI)
 	terminalWriteLine("  Done!");
 	terminalWriteLine("  Preparing the memory allocator...");
 	//get the memory map from grub
+	terminalWriteString("    Reading Multiboot structures");
+	mb2i.build(MBI);
+	terminalWriteLine("      Done!");
 	terminalWriteString("    Reading grub mem map");
 	//getMemMap(mbd);
 	terminalWriteLine("    Done!");

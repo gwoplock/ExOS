@@ -16,12 +16,15 @@ class PageFrameAllocator;
 class Keyboard;
 class PageTable;
 class ProgrammableIntervalTimer;
+class Multiboot2Info;
+
 extern GlobalDescriptorTable gdt;
 extern InterruptDescriptorTable idt;
 extern PageTable pageTable;
 extern Keyboard KB;
 extern PageFrameAllocator frameAlloc;
 extern ProgrammableIntervalTimer pit;
+extern Multiboot2Info mb2i;
 
 void interruptSetUp();
 

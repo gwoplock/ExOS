@@ -4,7 +4,7 @@
 
 class Multiboot2Info{
 	private:
-		void* starts[22];
+		
 	public:
 		Multiboot2Info(){
 
@@ -15,4 +15,5 @@ class Multiboot2Info{
 		}
 
 		void build(void* MBI);
+		void* get(uint32_t tag);
 };
