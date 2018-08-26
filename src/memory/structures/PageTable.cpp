@@ -55,12 +55,10 @@ void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 	size_t sizeInPages = (size / FOUR_KB)
 			+ ( ( ( ((uint32_t) size) & 0xFFF) != 0)
 					+ ( ( ((uint32_t) phyStart) & 0xFFF) != 0));
-	printf("sip = %d, ", sizeInPages);
 	//covert to page dirs
 	size_t sizeInDirs = sizeInPages = (sizeInPages / 1024) + 1;
 	//calc the starting points
 	uint32_t startPage = (uint32_t) virtStart / FOUR_KB;
-	printf("sp = %d \n", startPage);
 	uint32_t startDir = startPage / 1024;
 	//set the dirs present
 	//TODO add options for different flags
@@ -68,8 +66,7 @@ void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 		pageDir[startDir + i].present = 1;
 	}
 	//dito for the page tables
-	for (size_t i = 0; i <= sizeInPages; i++) {
-		printf("paging page %d \n", startPage + i);
+	for (size_t i = 0; i <= sizeInPages; i++) {;
 		pageTables[startPage + i].present = 1;
 		pageTables[startPage + i].global = 1;
 		pageTables[startPage + i].physicalAddress = ((uint32_t) phyStart
