@@ -24,14 +24,14 @@ PageTable::PageTable(bool buildFlag) {
 	//also need the number of pages
 	size_t kernelDirs = (kernelPages / 1024) + 1;
 	//for every dir that we need mark it as present, and a few other things
-	for (size_t i = 0; i < kernelDirs; i++) {
+	for (size_t i = 0; i <= kernelDirs; i++) {
 		pageDir[KERNEL_PAGE_DIR_START + i].present = 1;
 		pageDir[KERNEL_PAGE_DIR_START + i].writeThrough = 1;
 		pageDir[KERNEL_PAGE_DIR_START + i].userSuper = 1;
 		pageDir[KERNEL_PAGE_DIR_START + i].readWrite = 1;
 	}
 	//for each page set the props
-	for (size_t i = 0; i < kernelPages; i++) {
+	for (size_t i = 0; i <= kernelPages; i++) {
 		pageTables[KERNEL_PAGE_START + i].readWrite = 1;
 		pageTables[KERNEL_PAGE_START + i].userSuper = 0;
 		pageTables[KERNEL_PAGE_START + i].writeThrough = 1;
@@ -54,19 +54,22 @@ void* PageTable::page(void* phyStart, void* virtStart, size_t size) {
 	//convert from bytes to 4Kb pages
 	size_t sizeInPages = (size / FOUR_KB)
 			+ ( ( ( ((uint32_t) size) & 0xFFF) != 0)
-					|| ( ( ((uint32_t) phyStart) & 0xFFF) != 0));
+					+ ( ( ((uint32_t) phyStart) & 0xFFF) != 0));
+	printf("sip = %d, ", sizeInPages);
 	//covert to page dirs
 	size_t sizeInDirs = sizeInPages = (sizeInPages / 1024) + 1;
 	//calc the starting points
 	uint32_t startPage = (uint32_t) virtStart / FOUR_KB;
+	printf("sp = %d \n", startPage);
 	uint32_t startDir = startPage / 1024;
 	//set the dirs present
 	//TODO add options for different flags
-	for (size_t i = 0; i < sizeInDirs; i++) {
+	for (size_t i = 0; i <= sizeInDirs; i++) {
 		pageDir[startDir + i].present = 1;
 	}
 	//dito for the page tables
-	for (size_t i = 0; i < sizeInPages; i++) {
+	for (size_t i = 0; i <= sizeInPages; i++) {
+		printf("paging page %d \n", startPage + i);
 		pageTables[startPage + i].present = 1;
 		pageTables[startPage + i].global = 1;
 		pageTables[startPage + i].physicalAddress = ((uint32_t) phyStart
