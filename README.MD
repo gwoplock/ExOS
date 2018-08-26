@@ -15,16 +15,9 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 
 ## Short term work
 * Garrett
-	- [x] Read USB spec - still going, its long
-	- [ ] USB abstract class
-	- [ ] OHCI driver
-	- [ ] UHCI driver
-	- [x] EHCI driver - mostly, still may have some issues with the root hub
-	- [ ] XHCI driver
-	
-* Oskari
-	- [ ] Floppy drive driver
-
+	- [x] read multiboot 2 system information (MB2I)
+	- [ ] read the new memory map format
+	- [ ] make sure MB2I structures are protected from paging 
 	
 ## Long term work
 * Load files from floppy drives
@@ -80,12 +73,10 @@ If you can't code theres still stuff for you. If you can write our readme or wik
     * If you're contributing ***please test on real hardware*** not just an emulator.
 3. Set up a ***multiboot compliant*** bootloader
     * I'm using [grub legacy](http://wiki.osdev.org/GRUB_Legacy) as my bootloader but you can use whatever as long as it's ***multiboot compliant***. 
-    * I'm not 100% sure that all of them work the more i look into it. I will try grub and see.
+    * I'm not 100% sure that all of them work the more I look into it. I will try grub and see.
+    * A new branch has been started to move to multiboot2 and modern grub. be prepared to change. 
 4. Test the bootloader installation
     * Just boot to the bootloader's menu screen to make sure it works.
-5. Configure the makefile (makefile.inc)
-    * Assumes that the compiler toolchain (i686-elf-*) is in the path. The floppy drive output is hardcoded based on who used the makefile last.
-        * Will possibly be fixed in the future. You must manually change them to match your system for now.
     
 ## Compilation
 
