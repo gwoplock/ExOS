@@ -51,7 +51,7 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 ### Contacting us
 * [slack](https://join.slack.com/t/exos-dev/shared_invite/enQtMjI2OTE2NjYzOTU4LTJhZTIyOTNkYmY2MjcxN2RjZTUzZjhkYTAzZTNlOThkODZkZmE5ODI3ODA0MjBlNDY3Mjg3OWNjODQ0ZGM3NDU)
 * Email
-	* Garrett: exos@garrettbattaglia.info
+	* Garrett: garrett@garrettbattaglia.com
 	* Oskari: xxc3ncoredxx@gmail.com (the typo is intentional)
 
 ### But, what can ***I*** do???
