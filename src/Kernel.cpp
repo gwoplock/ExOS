@@ -19,12 +19,15 @@
 #include "multiboot_spec/Multiboot.h"
 #include "memory/Mem.h"
 #include "utils/printf/Printf.h"
+#include "drivers/timers/ProgrammableIntervalTimer.h"
+#include "drivers/timers/Sleep.h"
 
 InterruptDescriptorTable idt;
 GlobalDescriptorTable gdt;
 PageTable pageTable;
 Keyboard KB;
 PageFrameAllocator frameAlloc;
+ProgrammableIntervalTimer pit;
 
 #if defined(__cplusplus)
 extern "C" {/* Use C linkage for kernel_main. */
@@ -53,6 +56,9 @@ void kernelMain(multiboot_info_t *mbd)
 	//sets up interrups and enables them
 	interruptSetUp();
 	terminalWriteLine(" Done!");
+	terminalWriteString("  Setting up PIT...");
+	pit = ProgrammableIntervalTimer();
+	terminalWriteLine("  Done!");
 	terminalWriteString("  Preparing the memory allocator...");
 	//get the memory map from grub
 	getMemMap(mbd);
@@ -63,16 +69,14 @@ void kernelMain(multiboot_info_t *mbd)
 	terminalWriteLine(" Done!");
 	terminalWriteString("  Finding PCI buses...");
 	//find the valid PCI buses
-	//PCIInit();
-	//test code
 	enumPCIDevices();
 
 	terminalWriteLine(" Done!");
-	terminalWriteString("  Finding USB host controllers...");
+	//terminalWriteString("  Finding USB host controllers...");
 	//find the (3 or less) USB host controllers. all have the same class/subclass code.
 	//PCIDeviceList usbHostControllers(0x0C, 0x03, false);
-	terminalWriteLine(" Done!");
-	terminalWriteLine("!!!!ExOS fully booted!!!!");
+	//terminalWriteLine(" Done!");
+	terminalWriteLine("!!!!ExOS fully booted!!!! 1");
 	//dont return.
 	while (true) {
 		asm("hlt");

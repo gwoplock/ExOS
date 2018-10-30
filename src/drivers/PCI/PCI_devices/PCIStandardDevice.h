@@ -16,9 +16,10 @@
 
 class PCIStandardDevice: public PCIDevice {
 	public:
-		PCIStandardDevice( );
+		PCIStandardDevice( ):PCIDevice( ) {
+		}
 		PCIStandardDevice(uint8_t bus, uint8_t device, uint8_t function, bool page);
-		virtual ~PCIStandardDevice( );
+		virtual ~PCIStandardDevice( ){}
 		uint32_t BAR0();
 		uint32_t BAR1();
 		uint32_t BAR2();

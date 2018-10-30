@@ -56,35 +56,6 @@ void Fat12FS::buildDirStructure()
 {
 	//This conversion may not work correctly... oh well
 	_root = new Fat12FSNode("Root", 0, DIR, ((_FSInfo->resSec) + (_FSInfo->FATs * _FSInfo->secPerFAT)) / _FSInfo->secPerCluster, this);
-	/*uint8_t* tempSector = (uint8_t*) malloc(_FSInfo->bytePerSec);
-	uint8_t sectorOffset = 0;
-	uint16_t startSector = (_FSInfo->resSec)
-			+ (_FSInfo->FATs * _FSInfo->secPerFAT);
-	uint16_t rootDirSize = (float) _FSInfo->dirEntryCount
-			/ (float) _FSInfo->bytePerSec
-			+ (_FSInfo->dirEntryCount % _FSInfo->bytePerSec != 0);
-			//_device->read(startSector+i, tempCluster)
-			//TODO there may be an issue if the size of a sector != a mult of the size of an entry... we will deal with that latter
-	for (size_t i = 0; i < rootDirSize; i++) {
-		if(tempSector[sectorOffset] == 0){
-			break;
-		}
-		Fat12FSNode* ret = parseEntry(tempSector + sectorOffset);
-		if (_tempLongName == nullptr){
-			sectorOffset += sizeof(FatNormalFileName);
-		} else {
-			sectorOffset += sizeof(FatLongFileName);
-		}
-		if(ret != nullptr){
-			_root->add(ret);
-			if(ret->type() == DIR){
-				buildTree(ret);
-			}
-		}
-		if (sectorOffset >= _FSInfo->bytePerSec){
-			//_device->read(startSectot+i, tempCluster)
-		}
-	}*/
 	buildTree((Fat12FSNode *)_root);
 }
 

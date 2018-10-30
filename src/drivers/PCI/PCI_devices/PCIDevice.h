@@ -18,11 +18,9 @@ class PCIDevice: public SpecialDevice {
 		uint8_t _function;
 		bool _page;
 	public:
-		PCIDevice( );
+		PCIDevice( ){}
 		PCIDevice(uint8_t bus, uint8_t device, uint8_t function, bool page);
-		virtual ~PCIDevice( ){
-
-		}
+		virtual ~PCIDevice( ){}
 		uint16_t deviceID();
 		uint16_t venderID();
 		uint16_t status();
