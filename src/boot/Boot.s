@@ -37,14 +37,16 @@ BootPageDirectory:
     dd 0x00C00083
     times (1024 - KERNEL_PAGE_NUMBER - 2) dd 0  ; Pages after the kernel image.
  
- 
-section .text
+section .multiboot
 align 4
 MultiBootHeader:
     dd MAGIC
     dd FLAGS
     dd CHECKSUM
- 
+
+
+section .text
+align 4
 ; reserve initial kernel stack space -- that's 16k.
 STACKSIZE equ 0x4000
  
