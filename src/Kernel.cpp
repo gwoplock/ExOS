@@ -21,6 +21,8 @@
 #include "utils/printf/Printf.h"
 #include "drivers/timers/ProgrammableIntervalTimer.h"
 #include "drivers/timers/Sleep.h"
+#include "drivers/driver_bundle/LoadBundle.h"
+
 
 InterruptDescriptorTable idt;
 GlobalDescriptorTable gdt;
@@ -67,7 +69,10 @@ void kernelMain(multiboot_info_t *mbd)
 	//set malloc's support vars
 	mallocInit();
 	terminalWriteLine(" Done!");
-	terminalWriteString("  Finding PCI buses...");
+	terminalWriteString("  Loading Driver Bundle...");
+	readBootMods(mbd);
+	terminalWriteLine("  Done!");
+	/*terminalWriteString("  Finding PCI buses...");
 	//find the valid PCI buses
 	enumPCIDevices();
 
@@ -75,7 +80,7 @@ void kernelMain(multiboot_info_t *mbd)
 	//terminalWriteString("  Finding USB host controllers...");
 	//find the (3 or less) USB host controllers. all have the same class/subclass code.
 	//PCIDeviceList usbHostControllers(0x0C, 0x03, false);
-	//terminalWriteLine(" Done!");
+	//terminalWriteLine(" Done!");*/
 	terminalWriteLine("!!!!ExOS fully booted!!!! 1");
 	//dont return.
 	while (true) {
