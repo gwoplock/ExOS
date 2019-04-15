@@ -14,10 +14,13 @@ ExOS extends the [MIT exokernel](https://pdos.csail.mit.edu/archive/exo/) by rem
 * Live relinking to allow unmodified programs to be run
 
 ## Short term work
-* Garrett
-	- [x] read multiboot 2 system information (MB2I)
-	- [ ] read the new memory map format
-	- [ ] make sure MB2I structures are protected from paging 
+* Garrett - in driver_bundle branch
+	- [x] Define driver bundle format
+	- [x] read grub (multiboot) module format
+	- [ ] parse driver bundle
+	- [ ] load drivers from bundle
+	- [ ] init drivers
+	- [ ] enumerate devices 
 	
 ## Long term work
 * Load files from floppy drives
